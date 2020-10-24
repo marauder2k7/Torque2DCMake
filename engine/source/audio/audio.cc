@@ -2523,7 +2523,7 @@ bool OpenALInit()
    mContext = alcCreateContext((ALCdevice*)mDevice, NULL);;
 #elif defined(TORQUE_OS_IOS)
 #else
-   mContext = alcCreateContext(mDevice,NULL);
+   mContext = alcCreateContext((ALCdevice*)mDevice,NULL);
 #endif
    if (mContext == NULL)
       return false;
@@ -2532,7 +2532,7 @@ bool OpenALInit()
 #if defined(TORQUE_OS_ANDROID) || defined(TORQUE_OS_LINUX) || defined(TORQUE_OS_EMSCRIPTEN) || defined(TORQUE_OS_OPENBSD)
    alcMakeContextCurrent((ALCcontext*)mContext);
 #else
-   alcMakeContextCurrent(mContext);
+   alcMakeContextCurrent((ALCcontext*)mContext);
 #endif
    ALenum err = alGetError();
    mRequestSources = MAX_AUDIOSOURCES;	
@@ -2634,7 +2634,7 @@ void OpenALShutdown()
 #elif defined(TORQUE_OS_EMSCRIPTEN)
       alcDestroyContext((ALCcontext*)mContext);
 #else
-	   alcDestroyContext(mContext);
+	   alcDestroyContext((ALCcontext*)mContext);
 #endif
 
       mContext = NULL;
@@ -2646,7 +2646,7 @@ void OpenALShutdown()
 #elif defined(TORQUE_OS_EMSCRIPTEN)
       alcCloseDevice((ALCdevice*)mDevice);
 #else
-	   alcCloseDevice(mDevice);
+	   alcCloseDevice((ALCdevice*)mDevice);
 #endif
       mDevice = NULL;
    }
