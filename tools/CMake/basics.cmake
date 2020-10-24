@@ -46,8 +46,8 @@ macro(addPath dir)
              ${dir}/*.c
              ${dir}/*.cc
              ${dir}/*.h
-			 ${dir}/*.neon.asm
-			 ${dir}/*.asm
+			 #${dir}/*.neon.asm
+			 #${dir}/*.asm
              ${mac_files}
              #${dir}/*.asm
              )
@@ -375,15 +375,15 @@ set(TORQUE_STATIC ON)
 #option(TORQUE_STATIC "enables or disable static" OFF)
 
 if(WIN32)
-    set(TORQUE_CXX_FLAGS_EXECUTABLES "/wd4018 /wd4100 /wd4121 /wd4127 /wd4130 /wd4244 /wd4245 /wd4389 /wd4511 /wd4512 /wd4800 /wd4995 " CACHE TYPE STRING)
+    set(TORQUE_CXX_FLAGS_EXECUTABLES "/wd4800 /wd4100 /wd4127 /wd4127 /wd4512" CACHE TYPE STRING)
     mark_as_advanced(TORQUE_CXX_FLAGS_EXECUTABLES)
 
     set(TORQUE_CXX_FLAGS_LIBS "/W0" CACHE TYPE STRING)
     mark_as_advanced(TORQUE_CXX_FLAGS_LIBS)
 
-    set(TORQUE_CXX_FLAGS_COMMON_DEFAULT "-DUNICODE -D_UNICODE -D_CRT_SECURE_NO_WARNINGS /MP /O2 /Ob2 /Oi /Ot /Oy /GT /Zi /W4 /nologo /GF /EHsc /GS- /Gy- /Qpar- /fp:precise /fp:except- /GR /Zc:wchar_t-" )
+    set(TORQUE_CXX_FLAGS_COMMON_DEFAULT "-DUNICODE -D_UNICODE -D_CRT_SECURE_NO_WARNINGS /analyze- /RTC1 /TP /ZI /GR /MP /Od /MT /nologo /WX- /Zc:wchar_t /FC /W3 ")
     if( TORQUE_CPU_X32 )
-       set(TORQUE_CXX_FLAGS_COMMON_DEFAULT "${TORQUE_CXX_FLAGS_COMMON_DEFAULT} /arch:SSE2")
+       set(TORQUE_CXX_FLAGS_COMMON_DEFAULT "${TORQUE_CXX_FLAGS_COMMON_DEFAULT}")
     endif()
     set(TORQUE_CXX_FLAGS_COMMON ${TORQUE_CXX_FLAGS_COMMON_DEFAULT} CACHE TYPE STRING)
 
@@ -391,7 +391,7 @@ if(WIN32)
 
     set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} ${TORQUE_CXX_FLAGS_COMMON}")
     set(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} ${CMAKE_CXX_FLAGS}")
-    set(CMAKE_EXE_LINKER_FLAGS "/LARGEADDRESSAWARE")
+    set(CMAKE_EXE_LINKER_FLAGS "")
     #set(STATIC_LIBRARY_FLAGS "/OPT:NOREF")
 
     # Force static runtime libraries

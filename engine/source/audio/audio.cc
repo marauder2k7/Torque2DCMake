@@ -38,7 +38,6 @@
 #ifdef TORQUE_OS_OSX
 //#define REL_WORKAROUND
 #endif
-
 //-------------------------------------------------------------------------
 #ifdef TORQUE_OS_IOS
 
@@ -64,8 +63,8 @@ static ALCcontext *mContext = NULL;             // active OpenAL context
 static ALCdevice *mDevice   = NULL;             // active OpenAL device
 static ALCcontext *mContext = NULL;             // active OpenAL context
 #else
-static ALCvoid *mDevice   = NULL;             // active OpenAL device
-static ALCvoid *mContext = NULL;             // active OpenAL context
+static ALCdevice *mDevice   = NULL;             // active OpenAL device
+static ALCcontext *mContext = NULL;             // active OpenAL context
 #endif
 F32 mAudioChannelVolumes[Audio::AudioVolumeChannels];     // the attenuation for each of the channel types
 
@@ -2462,7 +2461,7 @@ void shutdownContext()
 bool OpenALInit()
 {
    OpenALShutdown();
-
+   
    if(!OpenALDLLInit())
       return false;
 
@@ -2493,7 +2492,7 @@ bool OpenALInit()
 #elif defined(TORQUE_OS_ANDROID)
    mDevice = alcOpenDevice("openal-soft");
 #else
-   mDevice = (ALCvoid *)alcOpenDevice((const ALCchar*)NULL);
+   mDevice = (ALCdevice*)alcOpenDevice((const ALCchar*)NULL);
 #endif
    if (mDevice == (ALCvoid *)NULL)
       return false;

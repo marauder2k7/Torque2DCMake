@@ -32,97 +32,148 @@ TorqueSystemInfo PlatformSystemInfo;
 
 enum CPUFlags
 {
-   BIT_FPU     = BIT(0),
-   BIT_RDTSC   = BIT(4),
-   BIT_MMX     = BIT(23),
-   BIT_SSE     = BIT(25),
-   BIT_3DNOW   = BIT(31),
+   // EDX Register flags
+   BIT_FPU = BIT(0),
+   BIT_RDTSC = BIT(4),
+   BIT_MMX = BIT(23),
+   BIT_SSE = BIT(25),
+   BIT_SSE2 = BIT(26),
+   BIT_3DNOW = BIT(31),
+
+   // These use a different value for comparison than the above flags (ECX Register)
+   BIT_SSE3 = BIT(0),
+   BIT_SSE3xt = BIT(9),
+   BIT_SSE4_1 = BIT(19),
+   BIT_SSE4_2 = BIT(20),
 };
+
 
 // fill the specified structure with information obtained from asm code
 void SetProcessorInfo(TorqueSystemInfo::Processor& pInfo,
-   char* vendor, U32 processor, U32 properties)
+   char* vendor, U32 processor, U32 properties, U32 properties2)
 {
    PlatformSystemInfo.processor.properties |= (properties & BIT_FPU)   ? CPU_PROP_FPU : 0;
    PlatformSystemInfo.processor.properties |= (properties & BIT_RDTSC) ? CPU_PROP_RDTSC : 0;
    PlatformSystemInfo.processor.properties |= (properties & BIT_MMX)   ? CPU_PROP_MMX : 0;
 
+
+
    if (dStricmp(vendor, "GenuineIntel") == 0)
    {
       pInfo.properties |= (properties & BIT_SSE) ? CPU_PROP_SSE : 0;
+      pInfo.properties |= (properties & BIT_SSE2) ? CPU_PROP_SSE2 : 0;
+      pInfo.properties |= (properties2 & BIT_SSE3) ? CPU_PROP_SSE3 : 0;
+      pInfo.properties |= (properties2 & BIT_SSE3xt) ? CPU_PROP_SSE3xt : 0;
+      pInfo.properties |= (properties2 & BIT_SSE4_1) ? CPU_PROP_SSE4_1 : 0;
+      pInfo.properties |= (properties2 & BIT_SSE4_2) ? CPU_PROP_SSE4_2 : 0;
+
       pInfo.type = CPU_Intel_Unknown;
       // switch on processor family code
       switch ((processor >> 8) & 0x0f)
       {
+      case 4:
+         pInfo.type = CPU_Intel_486;
+         pInfo.name = StringTable->insert("Intel 486 class");
+         break;
+
+         // Pentium Family
+      case 5:
+         // switch on processor model code
+         switch ((processor >> 4) & 0xf)
+         {
+         case 1:
+         case 2:
+         case 3:
+            pInfo.type = CPU_Intel_Pentium;
+            pInfo.name = StringTable->insert("Intel Pentium");
+            break;
          case 4:
-            pInfo.type = CPU_Intel_486;
-            pInfo.name = StringTable->insert("Intel 486 class");
+            pInfo.type = CPU_Intel_PentiumMMX;
+            pInfo.name = StringTable->insert("Intel Pentium MMX");
             break;
-
-            // Pentium Family
-         case 5:
-            // switch on processor model code
-            switch ((processor >> 4) & 0xf)
-            {
-               case 1:
-               case 2:
-               case 3:
-                  pInfo.type = CPU_Intel_Pentium;
-                  pInfo.name = StringTable->insert("Intel Pentium");
-                  break;
-               case 4:
-                  pInfo.type = CPU_Intel_PentiumMMX;
-                  pInfo.name = StringTable->insert("Intel Pentium MMX");
-                  break;
-               default:
-                  pInfo.type = CPU_Intel_Pentium;
-                  pInfo.name = StringTable->insert( "Intel (unknown, Pentium family)" );
-                  break;
-            }
-            break;
-
-            // Pentium Pro/II/II family
-         case 6:
-            // switch on processor model code
-            switch ((processor >> 4) & 0xf)
-            {
-               case 1:
-                  pInfo.type = CPU_Intel_PentiumPro;
-                  pInfo.name = StringTable->insert("Intel Pentium Pro");
-                  break;
-               case 3:
-               case 5:
-                  pInfo.type = CPU_Intel_PentiumII;
-                  pInfo.name = StringTable->insert("Intel Pentium II");
-                  break;
-               case 6:
-                  pInfo.type = CPU_Intel_PentiumCeleron;
-                  pInfo.name = StringTable->insert("Intel Pentium Celeron");
-                  break;
-               case 7:
-               case 8:
-               case 10:
-               case 11:
-                  pInfo.type = CPU_Intel_PentiumIII;
-                  pInfo.name = StringTable->insert("Intel Pentium III");
-                  break;
-               default:
-                  pInfo.type = CPU_Intel_PentiumPro;
-                  pInfo.name = StringTable->insert( "Intel (unknown, Pentium Pro/II/III family)" );
-                  break;
-            }
-            break;
-
-            // Pentium4 Family
-         case 0xf:
-            pInfo.type = CPU_Intel_Pentium4;
-            pInfo.name = StringTable->insert( "Intel Pentium 4" );
-            break;
-
          default:
-            pInfo.type = CPU_Intel_Unknown;
-            pInfo.name = StringTable->insert( "Intel (unknown)" );
+            pInfo.type = CPU_Intel_Pentium;
+            pInfo.name = StringTable->insert("Intel (unknown)");
             break;
+         }
+         break;
+
+         // Pentium Pro/II/II family
+      case 6:
+      {
+         U32 extendedModel = (processor & 0xf0000) >> 16;
+         // switch on processor model code
+         switch ((processor >> 4) & 0xf)
+         {
+         case 1:
+            pInfo.type = CPU_Intel_PentiumPro;
+            pInfo.name = StringTable->insert("Intel Pentium Pro");
+            break;
+         case 3:
+         case 5:
+            pInfo.type = CPU_Intel_PentiumII;
+            pInfo.name = StringTable->insert("Intel Pentium II");
+            break;
+         case 6:
+            pInfo.type = CPU_Intel_PentiumCeleron;
+            pInfo.name = StringTable->insert("Intel Pentium Celeron");
+            break;
+         case 7:
+         case 8:
+         case 11:
+            pInfo.type = CPU_Intel_PentiumIII;
+            pInfo.name = StringTable->insert("Intel Pentium III");
+            break;
+         case 0xA:
+            if (extendedModel == 1)
+            {
+               pInfo.type = CPU_Intel_Corei7Xeon;
+               pInfo.name = StringTable->insert("Intel Core i7 / Xeon");
+            }
+            else
+            {
+               pInfo.type = CPU_Intel_PentiumIII;
+               pInfo.name = StringTable->insert("Intel Pentium III Xeon");
+            }
+            break;
+         case 0xD:
+            if (extendedModel == 1)
+            {
+               pInfo.type = CPU_Intel_Corei7Xeon;
+               pInfo.name = StringTable->insert("Intel Core i7 / Xeon");
+            }
+            else
+            {
+               pInfo.type = CPU_Intel_PentiumM;
+               pInfo.name = StringTable->insert("Intel Pentium/Celeron M");
+            }
+            break;
+         case 0xE:
+            pInfo.type = CPU_Intel_Core;
+            pInfo.name = StringTable->insert("Intel Core");
+            break;
+         case 0xF:
+            pInfo.type = CPU_Intel_Core2;
+            pInfo.name = StringTable->insert("Intel Core 2");
+            break;
+         default:
+            pInfo.type = CPU_Intel_PentiumPro;
+            pInfo.name = StringTable->insert("Intel (unknown)");
+            break;
+         }
+         break;
+      }
+
+      // Pentium4 Family
+      case 0xf:
+         pInfo.type = CPU_Intel_Pentium4;
+         pInfo.name = StringTable->insert("Intel Pentium 4");
+         break;
+
+      default:
+         pInfo.type = CPU_Intel_Unknown;
+         pInfo.name = StringTable->insert("Intel (unknown)");
+         break;
       }
    }
    //--------------------------------------

@@ -25,19 +25,11 @@
 #include "console/console.h"
 #include "string/stringTable.h"
 #include <math.h>
+#include <intrin.h>
 
 extern void PlatformBlitInit();
 extern void SetProcessorInfo(TorqueSystemInfo::Processor& pInfo,
-   char* vendor, U32 processor, U32 properties); // platform/platformCPU.cc
-
-
-#if defined(TORQUE_SUPPORTS_NASM)
-// asm cpu detection routine from platform code
-extern "C"
-{
-   void detectX86CPUInfo(char *vendor, U32 *processor, U32 *properties);
-}
-#endif
+   char* vendor, U32 processor, U32 properties, U32 properties2); // platform/platformCPU.cc
 
 
 void Processor::init()
@@ -54,74 +46,27 @@ void Processor::init()
    PlatformSystemInfo.processor.type = CPU_X86Compatible;
    PlatformSystemInfo.processor.name = StringTable->insert("Unknown x86 Compatible");
    PlatformSystemInfo.processor.mhz  = 0;
-   PlatformSystemInfo.processor.properties = CPU_PROP_C;
+   PlatformSystemInfo.processor.properties = CPU_PROP_C | CPU_PROP_LE;
 
-   char     vendor[13] = {0,};
+   char vendor[0x20];
+   dMemset(vendor, 0, sizeof(vendor));
    U32   properties = 0;
    U32   processor  = 0;
+   U32   properties2 = 0;
 
-#if defined(TORQUE_SUPPORTS_NASM)
+   S32 vendorInfo[4];
+   __cpuid(vendorInfo, 0);
+   *reinterpret_cast<int*>(vendor) = vendorInfo[1];
+   *reinterpret_cast<int*>(vendor + 4) = vendorInfo[3];
+   *reinterpret_cast<int*>(vendor + 8) = vendorInfo[2];
 
-   detectX86CPUInfo(vendor, &processor, &properties);
+   S32 cpuInfo[4];
+   __cpuid(cpuInfo, 1);
+   processor = cpuInfo[0];
+   properties = cpuInfo[3];
+   properties2 = cpuInfo[2];
 
-#elif defined(TORQUE_SUPPORTS_VC_INLINE_X86_ASM)
-   __asm
-   {
-      //--------------------------------------
-      // is CPUID supported
-      push     ebx
-      push     edx
-      push     ecx
-      pushfd
-      pushfd                     // save EFLAGS to stack
-      pop      eax               // move EFLAGS into EAX
-      mov      ebx, eax
-      xor      eax, 0x200000     // flip bit 21
-      push     eax
-      popfd                      // restore EFLAGS
-      pushfd
-      pop      eax
-      cmp      eax, ebx
-      jz       EXIT              // doesn't support CPUID instruction
-
-      //--------------------------------------
-      // Get Vendor Informaion using CPUID eax==0
-      xor      eax, eax
-      cpuid
-
-      mov      DWORD PTR vendor, ebx
-      mov      DWORD PTR vendor+4, edx
-      mov      DWORD PTR vendor+8, ecx
-
-      // get Generic Extended CPUID info
-      mov      eax, 1
-      cpuid                      // eax=1, so cpuid queries feature information
-
-      and      eax, 0x0ff0
-      mov      processor, eax    // just store the model bits
-      mov      properties, edx
-
-      // Want to check for 3DNow(tm).  Need to see if extended cpuid functions present.
-      mov      eax, 0x80000000
-      cpuid
-      cmp      eax, 0x80000000
-      jbe      MAYBE_3DLATER
-      mov      eax, 0x80000001
-      cpuid
-      and      edx, 0x80000000      // 3DNow if bit 31 set -> put bit in our properties
-      or       properties, edx
-   MAYBE_3DLATER:
-
-
-   EXIT:
-      popfd
-      pop      ecx
-      pop      edx
-      pop      ebx
-   }
-#endif
-
-   SetProcessorInfo(PlatformSystemInfo.processor, vendor, processor, properties);
+   SetProcessorInfo(PlatformSystemInfo.processor, vendor, processor, properties, properties2);
 
 // now calculate speed of processor...
    U16 nearmhz = 0; // nearest rounded mhz

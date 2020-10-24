@@ -120,25 +120,25 @@ void AudioEnvironment::initPersistFields()
 {
    Parent::initPersistFields();
 
-   addField("useRoom",              TypeBool,   Offset(mUseRoom, AudioEnvironment));
+   addField("useRoom", TypeBool, Offset(mUseRoom, AudioEnvironment));
 #if !defined(TORQUE_OS_IOS) && !defined(TORQUE_OS_ANDROID)
-   addField("room",                 TypeEnum,   Offset(mRoom, AudioEnvironment), 1, &gAudioEnvironmentRoomTypes);
+   addField("room", TypeEnum, Offset(mRoom, AudioEnvironment), 1, &gAudioEnvironmentRoomTypes);
 #endif
-   addField("roomHF",               TypeS32,    Offset(mRoomHF, AudioEnvironment));
-   addField("reflections",          TypeS32,    Offset(mReflections, AudioEnvironment));
-   addField("reverb",               TypeS32,    Offset(mReverb, AudioEnvironment));
-   addField("roomRolloffFactor",    TypeF32,    Offset(mRoomRolloffFactor, AudioEnvironment));
-   addField("decayTime",            TypeF32,    Offset(mDecayTime, AudioEnvironment));
-   addField("decayHFRatio",         TypeF32,    Offset(mDecayHFRatio, AudioEnvironment));
-   addField("reflectionsDelay",     TypeF32,    Offset(mReflectionsDelay, AudioEnvironment));
-   addField("reverbDelay",          TypeF32,    Offset(mReverbDelay, AudioEnvironment));
-   addField("roomVolume",           TypeS32,    Offset(mRoomVolume, AudioEnvironment));
-   addField("effectVolume",         TypeF32,    Offset(mEffectVolume, AudioEnvironment));
-   addField("damping",              TypeF32,    Offset(mDamping, AudioEnvironment));
-   addField("environmentSize",      TypeF32,    Offset(mEnvironmentSize, AudioEnvironment));
-   addField("environmentDiffusion", TypeF32,    Offset(mEnvironmentDiffusion, AudioEnvironment));
-   addField("airAbsorption",        TypeF32,    Offset(mAirAbsorption, AudioEnvironment));
-   addField("flags",                TypeS32,    Offset(mFlags, AudioEnvironment));
+   addField("roomHF", TypeS32, Offset(mRoomHF, AudioEnvironment));
+   addField("reflections", TypeS32, Offset(mReflections, AudioEnvironment));
+   addField("reverb", TypeS32, Offset(mReverb, AudioEnvironment));
+   addField("roomRolloffFactor", TypeF32, Offset(mRoomRolloffFactor, AudioEnvironment));
+   addField("decayTime", TypeF32, Offset(mDecayTime, AudioEnvironment));
+   addField("decayHFRatio", TypeF32, Offset(mDecayHFRatio, AudioEnvironment));
+   addField("reflectionsDelay", TypeF32, Offset(mReflectionsDelay, AudioEnvironment));
+   addField("reverbDelay", TypeF32, Offset(mReverbDelay, AudioEnvironment));
+   addField("roomVolume", TypeS32, Offset(mRoomVolume, AudioEnvironment));
+   addField("effectVolume", TypeF32, Offset(mEffectVolume, AudioEnvironment));
+   addField("damping", TypeF32, Offset(mDamping, AudioEnvironment));
+   addField("environmentSize", TypeF32, Offset(mEnvironmentSize, AudioEnvironment));
+   addField("environmentDiffusion", TypeF32, Offset(mEnvironmentDiffusion, AudioEnvironment));
+   addField("airAbsorption", TypeF32, Offset(mAirAbsorption, AudioEnvironment));
+   addField("flags", TypeS32, Offset(mFlags, AudioEnvironment));
 }
 
 
@@ -146,7 +146,7 @@ void AudioEnvironment::packData(BitStream* stream)
 {
    Parent::packData(stream);
 #if !defined(TORQUE_OS_IOS)  && !defined(TORQUE_OS_ANDROID)
-   if(stream->writeFlag(mUseRoom))
+   if (stream->writeFlag(mUseRoom))
       stream->writeRangedU32(mRoom, EAX_ENVIRONMENT_GENERIC, EAX_ENVIRONMENT_COUNT);
    else
 #endif
@@ -174,7 +174,7 @@ void AudioEnvironment::unpackData(BitStream* stream)
    Parent::unpackData(stream);
    mUseRoom = stream->readFlag();
 #if !defined(TORQUE_OS_IOS)  && !defined(TORQUE_OS_ANDROID)
-   if(mUseRoom)
+   if (mUseRoom)
       mRoom = stream->readRangedU32(EAX_ENVIRONMENT_GENERIC, EAX_ENVIRONMENT_COUNT);
    else
 #endif
@@ -228,18 +228,18 @@ void AudioSampleEnvironment::initPersistFields()
 {
    Parent::initPersistFields();
 
-   addField("direct",              TypeS32,    Offset(mDirect, AudioSampleEnvironment));
-   addField("directHF",            TypeS32,    Offset(mDirectHF, AudioSampleEnvironment));
-   addField("room",                TypeS32,    Offset(mRoom, AudioSampleEnvironment));
-   addField("obstruction",         TypeF32,    Offset(mObstruction, AudioSampleEnvironment));
-   addField("obstructionLFRatio",  TypeF32,    Offset(mObstructionLFRatio, AudioSampleEnvironment));
-   addField("occlusion",           TypeF32,    Offset(mOcclusion, AudioSampleEnvironment));
-   addField("occlusionLFRatio",    TypeF32,    Offset(mOcclusionLFRatio, AudioSampleEnvironment));
-   addField("occlusionRoomRatio",  TypeF32,    Offset(mOcclusionRoomRatio, AudioSampleEnvironment));
-   addField("roomRolloff",         TypeF32,    Offset(mRoomRolloff, AudioSampleEnvironment));
-   addField("airAbsorption",       TypeF32,    Offset(mAirAbsorption, AudioSampleEnvironment));
-   addField("outsideVolumeHF",     TypeS32,    Offset(mOutsideVolumeHF, AudioSampleEnvironment));
-   addField("flags",               TypeS32,    Offset(mFlags, AudioSampleEnvironment));
+   addField("direct", TypeS32, Offset(mDirect, AudioSampleEnvironment));
+   addField("directHF", TypeS32, Offset(mDirectHF, AudioSampleEnvironment));
+   addField("room", TypeS32, Offset(mRoom, AudioSampleEnvironment));
+   addField("obstruction", TypeF32, Offset(mObstruction, AudioSampleEnvironment));
+   addField("obstructionLFRatio", TypeF32, Offset(mObstructionLFRatio, AudioSampleEnvironment));
+   addField("occlusion", TypeF32, Offset(mOcclusion, AudioSampleEnvironment));
+   addField("occlusionLFRatio", TypeF32, Offset(mOcclusionLFRatio, AudioSampleEnvironment));
+   addField("occlusionRoomRatio", TypeF32, Offset(mOcclusionRoomRatio, AudioSampleEnvironment));
+   addField("roomRolloff", TypeF32, Offset(mRoomRolloff, AudioSampleEnvironment));
+   addField("airAbsorption", TypeF32, Offset(mAirAbsorption, AudioSampleEnvironment));
+   addField("outsideVolumeHF", TypeS32, Offset(mOutsideVolumeHF, AudioSampleEnvironment));
+   addField("flags", TypeS32, Offset(mFlags, AudioSampleEnvironment));
 }
 
 void AudioSampleEnvironment::packData(BitStream* stream)
@@ -277,4 +277,3 @@ void AudioSampleEnvironment::unpackData(BitStream* stream)
    mOutsideVolumeHF = readRangedS32(stream, -10000, 0);
    mFlags = stream->readInt(3);
 }
-

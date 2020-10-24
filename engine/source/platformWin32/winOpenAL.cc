@@ -49,54 +49,14 @@
 //#include <al/eax_func.h>
 #undef AL_FUNCTION
 
-// Declarations for the "emulated" functions (al functions that don't 
-// exist in the loki openal implementation)
-ALboolean emu_alGetBoolean(ALenum param);
-ALint emu_alGetInteger(ALenum param);
-ALfloat emu_alGetFloat(ALenum param);
-ALdouble emu_alGetDouble(ALenum param);
-void emu_alListeneri(ALenum param, ALint value);
-void emu_alGetListener3f(ALenum pname, ALfloat *v1, ALfloat *v2, ALfloat *v3);
-ALCdevice* emu_alcGetContextsDevice(ALCcontext *context);
-
-static void *dlHandle = NULL;
-static char* dlError = "no error";
-
-/*!   Get an "emulated" function address and bind it to the function pointer
-*/
-static bool bindEmulatedFunction(void *&fnAddress, const char *name)
-{
-   fnAddress = NULL;
-
-   if (dStrcmp(name, "alGetBoolean") == 0)
-      fnAddress = (void*)&emu_alGetBoolean;
-   else if (dStrcmp(name, "alGetInteger") == 0)
-      fnAddress = (void*)&emu_alGetInteger;
-   else if (dStrcmp(name, "alGetFloat") == 0)
-      fnAddress = (void*)&emu_alGetFloat;
-   else if (dStrcmp(name, "alGetDouble") == 0)
-      fnAddress = (void*)&emu_alGetDouble;
-   else if (dStrcmp(name, "alListeneri") == 0)
-      fnAddress = (void*)&emu_alListeneri;
-   else if (dStrcmp(name, "alGetListener3f") == 0)
-      fnAddress = (void*)&emu_alGetListener3f;
-   else if (dStrcmp(name, "alcGetContextsDevice") == 0)
-      fnAddress = (void*)&emu_alcGetContextsDevice;
-
-   return fnAddress != NULL;
-}
-
 /*!   Get a function address from the OpenAL DLL and bind it to the
 *     function pointer
 */
 static bool bindFunction(void *&fnAddress, const char *name)
 {
    // JMQ: MinGW gcc 3.2 needs the cast to void*
-   fnAddress = GetProcAddress(winState.hinstOpenAL, name);
+   fnAddress = (void*)(GetProcAddress(winState.hinstOpenAL, name));
    if (!fnAddress)
-      if (bindEmulatedFunction(fnAddress, name))
-         Con::warnf(ConsoleLogEntry::General, " Missing OpenAL function '%s', using emulated function", name);
-      else
       Con::errorf(ConsoleLogEntry::General, " Missing OpenAL function '%s'", name);
    return (fnAddress != NULL);
 }
@@ -146,59 +106,6 @@ static bool bindEAXFunctions()
    return result;
 }
 
-// Definitions for the emulated functions
-ALboolean emu_alGetBoolean(ALenum param)
-{
-   ALboolean alboolean;
-   alGetBooleanv(param, &alboolean);
-   return alboolean;
-}
-
-ALint emu_alGetInteger(ALenum param)
-{
-   ALint alint;
-   alGetIntegerv(param, &alint);
-   return alint;
-}
-
-ALfloat emu_alGetFloat(ALenum param)
-{
-   ALfloat alfloat;
-   alGetFloatv(param, &alfloat);
-   return alfloat;
-}
-
-ALdouble emu_alGetDouble(ALenum param)
-{
-   ALdouble aldouble;
-   alGetDoublev(param, &aldouble);
-   return aldouble;
-}
-
-void emu_alGetListener3f(ALenum pname, ALfloat *v0, ALfloat *v1, ALfloat *v2)
-{
-   ALfloat ptArray[10];
-   ptArray[0] = *v0;
-   ptArray[1] = *v1;
-   ptArray[2] = *v2;
-   alGetListenerfv(pname, ptArray);
-   *v0 = ptArray[0];
-   *v1 = ptArray[1];
-   *v2 = ptArray[2];
-}
-
-void emu_alListeneri(ALenum param, ALint value)
-{
-   alListenerf(param, static_cast<ALfloat>(value));
-}
-
-ALCdevice* emu_alcGetContextsDevice(ALCcontext *context)
-{
-   // this function isn't emulated
-   AssertFatal(false, "alcGetContextsDevice is not available");
-   return NULL;
-}
-
 namespace Audio
 {
    /*!   Shutdown and Unload the OpenAL DLL
@@ -222,7 +129,7 @@ namespace Audio
    {
       OpenALDLLShutdown();
 
-      winState.hinstOpenAL = LoadLibraryA("OpenAL32.dll");
+      winState.hinstOpenAL = LoadLibrary( dT("OpenAl32.dll"));
 
       if (winState.hinstOpenAL != NULL)
       {
@@ -232,7 +139,7 @@ namespace Audio
          if (bindOpenALFunctions())
          {
             // if EAX is available bind it's function pointers
-            if (alIsExtensionPresent("EAX"))
+            //if (alIsExtensionPresent("EAX"))
                bindEAXFunctions();
 
             Con::printf("OpenAL functions binded.");
