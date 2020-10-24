@@ -67,134 +67,6 @@
 #include "component/behaviors/behaviorInstance.h"
 #endif
 
-#ifndef _OBJECTTYPES_H_
-#include "2d/objectTypes.h"
-#endif
-
-#ifndef _BASEDATABLOCK_H_
-#include "2d/sceneobject/BaseDatablock.h"
-#endif // !_BASEDATABLOCK_H_
-
-#ifndef _GAMECONNECTION_H_
-#include "game/gameConnection.h"
-#endif
-
-class NetConnection;
-class GameConnection;
-class NetObject;
-//-----------------------------------------------------------------------------
-// SceneObject Datablock
-//-----------------------------------------------------------------------------
-class SceneObjectDatablock : 
-   public BaseDatablock
-{
-public:
-   typedef BaseDatablock Parent;
-   SceneObjectDatablock();
-   virtual ~SceneObjectDatablock();
-
-   static void initPersistFields();
-   void onStaticModified(const char* slotName);
-
-   virtual bool onAdd();
-   virtual void onRemove();
-   virtual void packData(BitStream* stream);
-   virtual void unpackData(BitStream* stream);
-
-   void addSceneObjectReference(SceneObject* object);
-   void removeSceneObjectReference(SceneObject* object);
-
-   /// Lifetime.
-   F32                     mLifetime;
-   bool                    mLifetimeActive;
-
-   /// Scene layers.
-   U32                     mSceneLayer;
-
-   /// Scene groups.
-   U32                     mSceneGroup;
-
-   /// Area.
-   Vector2                 mSize;
-   bool                    mAutoSizing;
-   b2AABB                  mPreTickAABB;
-   b2AABB                  mCurrentAABB;
-   Vector2                 mLocalSizeOOBB[4];
-   Vector2                 mRenderOOBB[4];
-   S32                     mWorldProxyId;
-
-   /// Growing
-   bool					      mGrowActive;
-   Vector2					   mTargetSize;
-   Vector2					   mDeltaSize;
-
-   /// Position / Angle.
-   Vector2                 mPreTickPosition;
-   F32                     mPreTickAngle;
-   Vector2                 mRenderPosition;
-   F32                     mRenderAngle;
-   bool                    mSpatialDirty;
-   Vector2                 mLastCheckedPosition;
-   Vector2                 mTargetPosition;
-   bool                    mTargetPositionActive;
-   F32                     mDistanceToTarget;
-   F32                     mTargetPositionMargin;
-   bool                    mTargetPositionFound;
-   bool                    mSnapToTargetPosition;
-   bool                    mStopAtTargetPosition;
-
-   /// Body.
-   b2Body*                 mpBody;
-   b2BodyDef               mBodyDefinition;
-   U32                     mWorldQueryKey;
-
-   /// Collision control.
-   U32                     mCollisionLayerMask;
-   U32                     mCollisionGroupMask;
-   bool                    mCollisionSuppress;
-   bool                    mCollisionOneWay;
-   b2FixtureDef            mDefaultFixture;
-   bool                    mGatherContacts;
-   Scene::typeContactVector* mpCurrentContacts;
-
-
-   /// Render visibility.
-   bool                    mVisible;
-
-   /// Render blending.
-   bool                    mBlendMode;
-   S32                     mSrcBlendFactor;
-   S32                     mDstBlendFactor;
-   ColorF                  mBlendColor;
-   F32                     mAlphaTest;
-
-   /// Fading
-   bool					   mFadeActive;
-   ColorF					mTargetColor;
-   F32						mDeltaRed;
-   F32						mDeltaGreen;
-   F32						mDeltaBlue;
-   F32						mDeltaAlpha;
-
-   /// Render sorting.
-   Vector2                 mSortPoint;
-
-   /// Input events.
-   bool                    mUseInputEvents;
-
-   /// Script callbacks.
-   bool                    mCollisionCallback;
-   bool                    mSleepingCallback;
-   bool                    mLastAwakeState;
-
-
-public:
-   DECLARE_CONOBJECT(SceneObjectDatablock);
-   SimSet SceneObjects;
-
-};
-
-
 //-----------------------------------------------------------------------------
 
 struct tDestroyNotification
@@ -232,17 +104,13 @@ struct SceneObjectAttachedGUI
 };
 
 class SceneObject :
-    public NetObject,
+    public BehaviorComponent,
     public SceneRenderObject,
     public PhysicsProxy
 {
 
 private:
-    typedef NetObject Parent;
-
-    static SceneObjectDatablock* mDefaultConfig;
-
-    GameConnection* mControllingClient;
+    typedef BehaviorComponent Parent;
 
 public:
     friend class Scene;
@@ -251,19 +119,6 @@ public:
     friend class WorldQuery;
     friend class DebugDraw;
     friend class SceneObjectRotateToEvent;
-
-    enum SceneObjectMasks
-    {
-       InitialUpdateMask   = BIT(0),
-       ScaleMask           = BIT(1),
-       MoveMask            = BIT(2),
-       MountedMask         = BIT(3),
-       NextFreeMask        = BIT(4)
-    };
-
-    SceneObjectDatablock* mConfigDataBlock;
-    static SceneObjectDatablock* getDefaultConfig() { return mDefaultConfig; };
-    static void setDefaultConfig(SceneObjectDatablock* config) { mDefaultConfig = config; };
 
 protected:
     /// Scene.
@@ -275,10 +130,6 @@ protected:
     ///         any simulation related functionality cannot be used such as TorqueScript
     ///         callbacks.
     SimObjectPtr<Scene>     mpTargetScene;
-
-    BitSet32                mObjectFlags;
-
-    U32                     mTypeMask;
 
     /// Lifetime.
     F32                     mLifetime;
@@ -300,12 +151,12 @@ protected:
     b2AABB                  mCurrentAABB;
     Vector2                 mLocalSizeOOBB[4];
     Vector2                 mRenderOOBB[4];
-	 S32                     mWorldProxyId;
+	S32                     mWorldProxyId;
 
-	 // Growing
-	 bool					       mGrowActive;
-	 Vector2					    mTargetSize;
-	 Vector2					    mDeltaSize;
+	// Growing
+	bool					mGrowActive;
+	Vector2					mTargetSize;
+	Vector2					mDeltaSize;
 
     /// Position / Angle.
     Vector2                 mPreTickPosition;
@@ -321,9 +172,6 @@ protected:
     bool                    mTargetPositionFound;
     bool                    mSnapToTargetPosition;
     bool                    mStopAtTargetPosition;
-
-    Vector2                 mPosition;
-    Vector2                 mVelocity;
 
     /// Body.
     b2Body*                 mpBody;
@@ -356,12 +204,12 @@ protected:
     F32                     mAlphaTest;
 
 	// Fading
-	bool					       mFadeActive;
-	ColorF					    mTargetColor;
-	F32						    mDeltaRed;
-	F32						    mDeltaGreen;
-	F32						    mDeltaBlue;
-	F32						    mDeltaAlpha;
+	bool					mFadeActive;
+	ColorF					mTargetColor;
+	F32						mDeltaRed;
+	F32						mDeltaGreen;
+	F32						mDeltaBlue;
+	F32						mDeltaAlpha;
 
     /// Render sorting.
     Vector2                 mSortPoint;
@@ -408,7 +256,7 @@ protected:
     /// Scene (un)registering.
     virtual void            OnRegisterScene( Scene* pScene );
     virtual void            OnUnregisterScene( Scene* pScene );
-    bool mEnabled;
+
     /// Ticking.
     void                    resetTickSpatials( const bool resize = false );
     inline bool             getSpatialDirty( void ) const { return mSpatialDirty; }
@@ -433,8 +281,6 @@ public:
     virtual void            onDestroyNotify( SceneObject* pSceneObject );
     static void             initPersistFields();
 
-    void setConfigDatablock(const char * datablockName);
-    SceneObjectDatablock *getConfigDatablock() { return mConfigDataBlock; };
     /// Integration.
     virtual void            preIntegrate( const F32 totalTime, const F32 elapsedTime, DebugStats* pDebugStats );
     virtual void            integrateObject( const F32 totalTime, const F32 elapsedTime, DebugStats* pDebugStats );
@@ -449,6 +295,7 @@ public:
     virtual bool            validRender( void ) const { return true; }
     virtual bool            shouldRender( void ) const { return false; }
 
+    
     /// Render Output.
     virtual bool            canPrepareRender( void ) const { return false; }
     virtual void            scenePrepareRender( const SceneRenderState* pSceneRenderState, SceneRenderQueue* pSceneRenderQueue ) {}
@@ -465,8 +312,7 @@ public:
     inline F32              getSceneTime( void ) const                  { if ( mpScene ) return mpScene->getSceneTime(); else return 0.0f; }
 
     /// Enabled.
-    void setEnabled(const bool enabled);
-    bool isEnabled() const { return mEnabled; }
+    virtual void            setEnabled( const bool enabled );
 
     /// Lifetime.
     void                    setLifetime( const F32 lifetime );
@@ -564,8 +410,8 @@ public:
     virtual void            onEndCollision( const TickContact& tickContact );
 
     /// Velocities.
-    inline void             setLinearVelocity(const Vector2& velocity) { if (mpScene) mpBody->SetLinearVelocity(velocity); else mBodyDefinition.linearVelocity = velocity; mVelocity = velocity; }
-    inline Vector2          getLinearVelocity(void) const               { return mVelocity; }
+    inline void             setLinearVelocity( const Vector2& velocity ) { if ( mpScene ) mpBody->SetLinearVelocity( velocity ); else mBodyDefinition.linearVelocity = velocity; }
+    inline Vector2          getLinearVelocity(void) const               { if ( mpScene ) return mpBody->GetLinearVelocity(); else return mBodyDefinition.linearVelocity; }
     inline Vector2          getLinearVelocityFromWorldPoint( const Vector2& worldPoint ) { if ( mpScene ) return mpBody->GetLinearVelocityFromWorldPoint( worldPoint ); else return mBodyDefinition.linearVelocity; }
     inline Vector2          getLinearVelocityFromLocalPoint( const Vector2& localPoint ) { if ( mpScene ) return mpBody->GetLinearVelocityFromLocalPoint( localPoint ); else return mBodyDefinition.linearVelocity; }
     inline void             setAngularVelocity( const F32 velocity )    { if ( mpScene ) mpBody->SetAngularVelocity( velocity ); else mBodyDefinition.angularVelocity = velocity; }
@@ -756,14 +602,6 @@ public:
     void                    notifyComponentsRemoveFromScene( void );
     void                    notifyComponentsUpdate( void );
 
-
-    
-    virtual void setControllingClient(GameConnection* connection);
-    GameConnection* getControllingClient() { return mControllingClient; }
-
-    //Type Mask
-    U32 getTypeMask() { return mTypeMask ; }
-
     /// Miscellaneous.
     inline const char*      scriptThis(void) const                      { return Con::getIntArg(getId()); }
     inline bool             getIsAlwaysInScope(void) const              { return mAlwaysInScope; }
@@ -791,7 +629,7 @@ public:
     static const char* getDstBlendFactorDescription(const GLenum factor);
 
     /// Declare Console Object.
-    DECLARE_CONOBJECT(SceneObject);
+    DECLARE_CONOBJECT( SceneObject );
 
 protected:
     S32                     copyCircleCollisionShapeTo( SceneObject* pSceneObject, const b2FixtureDef& fixtureDef ) const;

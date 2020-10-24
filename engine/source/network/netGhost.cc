@@ -32,7 +32,6 @@
 
 #define DebugChecksum 0xF00DBAAD
 
-
 extern U32 gGhostUpdates;
 
 class GhostAlwaysObjectEvent : public NetEvent
@@ -42,8 +41,6 @@ class GhostAlwaysObjectEvent : public NetEvent
    NetObject *object;
    bool validObject;
 public:
-   typedef NetEvent Parent;
-
    GhostAlwaysObjectEvent(NetObject *obj = NULL, U32 index = 0)
    {
       if(obj)
@@ -51,13 +48,7 @@ public:
          objectId = obj->getId();
          ghostIndex = index;
       }
-      else
-      {
-         objectId = 0;
-         ghostIndex = 0;
-      }
       object = NULL;
-      validObject = false;
    }
    ~GhostAlwaysObjectEvent()
       { delete object; }
@@ -71,8 +62,7 @@ public:
       {
          S32 classId = obj->getClassId(ps->getNetClassGroup());
          bstream->writeClassId(classId, NetClassTypeObject, ps->getNetClassGroup());
-         U32 retMask = obj->packUpdate(ps, 0xFFFFFFFF, bstream);
-         if (retMask != 0)obj->setMaskBits(retMask);
+         obj->packUpdate(ps, 0xFFFFFFFF, bstream);
       }
    }
    void write(NetConnection *ps, BitStream *bstream)
@@ -82,8 +72,7 @@ public:
       {
          S32 classId = object->getClassId(ps->getNetClassGroup());
          bstream->writeClassId(classId, NetClassTypeObject, ps->getNetClassGroup());
-         U32 retMask = object->packUpdate(ps, 0xFFFFFFFF, bstream);
-         if (retMask != 0) object->setMaskBits(retMask);
+         object->packUpdate(ps, 0xFFFFFFFF, bstream);
       }
    }
    void unpack(NetConnection *ps, BitStream *bstream)
@@ -336,7 +325,6 @@ void NetConnection::ghostWritePacket(BitStream *bstream, PacketNotify *notify)
 
    if(mScopeObject)
       mScopeObject->onCameraScopeQuery(this, &camInfo);
-   doneScopingScene();
 
    for(i = mGhostZeroUpdateIndex - 1; i >= 0; i--)
    {
@@ -388,9 +376,9 @@ void NetConnection::ghostWritePacket(BitStream *bstream, PacketNotify *notify)
    //
    for(i = mGhostZeroUpdateIndex - 1; i >= 0 && !bstream->isFull(); i--)
    {
-      walk = mGhostArray[i];
-      if(walk->flags & (GhostInfo::KillingGhost | GhostInfo::Ghosting))
-         continue;
+      GhostInfo *walk = mGhostArray[i];
+        if(walk->flags & (GhostInfo::KillingGhost | GhostInfo::Ghosting))
+           continue;
         
       bstream->writeFlag(true);
 
@@ -445,8 +433,6 @@ void NetConnection::ghostWritePacket(BitStream *bstream, PacketNotify *notify)
 
          AssertFatal((retMask & (~updateMask)) == 0, "Cannot set new bits in packUpdate return");
 
-         ghostWriteExtra(walk->obj, bstream);
-
          walk->updateMask = retMask;
          if(!retMask)
             ghostPushToZero(walk);
@@ -484,7 +470,6 @@ void NetConnection::ghostReadPacket(BitStream *bstream)
    idSize += 3;
 
    // while there's an object waiting...
-   gGhostUpdates = 0;
 
    while(bstream->readFlag())
    {
@@ -518,12 +503,8 @@ void NetConnection::ghostReadPacket(BitStream *bstream)
             {
                setLastError("Invalid packet.");
                return;
-            
             }
-
-            obj->mNetFlags &= ~(BIT(NetObject::MaxNetFlagBit + 1) - 1);
-
-            obj->mNetFlags |= NetObject::IsGhost;
+            obj->mNetFlags = NetObject::IsGhost;
 
             // object gets initial update before adding to the manager
 
@@ -537,24 +518,7 @@ void NetConnection::ghostReadPacket(BitStream *bstream)
                avar("class id mismatch for dest class %s.",
                   mLocalGhosts[index]->getClassName()) );
 #endif
-            ghostPreRead(mLocalGhosts[index], true);
             mLocalGhosts[index]->unpackUpdate(this, bstream);
-
-            if (mRemoteConnection)
-            {
-               obj->mServerObject = mRemoteConnection->resolveObjectFromGhostIndex(index);
-               if (obj->mServerObject)
-               {
-                  obj->mServerObject->mClientObject = obj;
-
-                  // Sync selection flag as otherwise the editor will end up setting only
-                  // server-side flags when selecting an object that hasn't been ghosted yet
-                  // (usually the case when creating new objects).
-
-                  if (obj->mServerObject->isSelected())
-                     obj->setSelected(true);
-               }
-            }
 
             if(!obj->registerObject())
             {
@@ -562,9 +526,10 @@ void NetConnection::ghostReadPacket(BitStream *bstream)
                   setLastError("Invalid packet.");
                return;
             }
+            if(mRemoteConnection)
+               obj->mServerObject = mRemoteConnection->resolveObjectFromGhostIndex(index);
 
             addObject(obj);
-            ghostReadExtra(mLocalGhosts[index], bstream, true);
          }
          else
          {
@@ -577,9 +542,7 @@ void NetConnection::ghostReadPacket(BitStream *bstream)
                avar("class id mismatch for dest class %s.",
                   mLocalGhosts[index]->getClassName()) );
 #endif
-            ghostPreRead(mLocalGhosts[index], false);
             mLocalGhosts[index]->unpackUpdate(this, bstream);
-            ghostReadExtra(mLocalGhosts[index], bstream, false);
          }
          //PacketStream::getStats()->addBits(PacketStats::Receive, bstream->getCurPos() - startPos, ghostRefs[index].localGhost->getPersistTag());
 #ifdef TORQUE_DEBUG_NET
@@ -589,7 +552,7 @@ void NetConnection::ghostReadPacket(BitStream *bstream)
             avar("unpackUpdate did not match packUpdate for object of class %s.",
                mLocalGhosts[index]->getClassName()) );
 #endif
-         if(!mErrorBuffer[0])
+         if(mErrorBuffer[0])
             return;
       }
    }
@@ -725,10 +688,6 @@ void NetConnection::objectInScope(NetObject *obj)
       if(walk->obj != obj)
          continue;
       walk->flags |= GhostInfo::InScope;
-      // Make sure scope always if reflected on the ghostinfo too
-      if (obj->mNetFlags.test(NetObject::ScopeAlways))
-         walk->flags |= GhostInfo::ScopeAlways;
-
       return;
    }
 
@@ -790,7 +749,6 @@ void NetConnection::handleConnectionMessage(U32 message, U32 sequence, U32 ghost
          // if so, we need to indicate to the server to restart ghosting, after
          // we download all the files...
          sv.ghost = NULL;
-         sv.index = -1;
          mGhostAlwaysSaveList.push_back(sv);
          if(mGhostAlwaysSaveList.size() == 1)
             loadNextGhostAlwaysObject(true);
@@ -801,7 +759,7 @@ void NetConnection::handleConnectionMessage(U32 message, U32 sequence, U32 ghost
          Con::executef(this, 1, "onGhostAlwaysObjectsReceived");
          Con::printf("Ghost Always objects received.");
          mGhosting = true;
-         for(i = 0; i < mGhostFreeIndex; i++)
+         for(i = 0; i < (S32)mGhostFreeIndex; i++)
          {
             if(mGhostArray[i]->flags & GhostInfo::ScopedEvent)
                mGhostArray[i]->flags &= ~(GhostInfo::Ghosting | GhostInfo::ScopedEvent);
@@ -878,82 +836,18 @@ void NetConnection::activateGhosting()
          objectInScope(obj);
    }
    sendConnectionMessage(GhostAlwaysStarting, mGhostingSequence, ghostAlwaysSet->size());
-
-   if (getLocalClientConnection() == this)
+   for(j = mGhostZeroUpdateIndex - 1; j >= 0; j--)
    {
-      // Get a pointer to the local client.
-      NetConnection* pClient = NetConnection::getConnectionToServer();
+      AssertFatal((mGhostArray[j]->flags & GhostInfo::ScopeAlways) != 0, "Non-scope always in the scope always list.")
 
-      Con::executef(2,"onGhostAlwaysStarted", Con::getIntArg(mGhostZeroUpdateIndex));
+      // we may end up resending state here, but at least initial state
+      // will not be resent.
+      mGhostArray[j]->updateMask = 0;
+      ghostPushToZero(mGhostArray[j]);
+      mGhostArray[j]->flags &= ~GhostInfo::NotYetGhosted;
+      mGhostArray[j]->flags |= GhostInfo::ScopedEvent;
 
-      // Set up a buffer for the object send.
-      U8 iBuffer[4096];
-      BitStream mStream(iBuffer, 4096);
-
-      // Iterate through the scope always objects...
-      for (j = mGhostZeroUpdateIndex - 1; j >= 0; j--)
-      {
-         AssertFatal((mGhostArray[j]->flags & GhostInfo::ScopeAlways) != 0, "NetConnection::activateGhosting:  Non-scope always in the scope always list.");
-
-         // Clear the ghost update mask and flags appropriately.
-         mGhostArray[j]->updateMask = 0;
-         ghostPushToZero(mGhostArray[j]);
-         mGhostArray[j]->flags &= ~GhostInfo::NotYetGhosted;
-         mGhostArray[j]->flags |= GhostInfo::ScopedEvent;
-
-         // Set up a pointer to the new object.
-         NetObject* pObject = 0;
-
-         // If there's a valid ghost object...
-         if (mGhostArray[j]->obj)
-         {
-            // Pack the server object's update.
-            mStream.setPosition(0);
-            mStream.clearCompressionPoint();
-            U32 retMask = mGhostArray[j]->obj->packUpdate(this, 0xFFFFFFFF, &mStream);
-            if (retMask != 0)
-               mGhostArray[j]->obj->setMaskBits(retMask);
-
-            // Create a new object instance for the client.
-            pObject = (NetObject*)ConsoleObject::create(pClient->getNetClassGroup(), NetClassTypeObject, mGhostArray[j]->obj->getClassId(getNetClassGroup()));
-
-            // Set the client object networking flags.
-            pObject->mNetFlags = NetObject::IsGhost;
-            pObject->mNetIndex = mGhostArray[j]->index;
-
-            // Unpack the client object's update.
-            mStream.setPosition(0);
-            mStream.clearCompressionPoint();
-            pObject->unpackUpdate(pClient, &mStream);
-         }
-         else
-         {
-            // Otherwise, create a new dummy netobject.
-            pObject = new NetObject;
-         }
-
-         // Execute the appropriate console callback.
-         Con::executef(2,"onGhostAlwaysObjectReceived");
-
-         // Set the ghost always object for the client.
-         pClient->setGhostAlwaysObject(pObject, mGhostArray[j]->index);
-      }
-   }
-   else
-   {
-      for (j = mGhostZeroUpdateIndex - 1; j >= 0; j--)
-      {
-         AssertFatal((mGhostArray[j]->flags & GhostInfo::ScopeAlways) != 0, "Non-scope always in the scope always list.")
-
-         // we may end up resending state here, but at least initial state
-         // will not be resent.
-         mGhostArray[j]->updateMask = 0;
-         ghostPushToZero(mGhostArray[j]);
-         mGhostArray[j]->flags &= ~GhostInfo::NotYetGhosted;
-         mGhostArray[j]->flags |= GhostInfo::ScopedEvent;
-
-         postNetEvent(new GhostAlwaysObjectEvent(mGhostArray[j]->obj, mGhostArray[j]->index));
-      }
+      postNetEvent(new GhostAlwaysObjectEvent(mGhostArray[j]->obj, mGhostArray[j]->index));
    }
    sendConnectionMessage(GhostAlwaysDone, mGhostingSequence);
    //AssertFatal(validateGhostArray(), "Invalid ghost array!");
@@ -1005,11 +899,8 @@ void NetConnection::setGhostAlwaysObject(NetObject *object, U32 index)
    object->mNetIndex = index;
 
    // while there's an object waiting...
-   if (isLocalConnection()) 
-   {
+   if (isLocalConnection()) {
       object->mServerObject = mRemoteConnection->resolveObjectFromGhostIndex(index);
-      if (object->mServerObject)
-         object->mServerObject->mClientObject = object;
    }
 
    GhostSave sv;
@@ -1171,8 +1062,7 @@ void NetConnection::ghostWriteStartBlock(ResizeBitStream *stream)
    {
       if(mLocalGhosts[i])
       {
-         U32 retMask = mLocalGhosts[i]->packUpdate(this, 0xFFFFFFFF, stream);
-         if (retMask != 0) mLocalGhosts[i]->setMaskBits(retMask);
+         mLocalGhosts[i]->packUpdate(this, 0xFFFFFFFF, stream);
          stream->validate();
       }
    }

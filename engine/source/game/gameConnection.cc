@@ -27,7 +27,7 @@
 #include "io/bitStream.h"
 #include "game/gameConnection.h"
 #include "io/resource/resourceManager.h"
-#include "2d/sceneobject/SceneObject.h"
+
 #include "gameConnection_ScriptBinding.h"
 
 //----------------------------------------------------------------------------
@@ -323,20 +323,7 @@ void GameConnection::setDisconnectReason(const char *str)
 //----------------------------------------------------------------------------
 //----------------------------------------------------------------------------
 //----------------------------------------------------------------------------
-void GameConnection::ghostPreRead(NetObject * nobj, bool newGhost)
-{
-   Parent::ghostPreRead(nobj, newGhost);
-}
 
-void GameConnection::ghostReadExtra(NetObject * nobj, BitStream * bstream, bool newGhost)
-{
-   Parent::ghostReadExtra(nobj, bstream, newGhost);
-}
-
-void GameConnection::ghostWriteExtra(NetObject * nobj, BitStream * bstream)
-{
-   Parent::ghostWriteExtra(nobj, bstream);
-}
 
 void GameConnection::readPacket(BitStream *bstream)
 {
@@ -358,39 +345,12 @@ void GameConnection::writePacket(BitStream *bstream, PacketNotify *note)
    bstream->clearCompressionPoint();
    stringBuf[0] = 0;
    bstream->setStringBuffer(stringBuf);
-
-   GamePacketNotify *gnote = (GamePacketNotify *) note;
-   
-   U32 startPos = bstream->getCurPos();
-
+                                                   
    Parent::writePacket(bstream, note);
    bstream->clearCompressionPoint();
    bstream->setStringBuffer(NULL);
 }
 
-
-void GameConnection::setControlObject(SceneObject * cObj)
-{
-   if (mControlObject == cObj)
-      return;
-
-   if (cObj)
-   {
-
-      if (GameConnection *con = cObj->getControllingClient())
-      {
-         if (this != con)
-         {
-            if (con->getControlObject() == cObj)
-               con->setControlObject(0);
-         }
-      }
-
-      cObj->setControllingClient(this);
-   }
-
-   mControlObject = cObj;
-}
 
 void GameConnection::detectLag()
 {

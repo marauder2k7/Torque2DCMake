@@ -47,7 +47,6 @@ protected:
    const char *mTypeName;
    const char *mInspectorFieldType;
 
-
 public:
 
    /// @name cbt_list List Interface

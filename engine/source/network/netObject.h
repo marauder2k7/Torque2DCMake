@@ -30,9 +30,6 @@
 #include "math/mMath.h"
 #endif
 
-#ifndef _BEHAVIORCOMPONENT_H_
-#include "component/behaviors/behaviorComponent.h"
-#endif
 
 //-----------------------------------------------------------------------------
 class NetConnection;
@@ -220,7 +217,7 @@ struct GhostInfo;
 /// the documentation on AbstractClassRep for more details.
 ///
 /// @nosubgrouping
-class NetObject : public BehaviorComponent
+class NetObject: public SimObject
 {
    // The Ghost Manager needs read/write access
    friend class  NetConnection;
@@ -231,7 +228,7 @@ class NetObject : public BehaviorComponent
    friend class GhostAlwaysObjectEvent;
 
 private:
-   typedef BehaviorComponent Parent;
+   typedef SimObject Parent;
 
    /// Mask indicating which states are dirty and need to be retransmitted on this
    /// object.
@@ -271,7 +268,7 @@ protected:
    /// @note "Premature optimization is the root of all evil" - Donald Knuth. The current codebase
    ///       uses this feature in three small places, mostly for non-speed-related purposes.
    SimObjectPtr<NetObject> mServerObject;
-   SimObjectPtr<NetObject> mClientObject;
+
    enum NetFlags
    {
       IsGhost           =  BIT(1),   ///< This is a ghost.
@@ -379,36 +376,6 @@ public:
    bool isScopeable() const;     ///< Is this object subject to scoping?
    bool isGhostable() const;     ///< Is this object ghostable?
    bool isGhostAlways() const;   ///< Should this object always be ghosted?
-
-   /// Returns a pointer to the server object when on a local connection.
-   NetObject* getServerObject() const { return mServerObject; }
-
-   /// Return a pointer t the client object
-   NetObject* getClientObject() const { return mClientObject; }
-
-   /// Template form for the callers convenience
-   template <class T>
-   static T* getServerObject(T *netObj) { return static_cast<T*>(netObj->getServerObject()); }
-
-   /// Template form for the callers convenience
-   template <class T>
-   static T* getClientObject(T *netObj) { return static_cast<T*>(netObj->getClientObject()); }
-
-protected:
-   U16          mScope_id;
-   U16          mScope_refs;
-   bool         mScope_registered;
-   virtual void onScopeIdChange() {}
-public:
-   enum {SCOPE_ID_BITS = 14};
-   U16          getScopeId() const { return mScope_id; }
-   U16          addScopeRef();
-   U16          generateScopeId();
-   U16          master_scope_id = 1;
-   void         removeScopeRef();
-   void         setScopeRegistered(bool flag) { mScope_registered = flag; }
-   bool         getScopeRegistered() const { return mScope_registered; }
-
 };
 
 //-----------------------------------------------------------------------------
@@ -449,6 +416,5 @@ inline bool NetObject::isGhostAlways() const
                "That's strange, a ScopeAlways non-ghostable object?  Something wrong here");
    return mNetFlags.test(Ghostable) && mNetFlags.test(ScopeAlways);
 }
-
 
 #endif

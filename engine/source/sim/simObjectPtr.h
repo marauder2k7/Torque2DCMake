@@ -27,8 +27,6 @@
 #include "platform/platform.h"
 #endif
 
-#include "console/consoleBaseType.h"
-
 
 //---------------------------------------------------------------------------
 /// Smart SimObject pointer.

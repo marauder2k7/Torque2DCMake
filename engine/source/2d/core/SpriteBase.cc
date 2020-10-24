@@ -33,7 +33,7 @@
 
 //------------------------------------------------------------------------------
 
-IMPLEMENT_CO_NETOBJECT_V1(SpriteBase);
+IMPLEMENT_CONOBJECT(SpriteBase);
 
 //------------------------------------------------------------------------------
 
@@ -54,7 +54,7 @@ void SpriteBase::initPersistFields()
     // Call parent.
     Parent::initPersistFields();
 
-    addProtectedField("Image", TypeImageAssetPtr, Offset(mImageAsset, SpriteBase), &_setImage, &getImage, &writeImage, "");
+    addProtectedField("Image", TypeImageAssetPtr, Offset(mImageAsset, SpriteBase), &setImage, &getImage, &writeImage, "");
     addProtectedField("Frame", TypeS32, Offset(mImageFrame, SpriteBase), &setImageFrame, &defaultProtectedGetFn, &writeImageFrame, "");
     addProtectedField("NamedFrame", TypeString, Offset(mNamedImageFrame, SpriteBase), &setNamedImageFrame, &defaultProtectedGetFn, &writeNamedImageFrame, "");
     addProtectedField("Animation", TypeAnimationAssetPtr, Offset(mAnimationAsset, SpriteBase), &setAnimation, &getAnimation, &writeAnimation, "");
@@ -95,11 +95,6 @@ void SpriteBase::copyTo(SimObject* object)
     ImageFrameProvider::copyTo( pSpriteBase );
 }
 
-void SpriteBase::setControllingClient(GameConnection * connection)
-{
-   Parent::setControllingClient(connection);
-}
-
 //------------------------------------------------------------------------------
 
 void SpriteBase::onAnimationEnd( void )
@@ -107,54 +102,3 @@ void SpriteBase::onAnimationEnd( void )
     // Do script callback.
     Con::executef( this, 1, "onAnimationEnd" );
 }
-
-//----------------------------------------------------------------------------------------------
-// Network Send.
-//
-// TO BE IMPLEMENTED!
-//----------------------------------------------------------------------------------------------
-U32 SpriteBase::packUpdate(NetConnection * conn, U32 mask, BitStream *stream)
-{
-   U32 retMask = Parent::packUpdate(conn, mask, stream);
-   if (stream->writeFlag(mask & InitialUpdateMask))
-   {
-      stream->writeString(mImageAsset.getAssetId());
-   }
-
-   return retMask;
-}
-
-
-//----------------------------------------------------------------------------------------------
-// Network Receive.
-//
-// TO BE IMPLEMENTED!
-//----------------------------------------------------------------------------------------------
-void SpriteBase::unpackUpdate(NetConnection * conn, BitStream *stream)
-{
-   Parent::unpackUpdate(conn, stream);
-   if (stream->readFlag())
-   {
-      char buffer[256];
-      stream->readString(buffer);
-      setImage(buffer);
-
-   }
-}
-
-bool SpriteBase::setImage(const char* data)
-{
-   void* obj = this;
-
-   return _setImage(obj, data);
-}
-
-bool SpriteBase::_setImage(void* obj, const char* data)
-{
-   ImageFrameProvider* ifP = dynamic_cast<ImageFrameProvider*>(reinterpret_cast <SpriteBase*>( obj));
-   ifP->setImage(data);
-
-   return false;
-}
-
-//-----------------------------------------------------------------------------

@@ -23,26 +23,26 @@
 #include "platformWin32/platformWin32.h"
 #include "console/console.h"
 
-#include "al/altypes.h"
-#include "al/alctypes.h"
+#include "openal/win32/al/altypes.h"
+#include "openal/win32/al/alctypes.h"
 #define INITGUID
-#include "al/eaxtypes.h"
+#include "openal/win32/al/eaxtypes.h"
 
 
 // Define the OpenAL and Extension Stub functions
 #define AL_FUNCTION(fn_return, fn_name, fn_args, fn_value) fn_return stub_##fn_name fn_args{ fn_value }
-#include "al/al_func.h"
-#include "al/alc_func.h"
-#include "al/eax_func.h"
+#include "openal/win32/al/al_func.h"
+#include "openal/win32/al/alc_func.h"
+#include "openal/win32/al/eax_func.h"
 #undef AL_FUNCTION
 
 
 // Declare the OpenAL and Extension Function pointers
 // And initialize them to the stub functions
 #define AL_FUNCTION(fn_return,fn_name,fn_args, fn_value) fn_return (*fn_name)fn_args = stub_##fn_name;
-#include "al/al_func.h"
-#include "al/alc_func.h"
-#include "al/eax_func.h"
+#include "openal/win32/al/al_func.h"
+#include "openal/win32/al/alc_func.h"
+#include "openal/win32/al/eax_func.h"
 #undef AL_FUNCTION
 
 
@@ -75,8 +75,8 @@ static bool bindOpenALFunctions()
 {
    bool result = true;
    #define AL_FUNCTION(fn_return, fn_name, fn_args, fn_value) result &= bindFunction( *(void**)&fn_name, #fn_name);
-   #include "al/al_func.h"
-   #include "al/alc_func.h"
+   #include "openal/win32/al/al_func.h"
+   #include "openal/win32/al/alc_func.h"
    #undef AL_FUNCTION
    return result;
 }
@@ -86,9 +86,9 @@ static bool bindOpenALFunctions()
 static void unbindOpenALFunctions()
 {
    #define AL_FUNCTION(fn_return, fn_name, fn_args, fn_value) fn_name = stub_##fn_name;
-   #include "al/al_func.h"
-   #include "al/alc_func.h"
-   #include "al/eax_func.h"
+   #include "openal/win32/al/al_func.h"
+   #include "openal/win32/al/alc_func.h"
+   #include "openal/win32/al/eax_func.h"
    #undef AL_FUNCTION
 }
 
@@ -98,7 +98,7 @@ static bool bindEAXFunctions()
 {
    bool result = true;
    #define AL_FUNCTION(fn_return, fn_name, fn_args, fn_value) result &= bindExtensionFunction( *(void**)&fn_name, #fn_name);
-   #include "al/eax_func.h"
+   #include "openal/win32/al/eax_func.h"
    #undef AL_FUNCTION
    return result;
 }

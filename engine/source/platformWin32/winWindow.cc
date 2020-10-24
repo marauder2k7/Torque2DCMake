@@ -623,7 +623,6 @@ static LRESULT PASCAL WindowProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM 
 {
    switch ( message )
    {
-
    // Window DragDrop-enabled [12/14/2006 justind]
    case WM_CREATE:
       DragAcceptFiles(hWnd, TRUE);
@@ -899,9 +898,6 @@ static LRESULT PASCAL WindowProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM 
    return DefWindowProc(hWnd, message, wParam, lParam);
 }
 
-#define MOUSEEVENTF_FROMTOUCH 0xFF515700
-#define MOUSEEVENTF_MASK 0xFFFFFF00
-
 //--------------------------------------
 static void OurDispatchMessages()
 {
@@ -985,14 +981,7 @@ case WM_SETCURSOR:
       SetCursor(NULL);
    break;
 case WM_LBUTTONDOWN:
-   if ((GetMessageExtraInfo() & MOUSEEVENTF_MASK) != MOUSEEVENTF_FROMTOUCH)
-   {
-      mouseButtonEvent(SI_MAKE, KEY_BUTTON0);
-   }
-   else
-   {
-      Con::printf("from pen");
-   }
+   mouseButtonEvent(SI_MAKE, KEY_BUTTON0);
    break;
 case WM_MBUTTONDOWN:
    mouseButtonEvent(SI_MAKE, KEY_BUTTON2);
@@ -1183,7 +1172,7 @@ HWND CreateOpenGLWindow( U32 width, U32 height, bool fullScreen, bool allowSizin
       else
          windowStyle |= ( WS_OVERLAPPEDWINDOW );
 
-   HWND oglWin = CreateWindowEx(
+   return CreateWindowEx(
       exWindowStyle,
       windowClassName,
       windowName,
@@ -1192,16 +1181,12 @@ HWND CreateOpenGLWindow( U32 width, U32 height, bool fullScreen, bool allowSizin
       NULL, NULL,
       winState.appInstance,
       NULL);
-
-   RegisterTouchWindow(oglWin, 0);
-
-   return oglWin;
 }
 
 //--------------------------------------
 HWND CreateCurtain( U32 width, U32 height )
 {
-   HWND curtain = CreateWindow(
+   return CreateWindow(
       dT("Curtain"),
       dT(""),
       ( WS_POPUP | WS_MAXIMIZE ),
@@ -1210,10 +1195,6 @@ HWND CreateCurtain( U32 width, U32 height )
       NULL, NULL,
       winState.appInstance,
       NULL );
-
-   RegisterTouchWindow(curtain, 0);
-
-   return curtain;
 }
 
 //--------------------------------------

@@ -158,7 +158,7 @@ struct TickContact
 ///-----------------------------------------------------------------------------
 
 class Scene :
-    public NetObject,
+    public BehaviorComponent,
     public TamlChildren,
     public PhysicsProxy,
     public b2ContactListener,
@@ -172,16 +172,6 @@ public:
     typedef Vector<TickContact>                 typeContactVector;
     typedef HashMap<b2Contact*, TickContact>    typeContactHash;
     typedef Vector<AssetPtr<AssetBase>*>        typeAssetPtrVector;
-
-    static Scene *getRootScene()
-    {
-       if (Scene::smSceneList.empty())
-          return nullptr;
-
-       return Scene::smSceneList[0];
-    }
-
-    static Vector<Scene *> smSceneList;
 
     /// Scene Debug Options.
     enum DebugOption
@@ -218,7 +208,7 @@ public:
     DebugDraw                   mDebugDraw;
 
 private:
-    typedef NetObject   Parent;
+    typedef BehaviorComponent   Parent;
     typedef SceneObject         Children;
 
     /// World.
@@ -311,10 +301,6 @@ protected:
     virtual void            onTamlPostRead( const TamlCustomNodes& customNodes );
     virtual void            onTamlCustomWrite( TamlCustomNodes& customNodes );
     virtual void            onTamlCustomRead( const TamlCustomNodes& customNodes );
-    static Scene * smRootScene;
-
-    bool mIsClient;
-    F32 mVisibleGhostDistance;
 
 public:
     Scene();
@@ -389,10 +375,6 @@ public:
     S32                     createJoint( b2JointDef* pJointDef );
     bool                    deleteJoint( const U32 jointId );
     bool                    hasJoints( SceneObject* pSceneObject );
-
-    /// Networking.
-    virtual U32             packUpdate(NetConnection * conn, U32 mask, BitStream *stream);
-    virtual void            unpackUpdate(NetConnection * conn, BitStream *stream);
 
     /// Distance joint.
     S32                     createDistanceJoint(
@@ -685,7 +667,6 @@ public:
     inline bool             getRenderCallback( void ) const             { return mRenderCallback; }
     static SceneRenderRequest* createDefaultRenderRequest( SceneRenderQueue* pSceneRenderQueue, SceneObject* pSceneObject  );
 
-    inline void             setClientScene(const bool isClient) { mIsClient = isClient; }
     /// Taml children.
     virtual U32 getTamlChildCount( void ) const                         { return (U32)mSceneObjects.size(); }
     virtual SimObject* getTamlChild( const U32 childIndex ) const;
@@ -698,12 +679,6 @@ public:
     static DebugOption getDebugOptionEnum(const char* label);
     static const char* getDebugOptionDescription( DebugOption debugOption );
     b2ParticleSystem*			mParticleSystem;
-
-    // Level Info
-    void setVisibleGhostDistance(F32 dist) { mVisibleGhostDistance = dist; }
-    F32  getVisibleGhostDistance() { return mVisibleGhostDistance; }
-
-
     /// Declare Console Object.
     DECLARE_CONOBJECT(Scene);
 
@@ -754,14 +729,6 @@ public:
 };
 
 //-----------------------------------------------------------------------------
-
-/// The client-side scene graph.  Not used if the engine is running
-/// as a dedicated server.
-extern Scene* gClientScene;
-
-/// The server-side scene graph.  Not used if the engine is running
-/// as a pure client.
-extern Scene* gServerScene;
 
 extern void findObjectsCallback(SceneObject* pSceneObject, void* storage);
 extern void findLayeredObjectsCallback(SceneObject* pSceneObject, void* storage);

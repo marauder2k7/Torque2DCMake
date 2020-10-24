@@ -35,7 +35,6 @@ LPDIRECTINPUT8 DInputDevice::smDInputInterface;
 U8    DInputDevice::smKeyboardCount;
 U8    DInputDevice::smMouseCount;
 U8    DInputDevice::smJoystickCount;
-U8    DInputDevice::smTouchCount;
 U8    DInputDevice::smUnknownCount;
 U8    DInputDevice::smModifierKeys;
 bool  DInputDevice::smKeyStates[256];
@@ -57,14 +56,6 @@ DInputDevice::DInputDevice( const DIDEVICEINSTANCE* dii )
 
    mPrevPOVPos       = 0;
 
-   // Check for a digitizer and see if we have one.
-
-   int value = GetSystemMetrics(SM_DIGITIZER);
-   if (value & NID_READY)
-   {
-      Con::printf("digitizer found");
-   }
-
    switch ( GET_DIDEVICE_TYPE( mDeviceInstance.dwDevType ) )
    {
       case DI8DEVTYPE_KEYBOARD:
@@ -77,7 +68,6 @@ DInputDevice::DInputDevice( const DIDEVICEINSTANCE* dii )
          mDeviceType = MouseDeviceType;
          mDeviceID   = smMouseCount++;
          dSprintf( mName, 29, "mouse%d", mDeviceID );
-         Con::printf("FoundDevice %s input device.", mName);
          break;
 
       case DI8DEVTYPE_JOYSTICK:
@@ -85,13 +75,6 @@ DInputDevice::DInputDevice( const DIDEVICEINSTANCE* dii )
          mDeviceType = JoystickDeviceType;
          mDeviceID   = smJoystickCount++;
          dSprintf( mName, 29, "joystick%d", mDeviceID );
-         break;
-
-      case DI8DEVTYPE_SCREENPOINTER:
-         mDeviceType = ScreenTouchDeviceType;
-         mDeviceID   = smTouchCount++;
-         Con::printf("TouchDevice Found.");
-         dSprintf(mName, 29, "touch%d", mDeviceID);
          break;
 
       default:
@@ -122,7 +105,6 @@ void DInputDevice::init()
    smKeyboardCount      = 0;
    smMouseCount         = 0;
    smJoystickCount      = 0;
-   smTouchCount         = 0;
    smUnknownCount       = 0;
    smModifierKeys       = 0;
 }

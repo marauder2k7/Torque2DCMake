@@ -66,12 +66,6 @@
 
 SimObjectPtr<Scene> Scene::LoadingScene = NULL;
 
-Scene* gClientScene = NULL;
-Scene* gServerScene = NULL;
-
-Scene * Scene::smRootScene = nullptr;
-Vector<Scene*> Scene::smSceneList;
-
 //------------------------------------------------------------------------------
 
 static ContactFilter mContactFilter;
@@ -154,7 +148,6 @@ static StringTableEntry assetNodeName                     = StringTable->insert(
 
 Scene::Scene() :
     /// World.
-    mIsClient(true),
     mpWorld(NULL),
     mWorldGravity(0.0f, 0.0f),
     mVelocityIterations(8),
@@ -178,7 +171,7 @@ Scene::Scene() :
     mIsEditorScene(0),
     mUpdateCallback(false),
     mRenderCallback(false),
-    mSceneIndex(-1)
+    mSceneIndex(0)
 {
     // Set Vector Associations.
     VECTOR_SET_ASSOCIATION( mSceneObjects );
@@ -198,13 +191,9 @@ Scene::Scene() :
     mControllers = new SimSet();
     mControllers->registerObject();
 
-    mNetFlags.set(ScopeAlways | Ghostable);
-
-    gClientScene = this;
-
     // Assign scene index.    
-    //mSceneIndex = ++sSceneMasterIndex;
-    //sSceneCount++;
+    mSceneIndex = ++sSceneMasterIndex;
+    sSceneCount++;
 }
 
 //-----------------------------------------------------------------------------
@@ -216,7 +205,7 @@ Scene::~Scene()
         mControllers->deleteObject();
 
     // Decrease scene count.
-    //--sSceneCount;
+    --sSceneCount;
 }
 
 //-----------------------------------------------------------------------------
@@ -226,10 +215,6 @@ bool Scene::onAdd()
     // Call Parent.
     if(!Parent::onAdd())
         return false;
-
-    //smSceneList.pop_front(this);
-    smSceneList.push_front(this);
-    mSceneIndex = smSceneList.size() - 1;
 
     // Create physics world.
     mpWorld = new b2World( mWorldGravity );
@@ -269,7 +254,6 @@ bool Scene::onAdd()
 
 void Scene::onRemove()
 {
-
     // Turn-off tick processing.
     setProcessTicks( false );
 
@@ -294,10 +278,7 @@ void Scene::onRemove()
 
     // Call Parent. Clear scene handles all the object removal, so we can skip
     // that part and just do the sim-object stuff.
-    Parent::onRemove();
-
-    smSceneList.remove(this);
-    mSceneIndex = -1;
+    SimObject::onRemove();
 }
 
 //-----------------------------------------------------------------------------
@@ -1356,8 +1337,6 @@ void Scene::addToScene( SceneObject* pSceneObject )
     if ( pSceneObject == NULL )
         return;
 
-
-
     // Fetch current scene.
     Scene* pCurrentScene = pSceneObject->getScene();
 
@@ -1717,28 +1696,6 @@ bool Scene::hasJoints( SceneObject* pSceneObject )
     return true;
 }
 
-//----------------------------------------------------------------------------------------------
-// Network Send.
-//
-// TO BE IMPLEMENTED!
-//----------------------------------------------------------------------------------------------
-U32 Scene::packUpdate(NetConnection * conn, U32 mask, BitStream *stream)
-{
-   U32 retMask = Parent::packUpdate(conn, mask, stream);
-
-   return retMask;
-}
-
-
-//----------------------------------------------------------------------------------------------
-// Network Receive.
-//
-// TO BE IMPLEMENTED!
-//----------------------------------------------------------------------------------------------
-void Scene::unpackUpdate(NetConnection * conn, BitStream *stream)
-{
-   Parent::unpackUpdate(conn, stream);
-}
 //-----------------------------------------------------------------------------
 
 S32 Scene::createDistanceJoint(
@@ -3667,8 +3624,6 @@ void Scene::attachSceneWindow( SceneWindow* pSceneWindow2D )
 
     // Add to Attached List.
     mAttachedSceneWindows.addObject( pSceneWindow2D );
-
-
 }
 
 //-----------------------------------------------------------------------------
@@ -5273,7 +5228,7 @@ void Scene::onTamlCustomRead( const TamlCustomNodes& customNodes )
 
 U32 Scene::getGlobalSceneCount( void )
 {
-    return Scene::smSceneList.size();
+    return sSceneCount;
 }
 
 //-----------------------------------------------------------------------------
@@ -5672,4 +5627,5 @@ static void WriteCustomTamlSchema( const AbstractClassRep* pClassRep, TiXmlEleme
 }
 
 //------------------------------------------------------------------------------
-IMPLEMENT_NETOBJECT_CHILDREN_SCHEMA(Scene, WriteCustomTamlSchema);
+
+IMPLEMENT_CONOBJECT_CHILDREN_SCHEMA(Scene, WriteCustomTamlSchema);

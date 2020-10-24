@@ -54,11 +54,6 @@ public:
 
     virtual void sceneRender( const SceneRenderState* pSceneRenderState, const SceneRenderRequest* pSceneRenderRequest, BatchRender* pBatchRenderer );
 
-    virtual U32 packUpdate(NetConnection * conn, U32 mask, BitStream * stream);
-
-    virtual void unpackUpdate(NetConnection * conn, BitStream * stream);
-
-    virtual void setControllingClient(GameConnection* connection);
     /// Declare Console Object.
     DECLARE_CONOBJECT( Sprite );
 
