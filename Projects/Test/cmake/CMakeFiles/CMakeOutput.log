@@ -1,0 +1,793 @@
+The system is: Windows - 10.0.18362 - AMD64
+Compiling the C compiler identification source file "CMakeCCompilerId.c" succeeded.
+Compiler:  
+Build flags: 
+Id flags:  
+
+The output was:
+0
+Microsoft (R) Build Engine version 15.9.21+g9802d43bc3 for .NET Framework
+Copyright (C) Microsoft Corporation. All rights reserved.
+
+Build started 24/10/2020 03:54:28.
+Project "M:\Torque2DCmake\Projects\Test\cmake\CMakeFiles\3.17.1\CompilerIdC\CompilerIdC.vcxproj" on node 1 (default targets).
+PrepareForBuild:
+  Creating directory "Debug\".
+  Creating directory "Debug\CompilerIdC.tlog\".
+InitializeBuildStatus:
+  Creating "Debug\CompilerIdC.tlog\unsuccessfulbuild" because "AlwaysCreate" was specified.
+ClCompile:
+  C:\Program Files (x86)\Microsoft Visual Studio\2017\Professional\VC\Tools\MSVC\14.16.27023\bin\HostX86\x86\CL.exe /c /nologo /W0 /WX- /diagnostics:classic /Od /Oy- /D _MBCS /Gm- /EHsc /RTC1 /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Zc:inline /Fo"Debug\\" /Fd"Debug\vc141.pdb" /Gd /TC /analyze- /FC /errorReport:queue CMakeCCompilerId.c
+  CMakeCCompilerId.c
+Link:
+  C:\Program Files (x86)\Microsoft Visual Studio\2017\Professional\VC\Tools\MSVC\14.16.27023\bin\HostX86\x86\link.exe /ERRORREPORT:QUEUE /OUT:".\CompilerIdC.exe" /INCREMENTAL:NO /NOLOGO kernel32.lib user32.lib gdi32.lib winspool.lib comdlg32.lib advapi32.lib shell32.lib ole32.lib oleaut32.lib uuid.lib odbc32.lib odbccp32.lib /MANIFEST /MANIFESTUAC:"level='asInvoker' uiAccess='false'" /manifest:embed /PDB:".\CompilerIdC.pdb" /SUBSYSTEM:CONSOLE /TLBID:1 /DYNAMICBASE /NXCOMPAT /IMPLIB:".\CompilerIdC.lib" /MACHINE:X86 /SAFESEH Debug\CMakeCCompilerId.obj
+  CompilerIdC.vcxproj -> M:\Torque2DCmake\Projects\Test\cmake\CMakeFiles\3.17.1\CompilerIdC\.\CompilerIdC.exe
+PostBuildEvent:
+  for %%i in (cl.exe) do @echo CMAKE_C_COMPILER=%%~$PATH:i
+  :VCEnd
+  CMAKE_C_COMPILER=C:\Program Files (x86)\Microsoft Visual Studio\2017\Professional\VC\Tools\MSVC\14.16.27023\bin\Hostx86\x86\cl.exe
+FinalizeBuildStatus:
+  Deleting file "Debug\CompilerIdC.tlog\unsuccessfulbuild".
+  Touching "Debug\CompilerIdC.tlog\CompilerIdC.lastbuildstate".
+Done Building Project "M:\Torque2DCmake\Projects\Test\cmake\CMakeFiles\3.17.1\CompilerIdC\CompilerIdC.vcxproj" (default targets).
+
+Build succeeded.
+    0 Warning(s)
+    0 Error(s)
+
+Time Elapsed 00:00:00.83
+
+
+Compilation of the C compiler identification source "CMakeCCompilerId.c" produced "CompilerIdC.exe"
+
+Compilation of the C compiler identification source "CMakeCCompilerId.c" produced "CompilerIdC.vcxproj"
+
+The C compiler identification is MSVC, found in "M:/Torque2DCmake/Projects/Test/cmake/CMakeFiles/3.17.1/CompilerIdC/CompilerIdC.exe"
+
+Compiling the CXX compiler identification source file "CMakeCXXCompilerId.cpp" succeeded.
+Compiler:  
+Build flags: 
+Id flags:  
+
+The output was:
+0
+Microsoft (R) Build Engine version 15.9.21+g9802d43bc3 for .NET Framework
+Copyright (C) Microsoft Corporation. All rights reserved.
+
+Build started 24/10/2020 03:54:29.
+Project "M:\Torque2DCmake\Projects\Test\cmake\CMakeFiles\3.17.1\CompilerIdCXX\CompilerIdCXX.vcxproj" on node 1 (default targets).
+PrepareForBuild:
+  Creating directory "Debug\".
+  Creating directory "Debug\CompilerIdCXX.tlog\".
+InitializeBuildStatus:
+  Creating "Debug\CompilerIdCXX.tlog\unsuccessfulbuild" because "AlwaysCreate" was specified.
+ClCompile:
+  C:\Program Files (x86)\Microsoft Visual Studio\2017\Professional\VC\Tools\MSVC\14.16.27023\bin\HostX86\x86\CL.exe /c /nologo /W0 /WX- /diagnostics:classic /Od /Oy- /D _MBCS /Gm- /EHsc /RTC1 /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Zc:inline /Fo"Debug\\" /Fd"Debug\vc141.pdb" /Gd /TP /analyze- /FC /errorReport:queue CMakeCXXCompilerId.cpp
+  CMakeCXXCompilerId.cpp
+Link:
+  C:\Program Files (x86)\Microsoft Visual Studio\2017\Professional\VC\Tools\MSVC\14.16.27023\bin\HostX86\x86\link.exe /ERRORREPORT:QUEUE /OUT:".\CompilerIdCXX.exe" /INCREMENTAL:NO /NOLOGO kernel32.lib user32.lib gdi32.lib winspool.lib comdlg32.lib advapi32.lib shell32.lib ole32.lib oleaut32.lib uuid.lib odbc32.lib odbccp32.lib /MANIFEST /MANIFESTUAC:"level='asInvoker' uiAccess='false'" /manifest:embed /PDB:".\CompilerIdCXX.pdb" /SUBSYSTEM:CONSOLE /TLBID:1 /DYNAMICBASE /NXCOMPAT /IMPLIB:".\CompilerIdCXX.lib" /MACHINE:X86 /SAFESEH Debug\CMakeCXXCompilerId.obj
+  CompilerIdCXX.vcxproj -> M:\Torque2DCmake\Projects\Test\cmake\CMakeFiles\3.17.1\CompilerIdCXX\.\CompilerIdCXX.exe
+PostBuildEvent:
+  for %%i in (cl.exe) do @echo CMAKE_CXX_COMPILER=%%~$PATH:i
+  :VCEnd
+  CMAKE_CXX_COMPILER=C:\Program Files (x86)\Microsoft Visual Studio\2017\Professional\VC\Tools\MSVC\14.16.27023\bin\Hostx86\x86\cl.exe
+FinalizeBuildStatus:
+  Deleting file "Debug\CompilerIdCXX.tlog\unsuccessfulbuild".
+  Touching "Debug\CompilerIdCXX.tlog\CompilerIdCXX.lastbuildstate".
+Done Building Project "M:\Torque2DCmake\Projects\Test\cmake\CMakeFiles\3.17.1\CompilerIdCXX\CompilerIdCXX.vcxproj" (default targets).
+
+Build succeeded.
+    0 Warning(s)
+    0 Error(s)
+
+Time Elapsed 00:00:00.70
+
+
+Compilation of the CXX compiler identification source "CMakeCXXCompilerId.cpp" produced "CompilerIdCXX.exe"
+
+Compilation of the CXX compiler identification source "CMakeCXXCompilerId.cpp" produced "CompilerIdCXX.vcxproj"
+
+The CXX compiler identification is MSVC, found in "M:/Torque2DCmake/Projects/Test/cmake/CMakeFiles/3.17.1/CompilerIdCXX/CompilerIdCXX.exe"
+
+Determining if the C compiler works passed with the following output:
+Change Dir: M:/Torque2DCmake/Projects/Test/cmake/CMakeFiles/CMakeTmp
+
+Run Build Command(s):C:/Program Files (x86)/Microsoft Visual Studio/2017/Professional/MSBuild/15.0/Bin/MSBuild.exe cmTC_fbf04.vcxproj /p:Configuration=Debug /p:Platform=Win32 /p:VisualStudioVersion=15.0 /v:m && Microsoft (R) Build Engine version 15.9.21+g9802d43bc3 for .NET Framework
+Copyright (C) Microsoft Corporation. All rights reserved.
+
+  Microsoft (R) C/C++ Optimizing Compiler Version 19.16.27030.1 for x86
+  Copyright (C) Microsoft Corporation.  All rights reserved.
+  
+  cl /c /Zi /W3 /WX- /diagnostics:classic /Od /Ob0 /Oy- /D WIN32 /D _WINDOWS /D "CMAKE_INTDIR=\"Debug\"" /D _MBCS /Gm- /RTC1 /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Zc:inline /Fo"cmTC_fbf04.dir\Debug\\" /Fd"cmTC_fbf04.dir\Debug\vc141.pdb" /Gd /TC /analyze- /errorReport:queue M:\Torque2DCmake\Projects\Test\cmake\CMakeFiles\CMakeTmp\testCCompiler.c
+  testCCompiler.c
+  
+  cmTC_fbf04.vcxproj -> M:\Torque2DCmake\Projects\Test\cmake\CMakeFiles\CMakeTmp\Debug\cmTC_fbf04.exe
+
+
+
+Detecting C compiler ABI info compiled with the following output:
+Change Dir: M:/Torque2DCmake/Projects/Test/cmake/CMakeFiles/CMakeTmp
+
+Run Build Command(s):C:/Program Files (x86)/Microsoft Visual Studio/2017/Professional/MSBuild/15.0/Bin/MSBuild.exe cmTC_97747.vcxproj /p:Configuration=Debug /p:Platform=Win32 /p:VisualStudioVersion=15.0 /v:m && Microsoft (R) Build Engine version 15.9.21+g9802d43bc3 for .NET Framework
+Copyright (C) Microsoft Corporation. All rights reserved.
+
+  Microsoft (R) C/C++ Optimizing Compiler Version 19.16.27030.1 for x86
+  Copyright (C) Microsoft Corporation.  All rights reserved.
+  
+  cl /c /Zi /W3 /WX- /diagnostics:classic /Od /Ob0 /Oy- /D WIN32 /D _WINDOWS /D "CMAKE_INTDIR=\"Debug\"" /D _MBCS /Gm- /RTC1 /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Zc:inline /Fo"cmTC_97747.dir\Debug\\" /Fd"cmTC_97747.dir\Debug\vc141.pdb" /Gd /TC /analyze- /errorReport:queue "C:\Program Files\CMake\share\cmake-3.17\Modules\CMakeCCompilerABI.c"
+  CMakeCCompilerABI.c
+  
+  cmTC_97747.vcxproj -> M:\Torque2DCmake\Projects\Test\cmake\CMakeFiles\CMakeTmp\Debug\cmTC_97747.exe
+
+
+
+Determining if the CXX compiler works passed with the following output:
+Change Dir: M:/Torque2DCmake/Projects/Test/cmake/CMakeFiles/CMakeTmp
+
+Run Build Command(s):C:/Program Files (x86)/Microsoft Visual Studio/2017/Professional/MSBuild/15.0/Bin/MSBuild.exe cmTC_affdc.vcxproj /p:Configuration=Debug /p:Platform=Win32 /p:VisualStudioVersion=15.0 /v:m && Microsoft (R) Build Engine version 15.9.21+g9802d43bc3 for .NET Framework
+Copyright (C) Microsoft Corporation. All rights reserved.
+
+  Microsoft (R) C/C++ Optimizing Compiler Version 19.16.27030.1 for x86
+  Copyright (C) Microsoft Corporation.  All rights reserved.
+  
+  cl /c /Zi /W3 /WX- /diagnostics:classic /Od /Ob0 /Oy- /D WIN32 /D _WINDOWS /D "CMAKE_INTDIR=\"Debug\"" /D _MBCS /Gm- /EHsc /RTC1 /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Zc:inline /GR /Fo"cmTC_affdc.dir\Debug\\" /Fd"cmTC_affdc.dir\Debug\vc141.pdb" /Gd /TP /analyze- /errorReport:queue M:\Torque2DCmake\Projects\Test\cmake\CMakeFiles\CMakeTmp\testCXXCompiler.cxx
+  testCXXCompiler.cxx
+  
+  cmTC_affdc.vcxproj -> M:\Torque2DCmake\Projects\Test\cmake\CMakeFiles\CMakeTmp\Debug\cmTC_affdc.exe
+
+
+
+Detecting CXX compiler ABI info compiled with the following output:
+Change Dir: M:/Torque2DCmake/Projects/Test/cmake/CMakeFiles/CMakeTmp
+
+Run Build Command(s):C:/Program Files (x86)/Microsoft Visual Studio/2017/Professional/MSBuild/15.0/Bin/MSBuild.exe cmTC_a9778.vcxproj /p:Configuration=Debug /p:Platform=Win32 /p:VisualStudioVersion=15.0 /v:m && Microsoft (R) Build Engine version 15.9.21+g9802d43bc3 for .NET Framework
+Copyright (C) Microsoft Corporation. All rights reserved.
+
+  Microsoft (R) C/C++ Optimizing Compiler Version 19.16.27030.1 for x86
+  Copyright (C) Microsoft Corporation.  All rights reserved.
+  
+  cl /c /Zi /W3 /WX- /diagnostics:classic /Od /Ob0 /Oy- /D WIN32 /D _WINDOWS /D "CMAKE_INTDIR=\"Debug\"" /D _MBCS /Gm- /EHsc /RTC1 /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Zc:inline /GR /Fo"cmTC_a9778.dir\Debug\\" /Fd"cmTC_a9778.dir\Debug\vc141.pdb" /Gd /TP /analyze- /errorReport:queue "C:\Program Files\CMake\share\cmake-3.17\Modules\CMakeCXXCompilerABI.cpp"
+  CMakeCXXCompilerABI.cpp
+  
+  cmTC_a9778.vcxproj -> M:\Torque2DCmake\Projects\Test\cmake\CMakeFiles\CMakeTmp\Debug\cmTC_a9778.exe
+
+
+
+Determining if the include file sys/types.h exists passed with the following output:
+Change Dir: M:/Torque2DCmake/Projects/Test/cmake/CMakeFiles/CMakeTmp
+
+Run Build Command(s):C:/Program Files (x86)/Microsoft Visual Studio/2017/Professional/MSBuild/15.0/Bin/MSBuild.exe cmTC_ceee8.vcxproj /p:Configuration=Debug /p:Platform=Win32 /p:VisualStudioVersion=15.0 /v:m && Microsoft (R) Build Engine version 15.9.21+g9802d43bc3 for .NET Framework
+Copyright (C) Microsoft Corporation. All rights reserved.
+
+  CheckIncludeFile.c
+  cmTC_ceee8.vcxproj -> M:\Torque2DCmake\Projects\Test\cmake\CMakeFiles\CMakeTmp\Debug\cmTC_ceee8.exe
+
+
+
+Determining if the include file stdint.h exists passed with the following output:
+Change Dir: M:/Torque2DCmake/Projects/Test/cmake/CMakeFiles/CMakeTmp
+
+Run Build Command(s):C:/Program Files (x86)/Microsoft Visual Studio/2017/Professional/MSBuild/15.0/Bin/MSBuild.exe cmTC_2fa82.vcxproj /p:Configuration=Debug /p:Platform=Win32 /p:VisualStudioVersion=15.0 /v:m && Microsoft (R) Build Engine version 15.9.21+g9802d43bc3 for .NET Framework
+Copyright (C) Microsoft Corporation. All rights reserved.
+
+  CheckIncludeFile.c
+  cmTC_2fa82.vcxproj -> M:\Torque2DCmake\Projects\Test\cmake\CMakeFiles\CMakeTmp\Debug\cmTC_2fa82.exe
+
+
+
+Determining if the include file stddef.h exists passed with the following output:
+Change Dir: M:/Torque2DCmake/Projects/Test/cmake/CMakeFiles/CMakeTmp
+
+Run Build Command(s):C:/Program Files (x86)/Microsoft Visual Studio/2017/Professional/MSBuild/15.0/Bin/MSBuild.exe cmTC_3f7f3.vcxproj /p:Configuration=Debug /p:Platform=Win32 /p:VisualStudioVersion=15.0 /v:m && Microsoft (R) Build Engine version 15.9.21+g9802d43bc3 for .NET Framework
+Copyright (C) Microsoft Corporation. All rights reserved.
+
+  CheckIncludeFile.c
+  cmTC_3f7f3.vcxproj -> M:\Torque2DCmake\Projects\Test\cmake\CMakeFiles\CMakeTmp\Debug\cmTC_3f7f3.exe
+
+
+
+Determining size of long passed with the following output:
+Change Dir: M:/Torque2DCmake/Projects/Test/cmake/CMakeFiles/CMakeTmp
+
+Run Build Command(s):C:/Program Files (x86)/Microsoft Visual Studio/2017/Professional/MSBuild/15.0/Bin/MSBuild.exe cmTC_97d7c.vcxproj /p:Configuration=Debug /p:Platform=Win32 /p:VisualStudioVersion=15.0 /v:m && Microsoft (R) Build Engine version 15.9.21+g9802d43bc3 for .NET Framework
+Copyright (C) Microsoft Corporation. All rights reserved.
+
+  SIZEOF_LONG.c
+  cmTC_97d7c.vcxproj -> M:\Torque2DCmake\Projects\Test\cmake\CMakeFiles\CMakeTmp\Debug\cmTC_97d7c.exe
+
+
+
+Determining size of long long passed with the following output:
+Change Dir: M:/Torque2DCmake/Projects/Test/cmake/CMakeFiles/CMakeTmp
+
+Run Build Command(s):C:/Program Files (x86)/Microsoft Visual Studio/2017/Professional/MSBuild/15.0/Bin/MSBuild.exe cmTC_acb25.vcxproj /p:Configuration=Debug /p:Platform=Win32 /p:VisualStudioVersion=15.0 /v:m && Microsoft (R) Build Engine version 15.9.21+g9802d43bc3 for .NET Framework
+Copyright (C) Microsoft Corporation. All rights reserved.
+
+  SIZEOF_LONG_LONG.c
+  cmTC_acb25.vcxproj -> M:\Torque2DCmake\Projects\Test\cmake\CMakeFiles\CMakeTmp\Debug\cmTC_acb25.exe
+
+
+
+Performing C++ SOURCE FILE Test HAVE_STD_CXX11 succeeded with the following output:
+Change Dir: M:/Torque2DCmake/Projects/Test/cmake/CMakeFiles/CMakeTmp
+
+Run Build Command(s):C:/Program Files (x86)/Microsoft Visual Studio/2017/Professional/MSBuild/15.0/Bin/MSBuild.exe cmTC_ed22c.vcxproj /p:Configuration=Debug /p:Platform=Win32 /p:VisualStudioVersion=15.0 /v:m && Microsoft (R) Build Engine version 15.9.21+g9802d43bc3 for .NET Framework
+Copyright (C) Microsoft Corporation. All rights reserved.
+
+  src.cxx
+  cmTC_ed22c.vcxproj -> M:\Torque2DCmake\Projects\Test\cmake\CMakeFiles\CMakeTmp\Debug\cmTC_ed22c.exe
+
+
+Source file was:
+int main() { return 0; }
+Performing C SOURCE FILE Test HAVE_INLINE succeeded with the following output:
+Change Dir: M:/Torque2DCmake/Projects/Test/cmake/CMakeFiles/CMakeTmp
+
+Run Build Command(s):C:/Program Files (x86)/Microsoft Visual Studio/2017/Professional/MSBuild/15.0/Bin/MSBuild.exe cmTC_9298b.vcxproj /p:Configuration=Debug /p:Platform=Win32 /p:VisualStudioVersion=15.0 /v:m && Microsoft (R) Build Engine version 15.9.21+g9802d43bc3 for .NET Framework
+Copyright (C) Microsoft Corporation. All rights reserved.
+
+  src.c
+  cmTC_9298b.vcxproj -> M:\Torque2DCmake\Projects\Test\cmake\CMakeFiles\CMakeTmp\Debug\cmTC_9298b.exe
+
+
+Source file was:
+inline void foo(void) { }
+                             int main() {return 0;}
+Performing C SOURCE FILE Test HAVE_STRUCT_TIMESPEC succeeded with the following output:
+Change Dir: M:/Torque2DCmake/Projects/Test/cmake/CMakeFiles/CMakeTmp
+
+Run Build Command(s):C:/Program Files (x86)/Microsoft Visual Studio/2017/Professional/MSBuild/15.0/Bin/MSBuild.exe cmTC_bfd58.vcxproj /p:Configuration=Debug /p:Platform=Win32 /p:VisualStudioVersion=15.0 /v:m && Microsoft (R) Build Engine version 15.9.21+g9802d43bc3 for .NET Framework
+Copyright (C) Microsoft Corporation. All rights reserved.
+
+  src.c
+  cmTC_bfd58.vcxproj -> M:\Torque2DCmake\Projects\Test\cmake\CMakeFiles\CMakeTmp\Debug\cmTC_bfd58.exe
+
+
+Source file was:
+
+#include <time.h>
+
+int main()
+{
+  (void)sizeof(((struct timespec *)0)->tv_sec);
+  return 0;
+}
+
+Performing C SOURCE FILE Test HAVE_C99_BOOL succeeded with the following output:
+Change Dir: M:/Torque2DCmake/Projects/Test/cmake/CMakeFiles/CMakeTmp
+
+Run Build Command(s):C:/Program Files (x86)/Microsoft Visual Studio/2017/Professional/MSBuild/15.0/Bin/MSBuild.exe cmTC_9a6f7.vcxproj /p:Configuration=Debug /p:Platform=Win32 /p:VisualStudioVersion=15.0 /v:m && Microsoft (R) Build Engine version 15.9.21+g9802d43bc3 for .NET Framework
+Copyright (C) Microsoft Corporation. All rights reserved.
+
+  src.c
+M:\Torque2DCmake\Projects\Test\cmake\CMakeFiles\CMakeTmp\src.c(1): warning C4100: 'argv': unreferenced formal parameter [M:\Torque2DCmake\Projects\Test\cmake\CMakeFiles\CMakeTmp\cmTC_9a6f7.vcxproj]
+  cmTC_9a6f7.vcxproj -> M:\Torque2DCmake\Projects\Test\cmake\CMakeFiles\CMakeTmp\Debug\cmTC_9a6f7.exe
+
+
+Source file was:
+int main(int argc, char *argv[])
+ {
+     volatile _Bool ret;
+     ret = (argc > 1) ? 1 : 0;
+     return ret ? -1 : 0;
+ }
+Determining if the include file stdbool.h exists passed with the following output:
+Change Dir: M:/Torque2DCmake/Projects/Test/cmake/CMakeFiles/CMakeTmp
+
+Run Build Command(s):C:/Program Files (x86)/Microsoft Visual Studio/2017/Professional/MSBuild/15.0/Bin/MSBuild.exe cmTC_91bf8.vcxproj /p:Configuration=Debug /p:Platform=Win32 /p:VisualStudioVersion=15.0 /v:m && Microsoft (R) Build Engine version 15.9.21+g9802d43bc3 for .NET Framework
+Copyright (C) Microsoft Corporation. All rights reserved.
+
+  CheckIncludeFile.c
+  cmTC_91bf8.vcxproj -> M:\Torque2DCmake\Projects\Test\cmake\CMakeFiles\CMakeTmp\Debug\cmTC_91bf8.exe
+
+
+
+Determining if the include file malloc.h exists passed with the following output:
+Change Dir: M:/Torque2DCmake/Projects/Test/cmake/CMakeFiles/CMakeTmp
+
+Run Build Command(s):C:/Program Files (x86)/Microsoft Visual Studio/2017/Professional/MSBuild/15.0/Bin/MSBuild.exe cmTC_03f20.vcxproj /p:Configuration=Debug /p:Platform=Win32 /p:VisualStudioVersion=15.0 /v:m && Microsoft (R) Build Engine version 15.9.21+g9802d43bc3 for .NET Framework
+Copyright (C) Microsoft Corporation. All rights reserved.
+
+  CheckIncludeFile.c
+  cmTC_03f20.vcxproj -> M:\Torque2DCmake\Projects\Test\cmake\CMakeFiles\CMakeTmp\Debug\cmTC_03f20.exe
+
+
+
+Determining if the include file intrin.h exists passed with the following output:
+Change Dir: M:/Torque2DCmake/Projects/Test/cmake/CMakeFiles/CMakeTmp
+
+Run Build Command(s):C:/Program Files (x86)/Microsoft Visual Studio/2017/Professional/MSBuild/15.0/Bin/MSBuild.exe cmTC_a16f0.vcxproj /p:Configuration=Debug /p:Platform=Win32 /p:VisualStudioVersion=15.0 /v:m && Microsoft (R) Build Engine version 15.9.21+g9802d43bc3 for .NET Framework
+Copyright (C) Microsoft Corporation. All rights reserved.
+
+  CheckIncludeFile.c
+  cmTC_a16f0.vcxproj -> M:\Torque2DCmake\Projects\Test\cmake\CMakeFiles\CMakeTmp\Debug\cmTC_a16f0.exe
+
+
+
+Determining if the include file fenv.h exists passed with the following output:
+Change Dir: M:/Torque2DCmake/Projects/Test/cmake/CMakeFiles/CMakeTmp
+
+Run Build Command(s):C:/Program Files (x86)/Microsoft Visual Studio/2017/Professional/MSBuild/15.0/Bin/MSBuild.exe cmTC_172fb.vcxproj /p:Configuration=Debug /p:Platform=Win32 /p:VisualStudioVersion=15.0 /v:m && Microsoft (R) Build Engine version 15.9.21+g9802d43bc3 for .NET Framework
+Copyright (C) Microsoft Corporation. All rights reserved.
+
+  CheckIncludeFile.c
+  cmTC_172fb.vcxproj -> M:\Torque2DCmake\Projects\Test\cmake\CMakeFiles\CMakeTmp\Debug\cmTC_172fb.exe
+
+
+
+Determining if the include file float.h exists passed with the following output:
+Change Dir: M:/Torque2DCmake/Projects/Test/cmake/CMakeFiles/CMakeTmp
+
+Run Build Command(s):C:/Program Files (x86)/Microsoft Visual Studio/2017/Professional/MSBuild/15.0/Bin/MSBuild.exe cmTC_d5bdf.vcxproj /p:Configuration=Debug /p:Platform=Win32 /p:VisualStudioVersion=15.0 /v:m && Microsoft (R) Build Engine version 15.9.21+g9802d43bc3 for .NET Framework
+Copyright (C) Microsoft Corporation. All rights reserved.
+
+  CheckIncludeFile.c
+  cmTC_d5bdf.vcxproj -> M:\Torque2DCmake\Projects\Test\cmake\CMakeFiles\CMakeTmp\Debug\cmTC_d5bdf.exe
+
+
+
+Determining if the include file guiddef.h exists passed with the following output:
+Change Dir: M:/Torque2DCmake/Projects/Test/cmake/CMakeFiles/CMakeTmp
+
+Run Build Command(s):C:/Program Files (x86)/Microsoft Visual Studio/2017/Professional/MSBuild/15.0/Bin/MSBuild.exe cmTC_86d46.vcxproj /p:Configuration=Debug /p:Platform=Win32 /p:VisualStudioVersion=15.0 /v:m && Microsoft (R) Build Engine version 15.9.21+g9802d43bc3 for .NET Framework
+Copyright (C) Microsoft Corporation. All rights reserved.
+
+  CheckIncludeFile.c
+  cmTC_86d46.vcxproj -> M:\Torque2DCmake\Projects\Test\cmake\CMakeFiles\CMakeTmp\Debug\cmTC_86d46.exe
+
+
+
+Performing C SOURCE FILE Test HAVE_CPUID_INTRINSIC succeeded with the following output:
+Change Dir: M:/Torque2DCmake/Projects/Test/cmake/CMakeFiles/CMakeTmp
+
+Run Build Command(s):C:/Program Files (x86)/Microsoft Visual Studio/2017/Professional/MSBuild/15.0/Bin/MSBuild.exe cmTC_247cb.vcxproj /p:Configuration=Debug /p:Platform=Win32 /p:VisualStudioVersion=15.0 /v:m && Microsoft (R) Build Engine version 15.9.21+g9802d43bc3 for .NET Framework
+Copyright (C) Microsoft Corporation. All rights reserved.
+
+  src.c
+  cmTC_247cb.vcxproj -> M:\Torque2DCmake\Projects\Test\cmake\CMakeFiles\CMakeTmp\Debug\cmTC_247cb.exe
+
+
+Source file was:
+#include <intrin.h>
+        int main()
+        {
+            int regs[4];
+            __cpuid(regs, 0);
+            return regs[0];
+        }
+Performing C SOURCE FILE Test HAVE_BITSCANFORWARD_INTRINSIC succeeded with the following output:
+Change Dir: M:/Torque2DCmake/Projects/Test/cmake/CMakeFiles/CMakeTmp
+
+Run Build Command(s):C:/Program Files (x86)/Microsoft Visual Studio/2017/Professional/MSBuild/15.0/Bin/MSBuild.exe cmTC_634c3.vcxproj /p:Configuration=Debug /p:Platform=Win32 /p:VisualStudioVersion=15.0 /v:m && Microsoft (R) Build Engine version 15.9.21+g9802d43bc3 for .NET Framework
+Copyright (C) Microsoft Corporation. All rights reserved.
+
+  src.c
+  cmTC_634c3.vcxproj -> M:\Torque2DCmake\Projects\Test\cmake\CMakeFiles\CMakeTmp\Debug\cmTC_634c3.exe
+
+
+Source file was:
+#include <intrin.h>
+        int main()
+        {
+            unsigned long idx = 0;
+            _BitScanForward(&idx, 1);
+            return idx;
+        }
+Determining if the _aligned_malloc exist passed with the following output:
+Change Dir: M:/Torque2DCmake/Projects/Test/cmake/CMakeFiles/CMakeTmp
+
+Run Build Command(s):C:/Program Files (x86)/Microsoft Visual Studio/2017/Professional/MSBuild/15.0/Bin/MSBuild.exe cmTC_eb8ab.vcxproj /p:Configuration=Debug /p:Platform=Win32 /p:VisualStudioVersion=15.0 /v:m && Microsoft (R) Build Engine version 15.9.21+g9802d43bc3 for .NET Framework
+Copyright (C) Microsoft Corporation. All rights reserved.
+
+  CheckSymbolExists.c
+  cmTC_eb8ab.vcxproj -> M:\Torque2DCmake\Projects\Test\cmake\CMakeFiles\CMakeTmp\Debug\cmTC_eb8ab.exe
+
+
+File M:/Torque2DCmake/Projects/Test/cmake/CMakeFiles/CMakeTmp/CheckSymbolExists.c:
+/* */
+#include <malloc.h>
+
+int main(int argc, char** argv)
+{
+  (void)argv;
+#ifndef _aligned_malloc
+  return ((int*)(&_aligned_malloc))[argc];
+#else
+  (void)argc;
+  return 0;
+#endif
+}
+Determining if the lrintf exist passed with the following output:
+Change Dir: M:/Torque2DCmake/Projects/Test/cmake/CMakeFiles/CMakeTmp
+
+Run Build Command(s):C:/Program Files (x86)/Microsoft Visual Studio/2017/Professional/MSBuild/15.0/Bin/MSBuild.exe cmTC_1b524.vcxproj /p:Configuration=Debug /p:Platform=Win32 /p:VisualStudioVersion=15.0 /v:m && Microsoft (R) Build Engine version 15.9.21+g9802d43bc3 for .NET Framework
+Copyright (C) Microsoft Corporation. All rights reserved.
+
+  CheckSymbolExists.c
+  cmTC_1b524.vcxproj -> M:\Torque2DCmake\Projects\Test\cmake\CMakeFiles\CMakeTmp\Debug\cmTC_1b524.exe
+
+
+File M:/Torque2DCmake/Projects/Test/cmake/CMakeFiles/CMakeTmp/CheckSymbolExists.c:
+/* */
+#include <math.h>
+
+int main(int argc, char** argv)
+{
+  (void)argv;
+#ifndef lrintf
+  return ((int*)(&lrintf))[argc];
+#else
+  (void)argc;
+  return 0;
+#endif
+}
+Determining if the modff exist passed with the following output:
+Change Dir: M:/Torque2DCmake/Projects/Test/cmake/CMakeFiles/CMakeTmp
+
+Run Build Command(s):C:/Program Files (x86)/Microsoft Visual Studio/2017/Professional/MSBuild/15.0/Bin/MSBuild.exe cmTC_045bd.vcxproj /p:Configuration=Debug /p:Platform=Win32 /p:VisualStudioVersion=15.0 /v:m && Microsoft (R) Build Engine version 15.9.21+g9802d43bc3 for .NET Framework
+Copyright (C) Microsoft Corporation. All rights reserved.
+
+  CheckSymbolExists.c
+  cmTC_045bd.vcxproj -> M:\Torque2DCmake\Projects\Test\cmake\CMakeFiles\CMakeTmp\Debug\cmTC_045bd.exe
+
+
+File M:/Torque2DCmake/Projects/Test/cmake/CMakeFiles/CMakeTmp/CheckSymbolExists.c:
+/* */
+#include <math.h>
+
+int main(int argc, char** argv)
+{
+  (void)argv;
+#ifndef modff
+  return ((int*)(&modff))[argc];
+#else
+  (void)argc;
+  return 0;
+#endif
+}
+Determining if the log2f exist passed with the following output:
+Change Dir: M:/Torque2DCmake/Projects/Test/cmake/CMakeFiles/CMakeTmp
+
+Run Build Command(s):C:/Program Files (x86)/Microsoft Visual Studio/2017/Professional/MSBuild/15.0/Bin/MSBuild.exe cmTC_20ce0.vcxproj /p:Configuration=Debug /p:Platform=Win32 /p:VisualStudioVersion=15.0 /v:m && Microsoft (R) Build Engine version 15.9.21+g9802d43bc3 for .NET Framework
+Copyright (C) Microsoft Corporation. All rights reserved.
+
+  CheckSymbolExists.c
+  cmTC_20ce0.vcxproj -> M:\Torque2DCmake\Projects\Test\cmake\CMakeFiles\CMakeTmp\Debug\cmTC_20ce0.exe
+
+
+File M:/Torque2DCmake/Projects/Test/cmake/CMakeFiles/CMakeTmp/CheckSymbolExists.c:
+/* */
+#include <math.h>
+
+int main(int argc, char** argv)
+{
+  (void)argv;
+#ifndef log2f
+  return ((int*)(&log2f))[argc];
+#else
+  (void)argc;
+  return 0;
+#endif
+}
+Determining if the cbrtf exist passed with the following output:
+Change Dir: M:/Torque2DCmake/Projects/Test/cmake/CMakeFiles/CMakeTmp
+
+Run Build Command(s):C:/Program Files (x86)/Microsoft Visual Studio/2017/Professional/MSBuild/15.0/Bin/MSBuild.exe cmTC_a14b4.vcxproj /p:Configuration=Debug /p:Platform=Win32 /p:VisualStudioVersion=15.0 /v:m && Microsoft (R) Build Engine version 15.9.21+g9802d43bc3 for .NET Framework
+Copyright (C) Microsoft Corporation. All rights reserved.
+
+  CheckSymbolExists.c
+  cmTC_a14b4.vcxproj -> M:\Torque2DCmake\Projects\Test\cmake\CMakeFiles\CMakeTmp\Debug\cmTC_a14b4.exe
+
+
+File M:/Torque2DCmake/Projects/Test/cmake/CMakeFiles/CMakeTmp/CheckSymbolExists.c:
+/* */
+#include <math.h>
+
+int main(int argc, char** argv)
+{
+  (void)argv;
+#ifndef cbrtf
+  return ((int*)(&cbrtf))[argc];
+#else
+  (void)argc;
+  return 0;
+#endif
+}
+Determining if the _controlfp exist passed with the following output:
+Change Dir: M:/Torque2DCmake/Projects/Test/cmake/CMakeFiles/CMakeTmp
+
+Run Build Command(s):C:/Program Files (x86)/Microsoft Visual Studio/2017/Professional/MSBuild/15.0/Bin/MSBuild.exe cmTC_6dfc7.vcxproj /p:Configuration=Debug /p:Platform=Win32 /p:VisualStudioVersion=15.0 /v:m && Microsoft (R) Build Engine version 15.9.21+g9802d43bc3 for .NET Framework
+Copyright (C) Microsoft Corporation. All rights reserved.
+
+  CheckSymbolExists.c
+  cmTC_6dfc7.vcxproj -> M:\Torque2DCmake\Projects\Test\cmake\CMakeFiles\CMakeTmp\Debug\cmTC_6dfc7.exe
+
+
+File M:/Torque2DCmake/Projects/Test/cmake/CMakeFiles/CMakeTmp/CheckSymbolExists.c:
+/* */
+#include <float.h>
+
+int main(int argc, char** argv)
+{
+  (void)argv;
+#ifndef _controlfp
+  return ((int*)(&_controlfp))[argc];
+#else
+  (void)argc;
+  return 0;
+#endif
+}
+Determining if the __control87_2 exist passed with the following output:
+Change Dir: M:/Torque2DCmake/Projects/Test/cmake/CMakeFiles/CMakeTmp
+
+Run Build Command(s):C:/Program Files (x86)/Microsoft Visual Studio/2017/Professional/MSBuild/15.0/Bin/MSBuild.exe cmTC_ed51c.vcxproj /p:Configuration=Debug /p:Platform=Win32 /p:VisualStudioVersion=15.0 /v:m && Microsoft (R) Build Engine version 15.9.21+g9802d43bc3 for .NET Framework
+Copyright (C) Microsoft Corporation. All rights reserved.
+
+  CheckSymbolExists.c
+  cmTC_ed51c.vcxproj -> M:\Torque2DCmake\Projects\Test\cmake\CMakeFiles\CMakeTmp\Debug\cmTC_ed51c.exe
+
+
+File M:/Torque2DCmake/Projects/Test/cmake/CMakeFiles/CMakeTmp/CheckSymbolExists.c:
+/* */
+#include <float.h>
+
+int main(int argc, char** argv)
+{
+  (void)argv;
+#ifndef __control87_2
+  return ((int*)(&__control87_2))[argc];
+#else
+  (void)argc;
+  return 0;
+#endif
+}
+Determining if the function stat exists passed with the following output:
+Change Dir: M:/Torque2DCmake/Projects/Test/cmake/CMakeFiles/CMakeTmp
+
+Run Build Command(s):C:/Program Files (x86)/Microsoft Visual Studio/2017/Professional/MSBuild/15.0/Bin/MSBuild.exe cmTC_875bc.vcxproj /p:Configuration=Debug /p:Platform=Win32 /p:VisualStudioVersion=15.0 /v:m && Microsoft (R) Build Engine version 15.9.21+g9802d43bc3 for .NET Framework
+Copyright (C) Microsoft Corporation. All rights reserved.
+
+  CheckFunctionExists.c
+  cmTC_875bc.vcxproj -> M:\Torque2DCmake\Projects\Test\cmake\CMakeFiles\CMakeTmp\Debug\cmTC_875bc.exe
+
+
+
+Determining if the function strtof exists passed with the following output:
+Change Dir: M:/Torque2DCmake/Projects/Test/cmake/CMakeFiles/CMakeTmp
+
+Run Build Command(s):C:/Program Files (x86)/Microsoft Visual Studio/2017/Professional/MSBuild/15.0/Bin/MSBuild.exe cmTC_12772.vcxproj /p:Configuration=Debug /p:Platform=Win32 /p:VisualStudioVersion=15.0 /v:m && Microsoft (R) Build Engine version 15.9.21+g9802d43bc3 for .NET Framework
+Copyright (C) Microsoft Corporation. All rights reserved.
+
+  CheckFunctionExists.c
+  cmTC_12772.vcxproj -> M:\Torque2DCmake\Projects\Test\cmake\CMakeFiles\CMakeTmp\Debug\cmTC_12772.exe
+
+
+
+Determining if the function _stricmp exists passed with the following output:
+Change Dir: M:/Torque2DCmake/Projects/Test/cmake/CMakeFiles/CMakeTmp
+
+Run Build Command(s):C:/Program Files (x86)/Microsoft Visual Studio/2017/Professional/MSBuild/15.0/Bin/MSBuild.exe cmTC_e47ba.vcxproj /p:Configuration=Debug /p:Platform=Win32 /p:VisualStudioVersion=15.0 /v:m && Microsoft (R) Build Engine version 15.9.21+g9802d43bc3 for .NET Framework
+Copyright (C) Microsoft Corporation. All rights reserved.
+
+  CheckFunctionExists.c
+  cmTC_e47ba.vcxproj -> M:\Torque2DCmake\Projects\Test\cmake\CMakeFiles\CMakeTmp\Debug\cmTC_e47ba.exe
+
+
+
+Determining if the function _strnicmp exists passed with the following output:
+Change Dir: M:/Torque2DCmake/Projects/Test/cmake/CMakeFiles/CMakeTmp
+
+Run Build Command(s):C:/Program Files (x86)/Microsoft Visual Studio/2017/Professional/MSBuild/15.0/Bin/MSBuild.exe cmTC_32d81.vcxproj /p:Configuration=Debug /p:Platform=Win32 /p:VisualStudioVersion=15.0 /v:m && Microsoft (R) Build Engine version 15.9.21+g9802d43bc3 for .NET Framework
+Copyright (C) Microsoft Corporation. All rights reserved.
+
+  CheckFunctionExists.c
+  cmTC_32d81.vcxproj -> M:\Torque2DCmake\Projects\Test\cmake\CMakeFiles\CMakeTmp\Debug\cmTC_32d81.exe
+
+
+
+Determining if the strnlen exist passed with the following output:
+Change Dir: M:/Torque2DCmake/Projects/Test/cmake/CMakeFiles/CMakeTmp
+
+Run Build Command(s):C:/Program Files (x86)/Microsoft Visual Studio/2017/Professional/MSBuild/15.0/Bin/MSBuild.exe cmTC_ddb83.vcxproj /p:Configuration=Debug /p:Platform=Win32 /p:VisualStudioVersion=15.0 /v:m && Microsoft (R) Build Engine version 15.9.21+g9802d43bc3 for .NET Framework
+Copyright (C) Microsoft Corporation. All rights reserved.
+
+  CheckSymbolExists.c
+  cmTC_ddb83.vcxproj -> M:\Torque2DCmake\Projects\Test\cmake\CMakeFiles\CMakeTmp\Debug\cmTC_ddb83.exe
+
+
+File M:/Torque2DCmake/Projects/Test/cmake/CMakeFiles/CMakeTmp/CheckSymbolExists.c:
+/* */
+#include <string.h>
+
+int main(int argc, char** argv)
+{
+  (void)argv;
+#ifndef strnlen
+  return ((int*)(&strnlen))[argc];
+#else
+  (void)argc;
+  return 0;
+#endif
+}
+Determining if the snprintf exist passed with the following output:
+Change Dir: M:/Torque2DCmake/Projects/Test/cmake/CMakeFiles/CMakeTmp
+
+Run Build Command(s):C:/Program Files (x86)/Microsoft Visual Studio/2017/Professional/MSBuild/15.0/Bin/MSBuild.exe cmTC_472ea.vcxproj /p:Configuration=Debug /p:Platform=Win32 /p:VisualStudioVersion=15.0 /v:m && Microsoft (R) Build Engine version 15.9.21+g9802d43bc3 for .NET Framework
+Copyright (C) Microsoft Corporation. All rights reserved.
+
+  CheckSymbolExists.c
+  cmTC_472ea.vcxproj -> M:\Torque2DCmake\Projects\Test\cmake\CMakeFiles\CMakeTmp\Debug\cmTC_472ea.exe
+
+
+File M:/Torque2DCmake/Projects/Test/cmake/CMakeFiles/CMakeTmp/CheckSymbolExists.c:
+/* */
+#include <stdio.h>
+
+int main(int argc, char** argv)
+{
+  (void)argv;
+#ifndef snprintf
+  return ((int*)(&snprintf))[argc];
+#else
+  (void)argc;
+  return 0;
+#endif
+}
+Determining if the isfinite exist passed with the following output:
+Change Dir: M:/Torque2DCmake/Projects/Test/cmake/CMakeFiles/CMakeTmp
+
+Run Build Command(s):C:/Program Files (x86)/Microsoft Visual Studio/2017/Professional/MSBuild/15.0/Bin/MSBuild.exe cmTC_66274.vcxproj /p:Configuration=Debug /p:Platform=Win32 /p:VisualStudioVersion=15.0 /v:m && Microsoft (R) Build Engine version 15.9.21+g9802d43bc3 for .NET Framework
+Copyright (C) Microsoft Corporation. All rights reserved.
+
+  CheckSymbolExists.c
+  cmTC_66274.vcxproj -> M:\Torque2DCmake\Projects\Test\cmake\CMakeFiles\CMakeTmp\Debug\cmTC_66274.exe
+
+
+File M:/Torque2DCmake/Projects/Test/cmake/CMakeFiles/CMakeTmp/CheckSymbolExists.c:
+/* */
+#include <math.h>
+
+int main(int argc, char** argv)
+{
+  (void)argv;
+#ifndef isfinite
+  return ((int*)(&isfinite))[argc];
+#else
+  (void)argc;
+  return 0;
+#endif
+}
+Determining if the isnan exist passed with the following output:
+Change Dir: M:/Torque2DCmake/Projects/Test/cmake/CMakeFiles/CMakeTmp
+
+Run Build Command(s):C:/Program Files (x86)/Microsoft Visual Studio/2017/Professional/MSBuild/15.0/Bin/MSBuild.exe cmTC_05262.vcxproj /p:Configuration=Debug /p:Platform=Win32 /p:VisualStudioVersion=15.0 /v:m && Microsoft (R) Build Engine version 15.9.21+g9802d43bc3 for .NET Framework
+Copyright (C) Microsoft Corporation. All rights reserved.
+
+  CheckSymbolExists.c
+  cmTC_05262.vcxproj -> M:\Torque2DCmake\Projects\Test\cmake\CMakeFiles\CMakeTmp\Debug\cmTC_05262.exe
+
+
+File M:/Torque2DCmake/Projects/Test/cmake/CMakeFiles/CMakeTmp/CheckSymbolExists.c:
+/* */
+#include <math.h>
+
+int main(int argc, char** argv)
+{
+  (void)argv;
+#ifndef isnan
+  return ((int*)(&isnan))[argc];
+#else
+  (void)argc;
+  return 0;
+#endif
+}
+Determining if the include file windows.h exists passed with the following output:
+Change Dir: M:/Torque2DCmake/Projects/Test/cmake/CMakeFiles/CMakeTmp
+
+Run Build Command(s):C:/Program Files (x86)/Microsoft Visual Studio/2017/Professional/MSBuild/15.0/Bin/MSBuild.exe cmTC_949dd.vcxproj /p:Configuration=Debug /p:Platform=Win32 /p:VisualStudioVersion=15.0 /v:m && Microsoft (R) Build Engine version 15.9.21+g9802d43bc3 for .NET Framework
+Copyright (C) Microsoft Corporation. All rights reserved.
+
+  CheckIncludeFile.c
+  cmTC_949dd.vcxproj -> M:\Torque2DCmake\Projects\Test\cmake\CMakeFiles\CMakeTmp\Debug\cmTC_949dd.exe
+
+
+
+Determining if the include file xmmintrin.h exists passed with the following output:
+Change Dir: M:/Torque2DCmake/Projects/Test/cmake/CMakeFiles/CMakeTmp
+
+Run Build Command(s):C:/Program Files (x86)/Microsoft Visual Studio/2017/Professional/MSBuild/15.0/Bin/MSBuild.exe cmTC_7bf06.vcxproj /p:Configuration=Debug /p:Platform=Win32 /p:VisualStudioVersion=15.0 /v:m && Microsoft (R) Build Engine version 15.9.21+g9802d43bc3 for .NET Framework
+Copyright (C) Microsoft Corporation. All rights reserved.
+
+  CheckIncludeFile.c
+  cmTC_7bf06.vcxproj -> M:\Torque2DCmake\Projects\Test\cmake\CMakeFiles\CMakeTmp\Debug\cmTC_7bf06.exe
+
+
+
+Determining if the include file emmintrin.h exists passed with the following output:
+Change Dir: M:/Torque2DCmake/Projects/Test/cmake/CMakeFiles/CMakeTmp
+
+Run Build Command(s):C:/Program Files (x86)/Microsoft Visual Studio/2017/Professional/MSBuild/15.0/Bin/MSBuild.exe cmTC_a6306.vcxproj /p:Configuration=Debug /p:Platform=Win32 /p:VisualStudioVersion=15.0 /v:m && Microsoft (R) Build Engine version 15.9.21+g9802d43bc3 for .NET Framework
+Copyright (C) Microsoft Corporation. All rights reserved.
+
+  CheckIncludeFile.c
+  cmTC_a6306.vcxproj -> M:\Torque2DCmake\Projects\Test\cmake\CMakeFiles\CMakeTmp\Debug\cmTC_a6306.exe
+
+
+
+Determining if the include file pmmintrin.h exists passed with the following output:
+Change Dir: M:/Torque2DCmake/Projects/Test/cmake/CMakeFiles/CMakeTmp
+
+Run Build Command(s):C:/Program Files (x86)/Microsoft Visual Studio/2017/Professional/MSBuild/15.0/Bin/MSBuild.exe cmTC_8d5af.vcxproj /p:Configuration=Debug /p:Platform=Win32 /p:VisualStudioVersion=15.0 /v:m && Microsoft (R) Build Engine version 15.9.21+g9802d43bc3 for .NET Framework
+Copyright (C) Microsoft Corporation. All rights reserved.
+
+  CheckIncludeFile.c
+  cmTC_8d5af.vcxproj -> M:\Torque2DCmake\Projects\Test\cmake\CMakeFiles\CMakeTmp\Debug\cmTC_8d5af.exe
+
+
+
+Determining if the include file smmintrin.h exists passed with the following output:
+Change Dir: M:/Torque2DCmake/Projects/Test/cmake/CMakeFiles/CMakeTmp
+
+Run Build Command(s):C:/Program Files (x86)/Microsoft Visual Studio/2017/Professional/MSBuild/15.0/Bin/MSBuild.exe cmTC_7b293.vcxproj /p:Configuration=Debug /p:Platform=Win32 /p:VisualStudioVersion=15.0 /v:m && Microsoft (R) Build Engine version 15.9.21+g9802d43bc3 for .NET Framework
+Copyright (C) Microsoft Corporation. All rights reserved.
+
+  CheckIncludeFile.c
+  cmTC_7b293.vcxproj -> M:\Torque2DCmake\Projects\Test\cmake\CMakeFiles\CMakeTmp\Debug\cmTC_7b293.exe
+
+
+
+Determining if files windows.h;mmsystem.h exist passed with the following output:
+Change Dir: M:/Torque2DCmake/Projects/Test/cmake/CMakeFiles/CMakeTmp
+
+Run Build Command(s):C:/Program Files (x86)/Microsoft Visual Studio/2017/Professional/MSBuild/15.0/Bin/MSBuild.exe cmTC_95b1f.vcxproj /p:Configuration=Debug /p:Platform=Win32 /p:VisualStudioVersion=15.0 /v:m && Microsoft (R) Build Engine version 15.9.21+g9802d43bc3 for .NET Framework
+Copyright (C) Microsoft Corporation. All rights reserved.
+
+  HAVE_MMSYSTEM_H.c
+  cmTC_95b1f.vcxproj -> M:\Torque2DCmake\Projects\Test\cmake\CMakeFiles\CMakeTmp\Debug\cmTC_95b1f.exe
+
+
+
+Determining if the include file mmdeviceapi.h exists passed with the following output:
+Change Dir: M:/Torque2DCmake/Projects/Test/cmake/CMakeFiles/CMakeTmp
+
+Run Build Command(s):C:/Program Files (x86)/Microsoft Visual Studio/2017/Professional/MSBuild/15.0/Bin/MSBuild.exe cmTC_2e5b6.vcxproj /p:Configuration=Debug /p:Platform=Win32 /p:VisualStudioVersion=15.0 /v:m && Microsoft (R) Build Engine version 15.9.21+g9802d43bc3 for .NET Framework
+Copyright (C) Microsoft Corporation. All rights reserved.
+
+  CheckIncludeFile.c
+  cmTC_2e5b6.vcxproj -> M:\Torque2DCmake\Projects\Test\cmake\CMakeFiles\CMakeTmp\Debug\cmTC_2e5b6.exe
+
+
+
+Determining if files inttypes.h exist passed with the following output:
+Change Dir: M:/Torque2DCmake/Projects/Test/cmake/CMakeFiles/CMakeTmp
+
+Run Build Command(s):C:/Program Files (x86)/Microsoft Visual Studio/2017/Professional/MSBuild/15.0/Bin/MSBuild.exe cmTC_2c0df.vcxproj /p:Configuration=Debug /p:Platform=Win32 /p:VisualStudioVersion=15.0 /v:m && Microsoft (R) Build Engine version 15.9.21+g9802d43bc3 for .NET Framework
+Copyright (C) Microsoft Corporation. All rights reserved.
+
+  INCLUDE_INTTYPES_H.c
+  cmTC_2c0df.vcxproj -> M:\Torque2DCmake\Projects\Test\cmake\CMakeFiles\CMakeTmp\Debug\cmTC_2c0df.exe
+
+
+
+Determining if files stdint.h exist passed with the following output:
+Change Dir: M:/Torque2DCmake/Projects/Test/cmake/CMakeFiles/CMakeTmp
+
+Run Build Command(s):C:/Program Files (x86)/Microsoft Visual Studio/2017/Professional/MSBuild/15.0/Bin/MSBuild.exe cmTC_c4626.vcxproj /p:Configuration=Debug /p:Platform=Win32 /p:VisualStudioVersion=15.0 /v:m && Microsoft (R) Build Engine version 15.9.21+g9802d43bc3 for .NET Framework
+Copyright (C) Microsoft Corporation. All rights reserved.
+
+  INCLUDE_STDINT_H.c
+  cmTC_c4626.vcxproj -> M:\Torque2DCmake\Projects\Test\cmake\CMakeFiles\CMakeTmp\Debug\cmTC_c4626.exe
+
+
+
+Determining if files sys/types.h exist passed with the following output:
+Change Dir: M:/Torque2DCmake/Projects/Test/cmake/CMakeFiles/CMakeTmp
+
+Run Build Command(s):C:/Program Files (x86)/Microsoft Visual Studio/2017/Professional/MSBuild/15.0/Bin/MSBuild.exe cmTC_7f230.vcxproj /p:Configuration=Debug /p:Platform=Win32 /p:VisualStudioVersion=15.0 /v:m && Microsoft (R) Build Engine version 15.9.21+g9802d43bc3 for .NET Framework
+Copyright (C) Microsoft Corporation. All rights reserved.
+
+  INCLUDE_SYS_TYPES_H.c
+  cmTC_7f230.vcxproj -> M:\Torque2DCmake\Projects\Test\cmake\CMakeFiles\CMakeTmp\Debug\cmTC_7f230.exe
+
+
+

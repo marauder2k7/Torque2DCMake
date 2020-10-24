@@ -1,0 +1,3361 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <ClCompile Include="M:\Torque2DCmake\engine\source\algorithm\crc.cc">
+      <Filter>torque2d\algorithm</Filter>
+    </ClCompile>
+    <ClCompile Include="M:\Torque2DCmake\engine\source\algorithm\hashFunction.cc">
+      <Filter>torque2d\algorithm</Filter>
+    </ClCompile>
+    <ClCompile Include="M:\Torque2DCmake\engine\source\assets\assetBase.cc">
+      <Filter>torque2d\assets</Filter>
+    </ClCompile>
+    <ClCompile Include="M:\Torque2DCmake\engine\source\assets\assetFieldTypes.cc">
+      <Filter>torque2d\assets</Filter>
+    </ClCompile>
+    <ClCompile Include="M:\Torque2DCmake\engine\source\assets\assetManager.cc">
+      <Filter>torque2d\assets</Filter>
+    </ClCompile>
+    <ClCompile Include="M:\Torque2DCmake\engine\source\assets\assetQuery.cc">
+      <Filter>torque2d\assets</Filter>
+    </ClCompile>
+    <ClCompile Include="M:\Torque2DCmake\engine\source\assets\assetTagsManifest.cc">
+      <Filter>torque2d\assets</Filter>
+    </ClCompile>
+    <ClCompile Include="M:\Torque2DCmake\engine\source\assets\declaredAssets.cc">
+      <Filter>torque2d\assets</Filter>
+    </ClCompile>
+    <ClCompile Include="M:\Torque2DCmake\engine\source\assets\referencedAssets.cc">
+      <Filter>torque2d\assets</Filter>
+    </ClCompile>
+    <ClCompile Include="M:\Torque2DCmake\engine\source\audio\AudioAsset.cc">
+      <Filter>torque2d\audio</Filter>
+    </ClCompile>
+    <ClCompile Include="M:\Torque2DCmake\engine\source\audio\audio.cc">
+      <Filter>torque2d\audio</Filter>
+    </ClCompile>
+    <ClCompile Include="M:\Torque2DCmake\engine\source\audio\audioBuffer.cc">
+      <Filter>torque2d\audio</Filter>
+    </ClCompile>
+    <ClCompile Include="M:\Torque2DCmake\engine\source\audio\audioDataBlock.cc">
+      <Filter>torque2d\audio</Filter>
+    </ClCompile>
+    <ClCompile Include="M:\Torque2DCmake\engine\source\audio\audioDescriptions.cc">
+      <Filter>torque2d\audio</Filter>
+    </ClCompile>
+    <ClCompile Include="M:\Torque2DCmake\engine\source\audio\audioStreamSourceFactory.cc">
+      <Filter>torque2d\audio</Filter>
+    </ClCompile>
+    <ClCompile Include="M:\Torque2DCmake\engine\source\audio\audio_ScriptBinding.cc">
+      <Filter>torque2d\audio</Filter>
+    </ClCompile>
+    <ClCompile Include="M:\Torque2DCmake\engine\source\audio\vorbisStreamSource.cc">
+      <Filter>torque2d\audio</Filter>
+    </ClCompile>
+    <ClCompile Include="M:\Torque2DCmake\engine\source\audio\wavStreamSource.cc">
+      <Filter>torque2d\audio</Filter>
+    </ClCompile>
+    <ClCompile Include="M:\Torque2DCmake\engine\source\bitmapFont\BitmapFont.cc">
+      <Filter>torque2d\bitmapFont</Filter>
+    </ClCompile>
+    <ClCompile Include="M:\Torque2DCmake\engine\source\bitmapFont\BitmapFontCharacter.cc">
+      <Filter>torque2d\bitmapFont</Filter>
+    </ClCompile>
+    <ClCompile Include="M:\Torque2DCmake\engine\source\Box2D\Collision\b2BroadPhase.cpp">
+      <Filter>torque2d\Box2D\Collision</Filter>
+    </ClCompile>
+    <ClCompile Include="M:\Torque2DCmake\engine\source\Box2D\Collision\b2CollideCircle.cpp">
+      <Filter>torque2d\Box2D\Collision</Filter>
+    </ClCompile>
+    <ClCompile Include="M:\Torque2DCmake\engine\source\Box2D\Collision\b2CollideEdge.cpp">
+      <Filter>torque2d\Box2D\Collision</Filter>
+    </ClCompile>
+    <ClCompile Include="M:\Torque2DCmake\engine\source\Box2D\Collision\b2CollidePolygon.cpp">
+      <Filter>torque2d\Box2D\Collision</Filter>
+    </ClCompile>
+    <ClCompile Include="M:\Torque2DCmake\engine\source\Box2D\Collision\b2Collision.cpp">
+      <Filter>torque2d\Box2D\Collision</Filter>
+    </ClCompile>
+    <ClCompile Include="M:\Torque2DCmake\engine\source\Box2D\Collision\b2Distance.cpp">
+      <Filter>torque2d\Box2D\Collision</Filter>
+    </ClCompile>
+    <ClCompile Include="M:\Torque2DCmake\engine\source\Box2D\Collision\b2DynamicTree.cpp">
+      <Filter>torque2d\Box2D\Collision</Filter>
+    </ClCompile>
+    <ClCompile Include="M:\Torque2DCmake\engine\source\Box2D\Collision\b2TimeOfImpact.cpp">
+      <Filter>torque2d\Box2D\Collision</Filter>
+    </ClCompile>
+    <ClCompile Include="M:\Torque2DCmake\engine\source\Box2D\Collision\Shapes\b2ChainShape.cpp">
+      <Filter>torque2d\Box2D\Collision\Shapes</Filter>
+    </ClCompile>
+    <ClCompile Include="M:\Torque2DCmake\engine\source\Box2D\Collision\Shapes\b2CircleShape.cpp">
+      <Filter>torque2d\Box2D\Collision\Shapes</Filter>
+    </ClCompile>
+    <ClCompile Include="M:\Torque2DCmake\engine\source\Box2D\Collision\Shapes\b2EdgeShape.cpp">
+      <Filter>torque2d\Box2D\Collision\Shapes</Filter>
+    </ClCompile>
+    <ClCompile Include="M:\Torque2DCmake\engine\source\Box2D\Collision\Shapes\b2PolygonShape.cpp">
+      <Filter>torque2d\Box2D\Collision\Shapes</Filter>
+    </ClCompile>
+    <ClCompile Include="M:\Torque2DCmake\engine\source\Box2D\Common\b2BlockAllocator.cpp">
+      <Filter>torque2d\Box2D\Common</Filter>
+    </ClCompile>
+    <ClCompile Include="M:\Torque2DCmake\engine\source\Box2D\Common\b2Draw.cpp">
+      <Filter>torque2d\Box2D\Common</Filter>
+    </ClCompile>
+    <ClCompile Include="M:\Torque2DCmake\engine\source\Box2D\Common\b2FreeList.cpp">
+      <Filter>torque2d\Box2D\Common</Filter>
+    </ClCompile>
+    <ClCompile Include="M:\Torque2DCmake\engine\source\Box2D\Common\b2Math.cpp">
+      <Filter>torque2d\Box2D\Common</Filter>
+    </ClCompile>
+    <ClCompile Include="M:\Torque2DCmake\engine\source\Box2D\Common\b2Settings.cpp">
+      <Filter>torque2d\Box2D\Common</Filter>
+    </ClCompile>
+    <ClCompile Include="M:\Torque2DCmake\engine\source\Box2D\Common\b2StackAllocator.cpp">
+      <Filter>torque2d\Box2D\Common</Filter>
+    </ClCompile>
+    <ClCompile Include="M:\Torque2DCmake\engine\source\Box2D\Common\b2Stat.cpp">
+      <Filter>torque2d\Box2D\Common</Filter>
+    </ClCompile>
+    <ClCompile Include="M:\Torque2DCmake\engine\source\Box2D\Common\b2Timer.cpp">
+      <Filter>torque2d\Box2D\Common</Filter>
+    </ClCompile>
+    <ClCompile Include="M:\Torque2DCmake\engine\source\Box2D\Common\b2TrackedBlock.cpp">
+      <Filter>torque2d\Box2D\Common</Filter>
+    </ClCompile>
+    <ClCompile Include="M:\Torque2DCmake\engine\source\Box2D\Dynamics\b2Body.cpp">
+      <Filter>torque2d\Box2D\Dynamics</Filter>
+    </ClCompile>
+    <ClCompile Include="M:\Torque2DCmake\engine\source\Box2D\Dynamics\b2ContactManager.cpp">
+      <Filter>torque2d\Box2D\Dynamics</Filter>
+    </ClCompile>
+    <ClCompile Include="M:\Torque2DCmake\engine\source\Box2D\Dynamics\b2Fixture.cpp">
+      <Filter>torque2d\Box2D\Dynamics</Filter>
+    </ClCompile>
+    <ClCompile Include="M:\Torque2DCmake\engine\source\Box2D\Dynamics\b2Island.cpp">
+      <Filter>torque2d\Box2D\Dynamics</Filter>
+    </ClCompile>
+    <ClCompile Include="M:\Torque2DCmake\engine\source\Box2D\Dynamics\b2World.cpp">
+      <Filter>torque2d\Box2D\Dynamics</Filter>
+    </ClCompile>
+    <ClCompile Include="M:\Torque2DCmake\engine\source\Box2D\Dynamics\b2WorldCallbacks.cpp">
+      <Filter>torque2d\Box2D\Dynamics</Filter>
+    </ClCompile>
+    <ClCompile Include="M:\Torque2DCmake\engine\source\Box2D\Dynamics\Contacts\b2ChainAndCircleContact.cpp">
+      <Filter>torque2d\Box2D\Dynamics\Contacts</Filter>
+    </ClCompile>
+    <ClCompile Include="M:\Torque2DCmake\engine\source\Box2D\Dynamics\Contacts\b2ChainAndPolygonContact.cpp">
+      <Filter>torque2d\Box2D\Dynamics\Contacts</Filter>
+    </ClCompile>
+    <ClCompile Include="M:\Torque2DCmake\engine\source\Box2D\Dynamics\Contacts\b2CircleContact.cpp">
+      <Filter>torque2d\Box2D\Dynamics\Contacts</Filter>
+    </ClCompile>
+    <ClCompile Include="M:\Torque2DCmake\engine\source\Box2D\Dynamics\Contacts\b2Contact.cpp">
+      <Filter>torque2d\Box2D\Dynamics\Contacts</Filter>
+    </ClCompile>
+    <ClCompile Include="M:\Torque2DCmake\engine\source\Box2D\Dynamics\Contacts\b2ContactSolver.cpp">
+      <Filter>torque2d\Box2D\Dynamics\Contacts</Filter>
+    </ClCompile>
+    <ClCompile Include="M:\Torque2DCmake\engine\source\Box2D\Dynamics\Contacts\b2EdgeAndCircleContact.cpp">
+      <Filter>torque2d\Box2D\Dynamics\Contacts</Filter>
+    </ClCompile>
+    <ClCompile Include="M:\Torque2DCmake\engine\source\Box2D\Dynamics\Contacts\b2EdgeAndPolygonContact.cpp">
+      <Filter>torque2d\Box2D\Dynamics\Contacts</Filter>
+    </ClCompile>
+    <ClCompile Include="M:\Torque2DCmake\engine\source\Box2D\Dynamics\Contacts\b2PolygonAndCircleContact.cpp">
+      <Filter>torque2d\Box2D\Dynamics\Contacts</Filter>
+    </ClCompile>
+    <ClCompile Include="M:\Torque2DCmake\engine\source\Box2D\Dynamics\Contacts\b2PolygonContact.cpp">
+      <Filter>torque2d\Box2D\Dynamics\Contacts</Filter>
+    </ClCompile>
+    <ClCompile Include="M:\Torque2DCmake\engine\source\Box2D\Dynamics\Joints\b2DistanceJoint.cpp">
+      <Filter>torque2d\Box2D\Dynamics\Joints</Filter>
+    </ClCompile>
+    <ClCompile Include="M:\Torque2DCmake\engine\source\Box2D\Dynamics\Joints\b2FrictionJoint.cpp">
+      <Filter>torque2d\Box2D\Dynamics\Joints</Filter>
+    </ClCompile>
+    <ClCompile Include="M:\Torque2DCmake\engine\source\Box2D\Dynamics\Joints\b2GearJoint.cpp">
+      <Filter>torque2d\Box2D\Dynamics\Joints</Filter>
+    </ClCompile>
+    <ClCompile Include="M:\Torque2DCmake\engine\source\Box2D\Dynamics\Joints\b2Joint.cpp">
+      <Filter>torque2d\Box2D\Dynamics\Joints</Filter>
+    </ClCompile>
+    <ClCompile Include="M:\Torque2DCmake\engine\source\Box2D\Dynamics\Joints\b2MotorJoint.cpp">
+      <Filter>torque2d\Box2D\Dynamics\Joints</Filter>
+    </ClCompile>
+    <ClCompile Include="M:\Torque2DCmake\engine\source\Box2D\Dynamics\Joints\b2MouseJoint.cpp">
+      <Filter>torque2d\Box2D\Dynamics\Joints</Filter>
+    </ClCompile>
+    <ClCompile Include="M:\Torque2DCmake\engine\source\Box2D\Dynamics\Joints\b2PrismaticJoint.cpp">
+      <Filter>torque2d\Box2D\Dynamics\Joints</Filter>
+    </ClCompile>
+    <ClCompile Include="M:\Torque2DCmake\engine\source\Box2D\Dynamics\Joints\b2PulleyJoint.cpp">
+      <Filter>torque2d\Box2D\Dynamics\Joints</Filter>
+    </ClCompile>
+    <ClCompile Include="M:\Torque2DCmake\engine\source\Box2D\Dynamics\Joints\b2RevoluteJoint.cpp">
+      <Filter>torque2d\Box2D\Dynamics\Joints</Filter>
+    </ClCompile>
+    <ClCompile Include="M:\Torque2DCmake\engine\source\Box2D\Dynamics\Joints\b2RopeJoint.cpp">
+      <Filter>torque2d\Box2D\Dynamics\Joints</Filter>
+    </ClCompile>
+    <ClCompile Include="M:\Torque2DCmake\engine\source\Box2D\Dynamics\Joints\b2WeldJoint.cpp">
+      <Filter>torque2d\Box2D\Dynamics\Joints</Filter>
+    </ClCompile>
+    <ClCompile Include="M:\Torque2DCmake\engine\source\Box2D\Dynamics\Joints\b2WheelJoint.cpp">
+      <Filter>torque2d\Box2D\Dynamics\Joints</Filter>
+    </ClCompile>
+    <ClCompile Include="M:\Torque2DCmake\engine\source\Box2D\Particle\b2Particle.cpp">
+      <Filter>torque2d\Box2D\Particle</Filter>
+    </ClCompile>
+    <ClCompile Include="M:\Torque2DCmake\engine\source\Box2D\Particle\b2ParticleAssembly.cpp">
+      <Filter>torque2d\Box2D\Particle</Filter>
+    </ClCompile>
+    <ClCompile Include="M:\Torque2DCmake\engine\source\Box2D\Particle\b2ParticleGroup.cpp">
+      <Filter>torque2d\Box2D\Particle</Filter>
+    </ClCompile>
+    <ClCompile Include="M:\Torque2DCmake\engine\source\Box2D\Particle\b2ParticleSystem.cpp">
+      <Filter>torque2d\Box2D\Particle</Filter>
+    </ClCompile>
+    <ClCompile Include="M:\Torque2DCmake\engine\source\Box2D\Particle\b2VoronoiDiagram.cpp">
+      <Filter>torque2d\Box2D\Particle</Filter>
+    </ClCompile>
+    <ClCompile Include="M:\Torque2DCmake\engine\source\Box2D\Rope\b2Rope.cpp">
+      <Filter>torque2d\Box2D\Rope</Filter>
+    </ClCompile>
+    <ClCompile Include="M:\Torque2DCmake\engine\source\collection\bitTables.cc">
+      <Filter>torque2d\collection</Filter>
+    </ClCompile>
+    <ClCompile Include="M:\Torque2DCmake\engine\source\collection\hashTable.cc">
+      <Filter>torque2d\collection</Filter>
+    </ClCompile>
+    <ClCompile Include="M:\Torque2DCmake\engine\source\collection\nameTags.cpp">
+      <Filter>torque2d\collection</Filter>
+    </ClCompile>
+    <ClCompile Include="M:\Torque2DCmake\engine\source\collection\undo.cc">
+      <Filter>torque2d\collection</Filter>
+    </ClCompile>
+    <ClCompile Include="M:\Torque2DCmake\engine\source\collection\vector.cc">
+      <Filter>torque2d\collection</Filter>
+    </ClCompile>
+    <ClCompile Include="M:\Torque2DCmake\engine\source\component\dynamicConsoleMethodComponent.cpp">
+      <Filter>torque2d\component</Filter>
+    </ClCompile>
+    <ClCompile Include="M:\Torque2DCmake\engine\source\component\simComponent.cpp">
+      <Filter>torque2d\component</Filter>
+    </ClCompile>
+    <ClCompile Include="M:\Torque2DCmake\engine\source\component\behaviors\behaviorComponent.cpp">
+      <Filter>torque2d\component\behaviors</Filter>
+    </ClCompile>
+    <ClCompile Include="M:\Torque2DCmake\engine\source\component\behaviors\behaviorInstance.cpp">
+      <Filter>torque2d\component\behaviors</Filter>
+    </ClCompile>
+    <ClCompile Include="M:\Torque2DCmake\engine\source\component\behaviors\behaviorTemplate.cpp">
+      <Filter>torque2d\component\behaviors</Filter>
+    </ClCompile>
+    <ClCompile Include="M:\Torque2DCmake\engine\source\console\CMDscan.cc">
+      <Filter>torque2d\console</Filter>
+    </ClCompile>
+    <ClCompile Include="M:\Torque2DCmake\engine\source\console\ConsoleTypeValidators.cc">
+      <Filter>torque2d\console</Filter>
+    </ClCompile>
+    <ClCompile Include="M:\Torque2DCmake\engine\source\console\Package.cc">
+      <Filter>torque2d\console</Filter>
+    </ClCompile>
+    <ClCompile Include="M:\Torque2DCmake\engine\source\console\astAlloc.cc">
+      <Filter>torque2d\console</Filter>
+    </ClCompile>
+    <ClCompile Include="M:\Torque2DCmake\engine\source\console\astNodes.cc">
+      <Filter>torque2d\console</Filter>
+    </ClCompile>
+    <ClCompile Include="M:\Torque2DCmake\engine\source\console\cmdgram.cc">
+      <Filter>torque2d\console</Filter>
+    </ClCompile>
+    <ClCompile Include="M:\Torque2DCmake\engine\source\console\codeBlock.cc">
+      <Filter>torque2d\console</Filter>
+    </ClCompile>
+    <ClCompile Include="M:\Torque2DCmake\engine\source\console\compiledEval.cc">
+      <Filter>torque2d\console</Filter>
+    </ClCompile>
+    <ClCompile Include="M:\Torque2DCmake\engine\source\console\compiler.cc">
+      <Filter>torque2d\console</Filter>
+    </ClCompile>
+    <ClCompile Include="M:\Torque2DCmake\engine\source\console\console.cc">
+      <Filter>torque2d\console</Filter>
+    </ClCompile>
+    <ClCompile Include="M:\Torque2DCmake\engine\source\console\consoleBaseType.cc">
+      <Filter>torque2d\console</Filter>
+    </ClCompile>
+    <ClCompile Include="M:\Torque2DCmake\engine\source\console\consoleDictionary.cc">
+      <Filter>torque2d\console</Filter>
+    </ClCompile>
+    <ClCompile Include="M:\Torque2DCmake\engine\source\console\consoleDoc.cc">
+      <Filter>torque2d\console</Filter>
+    </ClCompile>
+    <ClCompile Include="M:\Torque2DCmake\engine\source\console\consoleExprEvalState.cc">
+      <Filter>torque2d\console</Filter>
+    </ClCompile>
+    <ClCompile Include="M:\Torque2DCmake\engine\source\console\consoleFunctions.cc">
+      <Filter>torque2d\console</Filter>
+    </ClCompile>
+    <ClCompile Include="M:\Torque2DCmake\engine\source\console\consoleLogger.cc">
+      <Filter>torque2d\console</Filter>
+    </ClCompile>
+    <ClCompile Include="M:\Torque2DCmake\engine\source\console\consoleNamespace.cc">
+      <Filter>torque2d\console</Filter>
+    </ClCompile>
+    <ClCompile Include="M:\Torque2DCmake\engine\source\console\consoleObject.cc">
+      <Filter>torque2d\console</Filter>
+    </ClCompile>
+    <ClCompile Include="M:\Torque2DCmake\engine\source\console\consoleParser.cc">
+      <Filter>torque2d\console</Filter>
+    </ClCompile>
+    <ClCompile Include="M:\Torque2DCmake\engine\source\console\consoleTypes.cc">
+      <Filter>torque2d\console</Filter>
+    </ClCompile>
+    <ClCompile Include="M:\Torque2DCmake\engine\source\console\metaScripting_ScriptBinding.cc">
+      <Filter>torque2d\console</Filter>
+    </ClCompile>
+    <ClCompile Include="M:\Torque2DCmake\engine\source\debug\profiler.cc">
+      <Filter>torque2d\debug</Filter>
+    </ClCompile>
+    <ClCompile Include="M:\Torque2DCmake\engine\source\debug\telnetDebugger.cc">
+      <Filter>torque2d\debug</Filter>
+    </ClCompile>
+    <ClCompile Include="M:\Torque2DCmake\engine\source\debug\remote\RemoteDebugger1.cc">
+      <Filter>torque2d\debug\remote</Filter>
+    </ClCompile>
+    <ClCompile Include="M:\Torque2DCmake\engine\source\debug\remote\RemoteDebuggerBase.cc">
+      <Filter>torque2d\debug\remote</Filter>
+    </ClCompile>
+    <ClCompile Include="M:\Torque2DCmake\engine\source\debug\remote\RemoteDebuggerBridge.cc">
+      <Filter>torque2d\debug\remote</Filter>
+    </ClCompile>
+    <ClCompile Include="M:\Torque2DCmake\engine\source\delegates\delegateSignal.cpp">
+      <Filter>torque2d\delegates</Filter>
+    </ClCompile>
+    <ClCompile Include="M:\Torque2DCmake\engine\source\game\defaultGame.cc">
+      <Filter>torque2d\game</Filter>
+    </ClCompile>
+    <ClCompile Include="M:\Torque2DCmake\engine\source\game\gameConnection.cc">
+      <Filter>torque2d\game</Filter>
+    </ClCompile>
+    <ClCompile Include="M:\Torque2DCmake\engine\source\game\gameInterface.cc">
+      <Filter>torque2d\game</Filter>
+    </ClCompile>
+    <ClCompile Include="M:\Torque2DCmake\engine\source\game\module.cc">
+      <Filter>torque2d\game</Filter>
+    </ClCompile>
+    <ClCompile Include="M:\Torque2DCmake\engine\source\game\version.cc">
+      <Filter>torque2d\game</Filter>
+    </ClCompile>
+    <ClCompile Include="M:\Torque2DCmake\engine\source\graphics\DynamicTexture.cc">
+      <Filter>torque2d\graphics</Filter>
+    </ClCompile>
+    <ClCompile Include="M:\Torque2DCmake\engine\source\graphics\PNGImage.cpp">
+      <Filter>torque2d\graphics</Filter>
+    </ClCompile>
+    <ClCompile Include="M:\Torque2DCmake\engine\source\graphics\TextureDictionary.cc">
+      <Filter>torque2d\graphics</Filter>
+    </ClCompile>
+    <ClCompile Include="M:\Torque2DCmake\engine\source\graphics\TextureHandle.cc">
+      <Filter>torque2d\graphics</Filter>
+    </ClCompile>
+    <ClCompile Include="M:\Torque2DCmake\engine\source\graphics\TextureManager.cc">
+      <Filter>torque2d\graphics</Filter>
+    </ClCompile>
+    <ClCompile Include="M:\Torque2DCmake\engine\source\graphics\bitmapBmp.cc">
+      <Filter>torque2d\graphics</Filter>
+    </ClCompile>
+    <ClCompile Include="M:\Torque2DCmake\engine\source\graphics\bitmapJpeg.cc">
+      <Filter>torque2d\graphics</Filter>
+    </ClCompile>
+    <ClCompile Include="M:\Torque2DCmake\engine\source\graphics\bitmapPng.cc">
+      <Filter>torque2d\graphics</Filter>
+    </ClCompile>
+    <ClCompile Include="M:\Torque2DCmake\engine\source\graphics\color.cc">
+      <Filter>torque2d\graphics</Filter>
+    </ClCompile>
+    <ClCompile Include="M:\Torque2DCmake\engine\source\graphics\dgl.cc">
+      <Filter>torque2d\graphics</Filter>
+    </ClCompile>
+    <ClCompile Include="M:\Torque2DCmake\engine\source\graphics\dglMatrix.cc">
+      <Filter>torque2d\graphics</Filter>
+    </ClCompile>
+    <ClCompile Include="M:\Torque2DCmake\engine\source\graphics\gBitmap.cc">
+      <Filter>torque2d\graphics</Filter>
+    </ClCompile>
+    <ClCompile Include="M:\Torque2DCmake\engine\source\graphics\gFont.cc">
+      <Filter>torque2d\graphics</Filter>
+    </ClCompile>
+    <ClCompile Include="M:\Torque2DCmake\engine\source\graphics\gPalette.cc">
+      <Filter>torque2d\graphics</Filter>
+    </ClCompile>
+    <ClCompile Include="M:\Torque2DCmake\engine\source\graphics\splineUtil.cc">
+      <Filter>torque2d\graphics</Filter>
+    </ClCompile>
+    <ClCompile Include="M:\Torque2DCmake\engine\source\gui\guiArrayCtrl.cc">
+      <Filter>torque2d\gui</Filter>
+    </ClCompile>
+    <ClCompile Include="M:\Torque2DCmake\engine\source\gui\guiBackgroundCtrl.cc">
+      <Filter>torque2d\gui</Filter>
+    </ClCompile>
+    <ClCompile Include="M:\Torque2DCmake\engine\source\gui\guiBitmapBorderCtrl.cc">
+      <Filter>torque2d\gui</Filter>
+    </ClCompile>
+    <ClCompile Include="M:\Torque2DCmake\engine\source\gui\guiBitmapCtrl.cc">
+      <Filter>torque2d\gui</Filter>
+    </ClCompile>
+    <ClCompile Include="M:\Torque2DCmake\engine\source\gui\guiBubbleTextCtrl.cc">
+      <Filter>torque2d\gui</Filter>
+    </ClCompile>
+    <ClCompile Include="M:\Torque2DCmake\engine\source\gui\guiCanvas.cc">
+      <Filter>torque2d\gui</Filter>
+    </ClCompile>
+    <ClCompile Include="M:\Torque2DCmake\engine\source\gui\guiColorPicker.cc">
+      <Filter>torque2d\gui</Filter>
+    </ClCompile>
+    <ClCompile Include="M:\Torque2DCmake\engine\source\gui\guiConsole.cc">
+      <Filter>torque2d\gui</Filter>
+    </ClCompile>
+    <ClCompile Include="M:\Torque2DCmake\engine\source\gui\guiConsoleEditCtrl.cc">
+      <Filter>torque2d\gui</Filter>
+    </ClCompile>
+    <ClCompile Include="M:\Torque2DCmake\engine\source\gui\guiConsoleTextCtrl.cc">
+      <Filter>torque2d\gui</Filter>
+    </ClCompile>
+    <ClCompile Include="M:\Torque2DCmake\engine\source\gui\guiControl.cc">
+      <Filter>torque2d\gui</Filter>
+    </ClCompile>
+    <ClCompile Include="M:\Torque2DCmake\engine\source\gui\guiDefaultControlRender.cc">
+      <Filter>torque2d\gui</Filter>
+    </ClCompile>
+    <ClCompile Include="M:\Torque2DCmake\engine\source\gui\guiFadeinBitmapCtrl.cc">
+      <Filter>torque2d\gui</Filter>
+    </ClCompile>
+    <ClCompile Include="M:\Torque2DCmake\engine\source\gui\guiInputCtrl.cc">
+      <Filter>torque2d\gui</Filter>
+    </ClCompile>
+    <ClCompile Include="M:\Torque2DCmake\engine\source\gui\guiListBoxCtrl.cc">
+      <Filter>torque2d\gui</Filter>
+    </ClCompile>
+    <ClCompile Include="M:\Torque2DCmake\engine\source\gui\guiMLTextCtrl.cc">
+      <Filter>torque2d\gui</Filter>
+    </ClCompile>
+    <ClCompile Include="M:\Torque2DCmake\engine\source\gui\guiMLTextEditCtrl.cc">
+      <Filter>torque2d\gui</Filter>
+    </ClCompile>
+    <ClCompile Include="M:\Torque2DCmake\engine\source\gui\guiMessageVectorCtrl.cc">
+      <Filter>torque2d\gui</Filter>
+    </ClCompile>
+    <ClCompile Include="M:\Torque2DCmake\engine\source\gui\guiMouseEventCtrl.cc">
+      <Filter>torque2d\gui</Filter>
+    </ClCompile>
+    <ClCompile Include="M:\Torque2DCmake\engine\source\gui\guiPopUpCtrl.cc">
+      <Filter>torque2d\gui</Filter>
+    </ClCompile>
+    <ClCompile Include="M:\Torque2DCmake\engine\source\gui\guiPopUpCtrlEx.cc">
+      <Filter>torque2d\gui</Filter>
+    </ClCompile>
+    <ClCompile Include="M:\Torque2DCmake\engine\source\gui\guiProgressCtrl.cc">
+      <Filter>torque2d\gui</Filter>
+    </ClCompile>
+    <ClCompile Include="M:\Torque2DCmake\engine\source\gui\guiScriptNotifyControl.cc">
+      <Filter>torque2d\gui</Filter>
+    </ClCompile>
+    <ClCompile Include="M:\Torque2DCmake\engine\source\gui\guiSliderCtrl.cc">
+      <Filter>torque2d\gui</Filter>
+    </ClCompile>
+    <ClCompile Include="M:\Torque2DCmake\engine\source\gui\guiTabPageCtrl.cc">
+      <Filter>torque2d\gui</Filter>
+    </ClCompile>
+    <ClCompile Include="M:\Torque2DCmake\engine\source\gui\guiTextCtrl.cc">
+      <Filter>torque2d\gui</Filter>
+    </ClCompile>
+    <ClCompile Include="M:\Torque2DCmake\engine\source\gui\guiTextEditCtrl.cc">
+      <Filter>torque2d\gui</Filter>
+    </ClCompile>
+    <ClCompile Include="M:\Torque2DCmake\engine\source\gui\guiTextEditSliderCtrl.cc">
+      <Filter>torque2d\gui</Filter>
+    </ClCompile>
+    <ClCompile Include="M:\Torque2DCmake\engine\source\gui\guiTextListCtrl.cc">
+      <Filter>torque2d\gui</Filter>
+    </ClCompile>
+    <ClCompile Include="M:\Torque2DCmake\engine\source\gui\guiTickCtrl.cc">
+      <Filter>torque2d\gui</Filter>
+    </ClCompile>
+    <ClCompile Include="M:\Torque2DCmake\engine\source\gui\guiTreeViewCtrl.cc">
+      <Filter>torque2d\gui</Filter>
+    </ClCompile>
+    <ClCompile Include="M:\Torque2DCmake\engine\source\gui\guiTypes.cc">
+      <Filter>torque2d\gui</Filter>
+    </ClCompile>
+    <ClCompile Include="M:\Torque2DCmake\engine\source\gui\messageVector.cc">
+      <Filter>torque2d\gui</Filter>
+    </ClCompile>
+    <ClCompile Include="M:\Torque2DCmake\engine\source\gui\buttons\guiBitmapButtonCtrl.cc">
+      <Filter>torque2d\gui\buttons</Filter>
+    </ClCompile>
+    <ClCompile Include="M:\Torque2DCmake\engine\source\gui\buttons\guiBorderButton.cc">
+      <Filter>torque2d\gui\buttons</Filter>
+    </ClCompile>
+    <ClCompile Include="M:\Torque2DCmake\engine\source\gui\buttons\guiButtonBaseCtrl.cc">
+      <Filter>torque2d\gui\buttons</Filter>
+    </ClCompile>
+    <ClCompile Include="M:\Torque2DCmake\engine\source\gui\buttons\guiButtonCtrl.cc">
+      <Filter>torque2d\gui\buttons</Filter>
+    </ClCompile>
+    <ClCompile Include="M:\Torque2DCmake\engine\source\gui\buttons\guiCheckBoxCtrl.cc">
+      <Filter>torque2d\gui\buttons</Filter>
+    </ClCompile>
+    <ClCompile Include="M:\Torque2DCmake\engine\source\gui\buttons\guiIconButtonCtrl.cc">
+      <Filter>torque2d\gui\buttons</Filter>
+    </ClCompile>
+    <ClCompile Include="M:\Torque2DCmake\engine\source\gui\buttons\guiRadioCtrl.cc">
+      <Filter>torque2d\gui\buttons</Filter>
+    </ClCompile>
+    <ClCompile Include="M:\Torque2DCmake\engine\source\gui\buttons\guiToolboxButtonCtrl.cc">
+      <Filter>torque2d\gui\buttons</Filter>
+    </ClCompile>
+    <ClCompile Include="M:\Torque2DCmake\engine\source\gui\containers\guiAutoScrollCtrl.cc">
+      <Filter>torque2d\gui\containers</Filter>
+    </ClCompile>
+    <ClCompile Include="M:\Torque2DCmake\engine\source\gui\containers\guiCtrlArrayCtrl.cc">
+      <Filter>torque2d\gui\containers</Filter>
+    </ClCompile>
+    <ClCompile Include="M:\Torque2DCmake\engine\source\gui\containers\guiDragAndDropCtrl.cc">
+      <Filter>torque2d\gui\containers</Filter>
+    </ClCompile>
+    <ClCompile Include="M:\Torque2DCmake\engine\source\gui\containers\guiDynamicCtrlArrayCtrl.cc">
+      <Filter>torque2d\gui\containers</Filter>
+    </ClCompile>
+    <ClCompile Include="M:\Torque2DCmake\engine\source\gui\containers\guiFormCtrl.cc">
+      <Filter>torque2d\gui\containers</Filter>
+    </ClCompile>
+    <ClCompile Include="M:\Torque2DCmake\engine\source\gui\containers\guiFrameCtrl.cc">
+      <Filter>torque2d\gui\containers</Filter>
+    </ClCompile>
+    <ClCompile Include="M:\Torque2DCmake\engine\source\gui\containers\guiGridCtrl.cc">
+      <Filter>torque2d\gui\containers</Filter>
+    </ClCompile>
+    <ClCompile Include="M:\Torque2DCmake\engine\source\gui\containers\guiPaneCtrl.cc">
+      <Filter>torque2d\gui\containers</Filter>
+    </ClCompile>
+    <ClCompile Include="M:\Torque2DCmake\engine\source\gui\containers\guiRolloutCtrl.cc">
+      <Filter>torque2d\gui\containers</Filter>
+    </ClCompile>
+    <ClCompile Include="M:\Torque2DCmake\engine\source\gui\containers\guiScrollCtrl.cc">
+      <Filter>torque2d\gui\containers</Filter>
+    </ClCompile>
+    <ClCompile Include="M:\Torque2DCmake\engine\source\gui\containers\guiStackCtrl.cc">
+      <Filter>torque2d\gui\containers</Filter>
+    </ClCompile>
+    <ClCompile Include="M:\Torque2DCmake\engine\source\gui\containers\guiTabBookCtrl.cc">
+      <Filter>torque2d\gui\containers</Filter>
+    </ClCompile>
+    <ClCompile Include="M:\Torque2DCmake\engine\source\gui\containers\guiWindowCtrl.cc">
+      <Filter>torque2d\gui\containers</Filter>
+    </ClCompile>
+    <ClCompile Include="M:\Torque2DCmake\engine\source\gui\editor\guiControlListPopup.cc">
+      <Filter>torque2d\gui\editor</Filter>
+    </ClCompile>
+    <ClCompile Include="M:\Torque2DCmake\engine\source\gui\editor\guiDebugger.cc">
+      <Filter>torque2d\gui\editor</Filter>
+    </ClCompile>
+    <ClCompile Include="M:\Torque2DCmake\engine\source\gui\editor\guiEditCtrl.cc">
+      <Filter>torque2d\gui\editor</Filter>
+    </ClCompile>
+    <ClCompile Include="M:\Torque2DCmake\engine\source\gui\editor\guiFilterCtrl.cc">
+      <Filter>torque2d\gui\editor</Filter>
+    </ClCompile>
+    <ClCompile Include="M:\Torque2DCmake\engine\source\gui\editor\guiGraphCtrl.cc">
+      <Filter>torque2d\gui\editor</Filter>
+    </ClCompile>
+    <ClCompile Include="M:\Torque2DCmake\engine\source\gui\editor\guiImageList.cc">
+      <Filter>torque2d\gui\editor</Filter>
+    </ClCompile>
+    <ClCompile Include="M:\Torque2DCmake\engine\source\gui\editor\guiInspector.cc">
+      <Filter>torque2d\gui\editor</Filter>
+    </ClCompile>
+    <ClCompile Include="M:\Torque2DCmake\engine\source\gui\editor\guiInspectorTypes.cc">
+      <Filter>torque2d\gui\editor</Filter>
+    </ClCompile>
+    <ClCompile Include="M:\Torque2DCmake\engine\source\gui\editor\guiMenuBar.cc">
+      <Filter>torque2d\gui\editor</Filter>
+    </ClCompile>
+    <ClCompile Include="M:\Torque2DCmake\engine\source\gui\editor\guiSeparatorCtrl.cc">
+      <Filter>torque2d\gui\editor</Filter>
+    </ClCompile>
+    <ClCompile Include="M:\Torque2DCmake\engine\source\gui\language\lang.cc">
+      <Filter>torque2d\gui\language</Filter>
+    </ClCompile>
+    <ClCompile Include="M:\Torque2DCmake\engine\source\input\actionMap.cc">
+      <Filter>torque2d\input</Filter>
+    </ClCompile>
+    <ClCompile Include="M:\Torque2DCmake\engine\source\io\bitStream.cc">
+      <Filter>torque2d\io</Filter>
+    </ClCompile>
+    <ClCompile Include="M:\Torque2DCmake\engine\source\io\bufferStream.cc">
+      <Filter>torque2d\io</Filter>
+    </ClCompile>
+    <ClCompile Include="M:\Torque2DCmake\engine\source\io\byteBuffer.cpp">
+      <Filter>torque2d\io</Filter>
+    </ClCompile>
+    <ClCompile Include="M:\Torque2DCmake\engine\source\io\fileObject.cc">
+      <Filter>torque2d\io</Filter>
+    </ClCompile>
+    <ClCompile Include="M:\Torque2DCmake\engine\source\io\fileStream.cc">
+      <Filter>torque2d\io</Filter>
+    </ClCompile>
+    <ClCompile Include="M:\Torque2DCmake\engine\source\io\fileStreamObject.cc">
+      <Filter>torque2d\io</Filter>
+    </ClCompile>
+    <ClCompile Include="M:\Torque2DCmake\engine\source\io\fileSystem_ScriptBinding.cc">
+      <Filter>torque2d\io</Filter>
+    </ClCompile>
+    <ClCompile Include="M:\Torque2DCmake\engine\source\io\filterStream.cc">
+      <Filter>torque2d\io</Filter>
+    </ClCompile>
+    <ClCompile Include="M:\Torque2DCmake\engine\source\io\memStream.cc">
+      <Filter>torque2d\io</Filter>
+    </ClCompile>
+    <ClCompile Include="M:\Torque2DCmake\engine\source\io\nStream.cc">
+      <Filter>torque2d\io</Filter>
+    </ClCompile>
+    <ClCompile Include="M:\Torque2DCmake\engine\source\io\resizeStream.cc">
+      <Filter>torque2d\io</Filter>
+    </ClCompile>
+    <ClCompile Include="M:\Torque2DCmake\engine\source\io\streamObject.cc">
+      <Filter>torque2d\io</Filter>
+    </ClCompile>
+    <ClCompile Include="M:\Torque2DCmake\engine\source\io\resource\resourceDictionary.cc">
+      <Filter>torque2d\io\resource</Filter>
+    </ClCompile>
+    <ClCompile Include="M:\Torque2DCmake\engine\source\io\resource\resourceManager.cc">
+      <Filter>torque2d\io\resource</Filter>
+    </ClCompile>
+    <ClCompile Include="M:\Torque2DCmake\engine\source\io\zip\centralDir.cc">
+      <Filter>torque2d\io\zip</Filter>
+    </ClCompile>
+    <ClCompile Include="M:\Torque2DCmake\engine\source\io\zip\compressor.cc">
+      <Filter>torque2d\io\zip</Filter>
+    </ClCompile>
+    <ClCompile Include="M:\Torque2DCmake\engine\source\io\zip\deflate.cc">
+      <Filter>torque2d\io\zip</Filter>
+    </ClCompile>
+    <ClCompile Include="M:\Torque2DCmake\engine\source\io\zip\extraField.cc">
+      <Filter>torque2d\io\zip</Filter>
+    </ClCompile>
+    <ClCompile Include="M:\Torque2DCmake\engine\source\io\zip\fileHeader.cc">
+      <Filter>torque2d\io\zip</Filter>
+    </ClCompile>
+    <ClCompile Include="M:\Torque2DCmake\engine\source\io\zip\stored.cc">
+      <Filter>torque2d\io\zip</Filter>
+    </ClCompile>
+    <ClCompile Include="M:\Torque2DCmake\engine\source\io\zip\zipArchive.cc">
+      <Filter>torque2d\io\zip</Filter>
+    </ClCompile>
+    <ClCompile Include="M:\Torque2DCmake\engine\source\io\zip\zipCryptStream.cc">
+      <Filter>torque2d\io\zip</Filter>
+    </ClCompile>
+    <ClCompile Include="M:\Torque2DCmake\engine\source\io\zip\zipObject.cc">
+      <Filter>torque2d\io\zip</Filter>
+    </ClCompile>
+    <ClCompile Include="M:\Torque2DCmake\engine\source\io\zip\zipSubStream.cc">
+      <Filter>torque2d\io\zip</Filter>
+    </ClCompile>
+    <ClCompile Include="M:\Torque2DCmake\engine\source\io\zip\zipTempStream.cc">
+      <Filter>torque2d\io\zip</Filter>
+    </ClCompile>
+    <ClCompile Include="M:\Torque2DCmake\engine\source\math\mBox.cc">
+      <Filter>torque2d\math</Filter>
+    </ClCompile>
+    <ClCompile Include="M:\Torque2DCmake\engine\source\math\mMathAMD.cc">
+      <Filter>torque2d\math</Filter>
+    </ClCompile>
+    <ClCompile Include="M:\Torque2DCmake\engine\source\math\mMathAltivec.cc">
+      <Filter>torque2d\math</Filter>
+    </ClCompile>
+    <ClCompile Include="M:\Torque2DCmake\engine\source\math\mMathFn.cc">
+      <Filter>torque2d\math</Filter>
+    </ClCompile>
+    <ClCompile Include="M:\Torque2DCmake\engine\source\math\mMathSSE.cc">
+      <Filter>torque2d\math</Filter>
+    </ClCompile>
+    <ClCompile Include="M:\Torque2DCmake\engine\source\math\mMath_C.cc">
+      <Filter>torque2d\math</Filter>
+    </ClCompile>
+    <ClCompile Include="M:\Torque2DCmake\engine\source\math\mMatrix.cc">
+      <Filter>torque2d\math</Filter>
+    </ClCompile>
+    <ClCompile Include="M:\Torque2DCmake\engine\source\math\mPlaneTransformer.cc">
+      <Filter>torque2d\math</Filter>
+    </ClCompile>
+    <ClCompile Include="M:\Torque2DCmake\engine\source\math\mPoint.cpp">
+      <Filter>torque2d\math</Filter>
+    </ClCompile>
+    <ClCompile Include="M:\Torque2DCmake\engine\source\math\mQuadPatch.cc">
+      <Filter>torque2d\math</Filter>
+    </ClCompile>
+    <ClCompile Include="M:\Torque2DCmake\engine\source\math\mQuat.cc">
+      <Filter>torque2d\math</Filter>
+    </ClCompile>
+    <ClCompile Include="M:\Torque2DCmake\engine\source\math\mRandom.cc">
+      <Filter>torque2d\math</Filter>
+    </ClCompile>
+    <ClCompile Include="M:\Torque2DCmake\engine\source\math\mSolver.cc">
+      <Filter>torque2d\math</Filter>
+    </ClCompile>
+    <ClCompile Include="M:\Torque2DCmake\engine\source\math\mSplinePatch.cc">
+      <Filter>torque2d\math</Filter>
+    </ClCompile>
+    <ClCompile Include="M:\Torque2DCmake\engine\source\math\mathTypes.cc">
+      <Filter>torque2d\math</Filter>
+    </ClCompile>
+    <ClCompile Include="M:\Torque2DCmake\engine\source\math\mathUtils.cc">
+      <Filter>torque2d\math</Filter>
+    </ClCompile>
+    <ClCompile Include="M:\Torque2DCmake\engine\source\math\math_ScriptBinding.cc">
+      <Filter>torque2d\math</Filter>
+    </ClCompile>
+    <ClCompile Include="M:\Torque2DCmake\engine\source\math\rectClipper.cpp">
+      <Filter>torque2d\math</Filter>
+    </ClCompile>
+    <ClCompile Include="M:\Torque2DCmake\engine\source\memory\dataChunker.cc">
+      <Filter>torque2d\memory</Filter>
+    </ClCompile>
+    <ClCompile Include="M:\Torque2DCmake\engine\source\memory\frameAllocator_ScriptBinding.cc">
+      <Filter>torque2d\memory</Filter>
+    </ClCompile>
+    <ClCompile Include="M:\Torque2DCmake\engine\source\messaging\dispatcher.cc">
+      <Filter>torque2d\messaging</Filter>
+    </ClCompile>
+    <ClCompile Include="M:\Torque2DCmake\engine\source\messaging\eventManager.cc">
+      <Filter>torque2d\messaging</Filter>
+    </ClCompile>
+    <ClCompile Include="M:\Torque2DCmake\engine\source\messaging\message.cc">
+      <Filter>torque2d\messaging</Filter>
+    </ClCompile>
+    <ClCompile Include="M:\Torque2DCmake\engine\source\messaging\messageForwarder.cc">
+      <Filter>torque2d\messaging</Filter>
+    </ClCompile>
+    <ClCompile Include="M:\Torque2DCmake\engine\source\messaging\scriptMsgListener.cc">
+      <Filter>torque2d\messaging</Filter>
+    </ClCompile>
+    <ClCompile Include="M:\Torque2DCmake\engine\source\module\moduleDefinition.cc">
+      <Filter>torque2d\module</Filter>
+    </ClCompile>
+    <ClCompile Include="M:\Torque2DCmake\engine\source\module\moduleManager.cc">
+      <Filter>torque2d\module</Filter>
+    </ClCompile>
+    <ClCompile Include="M:\Torque2DCmake\engine\source\module\moduleMergeDefinition.cc">
+      <Filter>torque2d\module</Filter>
+    </ClCompile>
+    <ClCompile Include="M:\Torque2DCmake\engine\source\network\RemoteCommandEvent.cc">
+      <Filter>torque2d\network</Filter>
+    </ClCompile>
+    <ClCompile Include="M:\Torque2DCmake\engine\source\network\connectionProtocol.cc">
+      <Filter>torque2d\network</Filter>
+    </ClCompile>
+    <ClCompile Include="M:\Torque2DCmake\engine\source\network\connectionStringTable.cc">
+      <Filter>torque2d\network</Filter>
+    </ClCompile>
+    <ClCompile Include="M:\Torque2DCmake\engine\source\network\httpObject.cc">
+      <Filter>torque2d\network</Filter>
+    </ClCompile>
+    <ClCompile Include="M:\Torque2DCmake\engine\source\network\netConnection.cc">
+      <Filter>torque2d\network</Filter>
+    </ClCompile>
+    <ClCompile Include="M:\Torque2DCmake\engine\source\network\netDownload.cc">
+      <Filter>torque2d\network</Filter>
+    </ClCompile>
+    <ClCompile Include="M:\Torque2DCmake\engine\source\network\netEvent.cc">
+      <Filter>torque2d\network</Filter>
+    </ClCompile>
+    <ClCompile Include="M:\Torque2DCmake\engine\source\network\netGhost.cc">
+      <Filter>torque2d\network</Filter>
+    </ClCompile>
+    <ClCompile Include="M:\Torque2DCmake\engine\source\network\netInterface.cc">
+      <Filter>torque2d\network</Filter>
+    </ClCompile>
+    <ClCompile Include="M:\Torque2DCmake\engine\source\network\netObject.cc">
+      <Filter>torque2d\network</Filter>
+    </ClCompile>
+    <ClCompile Include="M:\Torque2DCmake\engine\source\network\netStringTable.cc">
+      <Filter>torque2d\network</Filter>
+    </ClCompile>
+    <ClCompile Include="M:\Torque2DCmake\engine\source\network\netTest.cc">
+      <Filter>torque2d\network</Filter>
+    </ClCompile>
+    <ClCompile Include="M:\Torque2DCmake\engine\source\network\networkProcessList.cc">
+      <Filter>torque2d\network</Filter>
+    </ClCompile>
+    <ClCompile Include="M:\Torque2DCmake\engine\source\network\serverQuery.cc">
+      <Filter>torque2d\network</Filter>
+    </ClCompile>
+    <ClCompile Include="M:\Torque2DCmake\engine\source\network\tcpObject.cc">
+      <Filter>torque2d\network</Filter>
+    </ClCompile>
+    <ClCompile Include="M:\Torque2DCmake\engine\source\network\telnetConsole.cc">
+      <Filter>torque2d\network</Filter>
+    </ClCompile>
+    <ClCompile Include="M:\Torque2DCmake\engine\source\persistence\SimXMLDocument.cpp">
+      <Filter>torque2d\persistence</Filter>
+    </ClCompile>
+    <ClCompile Include="M:\Torque2DCmake\engine\source\persistence\taml\taml.cc">
+      <Filter>torque2d\persistence\taml</Filter>
+    </ClCompile>
+    <ClCompile Include="M:\Torque2DCmake\engine\source\persistence\taml\tamlCustom.cc">
+      <Filter>torque2d\persistence\taml</Filter>
+    </ClCompile>
+    <ClCompile Include="M:\Torque2DCmake\engine\source\persistence\taml\tamlWriteNode.cc">
+      <Filter>torque2d\persistence\taml</Filter>
+    </ClCompile>
+    <ClCompile Include="M:\Torque2DCmake\engine\source\persistence\taml\binary\tamlBinaryReader.cc">
+      <Filter>torque2d\persistence\taml\binary</Filter>
+    </ClCompile>
+    <ClCompile Include="M:\Torque2DCmake\engine\source\persistence\taml\binary\tamlBinaryWriter.cc">
+      <Filter>torque2d\persistence\taml\binary</Filter>
+    </ClCompile>
+    <ClCompile Include="M:\Torque2DCmake\engine\source\persistence\taml\json\tamlJSONParser.cc">
+      <Filter>torque2d\persistence\taml\json</Filter>
+    </ClCompile>
+    <ClCompile Include="M:\Torque2DCmake\engine\source\persistence\taml\json\tamlJSONReader.cc">
+      <Filter>torque2d\persistence\taml\json</Filter>
+    </ClCompile>
+    <ClCompile Include="M:\Torque2DCmake\engine\source\persistence\taml\json\tamlJSONWriter.cc">
+      <Filter>torque2d\persistence\taml\json</Filter>
+    </ClCompile>
+    <ClCompile Include="M:\Torque2DCmake\engine\source\persistence\taml\xml\tamlXmlParser.cc">
+      <Filter>torque2d\persistence\taml\xml</Filter>
+    </ClCompile>
+    <ClCompile Include="M:\Torque2DCmake\engine\source\persistence\taml\xml\tamlXmlReader.cc">
+      <Filter>torque2d\persistence\taml\xml</Filter>
+    </ClCompile>
+    <ClCompile Include="M:\Torque2DCmake\engine\source\persistence\taml\xml\tamlXmlWriter.cc">
+      <Filter>torque2d\persistence\taml\xml</Filter>
+    </ClCompile>
+    <ClCompile Include="M:\Torque2DCmake\engine\source\persistence\tinyXML\tinystr.cpp">
+      <Filter>torque2d\persistence\tinyXML</Filter>
+    </ClCompile>
+    <ClCompile Include="M:\Torque2DCmake\engine\source\persistence\tinyXML\tinyxml.cpp">
+      <Filter>torque2d\persistence\tinyXML</Filter>
+    </ClCompile>
+    <ClCompile Include="M:\Torque2DCmake\engine\source\persistence\tinyXML\tinyxmlerror.cpp">
+      <Filter>torque2d\persistence\tinyXML</Filter>
+    </ClCompile>
+    <ClCompile Include="M:\Torque2DCmake\engine\source\persistence\tinyXML\tinyxmlparser.cpp">
+      <Filter>torque2d\persistence\tinyXML</Filter>
+    </ClCompile>
+    <ClCompile Include="M:\Torque2DCmake\engine\source\platform\CursorManager.cc">
+      <Filter>torque2d\platform</Filter>
+    </ClCompile>
+    <ClCompile Include="M:\Torque2DCmake\engine\source\platform\Tickable.cc">
+      <Filter>torque2d\platform</Filter>
+    </ClCompile>
+    <ClCompile Include="M:\Torque2DCmake\engine\source\platform\platform.cc">
+      <Filter>torque2d\platform</Filter>
+    </ClCompile>
+    <ClCompile Include="M:\Torque2DCmake\engine\source\platform\platformAssert.cc">
+      <Filter>torque2d\platform</Filter>
+    </ClCompile>
+    <ClCompile Include="M:\Torque2DCmake\engine\source\platform\platformCPU.cc">
+      <Filter>torque2d\platform</Filter>
+    </ClCompile>
+    <ClCompile Include="M:\Torque2DCmake\engine\source\platform\platformFileIO.cc">
+      <Filter>torque2d\platform</Filter>
+    </ClCompile>
+    <ClCompile Include="M:\Torque2DCmake\engine\source\platform\platformFont.cc">
+      <Filter>torque2d\platform</Filter>
+    </ClCompile>
+    <ClCompile Include="M:\Torque2DCmake\engine\source\platform\platformMemory.cc">
+      <Filter>torque2d\platform</Filter>
+    </ClCompile>
+    <ClCompile Include="M:\Torque2DCmake\engine\source\platform\platformNet.cpp">
+      <Filter>torque2d\platform</Filter>
+    </ClCompile>
+    <ClCompile Include="M:\Torque2DCmake\engine\source\platform\platformNetAsync.cpp">
+      <Filter>torque2d\platform</Filter>
+    </ClCompile>
+    <ClCompile Include="M:\Torque2DCmake\engine\source\platform\platformNet_ScriptBinding.cc">
+      <Filter>torque2d\platform</Filter>
+    </ClCompile>
+    <ClCompile Include="M:\Torque2DCmake\engine\source\platform\platformString.cc">
+      <Filter>torque2d\platform</Filter>
+    </ClCompile>
+    <ClCompile Include="M:\Torque2DCmake\engine\source\platform\platformVideo.cc">
+      <Filter>torque2d\platform</Filter>
+    </ClCompile>
+    <ClCompile Include="M:\Torque2DCmake\engine\source\platform\menus\popupMenu.cc">
+      <Filter>torque2d\platform\menus</Filter>
+    </ClCompile>
+    <ClCompile Include="M:\Torque2DCmake\engine\source\platform\nativeDialogs\fileDialog.cc">
+      <Filter>torque2d\platform\nativeDialogs</Filter>
+    </ClCompile>
+    <ClCompile Include="M:\Torque2DCmake\engine\source\platform\nativeDialogs\msgBox.cpp">
+      <Filter>torque2d\platform\nativeDialogs</Filter>
+    </ClCompile>
+    <ClCompile Include="M:\Torque2DCmake\engine\source\sim\SimObjectList.cc">
+      <Filter>torque2d\sim</Filter>
+    </ClCompile>
+    <ClCompile Include="M:\Torque2DCmake\engine\source\sim\scriptGroup.cc">
+      <Filter>torque2d\sim</Filter>
+    </ClCompile>
+    <ClCompile Include="M:\Torque2DCmake\engine\source\sim\scriptObject.cc">
+      <Filter>torque2d\sim</Filter>
+    </ClCompile>
+    <ClCompile Include="M:\Torque2DCmake\engine\source\sim\simBase.cc">
+      <Filter>torque2d\sim</Filter>
+    </ClCompile>
+    <ClCompile Include="M:\Torque2DCmake\engine\source\sim\simConsoleEvent.cc">
+      <Filter>torque2d\sim</Filter>
+    </ClCompile>
+    <ClCompile Include="M:\Torque2DCmake\engine\source\sim\simConsoleThreadExecEvent.cc">
+      <Filter>torque2d\sim</Filter>
+    </ClCompile>
+    <ClCompile Include="M:\Torque2DCmake\engine\source\sim\simDatablock.cc">
+      <Filter>torque2d\sim</Filter>
+    </ClCompile>
+    <ClCompile Include="M:\Torque2DCmake\engine\source\sim\simDictionary.cc">
+      <Filter>torque2d\sim</Filter>
+    </ClCompile>
+    <ClCompile Include="M:\Torque2DCmake\engine\source\sim\simFieldDictionary.cc">
+      <Filter>torque2d\sim</Filter>
+    </ClCompile>
+    <ClCompile Include="M:\Torque2DCmake\engine\source\sim\simManager.cc">
+      <Filter>torque2d\sim</Filter>
+    </ClCompile>
+    <ClCompile Include="M:\Torque2DCmake\engine\source\sim\simObject.cc">
+      <Filter>torque2d\sim</Filter>
+    </ClCompile>
+    <ClCompile Include="M:\Torque2DCmake\engine\source\sim\simSerialize.cpp">
+      <Filter>torque2d\sim</Filter>
+    </ClCompile>
+    <ClCompile Include="M:\Torque2DCmake\engine\source\sim\simSet.cc">
+      <Filter>torque2d\sim</Filter>
+    </ClCompile>
+    <ClCompile Include="M:\Torque2DCmake\engine\source\spine\Animation.c">
+      <Filter>torque2d\spine</Filter>
+    </ClCompile>
+    <ClCompile Include="M:\Torque2DCmake\engine\source\spine\AnimationState.c">
+      <Filter>torque2d\spine</Filter>
+    </ClCompile>
+    <ClCompile Include="M:\Torque2DCmake\engine\source\spine\AnimationStateData.c">
+      <Filter>torque2d\spine</Filter>
+    </ClCompile>
+    <ClCompile Include="M:\Torque2DCmake\engine\source\spine\Atlas.c">
+      <Filter>torque2d\spine</Filter>
+    </ClCompile>
+    <ClCompile Include="M:\Torque2DCmake\engine\source\spine\AtlasAttachmentLoader.c">
+      <Filter>torque2d\spine</Filter>
+    </ClCompile>
+    <ClCompile Include="M:\Torque2DCmake\engine\source\spine\Attachment.c">
+      <Filter>torque2d\spine</Filter>
+    </ClCompile>
+    <ClCompile Include="M:\Torque2DCmake\engine\source\spine\AttachmentLoader.c">
+      <Filter>torque2d\spine</Filter>
+    </ClCompile>
+    <ClCompile Include="M:\Torque2DCmake\engine\source\spine\Bone.c">
+      <Filter>torque2d\spine</Filter>
+    </ClCompile>
+    <ClCompile Include="M:\Torque2DCmake\engine\source\spine\BoneData.c">
+      <Filter>torque2d\spine</Filter>
+    </ClCompile>
+    <ClCompile Include="M:\Torque2DCmake\engine\source\spine\BoundingBoxAttachment.c">
+      <Filter>torque2d\spine</Filter>
+    </ClCompile>
+    <ClCompile Include="M:\Torque2DCmake\engine\source\spine\Event.c">
+      <Filter>torque2d\spine</Filter>
+    </ClCompile>
+    <ClCompile Include="M:\Torque2DCmake\engine\source\spine\EventData.c">
+      <Filter>torque2d\spine</Filter>
+    </ClCompile>
+    <ClCompile Include="M:\Torque2DCmake\engine\source\spine\Json.c">
+      <Filter>torque2d\spine</Filter>
+    </ClCompile>
+    <ClCompile Include="M:\Torque2DCmake\engine\source\spine\RegionAttachment.c">
+      <Filter>torque2d\spine</Filter>
+    </ClCompile>
+    <ClCompile Include="M:\Torque2DCmake\engine\source\spine\Skeleton.c">
+      <Filter>torque2d\spine</Filter>
+    </ClCompile>
+    <ClCompile Include="M:\Torque2DCmake\engine\source\spine\SkeletonBounds.c">
+      <Filter>torque2d\spine</Filter>
+    </ClCompile>
+    <ClCompile Include="M:\Torque2DCmake\engine\source\spine\SkeletonData.c">
+      <Filter>torque2d\spine</Filter>
+    </ClCompile>
+    <ClCompile Include="M:\Torque2DCmake\engine\source\spine\SkeletonJson.c">
+      <Filter>torque2d\spine</Filter>
+    </ClCompile>
+    <ClCompile Include="M:\Torque2DCmake\engine\source\spine\Skin.c">
+      <Filter>torque2d\spine</Filter>
+    </ClCompile>
+    <ClCompile Include="M:\Torque2DCmake\engine\source\spine\Slot.c">
+      <Filter>torque2d\spine</Filter>
+    </ClCompile>
+    <ClCompile Include="M:\Torque2DCmake\engine\source\spine\SlotData.c">
+      <Filter>torque2d\spine</Filter>
+    </ClCompile>
+    <ClCompile Include="M:\Torque2DCmake\engine\source\spine\extension.c">
+      <Filter>torque2d\spine</Filter>
+    </ClCompile>
+    <ClCompile Include="M:\Torque2DCmake\engine\source\string\findMatch.cc">
+      <Filter>torque2d\string</Filter>
+    </ClCompile>
+    <ClCompile Include="M:\Torque2DCmake\engine\source\string\stringBuffer.cc">
+      <Filter>torque2d\string</Filter>
+    </ClCompile>
+    <ClCompile Include="M:\Torque2DCmake\engine\source\string\stringStack.cc">
+      <Filter>torque2d\string</Filter>
+    </ClCompile>
+    <ClCompile Include="M:\Torque2DCmake\engine\source\string\stringTable.cc">
+      <Filter>torque2d\string</Filter>
+    </ClCompile>
+    <ClCompile Include="M:\Torque2DCmake\engine\source\string\stringUnit.cpp">
+      <Filter>torque2d\string</Filter>
+    </ClCompile>
+    <ClCompile Include="M:\Torque2DCmake\engine\source\string\unicode.cc">
+      <Filter>torque2d\string</Filter>
+    </ClCompile>
+    <ClCompile Include="M:\Torque2DCmake\engine\source\testing\unitTesting.cc">
+      <Filter>torque2d\testing</Filter>
+    </ClCompile>
+    <ClCompile Include="M:\Torque2DCmake\engine\source\testing\tests\platformFileIoTests.cc">
+      <Filter>torque2d\testing\tests</Filter>
+    </ClCompile>
+    <ClCompile Include="M:\Torque2DCmake\engine\source\testing\tests\platformMemoryTests.cc">
+      <Filter>torque2d\testing\tests</Filter>
+    </ClCompile>
+    <ClCompile Include="M:\Torque2DCmake\engine\source\testing\tests\platformStringTests.cc">
+      <Filter>torque2d\testing\tests</Filter>
+    </ClCompile>
+    <ClCompile Include="M:\Torque2DCmake\engine\source\2d\levelInfo.cc">
+      <Filter>torque2d\2d</Filter>
+    </ClCompile>
+    <ClCompile Include="M:\Torque2DCmake\engine\source\2d\assets\AnimationAsset.cc">
+      <Filter>torque2d\2d\assets</Filter>
+    </ClCompile>
+    <ClCompile Include="M:\Torque2DCmake\engine\source\2d\assets\FontAsset.cc">
+      <Filter>torque2d\2d\assets</Filter>
+    </ClCompile>
+    <ClCompile Include="M:\Torque2DCmake\engine\source\2d\assets\ImageAsset.cc">
+      <Filter>torque2d\2d\assets</Filter>
+    </ClCompile>
+    <ClCompile Include="M:\Torque2DCmake\engine\source\2d\assets\LevelAsset.cc">
+      <Filter>torque2d\2d\assets</Filter>
+    </ClCompile>
+    <ClCompile Include="M:\Torque2DCmake\engine\source\2d\assets\ParticleAsset.cc">
+      <Filter>torque2d\2d\assets</Filter>
+    </ClCompile>
+    <ClCompile Include="M:\Torque2DCmake\engine\source\2d\assets\ParticleAssetEmitter.cc">
+      <Filter>torque2d\2d\assets</Filter>
+    </ClCompile>
+    <ClCompile Include="M:\Torque2DCmake\engine\source\2d\assets\ParticleAssetField.cc">
+      <Filter>torque2d\2d\assets</Filter>
+    </ClCompile>
+    <ClCompile Include="M:\Torque2DCmake\engine\source\2d\assets\ParticleAssetFieldCollection.cc">
+      <Filter>torque2d\2d\assets</Filter>
+    </ClCompile>
+    <ClCompile Include="M:\Torque2DCmake\engine\source\2d\assets\SkeletonAsset.cc">
+      <Filter>torque2d\2d\assets</Filter>
+    </ClCompile>
+    <ClCompile Include="M:\Torque2DCmake\engine\source\2d\controllers\AmbientForceController.cc">
+      <Filter>torque2d\2d\controllers</Filter>
+    </ClCompile>
+    <ClCompile Include="M:\Torque2DCmake\engine\source\2d\controllers\BuoyancyController.cc">
+      <Filter>torque2d\2d\controllers</Filter>
+    </ClCompile>
+    <ClCompile Include="M:\Torque2DCmake\engine\source\2d\controllers\PointForceController.cc">
+      <Filter>torque2d\2d\controllers</Filter>
+    </ClCompile>
+    <ClCompile Include="M:\Torque2DCmake\engine\source\2d\controllers\core\GroupedSceneController.cc">
+      <Filter>torque2d\2d\controllers\core</Filter>
+    </ClCompile>
+    <ClCompile Include="M:\Torque2DCmake\engine\source\2d\controllers\core\PickingSceneController.cc">
+      <Filter>torque2d\2d\controllers\core</Filter>
+    </ClCompile>
+    <ClCompile Include="M:\Torque2DCmake\engine\source\2d\core\BatchRender.cc">
+      <Filter>torque2d\2d\core</Filter>
+    </ClCompile>
+    <ClCompile Include="M:\Torque2DCmake\engine\source\2d\core\CoreMath.cc">
+      <Filter>torque2d\2d\core</Filter>
+    </ClCompile>
+    <ClCompile Include="M:\Torque2DCmake\engine\source\2d\core\ImageFrameProvider.cc">
+      <Filter>torque2d\2d\core</Filter>
+    </ClCompile>
+    <ClCompile Include="M:\Torque2DCmake\engine\source\2d\core\ImageFrameProviderCore.cc">
+      <Filter>torque2d\2d\core</Filter>
+    </ClCompile>
+    <ClCompile Include="M:\Torque2DCmake\engine\source\2d\core\ParticleSystem.cc">
+      <Filter>torque2d\2d\core</Filter>
+    </ClCompile>
+    <ClCompile Include="M:\Torque2DCmake\engine\source\2d\core\RenderProxy.cc">
+      <Filter>torque2d\2d\core</Filter>
+    </ClCompile>
+    <ClCompile Include="M:\Torque2DCmake\engine\source\2d\core\SpriteBase.cc">
+      <Filter>torque2d\2d\core</Filter>
+    </ClCompile>
+    <ClCompile Include="M:\Torque2DCmake\engine\source\2d\core\SpriteBatch.cc">
+      <Filter>torque2d\2d\core</Filter>
+    </ClCompile>
+    <ClCompile Include="M:\Torque2DCmake\engine\source\2d\core\SpriteBatchItem.cc">
+      <Filter>torque2d\2d\core</Filter>
+    </ClCompile>
+    <ClCompile Include="M:\Torque2DCmake\engine\source\2d\core\SpriteBatchQuery.cc">
+      <Filter>torque2d\2d\core</Filter>
+    </ClCompile>
+    <ClCompile Include="M:\Torque2DCmake\engine\source\2d\core\Utility.cc">
+      <Filter>torque2d\2d\core</Filter>
+    </ClCompile>
+    <ClCompile Include="M:\Torque2DCmake\engine\source\2d\core\Vector2.cc">
+      <Filter>torque2d\2d\core</Filter>
+    </ClCompile>
+    <ClCompile Include="M:\Torque2DCmake\engine\source\2d\experimental\composites\WaveComposite.cc">
+      <Filter>torque2d\2d\experimental\composites</Filter>
+    </ClCompile>
+    <ClCompile Include="M:\Torque2DCmake\engine\source\2d\gui\SceneWindow.cc">
+      <Filter>torque2d\2d\gui</Filter>
+    </ClCompile>
+    <ClCompile Include="M:\Torque2DCmake\engine\source\2d\gui\guiImageButtonCtrl.cc">
+      <Filter>torque2d\2d\gui</Filter>
+    </ClCompile>
+    <ClCompile Include="M:\Torque2DCmake\engine\source\2d\gui\guiSceneObjectCtrl.cc">
+      <Filter>torque2d\2d\gui</Filter>
+    </ClCompile>
+    <ClCompile Include="M:\Torque2DCmake\engine\source\2d\gui\guiSpriteCtrl.cc">
+      <Filter>torque2d\2d\gui</Filter>
+    </ClCompile>
+    <ClCompile Include="M:\Torque2DCmake\engine\source\2d\scene\ContactFilter.cc">
+      <Filter>torque2d\2d\scene</Filter>
+    </ClCompile>
+    <ClCompile Include="M:\Torque2DCmake\engine\source\2d\scene\DebugDraw.cc">
+      <Filter>torque2d\2d\scene</Filter>
+    </ClCompile>
+    <ClCompile Include="M:\Torque2DCmake\engine\source\2d\scene\Scene.cc">
+      <Filter>torque2d\2d\scene</Filter>
+    </ClCompile>
+    <ClCompile Include="M:\Torque2DCmake\engine\source\2d\scene\SceneRenderFactories.cpp">
+      <Filter>torque2d\2d\scene</Filter>
+    </ClCompile>
+    <ClCompile Include="M:\Torque2DCmake\engine\source\2d\scene\SceneRenderQueue.cpp">
+      <Filter>torque2d\2d\scene</Filter>
+    </ClCompile>
+    <ClCompile Include="M:\Torque2DCmake\engine\source\2d\scene\WorldQuery.cc">
+      <Filter>torque2d\2d\scene</Filter>
+    </ClCompile>
+    <ClCompile Include="M:\Torque2DCmake\engine\source\2d\sceneobject\BaseDatablock.cc">
+      <Filter>torque2d\2d\sceneobject</Filter>
+    </ClCompile>
+    <ClCompile Include="M:\Torque2DCmake\engine\source\2d\sceneobject\CompositeSprite.cc">
+      <Filter>torque2d\2d\sceneobject</Filter>
+    </ClCompile>
+    <ClCompile Include="M:\Torque2DCmake\engine\source\2d\sceneobject\LightObject.cc">
+      <Filter>torque2d\2d\sceneobject</Filter>
+    </ClCompile>
+    <ClCompile Include="M:\Torque2DCmake\engine\source\2d\sceneobject\ParticlePlayer.cc">
+      <Filter>torque2d\2d\sceneobject</Filter>
+    </ClCompile>
+    <ClCompile Include="M:\Torque2DCmake\engine\source\2d\sceneobject\Path.cc">
+      <Filter>torque2d\2d\sceneobject</Filter>
+    </ClCompile>
+    <ClCompile Include="M:\Torque2DCmake\engine\source\2d\sceneobject\SceneObject.cc">
+      <Filter>torque2d\2d\sceneobject</Filter>
+    </ClCompile>
+    <ClCompile Include="M:\Torque2DCmake\engine\source\2d\sceneobject\SceneObjectList.cc">
+      <Filter>torque2d\2d\sceneobject</Filter>
+    </ClCompile>
+    <ClCompile Include="M:\Torque2DCmake\engine\source\2d\sceneobject\SceneObjectSet.cc">
+      <Filter>torque2d\2d\sceneobject</Filter>
+    </ClCompile>
+    <ClCompile Include="M:\Torque2DCmake\engine\source\2d\sceneobject\Scroller.cc">
+      <Filter>torque2d\2d\sceneobject</Filter>
+    </ClCompile>
+    <ClCompile Include="M:\Torque2DCmake\engine\source\2d\sceneobject\ShapeVector.cc">
+      <Filter>torque2d\2d\sceneobject</Filter>
+    </ClCompile>
+    <ClCompile Include="M:\Torque2DCmake\engine\source\2d\sceneobject\SkeletonObject.cc">
+      <Filter>torque2d\2d\sceneobject</Filter>
+    </ClCompile>
+    <ClCompile Include="M:\Torque2DCmake\engine\source\2d\sceneobject\Sprite.cc">
+      <Filter>torque2d\2d\sceneobject</Filter>
+    </ClCompile>
+    <ClCompile Include="M:\Torque2DCmake\engine\source\2d\sceneobject\TextSprite.cc">
+      <Filter>torque2d\2d\sceneobject</Filter>
+    </ClCompile>
+    <ClCompile Include="M:\Torque2DCmake\engine\source\2d\sceneobject\Trigger.cc">
+      <Filter>torque2d\2d\sceneobject</Filter>
+    </ClCompile>
+    <ClCompile Include="M:\Torque2DCmake\engine\source\platformWin32\cardProfile.cpp">
+      <Filter>torque2d\platformWin32</Filter>
+    </ClCompile>
+    <ClCompile Include="M:\Torque2DCmake\engine\source\platformWin32\winAsmBlit.cc">
+      <Filter>torque2d\platformWin32</Filter>
+    </ClCompile>
+    <ClCompile Include="M:\Torque2DCmake\engine\source\platformWin32\winCPUInfo.cc">
+      <Filter>torque2d\platformWin32</Filter>
+    </ClCompile>
+    <ClCompile Include="M:\Torque2DCmake\engine\source\platformWin32\winConsole.cc">
+      <Filter>torque2d\platformWin32</Filter>
+    </ClCompile>
+    <ClCompile Include="M:\Torque2DCmake\engine\source\platformWin32\winDInputDevice.cc">
+      <Filter>torque2d\platformWin32</Filter>
+    </ClCompile>
+    <ClCompile Include="M:\Torque2DCmake\engine\source\platformWin32\winDirectInput.cc">
+      <Filter>torque2d\platformWin32</Filter>
+    </ClCompile>
+    <ClCompile Include="M:\Torque2DCmake\engine\source\platformWin32\winExec.cc">
+      <Filter>torque2d\platformWin32</Filter>
+    </ClCompile>
+    <ClCompile Include="M:\Torque2DCmake\engine\source\platformWin32\winFileio.cc">
+      <Filter>torque2d\platformWin32</Filter>
+    </ClCompile>
+    <ClCompile Include="M:\Torque2DCmake\engine\source\platformWin32\winFont.cc">
+      <Filter>torque2d\platformWin32</Filter>
+    </ClCompile>
+    <ClCompile Include="M:\Torque2DCmake\engine\source\platformWin32\winGL.cc">
+      <Filter>torque2d\platformWin32</Filter>
+    </ClCompile>
+    <ClCompile Include="M:\Torque2DCmake\engine\source\platformWin32\winGLSpecial.cc">
+      <Filter>torque2d\platformWin32</Filter>
+    </ClCompile>
+    <ClCompile Include="M:\Torque2DCmake\engine\source\platformWin32\winInput.cc">
+      <Filter>torque2d\platformWin32</Filter>
+    </ClCompile>
+    <ClCompile Include="M:\Torque2DCmake\engine\source\platformWin32\winMath.cc">
+      <Filter>torque2d\platformWin32</Filter>
+    </ClCompile>
+    <ClCompile Include="M:\Torque2DCmake\engine\source\platformWin32\winMath_ASM.cc">
+      <Filter>torque2d\platformWin32</Filter>
+    </ClCompile>
+    <ClCompile Include="M:\Torque2DCmake\engine\source\platformWin32\winMemory.cc">
+      <Filter>torque2d\platformWin32</Filter>
+    </ClCompile>
+    <ClCompile Include="M:\Torque2DCmake\engine\source\platformWin32\winOGLVideo.cc">
+      <Filter>torque2d\platformWin32</Filter>
+    </ClCompile>
+    <ClCompile Include="M:\Torque2DCmake\engine\source\platformWin32\winOpenAL.cc">
+      <Filter>torque2d\platformWin32</Filter>
+    </ClCompile>
+    <ClCompile Include="M:\Torque2DCmake\engine\source\platformWin32\winProcessControl.cc">
+      <Filter>torque2d\platformWin32</Filter>
+    </ClCompile>
+    <ClCompile Include="M:\Torque2DCmake\engine\source\platformWin32\winSemaphore.cc">
+      <Filter>torque2d\platformWin32</Filter>
+    </ClCompile>
+    <ClCompile Include="M:\Torque2DCmake\engine\source\platformWin32\winStrings.cc">
+      <Filter>torque2d\platformWin32</Filter>
+    </ClCompile>
+    <ClCompile Include="M:\Torque2DCmake\engine\source\platformWin32\winTLS.cc">
+      <Filter>torque2d\platformWin32</Filter>
+    </ClCompile>
+    <ClCompile Include="M:\Torque2DCmake\engine\source\platformWin32\winTime.cc">
+      <Filter>torque2d\platformWin32</Filter>
+    </ClCompile>
+    <ClCompile Include="M:\Torque2DCmake\engine\source\platformWin32\winUser.cc">
+      <Filter>torque2d\platformWin32</Filter>
+    </ClCompile>
+    <ClCompile Include="M:\Torque2DCmake\engine\source\platformWin32\winVFS.cc">
+      <Filter>torque2d\platformWin32</Filter>
+    </ClCompile>
+    <ClCompile Include="M:\Torque2DCmake\engine\source\platformWin32\winVideo.cc">
+      <Filter>torque2d\platformWin32</Filter>
+    </ClCompile>
+    <ClCompile Include="M:\Torque2DCmake\engine\source\platformWin32\winWindow.cc">
+      <Filter>torque2d\platformWin32</Filter>
+    </ClCompile>
+    <ClCompile Include="M:\Torque2DCmake\engine\source\platformWin32\nativeDialogs\win32DirectoryResolver.cpp">
+      <Filter>torque2d\platformWin32\nativeDialogs</Filter>
+    </ClCompile>
+    <ClCompile Include="M:\Torque2DCmake\engine\source\platformWin32\nativeDialogs\win32FileDialog.cc">
+      <Filter>torque2d\platformWin32\nativeDialogs</Filter>
+    </ClCompile>
+    <ClCompile Include="M:\Torque2DCmake\engine\source\platformWin32\nativeDialogs\win32MsgBox.cpp">
+      <Filter>torque2d\platformWin32\nativeDialogs</Filter>
+    </ClCompile>
+    <ClCompile Include="M:\Torque2DCmake\engine\source\platformWin32\menus\popupMenuWin32.cc">
+      <Filter>torque2d\platformWin32\menus</Filter>
+    </ClCompile>
+    <ClCompile Include="M:\Torque2DCmake\engine\source\platformWin32\threads\mutex.cc">
+      <Filter>torque2d\platformWin32\threads</Filter>
+    </ClCompile>
+    <ClCompile Include="M:\Torque2DCmake\engine\source\platformWin32\threads\thread.cc">
+      <Filter>torque2d\platformWin32\threads</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="M:\Torque2DCmake\engine\source\torqueConfig.h">
+      <Filter>torque2d</Filter>
+    </ClInclude>
+    <ClInclude Include="M:\Torque2DCmake\engine\source\algorithm\crc.h">
+      <Filter>torque2d\algorithm</Filter>
+    </ClInclude>
+    <ClInclude Include="M:\Torque2DCmake\engine\source\algorithm\crctab.h">
+      <Filter>torque2d\algorithm</Filter>
+    </ClInclude>
+    <ClInclude Include="M:\Torque2DCmake\engine\source\algorithm\hashFunction.h">
+      <Filter>torque2d\algorithm</Filter>
+    </ClInclude>
+    <ClInclude Include="M:\Torque2DCmake\engine\source\algorithm\md5.h">
+      <Filter>torque2d\algorithm</Filter>
+    </ClInclude>
+    <ClInclude Include="M:\Torque2DCmake\engine\source\assets\assetBase.h">
+      <Filter>torque2d\assets</Filter>
+    </ClInclude>
+    <ClInclude Include="M:\Torque2DCmake\engine\source\assets\assetBase_ScriptBinding.h">
+      <Filter>torque2d\assets</Filter>
+    </ClInclude>
+    <ClInclude Include="M:\Torque2DCmake\engine\source\assets\assetDefinition.h">
+      <Filter>torque2d\assets</Filter>
+    </ClInclude>
+    <ClInclude Include="M:\Torque2DCmake\engine\source\assets\assetFieldTypes.h">
+      <Filter>torque2d\assets</Filter>
+    </ClInclude>
+    <ClInclude Include="M:\Torque2DCmake\engine\source\assets\assetManager.h">
+      <Filter>torque2d\assets</Filter>
+    </ClInclude>
+    <ClInclude Include="M:\Torque2DCmake\engine\source\assets\assetManager_ScriptBinding.h">
+      <Filter>torque2d\assets</Filter>
+    </ClInclude>
+    <ClInclude Include="M:\Torque2DCmake\engine\source\assets\assetPtr.h">
+      <Filter>torque2d\assets</Filter>
+    </ClInclude>
+    <ClInclude Include="M:\Torque2DCmake\engine\source\assets\assetQuery.h">
+      <Filter>torque2d\assets</Filter>
+    </ClInclude>
+    <ClInclude Include="M:\Torque2DCmake\engine\source\assets\assetQuery_ScriptBinding.h">
+      <Filter>torque2d\assets</Filter>
+    </ClInclude>
+    <ClInclude Include="M:\Torque2DCmake\engine\source\assets\assetTagsManifest.h">
+      <Filter>torque2d\assets</Filter>
+    </ClInclude>
+    <ClInclude Include="M:\Torque2DCmake\engine\source\assets\assetTagsManifest_ScriptBinding.h">
+      <Filter>torque2d\assets</Filter>
+    </ClInclude>
+    <ClInclude Include="M:\Torque2DCmake\engine\source\assets\declaredAssets.h">
+      <Filter>torque2d\assets</Filter>
+    </ClInclude>
+    <ClInclude Include="M:\Torque2DCmake\engine\source\assets\referencedAssets.h">
+      <Filter>torque2d\assets</Filter>
+    </ClInclude>
+    <ClInclude Include="M:\Torque2DCmake\engine\source\assets\tamlAssetDeclaredUpdateVisitor.h">
+      <Filter>torque2d\assets</Filter>
+    </ClInclude>
+    <ClInclude Include="M:\Torque2DCmake\engine\source\assets\tamlAssetDeclaredVisitor.h">
+      <Filter>torque2d\assets</Filter>
+    </ClInclude>
+    <ClInclude Include="M:\Torque2DCmake\engine\source\assets\tamlAssetReferencedUpdateVisitor.h">
+      <Filter>torque2d\assets</Filter>
+    </ClInclude>
+    <ClInclude Include="M:\Torque2DCmake\engine\source\assets\tamlAssetReferencedVisitor.h">
+      <Filter>torque2d\assets</Filter>
+    </ClInclude>
+    <ClInclude Include="M:\Torque2DCmake\engine\source\audio\AudioAsset.h">
+      <Filter>torque2d\audio</Filter>
+    </ClInclude>
+    <ClInclude Include="M:\Torque2DCmake\engine\source\audio\audio.h">
+      <Filter>torque2d\audio</Filter>
+    </ClInclude>
+    <ClInclude Include="M:\Torque2DCmake\engine\source\audio\audioBuffer.h">
+      <Filter>torque2d\audio</Filter>
+    </ClInclude>
+    <ClInclude Include="M:\Torque2DCmake\engine\source\audio\audioDataBlock.h">
+      <Filter>torque2d\audio</Filter>
+    </ClInclude>
+    <ClInclude Include="M:\Torque2DCmake\engine\source\audio\audioDescriptions.h">
+      <Filter>torque2d\audio</Filter>
+    </ClInclude>
+    <ClInclude Include="M:\Torque2DCmake\engine\source\audio\audioStreamSource.h">
+      <Filter>torque2d\audio</Filter>
+    </ClInclude>
+    <ClInclude Include="M:\Torque2DCmake\engine\source\audio\audioStreamSourceFactory.h">
+      <Filter>torque2d\audio</Filter>
+    </ClInclude>
+    <ClInclude Include="M:\Torque2DCmake\engine\source\audio\vorbisStreamSource.h">
+      <Filter>torque2d\audio</Filter>
+    </ClInclude>
+    <ClInclude Include="M:\Torque2DCmake\engine\source\audio\wavStreamSource.h">
+      <Filter>torque2d\audio</Filter>
+    </ClInclude>
+    <ClInclude Include="M:\Torque2DCmake\engine\source\bitmapFont\BitmapFont.h">
+      <Filter>torque2d\bitmapFont</Filter>
+    </ClInclude>
+    <ClInclude Include="M:\Torque2DCmake\engine\source\bitmapFont\BitmapFontCharacter.h">
+      <Filter>torque2d\bitmapFont</Filter>
+    </ClInclude>
+    <ClInclude Include="M:\Torque2DCmake\engine\source\bitmapFont\BitmapFontCharacterInfo.h">
+      <Filter>torque2d\bitmapFont</Filter>
+    </ClInclude>
+    <ClInclude Include="M:\Torque2DCmake\engine\source\bitmapFont\BitmapFontLineInfo.h">
+      <Filter>torque2d\bitmapFont</Filter>
+    </ClInclude>
+    <ClInclude Include="M:\Torque2DCmake\engine\source\Box2D\Box2D.h">
+      <Filter>torque2d\Box2D</Filter>
+    </ClInclude>
+    <ClInclude Include="M:\Torque2DCmake\engine\source\Box2D\Collision\b2BroadPhase.h">
+      <Filter>torque2d\Box2D\Collision</Filter>
+    </ClInclude>
+    <ClInclude Include="M:\Torque2DCmake\engine\source\Box2D\Collision\b2Collision.h">
+      <Filter>torque2d\Box2D\Collision</Filter>
+    </ClInclude>
+    <ClInclude Include="M:\Torque2DCmake\engine\source\Box2D\Collision\b2Distance.h">
+      <Filter>torque2d\Box2D\Collision</Filter>
+    </ClInclude>
+    <ClInclude Include="M:\Torque2DCmake\engine\source\Box2D\Collision\b2DynamicTree.h">
+      <Filter>torque2d\Box2D\Collision</Filter>
+    </ClInclude>
+    <ClInclude Include="M:\Torque2DCmake\engine\source\Box2D\Collision\b2TimeOfImpact.h">
+      <Filter>torque2d\Box2D\Collision</Filter>
+    </ClInclude>
+    <ClInclude Include="M:\Torque2DCmake\engine\source\Box2D\Collision\Shapes\b2ChainShape.h">
+      <Filter>torque2d\Box2D\Collision\Shapes</Filter>
+    </ClInclude>
+    <ClInclude Include="M:\Torque2DCmake\engine\source\Box2D\Collision\Shapes\b2CircleShape.h">
+      <Filter>torque2d\Box2D\Collision\Shapes</Filter>
+    </ClInclude>
+    <ClInclude Include="M:\Torque2DCmake\engine\source\Box2D\Collision\Shapes\b2EdgeShape.h">
+      <Filter>torque2d\Box2D\Collision\Shapes</Filter>
+    </ClInclude>
+    <ClInclude Include="M:\Torque2DCmake\engine\source\Box2D\Collision\Shapes\b2PolygonShape.h">
+      <Filter>torque2d\Box2D\Collision\Shapes</Filter>
+    </ClInclude>
+    <ClInclude Include="M:\Torque2DCmake\engine\source\Box2D\Collision\Shapes\b2Shape.h">
+      <Filter>torque2d\Box2D\Collision\Shapes</Filter>
+    </ClInclude>
+    <ClInclude Include="M:\Torque2DCmake\engine\source\Box2D\Common\b2BlockAllocator.h">
+      <Filter>torque2d\Box2D\Common</Filter>
+    </ClInclude>
+    <ClInclude Include="M:\Torque2DCmake\engine\source\Box2D\Common\b2Draw.h">
+      <Filter>torque2d\Box2D\Common</Filter>
+    </ClInclude>
+    <ClInclude Include="M:\Torque2DCmake\engine\source\Box2D\Common\b2FreeList.h">
+      <Filter>torque2d\Box2D\Common</Filter>
+    </ClInclude>
+    <ClInclude Include="M:\Torque2DCmake\engine\source\Box2D\Common\b2GrowableBuffer.h">
+      <Filter>torque2d\Box2D\Common</Filter>
+    </ClInclude>
+    <ClInclude Include="M:\Torque2DCmake\engine\source\Box2D\Common\b2GrowableStack.h">
+      <Filter>torque2d\Box2D\Common</Filter>
+    </ClInclude>
+    <ClInclude Include="M:\Torque2DCmake\engine\source\Box2D\Common\b2IntrusiveList.h">
+      <Filter>torque2d\Box2D\Common</Filter>
+    </ClInclude>
+    <ClInclude Include="M:\Torque2DCmake\engine\source\Box2D\Common\b2Math.h">
+      <Filter>torque2d\Box2D\Common</Filter>
+    </ClInclude>
+    <ClInclude Include="M:\Torque2DCmake\engine\source\Box2D\Common\b2Settings.h">
+      <Filter>torque2d\Box2D\Common</Filter>
+    </ClInclude>
+    <ClInclude Include="M:\Torque2DCmake\engine\source\Box2D\Common\b2SlabAllocator.h">
+      <Filter>torque2d\Box2D\Common</Filter>
+    </ClInclude>
+    <ClInclude Include="M:\Torque2DCmake\engine\source\Box2D\Common\b2StackAllocator.h">
+      <Filter>torque2d\Box2D\Common</Filter>
+    </ClInclude>
+    <ClInclude Include="M:\Torque2DCmake\engine\source\Box2D\Common\b2Stat.h">
+      <Filter>torque2d\Box2D\Common</Filter>
+    </ClInclude>
+    <ClInclude Include="M:\Torque2DCmake\engine\source\Box2D\Common\b2Timer.h">
+      <Filter>torque2d\Box2D\Common</Filter>
+    </ClInclude>
+    <ClInclude Include="M:\Torque2DCmake\engine\source\Box2D\Common\b2TrackedBlock.h">
+      <Filter>torque2d\Box2D\Common</Filter>
+    </ClInclude>
+    <ClInclude Include="M:\Torque2DCmake\engine\source\Box2D\Dynamics\b2Body.h">
+      <Filter>torque2d\Box2D\Dynamics</Filter>
+    </ClInclude>
+    <ClInclude Include="M:\Torque2DCmake\engine\source\Box2D\Dynamics\b2ContactManager.h">
+      <Filter>torque2d\Box2D\Dynamics</Filter>
+    </ClInclude>
+    <ClInclude Include="M:\Torque2DCmake\engine\source\Box2D\Dynamics\b2Fixture.h">
+      <Filter>torque2d\Box2D\Dynamics</Filter>
+    </ClInclude>
+    <ClInclude Include="M:\Torque2DCmake\engine\source\Box2D\Dynamics\b2Island.h">
+      <Filter>torque2d\Box2D\Dynamics</Filter>
+    </ClInclude>
+    <ClInclude Include="M:\Torque2DCmake\engine\source\Box2D\Dynamics\b2TimeStep.h">
+      <Filter>torque2d\Box2D\Dynamics</Filter>
+    </ClInclude>
+    <ClInclude Include="M:\Torque2DCmake\engine\source\Box2D\Dynamics\b2World.h">
+      <Filter>torque2d\Box2D\Dynamics</Filter>
+    </ClInclude>
+    <ClInclude Include="M:\Torque2DCmake\engine\source\Box2D\Dynamics\b2WorldCallbacks.h">
+      <Filter>torque2d\Box2D\Dynamics</Filter>
+    </ClInclude>
+    <ClInclude Include="M:\Torque2DCmake\engine\source\Box2D\Dynamics\Contacts\b2ChainAndCircleContact.h">
+      <Filter>torque2d\Box2D\Dynamics\Contacts</Filter>
+    </ClInclude>
+    <ClInclude Include="M:\Torque2DCmake\engine\source\Box2D\Dynamics\Contacts\b2ChainAndPolygonContact.h">
+      <Filter>torque2d\Box2D\Dynamics\Contacts</Filter>
+    </ClInclude>
+    <ClInclude Include="M:\Torque2DCmake\engine\source\Box2D\Dynamics\Contacts\b2CircleContact.h">
+      <Filter>torque2d\Box2D\Dynamics\Contacts</Filter>
+    </ClInclude>
+    <ClInclude Include="M:\Torque2DCmake\engine\source\Box2D\Dynamics\Contacts\b2Contact.h">
+      <Filter>torque2d\Box2D\Dynamics\Contacts</Filter>
+    </ClInclude>
+    <ClInclude Include="M:\Torque2DCmake\engine\source\Box2D\Dynamics\Contacts\b2ContactSolver.h">
+      <Filter>torque2d\Box2D\Dynamics\Contacts</Filter>
+    </ClInclude>
+    <ClInclude Include="M:\Torque2DCmake\engine\source\Box2D\Dynamics\Contacts\b2EdgeAndCircleContact.h">
+      <Filter>torque2d\Box2D\Dynamics\Contacts</Filter>
+    </ClInclude>
+    <ClInclude Include="M:\Torque2DCmake\engine\source\Box2D\Dynamics\Contacts\b2EdgeAndPolygonContact.h">
+      <Filter>torque2d\Box2D\Dynamics\Contacts</Filter>
+    </ClInclude>
+    <ClInclude Include="M:\Torque2DCmake\engine\source\Box2D\Dynamics\Contacts\b2PolygonAndCircleContact.h">
+      <Filter>torque2d\Box2D\Dynamics\Contacts</Filter>
+    </ClInclude>
+    <ClInclude Include="M:\Torque2DCmake\engine\source\Box2D\Dynamics\Contacts\b2PolygonContact.h">
+      <Filter>torque2d\Box2D\Dynamics\Contacts</Filter>
+    </ClInclude>
+    <ClInclude Include="M:\Torque2DCmake\engine\source\Box2D\Dynamics\Joints\b2DistanceJoint.h">
+      <Filter>torque2d\Box2D\Dynamics\Joints</Filter>
+    </ClInclude>
+    <ClInclude Include="M:\Torque2DCmake\engine\source\Box2D\Dynamics\Joints\b2FrictionJoint.h">
+      <Filter>torque2d\Box2D\Dynamics\Joints</Filter>
+    </ClInclude>
+    <ClInclude Include="M:\Torque2DCmake\engine\source\Box2D\Dynamics\Joints\b2GearJoint.h">
+      <Filter>torque2d\Box2D\Dynamics\Joints</Filter>
+    </ClInclude>
+    <ClInclude Include="M:\Torque2DCmake\engine\source\Box2D\Dynamics\Joints\b2Joint.h">
+      <Filter>torque2d\Box2D\Dynamics\Joints</Filter>
+    </ClInclude>
+    <ClInclude Include="M:\Torque2DCmake\engine\source\Box2D\Dynamics\Joints\b2MotorJoint.h">
+      <Filter>torque2d\Box2D\Dynamics\Joints</Filter>
+    </ClInclude>
+    <ClInclude Include="M:\Torque2DCmake\engine\source\Box2D\Dynamics\Joints\b2MouseJoint.h">
+      <Filter>torque2d\Box2D\Dynamics\Joints</Filter>
+    </ClInclude>
+    <ClInclude Include="M:\Torque2DCmake\engine\source\Box2D\Dynamics\Joints\b2PrismaticJoint.h">
+      <Filter>torque2d\Box2D\Dynamics\Joints</Filter>
+    </ClInclude>
+    <ClInclude Include="M:\Torque2DCmake\engine\source\Box2D\Dynamics\Joints\b2PulleyJoint.h">
+      <Filter>torque2d\Box2D\Dynamics\Joints</Filter>
+    </ClInclude>
+    <ClInclude Include="M:\Torque2DCmake\engine\source\Box2D\Dynamics\Joints\b2RevoluteJoint.h">
+      <Filter>torque2d\Box2D\Dynamics\Joints</Filter>
+    </ClInclude>
+    <ClInclude Include="M:\Torque2DCmake\engine\source\Box2D\Dynamics\Joints\b2RopeJoint.h">
+      <Filter>torque2d\Box2D\Dynamics\Joints</Filter>
+    </ClInclude>
+    <ClInclude Include="M:\Torque2DCmake\engine\source\Box2D\Dynamics\Joints\b2WeldJoint.h">
+      <Filter>torque2d\Box2D\Dynamics\Joints</Filter>
+    </ClInclude>
+    <ClInclude Include="M:\Torque2DCmake\engine\source\Box2D\Dynamics\Joints\b2WheelJoint.h">
+      <Filter>torque2d\Box2D\Dynamics\Joints</Filter>
+    </ClInclude>
+    <ClInclude Include="M:\Torque2DCmake\engine\source\Box2D\Particle\b2Particle.h">
+      <Filter>torque2d\Box2D\Particle</Filter>
+    </ClInclude>
+    <ClInclude Include="M:\Torque2DCmake\engine\source\Box2D\Particle\b2ParticleAssembly.h">
+      <Filter>torque2d\Box2D\Particle</Filter>
+    </ClInclude>
+    <ClInclude Include="M:\Torque2DCmake\engine\source\Box2D\Particle\b2ParticleGroup.h">
+      <Filter>torque2d\Box2D\Particle</Filter>
+    </ClInclude>
+    <ClInclude Include="M:\Torque2DCmake\engine\source\Box2D\Particle\b2ParticleSystem.h">
+      <Filter>torque2d\Box2D\Particle</Filter>
+    </ClInclude>
+    <ClInclude Include="M:\Torque2DCmake\engine\source\Box2D\Particle\b2StackQueue.h">
+      <Filter>torque2d\Box2D\Particle</Filter>
+    </ClInclude>
+    <ClInclude Include="M:\Torque2DCmake\engine\source\Box2D\Particle\b2VoronoiDiagram.h">
+      <Filter>torque2d\Box2D\Particle</Filter>
+    </ClInclude>
+    <ClInclude Include="M:\Torque2DCmake\engine\source\Box2D\Rope\b2Rope.h">
+      <Filter>torque2d\Box2D\Rope</Filter>
+    </ClInclude>
+    <ClInclude Include="M:\Torque2DCmake\engine\source\collection\bitMatrix.h">
+      <Filter>torque2d\collection</Filter>
+    </ClInclude>
+    <ClInclude Include="M:\Torque2DCmake\engine\source\collection\bitSet.h">
+      <Filter>torque2d\collection</Filter>
+    </ClInclude>
+    <ClInclude Include="M:\Torque2DCmake\engine\source\collection\bitTables.h">
+      <Filter>torque2d\collection</Filter>
+    </ClInclude>
+    <ClInclude Include="M:\Torque2DCmake\engine\source\collection\bitVector.h">
+      <Filter>torque2d\collection</Filter>
+    </ClInclude>
+    <ClInclude Include="M:\Torque2DCmake\engine\source\collection\bitVectorW.h">
+      <Filter>torque2d\collection</Filter>
+    </ClInclude>
+    <ClInclude Include="M:\Torque2DCmake\engine\source\collection\findIterator.h">
+      <Filter>torque2d\collection</Filter>
+    </ClInclude>
+    <ClInclude Include="M:\Torque2DCmake\engine\source\collection\hashTable.h">
+      <Filter>torque2d\collection</Filter>
+    </ClInclude>
+    <ClInclude Include="M:\Torque2DCmake\engine\source\collection\linkedList.h">
+      <Filter>torque2d\collection</Filter>
+    </ClInclude>
+    <ClInclude Include="M:\Torque2DCmake\engine\source\collection\nameTags.h">
+      <Filter>torque2d\collection</Filter>
+    </ClInclude>
+    <ClInclude Include="M:\Torque2DCmake\engine\source\collection\nameTags_ScriptBinding.h">
+      <Filter>torque2d\collection</Filter>
+    </ClInclude>
+    <ClInclude Include="M:\Torque2DCmake\engine\source\collection\simpleHashTable.h">
+      <Filter>torque2d\collection</Filter>
+    </ClInclude>
+    <ClInclude Include="M:\Torque2DCmake\engine\source\collection\sparseArray.h">
+      <Filter>torque2d\collection</Filter>
+    </ClInclude>
+    <ClInclude Include="M:\Torque2DCmake\engine\source\collection\undo.h">
+      <Filter>torque2d\collection</Filter>
+    </ClInclude>
+    <ClInclude Include="M:\Torque2DCmake\engine\source\collection\undo_ScriptBinding.h">
+      <Filter>torque2d\collection</Filter>
+    </ClInclude>
+    <ClInclude Include="M:\Torque2DCmake\engine\source\collection\vector.h">
+      <Filter>torque2d\collection</Filter>
+    </ClInclude>
+    <ClInclude Include="M:\Torque2DCmake\engine\source\collection\vector2d.h">
+      <Filter>torque2d\collection</Filter>
+    </ClInclude>
+    <ClInclude Include="M:\Torque2DCmake\engine\source\collection\vectorHeap.h">
+      <Filter>torque2d\collection</Filter>
+    </ClInclude>
+    <ClInclude Include="M:\Torque2DCmake\engine\source\collection\vectorQueue.h">
+      <Filter>torque2d\collection</Filter>
+    </ClInclude>
+    <ClInclude Include="M:\Torque2DCmake\engine\source\component\dynamicConsoleMethodComponent.h">
+      <Filter>torque2d\component</Filter>
+    </ClInclude>
+    <ClInclude Include="M:\Torque2DCmake\engine\source\component\dynamicConsoleMethodComponent_ScriptBinding.h">
+      <Filter>torque2d\component</Filter>
+    </ClInclude>
+    <ClInclude Include="M:\Torque2DCmake\engine\source\component\simComponent.h">
+      <Filter>torque2d\component</Filter>
+    </ClInclude>
+    <ClInclude Include="M:\Torque2DCmake\engine\source\component\simComponent_ScriptBinding.h">
+      <Filter>torque2d\component</Filter>
+    </ClInclude>
+    <ClInclude Include="M:\Torque2DCmake\engine\source\component\behaviors\behaviorComponent.h">
+      <Filter>torque2d\component\behaviors</Filter>
+    </ClInclude>
+    <ClInclude Include="M:\Torque2DCmake\engine\source\component\behaviors\behaviorComponentRaiseEvent.h">
+      <Filter>torque2d\component\behaviors</Filter>
+    </ClInclude>
+    <ClInclude Include="M:\Torque2DCmake\engine\source\component\behaviors\behaviorComponent_ScriptBinding.h">
+      <Filter>torque2d\component\behaviors</Filter>
+    </ClInclude>
+    <ClInclude Include="M:\Torque2DCmake\engine\source\component\behaviors\behaviorInstance.h">
+      <Filter>torque2d\component\behaviors</Filter>
+    </ClInclude>
+    <ClInclude Include="M:\Torque2DCmake\engine\source\component\behaviors\behaviorInstance_ScriptBinding.h">
+      <Filter>torque2d\component\behaviors</Filter>
+    </ClInclude>
+    <ClInclude Include="M:\Torque2DCmake\engine\source\component\behaviors\behaviorTemplate.h">
+      <Filter>torque2d\component\behaviors</Filter>
+    </ClInclude>
+    <ClInclude Include="M:\Torque2DCmake\engine\source\component\behaviors\behaviorTemplate_ScriptBinding.h">
+      <Filter>torque2d\component\behaviors</Filter>
+    </ClInclude>
+    <ClInclude Include="M:\Torque2DCmake\engine\source\console\ConsoleTypeValidators.h">
+      <Filter>torque2d\console</Filter>
+    </ClInclude>
+    <ClInclude Include="M:\Torque2DCmake\engine\source\console\Package.h">
+      <Filter>torque2d\console</Filter>
+    </ClInclude>
+    <ClInclude Include="M:\Torque2DCmake\engine\source\console\ast.h">
+      <Filter>torque2d\console</Filter>
+    </ClInclude>
+    <ClInclude Include="M:\Torque2DCmake\engine\source\console\astNodeSizes.h">
+      <Filter>torque2d\console</Filter>
+    </ClInclude>
+    <ClInclude Include="M:\Torque2DCmake\engine\source\console\cmdgram.h">
+      <Filter>torque2d\console</Filter>
+    </ClInclude>
+    <ClInclude Include="M:\Torque2DCmake\engine\source\console\codeBlock.h">
+      <Filter>torque2d\console</Filter>
+    </ClInclude>
+    <ClInclude Include="M:\Torque2DCmake\engine\source\console\compiler.h">
+      <Filter>torque2d\console</Filter>
+    </ClInclude>
+    <ClInclude Include="M:\Torque2DCmake\engine\source\console\console.h">
+      <Filter>torque2d\console</Filter>
+    </ClInclude>
+    <ClInclude Include="M:\Torque2DCmake\engine\source\console\consoleBaseType.h">
+      <Filter>torque2d\console</Filter>
+    </ClInclude>
+    <ClInclude Include="M:\Torque2DCmake\engine\source\console\consoleDictionary.h">
+      <Filter>torque2d\console</Filter>
+    </ClInclude>
+    <ClInclude Include="M:\Torque2DCmake\engine\source\console\consoleDoc.h">
+      <Filter>torque2d\console</Filter>
+    </ClInclude>
+    <ClInclude Include="M:\Torque2DCmake\engine\source\console\consoleDoc_ScriptBinding.h">
+      <Filter>torque2d\console</Filter>
+    </ClInclude>
+    <ClInclude Include="M:\Torque2DCmake\engine\source\console\consoleExprEvalState.h">
+      <Filter>torque2d\console</Filter>
+    </ClInclude>
+    <ClInclude Include="M:\Torque2DCmake\engine\source\console\consoleExprEvalState_ScriptBinding.h">
+      <Filter>torque2d\console</Filter>
+    </ClInclude>
+    <ClInclude Include="M:\Torque2DCmake\engine\source\console\consoleInternal.h">
+      <Filter>torque2d\console</Filter>
+    </ClInclude>
+    <ClInclude Include="M:\Torque2DCmake\engine\source\console\consoleLogger.h">
+      <Filter>torque2d\console</Filter>
+    </ClInclude>
+    <ClInclude Include="M:\Torque2DCmake\engine\source\console\consoleLogger_ScriptBinding.h">
+      <Filter>torque2d\console</Filter>
+    </ClInclude>
+    <ClInclude Include="M:\Torque2DCmake\engine\source\console\consoleNamespace.h">
+      <Filter>torque2d\console</Filter>
+    </ClInclude>
+    <ClInclude Include="M:\Torque2DCmake\engine\source\console\consoleNamespace_ScriptBinding.h">
+      <Filter>torque2d\console</Filter>
+    </ClInclude>
+    <ClInclude Include="M:\Torque2DCmake\engine\source\console\consoleObject.h">
+      <Filter>torque2d\console</Filter>
+    </ClInclude>
+    <ClInclude Include="M:\Torque2DCmake\engine\source\console\consoleParser.h">
+      <Filter>torque2d\console</Filter>
+    </ClInclude>
+    <ClInclude Include="M:\Torque2DCmake\engine\source\console\consoleTypes.h">
+      <Filter>torque2d\console</Filter>
+    </ClInclude>
+    <ClInclude Include="M:\Torque2DCmake\engine\source\console\expando_ScriptBinding.h">
+      <Filter>torque2d\console</Filter>
+    </ClInclude>
+    <ClInclude Include="M:\Torque2DCmake\engine\source\console\inputManagement_ScriptBinding.h">
+      <Filter>torque2d\console</Filter>
+    </ClInclude>
+    <ClInclude Include="M:\Torque2DCmake\engine\source\console\output_ScriptBinding.h">
+      <Filter>torque2d\console</Filter>
+    </ClInclude>
+    <ClInclude Include="M:\Torque2DCmake\engine\source\console\taggedStrings_ScriptBinding.h">
+      <Filter>torque2d\console</Filter>
+    </ClInclude>
+    <ClInclude Include="M:\Torque2DCmake\engine\source\debug\profiler.h">
+      <Filter>torque2d\debug</Filter>
+    </ClInclude>
+    <ClInclude Include="M:\Torque2DCmake\engine\source\debug\profiler_ScriptBinding.h">
+      <Filter>torque2d\debug</Filter>
+    </ClInclude>
+    <ClInclude Include="M:\Torque2DCmake\engine\source\debug\telnetDebugger.h">
+      <Filter>torque2d\debug</Filter>
+    </ClInclude>
+    <ClInclude Include="M:\Torque2DCmake\engine\source\debug\telnetDebugger_ScriptBinding.h">
+      <Filter>torque2d\debug</Filter>
+    </ClInclude>
+    <ClInclude Include="M:\Torque2DCmake\engine\source\debug\remote\RemoteDebugger1.h">
+      <Filter>torque2d\debug\remote</Filter>
+    </ClInclude>
+    <ClInclude Include="M:\Torque2DCmake\engine\source\debug\remote\RemoteDebugger1_ScriptBinding.h">
+      <Filter>torque2d\debug\remote</Filter>
+    </ClInclude>
+    <ClInclude Include="M:\Torque2DCmake\engine\source\debug\remote\RemoteDebuggerBase.h">
+      <Filter>torque2d\debug\remote</Filter>
+    </ClInclude>
+    <ClInclude Include="M:\Torque2DCmake\engine\source\debug\remote\RemoteDebuggerBase_ScriptBinding.h">
+      <Filter>torque2d\debug\remote</Filter>
+    </ClInclude>
+    <ClInclude Include="M:\Torque2DCmake\engine\source\debug\remote\RemoteDebuggerBridge.h">
+      <Filter>torque2d\debug\remote</Filter>
+    </ClInclude>
+    <ClInclude Include="M:\Torque2DCmake\engine\source\debug\remote\RemoteDebuggerBridge_ScriptBinding.h">
+      <Filter>torque2d\debug\remote</Filter>
+    </ClInclude>
+    <ClInclude Include="M:\Torque2DCmake\engine\source\delegates\FastDelegate.h">
+      <Filter>torque2d\delegates</Filter>
+    </ClInclude>
+    <ClInclude Include="M:\Torque2DCmake\engine\source\delegates\delegate.h">
+      <Filter>torque2d\delegates</Filter>
+    </ClInclude>
+    <ClInclude Include="M:\Torque2DCmake\engine\source\delegates\delegateSignal.h">
+      <Filter>torque2d\delegates</Filter>
+    </ClInclude>
+    <ClInclude Include="M:\Torque2DCmake\engine\source\game\defaultGame.h">
+      <Filter>torque2d\game</Filter>
+    </ClInclude>
+    <ClInclude Include="M:\Torque2DCmake\engine\source\game\gameConnection.h">
+      <Filter>torque2d\game</Filter>
+    </ClInclude>
+    <ClInclude Include="M:\Torque2DCmake\engine\source\game\gameConnection_ScriptBinding.h">
+      <Filter>torque2d\game</Filter>
+    </ClInclude>
+    <ClInclude Include="M:\Torque2DCmake\engine\source\game\gameInterface.h">
+      <Filter>torque2d\game</Filter>
+    </ClInclude>
+    <ClInclude Include="M:\Torque2DCmake\engine\source\game\gameInterface_ScriptBinding.h">
+      <Filter>torque2d\game</Filter>
+    </ClInclude>
+    <ClInclude Include="M:\Torque2DCmake\engine\source\game\module.h">
+      <Filter>torque2d\game</Filter>
+    </ClInclude>
+    <ClInclude Include="M:\Torque2DCmake\engine\source\game\resource.h">
+      <Filter>torque2d\game</Filter>
+    </ClInclude>
+    <ClInclude Include="M:\Torque2DCmake\engine\source\game\version.h">
+      <Filter>torque2d\game</Filter>
+    </ClInclude>
+    <ClInclude Include="M:\Torque2DCmake\engine\source\game\version_ScriptBinding.h">
+      <Filter>torque2d\game</Filter>
+    </ClInclude>
+    <ClInclude Include="M:\Torque2DCmake\engine\source\graphics\DynamicTexture.h">
+      <Filter>torque2d\graphics</Filter>
+    </ClInclude>
+    <ClInclude Include="M:\Torque2DCmake\engine\source\graphics\PNGImage.h">
+      <Filter>torque2d\graphics</Filter>
+    </ClInclude>
+    <ClInclude Include="M:\Torque2DCmake\engine\source\graphics\PNGImage_ScriptBinding.h">
+      <Filter>torque2d\graphics</Filter>
+    </ClInclude>
+    <ClInclude Include="M:\Torque2DCmake\engine\source\graphics\TextureDictionary.h">
+      <Filter>torque2d\graphics</Filter>
+    </ClInclude>
+    <ClInclude Include="M:\Torque2DCmake\engine\source\graphics\TextureHandle.h">
+      <Filter>torque2d\graphics</Filter>
+    </ClInclude>
+    <ClInclude Include="M:\Torque2DCmake\engine\source\graphics\TextureManager.h">
+      <Filter>torque2d\graphics</Filter>
+    </ClInclude>
+    <ClInclude Include="M:\Torque2DCmake\engine\source\graphics\TextureManager_ScriptBinding.h">
+      <Filter>torque2d\graphics</Filter>
+    </ClInclude>
+    <ClInclude Include="M:\Torque2DCmake\engine\source\graphics\TextureObject.h">
+      <Filter>torque2d\graphics</Filter>
+    </ClInclude>
+    <ClInclude Include="M:\Torque2DCmake\engine\source\graphics\color.h">
+      <Filter>torque2d\graphics</Filter>
+    </ClInclude>
+    <ClInclude Include="M:\Torque2DCmake\engine\source\graphics\color_ScriptBinding.h">
+      <Filter>torque2d\graphics</Filter>
+    </ClInclude>
+    <ClInclude Include="M:\Torque2DCmake\engine\source\graphics\dgl.h">
+      <Filter>torque2d\graphics</Filter>
+    </ClInclude>
+    <ClInclude Include="M:\Torque2DCmake\engine\source\graphics\dglMac_ScriptBinding.h">
+      <Filter>torque2d\graphics</Filter>
+    </ClInclude>
+    <ClInclude Include="M:\Torque2DCmake\engine\source\graphics\dgl_ScriptBinding.h">
+      <Filter>torque2d\graphics</Filter>
+    </ClInclude>
+    <ClInclude Include="M:\Torque2DCmake\engine\source\graphics\gBitmap.h">
+      <Filter>torque2d\graphics</Filter>
+    </ClInclude>
+    <ClInclude Include="M:\Torque2DCmake\engine\source\graphics\gFont.h">
+      <Filter>torque2d\graphics</Filter>
+    </ClInclude>
+    <ClInclude Include="M:\Torque2DCmake\engine\source\graphics\gFont_ScriptBinding.h">
+      <Filter>torque2d\graphics</Filter>
+    </ClInclude>
+    <ClInclude Include="M:\Torque2DCmake\engine\source\graphics\gPalette.h">
+      <Filter>torque2d\graphics</Filter>
+    </ClInclude>
+    <ClInclude Include="M:\Torque2DCmake\engine\source\graphics\splineUtil.h">
+      <Filter>torque2d\graphics</Filter>
+    </ClInclude>
+    <ClInclude Include="M:\Torque2DCmake\engine\source\gui\guiArrayCtrl.h">
+      <Filter>torque2d\gui</Filter>
+    </ClInclude>
+    <ClInclude Include="M:\Torque2DCmake\engine\source\gui\guiBackgroundCtrl.h">
+      <Filter>torque2d\gui</Filter>
+    </ClInclude>
+    <ClInclude Include="M:\Torque2DCmake\engine\source\gui\guiBitmapCtrl.h">
+      <Filter>torque2d\gui</Filter>
+    </ClInclude>
+    <ClInclude Include="M:\Torque2DCmake\engine\source\gui\guiBubbleTextCtrl.h">
+      <Filter>torque2d\gui</Filter>
+    </ClInclude>
+    <ClInclude Include="M:\Torque2DCmake\engine\source\gui\guiCanvas.h">
+      <Filter>torque2d\gui</Filter>
+    </ClInclude>
+    <ClInclude Include="M:\Torque2DCmake\engine\source\gui\guiCanvas_ScriptBinding.h">
+      <Filter>torque2d\gui</Filter>
+    </ClInclude>
+    <ClInclude Include="M:\Torque2DCmake\engine\source\gui\guiColorPicker.h">
+      <Filter>torque2d\gui</Filter>
+    </ClInclude>
+    <ClInclude Include="M:\Torque2DCmake\engine\source\gui\guiConsole.h">
+      <Filter>torque2d\gui</Filter>
+    </ClInclude>
+    <ClInclude Include="M:\Torque2DCmake\engine\source\gui\guiConsoleEditCtrl.h">
+      <Filter>torque2d\gui</Filter>
+    </ClInclude>
+    <ClInclude Include="M:\Torque2DCmake\engine\source\gui\guiConsoleTextCtrl.h">
+      <Filter>torque2d\gui</Filter>
+    </ClInclude>
+    <ClInclude Include="M:\Torque2DCmake\engine\source\gui\guiControl.h">
+      <Filter>torque2d\gui</Filter>
+    </ClInclude>
+    <ClInclude Include="M:\Torque2DCmake\engine\source\gui\guiControl_ScriptBinding.h">
+      <Filter>torque2d\gui</Filter>
+    </ClInclude>
+    <ClInclude Include="M:\Torque2DCmake\engine\source\gui\guiDefaultControlRender.h">
+      <Filter>torque2d\gui</Filter>
+    </ClInclude>
+    <ClInclude Include="M:\Torque2DCmake\engine\source\gui\guiInputCtrl.h">
+      <Filter>torque2d\gui</Filter>
+    </ClInclude>
+    <ClInclude Include="M:\Torque2DCmake\engine\source\gui\guiListBoxCtrl.h">
+      <Filter>torque2d\gui</Filter>
+    </ClInclude>
+    <ClInclude Include="M:\Torque2DCmake\engine\source\gui\guiMLTextCtrl.h">
+      <Filter>torque2d\gui</Filter>
+    </ClInclude>
+    <ClInclude Include="M:\Torque2DCmake\engine\source\gui\guiMLTextEditCtrl.h">
+      <Filter>torque2d\gui</Filter>
+    </ClInclude>
+    <ClInclude Include="M:\Torque2DCmake\engine\source\gui\guiMessageVectorCtrl.h">
+      <Filter>torque2d\gui</Filter>
+    </ClInclude>
+    <ClInclude Include="M:\Torque2DCmake\engine\source\gui\guiMouseEventCtrl.h">
+      <Filter>torque2d\gui</Filter>
+    </ClInclude>
+    <ClInclude Include="M:\Torque2DCmake\engine\source\gui\guiPopUpCtrl.h">
+      <Filter>torque2d\gui</Filter>
+    </ClInclude>
+    <ClInclude Include="M:\Torque2DCmake\engine\source\gui\guiPopUpCtrlEx.h">
+      <Filter>torque2d\gui</Filter>
+    </ClInclude>
+    <ClInclude Include="M:\Torque2DCmake\engine\source\gui\guiProgressCtrl.h">
+      <Filter>torque2d\gui</Filter>
+    </ClInclude>
+    <ClInclude Include="M:\Torque2DCmake\engine\source\gui\guiScriptNotifyControl.h">
+      <Filter>torque2d\gui</Filter>
+    </ClInclude>
+    <ClInclude Include="M:\Torque2DCmake\engine\source\gui\guiSliderCtrl.h">
+      <Filter>torque2d\gui</Filter>
+    </ClInclude>
+    <ClInclude Include="M:\Torque2DCmake\engine\source\gui\guiTabPageCtrl.h">
+      <Filter>torque2d\gui</Filter>
+    </ClInclude>
+    <ClInclude Include="M:\Torque2DCmake\engine\source\gui\guiTextCtrl.h">
+      <Filter>torque2d\gui</Filter>
+    </ClInclude>
+    <ClInclude Include="M:\Torque2DCmake\engine\source\gui\guiTextEditCtrl.h">
+      <Filter>torque2d\gui</Filter>
+    </ClInclude>
+    <ClInclude Include="M:\Torque2DCmake\engine\source\gui\guiTextEditSliderCtrl.h">
+      <Filter>torque2d\gui</Filter>
+    </ClInclude>
+    <ClInclude Include="M:\Torque2DCmake\engine\source\gui\guiTextListCtrl.h">
+      <Filter>torque2d\gui</Filter>
+    </ClInclude>
+    <ClInclude Include="M:\Torque2DCmake\engine\source\gui\guiTickCtrl.h">
+      <Filter>torque2d\gui</Filter>
+    </ClInclude>
+    <ClInclude Include="M:\Torque2DCmake\engine\source\gui\guiTreeViewCtrl.h">
+      <Filter>torque2d\gui</Filter>
+    </ClInclude>
+    <ClInclude Include="M:\Torque2DCmake\engine\source\gui\guiTypes.h">
+      <Filter>torque2d\gui</Filter>
+    </ClInclude>
+    <ClInclude Include="M:\Torque2DCmake\engine\source\gui\messageVector.h">
+      <Filter>torque2d\gui</Filter>
+    </ClInclude>
+    <ClInclude Include="M:\Torque2DCmake\engine\source\gui\buttons\guiBitmapButtonCtrl.h">
+      <Filter>torque2d\gui\buttons</Filter>
+    </ClInclude>
+    <ClInclude Include="M:\Torque2DCmake\engine\source\gui\buttons\guiButtonBaseCtrl.h">
+      <Filter>torque2d\gui\buttons</Filter>
+    </ClInclude>
+    <ClInclude Include="M:\Torque2DCmake\engine\source\gui\buttons\guiButtonCtrl.h">
+      <Filter>torque2d\gui\buttons</Filter>
+    </ClInclude>
+    <ClInclude Include="M:\Torque2DCmake\engine\source\gui\buttons\guiCheckBoxCtrl.h">
+      <Filter>torque2d\gui\buttons</Filter>
+    </ClInclude>
+    <ClInclude Include="M:\Torque2DCmake\engine\source\gui\buttons\guiIconButtonCtrl.h">
+      <Filter>torque2d\gui\buttons</Filter>
+    </ClInclude>
+    <ClInclude Include="M:\Torque2DCmake\engine\source\gui\buttons\guiRadioCtrl.h">
+      <Filter>torque2d\gui\buttons</Filter>
+    </ClInclude>
+    <ClInclude Include="M:\Torque2DCmake\engine\source\gui\buttons\guiToolboxButtonCtrl.h">
+      <Filter>torque2d\gui\buttons</Filter>
+    </ClInclude>
+    <ClInclude Include="M:\Torque2DCmake\engine\source\gui\containers\guiAutoScrollCtrl.h">
+      <Filter>torque2d\gui\containers</Filter>
+    </ClInclude>
+    <ClInclude Include="M:\Torque2DCmake\engine\source\gui\containers\guiCtrlArrayCtrl.h">
+      <Filter>torque2d\gui\containers</Filter>
+    </ClInclude>
+    <ClInclude Include="M:\Torque2DCmake\engine\source\gui\containers\guiDragAndDropCtrl.h">
+      <Filter>torque2d\gui\containers</Filter>
+    </ClInclude>
+    <ClInclude Include="M:\Torque2DCmake\engine\source\gui\containers\guiDynamicCtrlArrayCtrl.h">
+      <Filter>torque2d\gui\containers</Filter>
+    </ClInclude>
+    <ClInclude Include="M:\Torque2DCmake\engine\source\gui\containers\guiFormCtrl.h">
+      <Filter>torque2d\gui\containers</Filter>
+    </ClInclude>
+    <ClInclude Include="M:\Torque2DCmake\engine\source\gui\containers\guiFrameCtrl.h">
+      <Filter>torque2d\gui\containers</Filter>
+    </ClInclude>
+    <ClInclude Include="M:\Torque2DCmake\engine\source\gui\containers\guiGridCtrl.h">
+      <Filter>torque2d\gui\containers</Filter>
+    </ClInclude>
+    <ClInclude Include="M:\Torque2DCmake\engine\source\gui\containers\guiPaneCtrl.h">
+      <Filter>torque2d\gui\containers</Filter>
+    </ClInclude>
+    <ClInclude Include="M:\Torque2DCmake\engine\source\gui\containers\guiRolloutCtrl.h">
+      <Filter>torque2d\gui\containers</Filter>
+    </ClInclude>
+    <ClInclude Include="M:\Torque2DCmake\engine\source\gui\containers\guiScrollCtrl.h">
+      <Filter>torque2d\gui\containers</Filter>
+    </ClInclude>
+    <ClInclude Include="M:\Torque2DCmake\engine\source\gui\containers\guiStackCtrl.h">
+      <Filter>torque2d\gui\containers</Filter>
+    </ClInclude>
+    <ClInclude Include="M:\Torque2DCmake\engine\source\gui\containers\guiTabBookCtrl.h">
+      <Filter>torque2d\gui\containers</Filter>
+    </ClInclude>
+    <ClInclude Include="M:\Torque2DCmake\engine\source\gui\containers\guiWindowCtrl.h">
+      <Filter>torque2d\gui\containers</Filter>
+    </ClInclude>
+    <ClInclude Include="M:\Torque2DCmake\engine\source\gui\editor\guiDebugger.h">
+      <Filter>torque2d\gui\editor</Filter>
+    </ClInclude>
+    <ClInclude Include="M:\Torque2DCmake\engine\source\gui\editor\guiEditCtrl.h">
+      <Filter>torque2d\gui\editor</Filter>
+    </ClInclude>
+    <ClInclude Include="M:\Torque2DCmake\engine\source\gui\editor\guiFilterCtrl.h">
+      <Filter>torque2d\gui\editor</Filter>
+    </ClInclude>
+    <ClInclude Include="M:\Torque2DCmake\engine\source\gui\editor\guiGraphCtrl.h">
+      <Filter>torque2d\gui\editor</Filter>
+    </ClInclude>
+    <ClInclude Include="M:\Torque2DCmake\engine\source\gui\editor\guiImageList.h">
+      <Filter>torque2d\gui\editor</Filter>
+    </ClInclude>
+    <ClInclude Include="M:\Torque2DCmake\engine\source\gui\editor\guiInspector.h">
+      <Filter>torque2d\gui\editor</Filter>
+    </ClInclude>
+    <ClInclude Include="M:\Torque2DCmake\engine\source\gui\editor\guiInspectorTypes.h">
+      <Filter>torque2d\gui\editor</Filter>
+    </ClInclude>
+    <ClInclude Include="M:\Torque2DCmake\engine\source\gui\editor\guiMenuBar.h">
+      <Filter>torque2d\gui\editor</Filter>
+    </ClInclude>
+    <ClInclude Include="M:\Torque2DCmake\engine\source\gui\editor\guiSeparatorCtrl.h">
+      <Filter>torque2d\gui\editor</Filter>
+    </ClInclude>
+    <ClInclude Include="M:\Torque2DCmake\engine\source\gui\language\lang.h">
+      <Filter>torque2d\gui\language</Filter>
+    </ClInclude>
+    <ClInclude Include="M:\Torque2DCmake\engine\source\input\actionMap.h">
+      <Filter>torque2d\input</Filter>
+    </ClInclude>
+    <ClInclude Include="M:\Torque2DCmake\engine\source\input\actionMap_ScriptBinding.h">
+      <Filter>torque2d\input</Filter>
+    </ClInclude>
+    <ClInclude Include="M:\Torque2DCmake\engine\source\io\bitStream.h">
+      <Filter>torque2d\io</Filter>
+    </ClInclude>
+    <ClInclude Include="M:\Torque2DCmake\engine\source\io\bufferStream.h">
+      <Filter>torque2d\io</Filter>
+    </ClInclude>
+    <ClInclude Include="M:\Torque2DCmake\engine\source\io\byteBuffer.h">
+      <Filter>torque2d\io</Filter>
+    </ClInclude>
+    <ClInclude Include="M:\Torque2DCmake\engine\source\io\fileObject.h">
+      <Filter>torque2d\io</Filter>
+    </ClInclude>
+    <ClInclude Include="M:\Torque2DCmake\engine\source\io\fileObject_ScriptBinding.h">
+      <Filter>torque2d\io</Filter>
+    </ClInclude>
+    <ClInclude Include="M:\Torque2DCmake\engine\source\io\fileStream.h">
+      <Filter>torque2d\io</Filter>
+    </ClInclude>
+    <ClInclude Include="M:\Torque2DCmake\engine\source\io\fileStreamObject.h">
+      <Filter>torque2d\io</Filter>
+    </ClInclude>
+    <ClInclude Include="M:\Torque2DCmake\engine\source\io\fileStreamObject_ScriptBinding.h">
+      <Filter>torque2d\io</Filter>
+    </ClInclude>
+    <ClInclude Include="M:\Torque2DCmake\engine\source\io\filterStream.h">
+      <Filter>torque2d\io</Filter>
+    </ClInclude>
+    <ClInclude Include="M:\Torque2DCmake\engine\source\io\memstream.h">
+      <Filter>torque2d\io</Filter>
+    </ClInclude>
+    <ClInclude Include="M:\Torque2DCmake\engine\source\io\rawData.h">
+      <Filter>torque2d\io</Filter>
+    </ClInclude>
+    <ClInclude Include="M:\Torque2DCmake\engine\source\io\resizeStream.h">
+      <Filter>torque2d\io</Filter>
+    </ClInclude>
+    <ClInclude Include="M:\Torque2DCmake\engine\source\io\stream.h">
+      <Filter>torque2d\io</Filter>
+    </ClInclude>
+    <ClInclude Include="M:\Torque2DCmake\engine\source\io\streamObject.h">
+      <Filter>torque2d\io</Filter>
+    </ClInclude>
+    <ClInclude Include="M:\Torque2DCmake\engine\source\io\streamObject_ScriptBinding.h">
+      <Filter>torque2d\io</Filter>
+    </ClInclude>
+    <ClInclude Include="M:\Torque2DCmake\engine\source\io\resource\resourceManager.h">
+      <Filter>torque2d\io\resource</Filter>
+    </ClInclude>
+    <ClInclude Include="M:\Torque2DCmake\engine\source\io\resource\resourceManager_ScriptBinding.h">
+      <Filter>torque2d\io\resource</Filter>
+    </ClInclude>
+    <ClInclude Include="M:\Torque2DCmake\engine\source\io\zip\centralDir.h">
+      <Filter>torque2d\io\zip</Filter>
+    </ClInclude>
+    <ClInclude Include="M:\Torque2DCmake\engine\source\io\zip\compressor.h">
+      <Filter>torque2d\io\zip</Filter>
+    </ClInclude>
+    <ClInclude Include="M:\Torque2DCmake\engine\source\io\zip\extraField.h">
+      <Filter>torque2d\io\zip</Filter>
+    </ClInclude>
+    <ClInclude Include="M:\Torque2DCmake\engine\source\io\zip\fileHeader.h">
+      <Filter>torque2d\io\zip</Filter>
+    </ClInclude>
+    <ClInclude Include="M:\Torque2DCmake\engine\source\io\zip\zipArchive.h">
+      <Filter>torque2d\io\zip</Filter>
+    </ClInclude>
+    <ClInclude Include="M:\Torque2DCmake\engine\source\io\zip\zipCryptStream.h">
+      <Filter>torque2d\io\zip</Filter>
+    </ClInclude>
+    <ClInclude Include="M:\Torque2DCmake\engine\source\io\zip\zipObject.h">
+      <Filter>torque2d\io\zip</Filter>
+    </ClInclude>
+    <ClInclude Include="M:\Torque2DCmake\engine\source\io\zip\zipObject_ScriptBinding.h">
+      <Filter>torque2d\io\zip</Filter>
+    </ClInclude>
+    <ClInclude Include="M:\Torque2DCmake\engine\source\io\zip\zipStatFilter.h">
+      <Filter>torque2d\io\zip</Filter>
+    </ClInclude>
+    <ClInclude Include="M:\Torque2DCmake\engine\source\io\zip\zipSubStream.h">
+      <Filter>torque2d\io\zip</Filter>
+    </ClInclude>
+    <ClInclude Include="M:\Torque2DCmake\engine\source\io\zip\zipTempStream.h">
+      <Filter>torque2d\io\zip</Filter>
+    </ClInclude>
+    <ClInclude Include="M:\Torque2DCmake\engine\source\math\box_ScriptBinding.h">
+      <Filter>torque2d\math</Filter>
+    </ClInclude>
+    <ClInclude Include="M:\Torque2DCmake\engine\source\math\mBox.h">
+      <Filter>torque2d\math</Filter>
+    </ClInclude>
+    <ClInclude Include="M:\Torque2DCmake\engine\source\math\mConstants.h">
+      <Filter>torque2d\math</Filter>
+    </ClInclude>
+    <ClInclude Include="M:\Torque2DCmake\engine\source\math\mMath.h">
+      <Filter>torque2d\math</Filter>
+    </ClInclude>
+    <ClInclude Include="M:\Torque2DCmake\engine\source\math\mMathFn.h">
+      <Filter>torque2d\math</Filter>
+    </ClInclude>
+    <ClInclude Include="M:\Torque2DCmake\engine\source\math\mMatrix.h">
+      <Filter>torque2d\math</Filter>
+    </ClInclude>
+    <ClInclude Include="M:\Torque2DCmake\engine\source\math\mNormalDistribution.h">
+      <Filter>torque2d\math</Filter>
+    </ClInclude>
+    <ClInclude Include="M:\Torque2DCmake\engine\source\math\mPlane.h">
+      <Filter>torque2d\math</Filter>
+    </ClInclude>
+    <ClInclude Include="M:\Torque2DCmake\engine\source\math\mPlaneTransformer.h">
+      <Filter>torque2d\math</Filter>
+    </ClInclude>
+    <ClInclude Include="M:\Torque2DCmake\engine\source\math\mPoint.h">
+      <Filter>torque2d\math</Filter>
+    </ClInclude>
+    <ClInclude Include="M:\Torque2DCmake\engine\source\math\mQuadPatch.h">
+      <Filter>torque2d\math</Filter>
+    </ClInclude>
+    <ClInclude Include="M:\Torque2DCmake\engine\source\math\mQuat.h">
+      <Filter>torque2d\math</Filter>
+    </ClInclude>
+    <ClInclude Include="M:\Torque2DCmake\engine\source\math\mRandom.h">
+      <Filter>torque2d\math</Filter>
+    </ClInclude>
+    <ClInclude Include="M:\Torque2DCmake\engine\source\math\mRect.h">
+      <Filter>torque2d\math</Filter>
+    </ClInclude>
+    <ClInclude Include="M:\Torque2DCmake\engine\source\math\mSphere.h">
+      <Filter>torque2d\math</Filter>
+    </ClInclude>
+    <ClInclude Include="M:\Torque2DCmake\engine\source\math\mSplinePatch.h">
+      <Filter>torque2d\math</Filter>
+    </ClInclude>
+    <ClInclude Include="M:\Torque2DCmake\engine\source\math\mathIO.h">
+      <Filter>torque2d\math</Filter>
+    </ClInclude>
+    <ClInclude Include="M:\Torque2DCmake\engine\source\math\mathTypes.h">
+      <Filter>torque2d\math</Filter>
+    </ClInclude>
+    <ClInclude Include="M:\Torque2DCmake\engine\source\math\mathUtils.h">
+      <Filter>torque2d\math</Filter>
+    </ClInclude>
+    <ClInclude Include="M:\Torque2DCmake\engine\source\math\matrix_ScriptBinding.h">
+      <Filter>torque2d\math</Filter>
+    </ClInclude>
+    <ClInclude Include="M:\Torque2DCmake\engine\source\math\random_ScriptBinding.h">
+      <Filter>torque2d\math</Filter>
+    </ClInclude>
+    <ClInclude Include="M:\Torque2DCmake\engine\source\math\rectClipper.h">
+      <Filter>torque2d\math</Filter>
+    </ClInclude>
+    <ClInclude Include="M:\Torque2DCmake\engine\source\math\vector_ScriptBinding.h">
+      <Filter>torque2d\math</Filter>
+    </ClInclude>
+    <ClInclude Include="M:\Torque2DCmake\engine\source\memory\dataChunker.h">
+      <Filter>torque2d\memory</Filter>
+    </ClInclude>
+    <ClInclude Include="M:\Torque2DCmake\engine\source\memory\factoryCache.h">
+      <Filter>torque2d\memory</Filter>
+    </ClInclude>
+    <ClInclude Include="M:\Torque2DCmake\engine\source\memory\frameAllocator.h">
+      <Filter>torque2d\memory</Filter>
+    </ClInclude>
+    <ClInclude Include="M:\Torque2DCmake\engine\source\memory\safeDelete.h">
+      <Filter>torque2d\memory</Filter>
+    </ClInclude>
+    <ClInclude Include="M:\Torque2DCmake\engine\source\messaging\dispatcher.h">
+      <Filter>torque2d\messaging</Filter>
+    </ClInclude>
+    <ClInclude Include="M:\Torque2DCmake\engine\source\messaging\dispatcher_ScriptBinding.h">
+      <Filter>torque2d\messaging</Filter>
+    </ClInclude>
+    <ClInclude Include="M:\Torque2DCmake\engine\source\messaging\eventManager.h">
+      <Filter>torque2d\messaging</Filter>
+    </ClInclude>
+    <ClInclude Include="M:\Torque2DCmake\engine\source\messaging\eventManager_ScriptBinding.h">
+      <Filter>torque2d\messaging</Filter>
+    </ClInclude>
+    <ClInclude Include="M:\Torque2DCmake\engine\source\messaging\message.h">
+      <Filter>torque2d\messaging</Filter>
+    </ClInclude>
+    <ClInclude Include="M:\Torque2DCmake\engine\source\messaging\messageForwarder.h">
+      <Filter>torque2d\messaging</Filter>
+    </ClInclude>
+    <ClInclude Include="M:\Torque2DCmake\engine\source\messaging\message_ScriptBinding.h">
+      <Filter>torque2d\messaging</Filter>
+    </ClInclude>
+    <ClInclude Include="M:\Torque2DCmake\engine\source\messaging\scriptMsgListener.h">
+      <Filter>torque2d\messaging</Filter>
+    </ClInclude>
+    <ClInclude Include="M:\Torque2DCmake\engine\source\module\moduleCallbacks.h">
+      <Filter>torque2d\module</Filter>
+    </ClInclude>
+    <ClInclude Include="M:\Torque2DCmake\engine\source\module\moduleDefinition.h">
+      <Filter>torque2d\module</Filter>
+    </ClInclude>
+    <ClInclude Include="M:\Torque2DCmake\engine\source\module\moduleDefinition_ScriptBinding.h">
+      <Filter>torque2d\module</Filter>
+    </ClInclude>
+    <ClInclude Include="M:\Torque2DCmake\engine\source\module\moduleManager.h">
+      <Filter>torque2d\module</Filter>
+    </ClInclude>
+    <ClInclude Include="M:\Torque2DCmake\engine\source\module\moduleManager_ScriptBinding.h">
+      <Filter>torque2d\module</Filter>
+    </ClInclude>
+    <ClInclude Include="M:\Torque2DCmake\engine\source\module\moduleMergeDefinition.h">
+      <Filter>torque2d\module</Filter>
+    </ClInclude>
+    <ClInclude Include="M:\Torque2DCmake\engine\source\module\tamlModuleIdUpdateVisitor.h">
+      <Filter>torque2d\module</Filter>
+    </ClInclude>
+    <ClInclude Include="M:\Torque2DCmake\engine\source\network\RemoteCommandEvent.h">
+      <Filter>torque2d\network</Filter>
+    </ClInclude>
+    <ClInclude Include="M:\Torque2DCmake\engine\source\network\RemoteCommandEvent_ScriptBinding.h">
+      <Filter>torque2d\network</Filter>
+    </ClInclude>
+    <ClInclude Include="M:\Torque2DCmake\engine\source\network\connectionProtocol.h">
+      <Filter>torque2d\network</Filter>
+    </ClInclude>
+    <ClInclude Include="M:\Torque2DCmake\engine\source\network\connectionProtocol_ScriptBinding.h">
+      <Filter>torque2d\network</Filter>
+    </ClInclude>
+    <ClInclude Include="M:\Torque2DCmake\engine\source\network\connectionStringTable.h">
+      <Filter>torque2d\network</Filter>
+    </ClInclude>
+    <ClInclude Include="M:\Torque2DCmake\engine\source\network\httpObject.h">
+      <Filter>torque2d\network</Filter>
+    </ClInclude>
+    <ClInclude Include="M:\Torque2DCmake\engine\source\network\httpObject_ScriptBinding.h">
+      <Filter>torque2d\network</Filter>
+    </ClInclude>
+    <ClInclude Include="M:\Torque2DCmake\engine\source\network\netConnection.h">
+      <Filter>torque2d\network</Filter>
+    </ClInclude>
+    <ClInclude Include="M:\Torque2DCmake\engine\source\network\netConnection_ScriptBinding.h">
+      <Filter>torque2d\network</Filter>
+    </ClInclude>
+    <ClInclude Include="M:\Torque2DCmake\engine\source\network\netInterface.h">
+      <Filter>torque2d\network</Filter>
+    </ClInclude>
+    <ClInclude Include="M:\Torque2DCmake\engine\source\network\netInterface_ScriptBinding.h">
+      <Filter>torque2d\network</Filter>
+    </ClInclude>
+    <ClInclude Include="M:\Torque2DCmake\engine\source\network\netObject.h">
+      <Filter>torque2d\network</Filter>
+    </ClInclude>
+    <ClInclude Include="M:\Torque2DCmake\engine\source\network\netObject_ScriptBinding.h">
+      <Filter>torque2d\network</Filter>
+    </ClInclude>
+    <ClInclude Include="M:\Torque2DCmake\engine\source\network\netStringTable.h">
+      <Filter>torque2d\network</Filter>
+    </ClInclude>
+    <ClInclude Include="M:\Torque2DCmake\engine\source\network\netStringTable_ScriptBinding.h">
+      <Filter>torque2d\network</Filter>
+    </ClInclude>
+    <ClInclude Include="M:\Torque2DCmake\engine\source\network\networkProcessList.h">
+      <Filter>torque2d\network</Filter>
+    </ClInclude>
+    <ClInclude Include="M:\Torque2DCmake\engine\source\network\serverQuery.h">
+      <Filter>torque2d\network</Filter>
+    </ClInclude>
+    <ClInclude Include="M:\Torque2DCmake\engine\source\network\serverQuery_ScriptBinding.h">
+      <Filter>torque2d\network</Filter>
+    </ClInclude>
+    <ClInclude Include="M:\Torque2DCmake\engine\source\network\tcpObject.h">
+      <Filter>torque2d\network</Filter>
+    </ClInclude>
+    <ClInclude Include="M:\Torque2DCmake\engine\source\network\tcpObject_ScriptBinding.h">
+      <Filter>torque2d\network</Filter>
+    </ClInclude>
+    <ClInclude Include="M:\Torque2DCmake\engine\source\network\telnetConsole.h">
+      <Filter>torque2d\network</Filter>
+    </ClInclude>
+    <ClInclude Include="M:\Torque2DCmake\engine\source\network\telnetConsole_ScriptBinding.h">
+      <Filter>torque2d\network</Filter>
+    </ClInclude>
+    <ClInclude Include="M:\Torque2DCmake\engine\source\persistence\SimXMLDocument.h">
+      <Filter>torque2d\persistence</Filter>
+    </ClInclude>
+    <ClInclude Include="M:\Torque2DCmake\engine\source\persistence\SimXMLDocument_ScriptBinding.h">
+      <Filter>torque2d\persistence</Filter>
+    </ClInclude>
+    <ClInclude Include="M:\Torque2DCmake\engine\source\persistence\rapidjson\include\rapidjson\allocators.h">
+      <Filter>torque2d\persistence\rapidjson\include\rapidjson</Filter>
+    </ClInclude>
+    <ClInclude Include="M:\Torque2DCmake\engine\source\persistence\rapidjson\include\rapidjson\document.h">
+      <Filter>torque2d\persistence\rapidjson\include\rapidjson</Filter>
+    </ClInclude>
+    <ClInclude Include="M:\Torque2DCmake\engine\source\persistence\rapidjson\include\rapidjson\encodedstream.h">
+      <Filter>torque2d\persistence\rapidjson\include\rapidjson</Filter>
+    </ClInclude>
+    <ClInclude Include="M:\Torque2DCmake\engine\source\persistence\rapidjson\include\rapidjson\encodings.h">
+      <Filter>torque2d\persistence\rapidjson\include\rapidjson</Filter>
+    </ClInclude>
+    <ClInclude Include="M:\Torque2DCmake\engine\source\persistence\rapidjson\include\rapidjson\filereadstream.h">
+      <Filter>torque2d\persistence\rapidjson\include\rapidjson</Filter>
+    </ClInclude>
+    <ClInclude Include="M:\Torque2DCmake\engine\source\persistence\rapidjson\include\rapidjson\filestream.h">
+      <Filter>torque2d\persistence\rapidjson\include\rapidjson</Filter>
+    </ClInclude>
+    <ClInclude Include="M:\Torque2DCmake\engine\source\persistence\rapidjson\include\rapidjson\filewritestream.h">
+      <Filter>torque2d\persistence\rapidjson\include\rapidjson</Filter>
+    </ClInclude>
+    <ClInclude Include="M:\Torque2DCmake\engine\source\persistence\rapidjson\include\rapidjson\prettywriter.h">
+      <Filter>torque2d\persistence\rapidjson\include\rapidjson</Filter>
+    </ClInclude>
+    <ClInclude Include="M:\Torque2DCmake\engine\source\persistence\rapidjson\include\rapidjson\rapidjson.h">
+      <Filter>torque2d\persistence\rapidjson\include\rapidjson</Filter>
+    </ClInclude>
+    <ClInclude Include="M:\Torque2DCmake\engine\source\persistence\rapidjson\include\rapidjson\reader.h">
+      <Filter>torque2d\persistence\rapidjson\include\rapidjson</Filter>
+    </ClInclude>
+    <ClInclude Include="M:\Torque2DCmake\engine\source\persistence\rapidjson\include\rapidjson\stringbuffer.h">
+      <Filter>torque2d\persistence\rapidjson\include\rapidjson</Filter>
+    </ClInclude>
+    <ClInclude Include="M:\Torque2DCmake\engine\source\persistence\rapidjson\include\rapidjson\writer.h">
+      <Filter>torque2d\persistence\rapidjson\include\rapidjson</Filter>
+    </ClInclude>
+    <ClInclude Include="M:\Torque2DCmake\engine\source\persistence\rapidjson\include\rapidjson\internal\pow10.h">
+      <Filter>torque2d\persistence\rapidjson\include\rapidjson\internal</Filter>
+    </ClInclude>
+    <ClInclude Include="M:\Torque2DCmake\engine\source\persistence\rapidjson\include\rapidjson\internal\stack.h">
+      <Filter>torque2d\persistence\rapidjson\include\rapidjson\internal</Filter>
+    </ClInclude>
+    <ClInclude Include="M:\Torque2DCmake\engine\source\persistence\rapidjson\include\rapidjson\internal\strfunc.h">
+      <Filter>torque2d\persistence\rapidjson\include\rapidjson\internal</Filter>
+    </ClInclude>
+    <ClInclude Include="M:\Torque2DCmake\engine\source\persistence\taml\taml.h">
+      <Filter>torque2d\persistence\taml</Filter>
+    </ClInclude>
+    <ClInclude Include="M:\Torque2DCmake\engine\source\persistence\taml\tamlCallbacks.h">
+      <Filter>torque2d\persistence\taml</Filter>
+    </ClInclude>
+    <ClInclude Include="M:\Torque2DCmake\engine\source\persistence\taml\tamlChildren.h">
+      <Filter>torque2d\persistence\taml</Filter>
+    </ClInclude>
+    <ClInclude Include="M:\Torque2DCmake\engine\source\persistence\taml\tamlCustom.h">
+      <Filter>torque2d\persistence\taml</Filter>
+    </ClInclude>
+    <ClInclude Include="M:\Torque2DCmake\engine\source\persistence\taml\tamlParser.h">
+      <Filter>torque2d\persistence\taml</Filter>
+    </ClInclude>
+    <ClInclude Include="M:\Torque2DCmake\engine\source\persistence\taml\tamlVisitor.h">
+      <Filter>torque2d\persistence\taml</Filter>
+    </ClInclude>
+    <ClInclude Include="M:\Torque2DCmake\engine\source\persistence\taml\tamlWriteNode.h">
+      <Filter>torque2d\persistence\taml</Filter>
+    </ClInclude>
+    <ClInclude Include="M:\Torque2DCmake\engine\source\persistence\taml\taml_ScriptBinding.h">
+      <Filter>torque2d\persistence\taml</Filter>
+    </ClInclude>
+    <ClInclude Include="M:\Torque2DCmake\engine\source\persistence\taml\binary\tamlBinaryReader.h">
+      <Filter>torque2d\persistence\taml\binary</Filter>
+    </ClInclude>
+    <ClInclude Include="M:\Torque2DCmake\engine\source\persistence\taml\binary\tamlBinaryWriter.h">
+      <Filter>torque2d\persistence\taml\binary</Filter>
+    </ClInclude>
+    <ClInclude Include="M:\Torque2DCmake\engine\source\persistence\taml\json\tamlJSONParser.h">
+      <Filter>torque2d\persistence\taml\json</Filter>
+    </ClInclude>
+    <ClInclude Include="M:\Torque2DCmake\engine\source\persistence\taml\json\tamlJSONReader.h">
+      <Filter>torque2d\persistence\taml\json</Filter>
+    </ClInclude>
+    <ClInclude Include="M:\Torque2DCmake\engine\source\persistence\taml\json\tamlJSONWriter.h">
+      <Filter>torque2d\persistence\taml\json</Filter>
+    </ClInclude>
+    <ClInclude Include="M:\Torque2DCmake\engine\source\persistence\taml\xml\tamlXmlParser.h">
+      <Filter>torque2d\persistence\taml\xml</Filter>
+    </ClInclude>
+    <ClInclude Include="M:\Torque2DCmake\engine\source\persistence\taml\xml\tamlXmlReader.h">
+      <Filter>torque2d\persistence\taml\xml</Filter>
+    </ClInclude>
+    <ClInclude Include="M:\Torque2DCmake\engine\source\persistence\taml\xml\tamlXmlWriter.h">
+      <Filter>torque2d\persistence\taml\xml</Filter>
+    </ClInclude>
+    <ClInclude Include="M:\Torque2DCmake\engine\source\persistence\tinyXML\tinystr.h">
+      <Filter>torque2d\persistence\tinyXML</Filter>
+    </ClInclude>
+    <ClInclude Include="M:\Torque2DCmake\engine\source\persistence\tinyXML\tinyxml.h">
+      <Filter>torque2d\persistence\tinyXML</Filter>
+    </ClInclude>
+    <ClInclude Include="M:\Torque2DCmake\engine\source\platform\CursorManager_ScriptBinding.h">
+      <Filter>torque2d\platform</Filter>
+    </ClInclude>
+    <ClInclude Include="M:\Torque2DCmake\engine\source\platform\GLCoreFunc.h">
+      <Filter>torque2d\platform</Filter>
+    </ClInclude>
+    <ClInclude Include="M:\Torque2DCmake\engine\source\platform\GLExtFunc.h">
+      <Filter>torque2d\platform</Filter>
+    </ClInclude>
+    <ClInclude Include="M:\Torque2DCmake\engine\source\platform\GLUFunc.h">
+      <Filter>torque2d\platform</Filter>
+    </ClInclude>
+    <ClInclude Include="M:\Torque2DCmake\engine\source\platform\Tickable.h">
+      <Filter>torque2d\platform</Filter>
+    </ClInclude>
+    <ClInclude Include="M:\Torque2DCmake\engine\source\platform\eaxtypes.h">
+      <Filter>torque2d\platform</Filter>
+    </ClInclude>
+    <ClInclude Include="M:\Torque2DCmake\engine\source\platform\event.h">
+      <Filter>torque2d\platform</Filter>
+    </ClInclude>
+    <ClInclude Include="M:\Torque2DCmake\engine\source\platform\platform.h">
+      <Filter>torque2d\platform</Filter>
+    </ClInclude>
+    <ClInclude Include="M:\Torque2DCmake\engine\source\platform\platformAL.h">
+      <Filter>torque2d\platform</Filter>
+    </ClInclude>
+    <ClInclude Include="M:\Torque2DCmake\engine\source\platform\platformAssert.h">
+      <Filter>torque2d\platform</Filter>
+    </ClInclude>
+    <ClInclude Include="M:\Torque2DCmake\engine\source\platform\platformAssert_ScriptBinding.h">
+      <Filter>torque2d\platform</Filter>
+    </ClInclude>
+    <ClInclude Include="M:\Torque2DCmake\engine\source\platform\platformAudio.h">
+      <Filter>torque2d\platform</Filter>
+    </ClInclude>
+    <ClInclude Include="M:\Torque2DCmake\engine\source\platform\platformCPU.h">
+      <Filter>torque2d\platform</Filter>
+    </ClInclude>
+    <ClInclude Include="M:\Torque2DCmake\engine\source\platform\platformEndian.h">
+      <Filter>torque2d\platform</Filter>
+    </ClInclude>
+    <ClInclude Include="M:\Torque2DCmake\engine\source\platform\platformFileIO.h">
+      <Filter>torque2d\platform</Filter>
+    </ClInclude>
+    <ClInclude Include="M:\Torque2DCmake\engine\source\platform\platformFileIO_ScriptBinding.h">
+      <Filter>torque2d\platform</Filter>
+    </ClInclude>
+    <ClInclude Include="M:\Torque2DCmake\engine\source\platform\platformFont.h">
+      <Filter>torque2d\platform</Filter>
+    </ClInclude>
+    <ClInclude Include="M:\Torque2DCmake\engine\source\platform\platformGL.h">
+      <Filter>torque2d\platform</Filter>
+    </ClInclude>
+    <ClInclude Include="M:\Torque2DCmake\engine\source\platform\platformInput.h">
+      <Filter>torque2d\platform</Filter>
+    </ClInclude>
+    <ClInclude Include="M:\Torque2DCmake\engine\source\platform\platformInput_ScriptBinding.h">
+      <Filter>torque2d\platform</Filter>
+    </ClInclude>
+    <ClInclude Include="M:\Torque2DCmake\engine\source\platform\platformMath.h">
+      <Filter>torque2d\platform</Filter>
+    </ClInclude>
+    <ClInclude Include="M:\Torque2DCmake\engine\source\platform\platformMemory.h">
+      <Filter>torque2d\platform</Filter>
+    </ClInclude>
+    <ClInclude Include="M:\Torque2DCmake\engine\source\platform\platformNet.h">
+      <Filter>torque2d\platform</Filter>
+    </ClInclude>
+    <ClInclude Include="M:\Torque2DCmake\engine\source\platform\platformNetAsync.h">
+      <Filter>torque2d\platform</Filter>
+    </ClInclude>
+    <ClInclude Include="M:\Torque2DCmake\engine\source\platform\platformSemaphore.h">
+      <Filter>torque2d\platform</Filter>
+    </ClInclude>
+    <ClInclude Include="M:\Torque2DCmake\engine\source\platform\platformString.h">
+      <Filter>torque2d\platform</Filter>
+    </ClInclude>
+    <ClInclude Include="M:\Torque2DCmake\engine\source\platform\platformString_ScriptBinding.h">
+      <Filter>torque2d\platform</Filter>
+    </ClInclude>
+    <ClInclude Include="M:\Torque2DCmake\engine\source\platform\platformTLS.h">
+      <Filter>torque2d\platform</Filter>
+    </ClInclude>
+    <ClInclude Include="M:\Torque2DCmake\engine\source\platform\platformTimeManager.h">
+      <Filter>torque2d\platform</Filter>
+    </ClInclude>
+    <ClInclude Include="M:\Torque2DCmake\engine\source\platform\platformVFS.h">
+      <Filter>torque2d\platform</Filter>
+    </ClInclude>
+    <ClInclude Include="M:\Torque2DCmake\engine\source\platform\platformVideo.h">
+      <Filter>torque2d\platform</Filter>
+    </ClInclude>
+    <ClInclude Include="M:\Torque2DCmake\engine\source\platform\platformVideo_ScriptBinding.h">
+      <Filter>torque2d\platform</Filter>
+    </ClInclude>
+    <ClInclude Include="M:\Torque2DCmake\engine\source\platform\platform_ScriptBinding.h">
+      <Filter>torque2d\platform</Filter>
+    </ClInclude>
+    <ClInclude Include="M:\Torque2DCmake\engine\source\platform\tmm_off.h">
+      <Filter>torque2d\platform</Filter>
+    </ClInclude>
+    <ClInclude Include="M:\Torque2DCmake\engine\source\platform\tmm_on.h">
+      <Filter>torque2d\platform</Filter>
+    </ClInclude>
+    <ClInclude Include="M:\Torque2DCmake\engine\source\platform\types.arm.h">
+      <Filter>torque2d\platform</Filter>
+    </ClInclude>
+    <ClInclude Include="M:\Torque2DCmake\engine\source\platform\types.codewarrior.h">
+      <Filter>torque2d\platform</Filter>
+    </ClInclude>
+    <ClInclude Include="M:\Torque2DCmake\engine\source\platform\types.gcc.h">
+      <Filter>torque2d\platform</Filter>
+    </ClInclude>
+    <ClInclude Include="M:\Torque2DCmake\engine\source\platform\types.h">
+      <Filter>torque2d\platform</Filter>
+    </ClInclude>
+    <ClInclude Include="M:\Torque2DCmake\engine\source\platform\types.posix.h">
+      <Filter>torque2d\platform</Filter>
+    </ClInclude>
+    <ClInclude Include="M:\Torque2DCmake\engine\source\platform\types.ppc.h">
+      <Filter>torque2d\platform</Filter>
+    </ClInclude>
+    <ClInclude Include="M:\Torque2DCmake\engine\source\platform\types.visualc.h">
+      <Filter>torque2d\platform</Filter>
+    </ClInclude>
+    <ClInclude Include="M:\Torque2DCmake\engine\source\platform\types.win32.h">
+      <Filter>torque2d\platform</Filter>
+    </ClInclude>
+    <ClInclude Include="M:\Torque2DCmake\engine\source\platform\typesPPC.h">
+      <Filter>torque2d\platform</Filter>
+    </ClInclude>
+    <ClInclude Include="M:\Torque2DCmake\engine\source\platform\typesWin32.h">
+      <Filter>torque2d\platform</Filter>
+    </ClInclude>
+    <ClInclude Include="M:\Torque2DCmake\engine\source\platform\typetraits.h">
+      <Filter>torque2d\platform</Filter>
+    </ClInclude>
+    <ClInclude Include="M:\Torque2DCmake\engine\source\platform\menus\popupMenu.h">
+      <Filter>torque2d\platform\menus</Filter>
+    </ClInclude>
+    <ClInclude Include="M:\Torque2DCmake\engine\source\platform\menus\popupMenu_ScriptBinding.h">
+      <Filter>torque2d\platform\menus</Filter>
+    </ClInclude>
+    <ClInclude Include="M:\Torque2DCmake\engine\source\platform\nativeDialogs\fileDialog.h">
+      <Filter>torque2d\platform\nativeDialogs</Filter>
+    </ClInclude>
+    <ClInclude Include="M:\Torque2DCmake\engine\source\platform\nativeDialogs\fileDialog_ScriptBinding.h">
+      <Filter>torque2d\platform\nativeDialogs</Filter>
+    </ClInclude>
+    <ClInclude Include="M:\Torque2DCmake\engine\source\platform\nativeDialogs\msgBox.h">
+      <Filter>torque2d\platform\nativeDialogs</Filter>
+    </ClInclude>
+    <ClInclude Include="M:\Torque2DCmake\engine\source\platform\nativeDialogs\msgBox_ScriptBinding.h">
+      <Filter>torque2d\platform\nativeDialogs</Filter>
+    </ClInclude>
+    <ClInclude Include="M:\Torque2DCmake\engine\source\platform\threads\mutex.h">
+      <Filter>torque2d\platform\threads</Filter>
+    </ClInclude>
+    <ClInclude Include="M:\Torque2DCmake\engine\source\platform\threads\semaphore.h">
+      <Filter>torque2d\platform\threads</Filter>
+    </ClInclude>
+    <ClInclude Include="M:\Torque2DCmake\engine\source\platform\threads\thread.h">
+      <Filter>torque2d\platform\threads</Filter>
+    </ClInclude>
+    <ClInclude Include="M:\Torque2DCmake\engine\source\sim\SimObjectList.h">
+      <Filter>torque2d\sim</Filter>
+    </ClInclude>
+    <ClInclude Include="M:\Torque2DCmake\engine\source\sim\scriptGroup.h">
+      <Filter>torque2d\sim</Filter>
+    </ClInclude>
+    <ClInclude Include="M:\Torque2DCmake\engine\source\sim\scriptObject.h">
+      <Filter>torque2d\sim</Filter>
+    </ClInclude>
+    <ClInclude Include="M:\Torque2DCmake\engine\source\sim\simBase.h">
+      <Filter>torque2d\sim</Filter>
+    </ClInclude>
+    <ClInclude Include="M:\Torque2DCmake\engine\source\sim\simBase_ScriptBinding.h">
+      <Filter>torque2d\sim</Filter>
+    </ClInclude>
+    <ClInclude Include="M:\Torque2DCmake\engine\source\sim\simConsoleEvent.h">
+      <Filter>torque2d\sim</Filter>
+    </ClInclude>
+    <ClInclude Include="M:\Torque2DCmake\engine\source\sim\simConsoleThreadExecEvent.h">
+      <Filter>torque2d\sim</Filter>
+    </ClInclude>
+    <ClInclude Include="M:\Torque2DCmake\engine\source\sim\simDatablock.h">
+      <Filter>torque2d\sim</Filter>
+    </ClInclude>
+    <ClInclude Include="M:\Torque2DCmake\engine\source\sim\simDatablockGroup.h">
+      <Filter>torque2d\sim</Filter>
+    </ClInclude>
+    <ClInclude Include="M:\Torque2DCmake\engine\source\sim\simDatablock_ScriptBinding.h">
+      <Filter>torque2d\sim</Filter>
+    </ClInclude>
+    <ClInclude Include="M:\Torque2DCmake\engine\source\sim\simDictionary.h">
+      <Filter>torque2d\sim</Filter>
+    </ClInclude>
+    <ClInclude Include="M:\Torque2DCmake\engine\source\sim\simEvent.h">
+      <Filter>torque2d\sim</Filter>
+    </ClInclude>
+    <ClInclude Include="M:\Torque2DCmake\engine\source\sim\simFieldDictionary.h">
+      <Filter>torque2d\sim</Filter>
+    </ClInclude>
+    <ClInclude Include="M:\Torque2DCmake\engine\source\sim\simObject.h">
+      <Filter>torque2d\sim</Filter>
+    </ClInclude>
+    <ClInclude Include="M:\Torque2DCmake\engine\source\sim\simObjectPtr.h">
+      <Filter>torque2d\sim</Filter>
+    </ClInclude>
+    <ClInclude Include="M:\Torque2DCmake\engine\source\sim\simObjectRef.h">
+      <Filter>torque2d\sim</Filter>
+    </ClInclude>
+    <ClInclude Include="M:\Torque2DCmake\engine\source\sim\simObjectTimerEvent.h">
+      <Filter>torque2d\sim</Filter>
+    </ClInclude>
+    <ClInclude Include="M:\Torque2DCmake\engine\source\sim\simObject_ScriptBinding.h">
+      <Filter>torque2d\sim</Filter>
+    </ClInclude>
+    <ClInclude Include="M:\Torque2DCmake\engine\source\sim\simSerialize_ScriptBinding.h">
+      <Filter>torque2d\sim</Filter>
+    </ClInclude>
+    <ClInclude Include="M:\Torque2DCmake\engine\source\sim\simSet.h">
+      <Filter>torque2d\sim</Filter>
+    </ClInclude>
+    <ClInclude Include="M:\Torque2DCmake\engine\source\sim\simSet_ScriptBinding.h">
+      <Filter>torque2d\sim</Filter>
+    </ClInclude>
+    <ClInclude Include="M:\Torque2DCmake\engine\source\spine\Animation.h">
+      <Filter>torque2d\spine</Filter>
+    </ClInclude>
+    <ClInclude Include="M:\Torque2DCmake\engine\source\spine\AnimationState.h">
+      <Filter>torque2d\spine</Filter>
+    </ClInclude>
+    <ClInclude Include="M:\Torque2DCmake\engine\source\spine\AnimationStateData.h">
+      <Filter>torque2d\spine</Filter>
+    </ClInclude>
+    <ClInclude Include="M:\Torque2DCmake\engine\source\spine\Atlas.h">
+      <Filter>torque2d\spine</Filter>
+    </ClInclude>
+    <ClInclude Include="M:\Torque2DCmake\engine\source\spine\AtlasAttachmentLoader.h">
+      <Filter>torque2d\spine</Filter>
+    </ClInclude>
+    <ClInclude Include="M:\Torque2DCmake\engine\source\spine\Attachment.h">
+      <Filter>torque2d\spine</Filter>
+    </ClInclude>
+    <ClInclude Include="M:\Torque2DCmake\engine\source\spine\AttachmentLoader.h">
+      <Filter>torque2d\spine</Filter>
+    </ClInclude>
+    <ClInclude Include="M:\Torque2DCmake\engine\source\spine\Bone.h">
+      <Filter>torque2d\spine</Filter>
+    </ClInclude>
+    <ClInclude Include="M:\Torque2DCmake\engine\source\spine\BoneData.h">
+      <Filter>torque2d\spine</Filter>
+    </ClInclude>
+    <ClInclude Include="M:\Torque2DCmake\engine\source\spine\BoundingBoxAttachment.h">
+      <Filter>torque2d\spine</Filter>
+    </ClInclude>
+    <ClInclude Include="M:\Torque2DCmake\engine\source\spine\Event.h">
+      <Filter>torque2d\spine</Filter>
+    </ClInclude>
+    <ClInclude Include="M:\Torque2DCmake\engine\source\spine\EventData.h">
+      <Filter>torque2d\spine</Filter>
+    </ClInclude>
+    <ClInclude Include="M:\Torque2DCmake\engine\source\spine\Json.h">
+      <Filter>torque2d\spine</Filter>
+    </ClInclude>
+    <ClInclude Include="M:\Torque2DCmake\engine\source\spine\RegionAttachment.h">
+      <Filter>torque2d\spine</Filter>
+    </ClInclude>
+    <ClInclude Include="M:\Torque2DCmake\engine\source\spine\Skeleton.h">
+      <Filter>torque2d\spine</Filter>
+    </ClInclude>
+    <ClInclude Include="M:\Torque2DCmake\engine\source\spine\SkeletonBounds.h">
+      <Filter>torque2d\spine</Filter>
+    </ClInclude>
+    <ClInclude Include="M:\Torque2DCmake\engine\source\spine\SkeletonData.h">
+      <Filter>torque2d\spine</Filter>
+    </ClInclude>
+    <ClInclude Include="M:\Torque2DCmake\engine\source\spine\SkeletonJson.h">
+      <Filter>torque2d\spine</Filter>
+    </ClInclude>
+    <ClInclude Include="M:\Torque2DCmake\engine\source\spine\Skin.h">
+      <Filter>torque2d\spine</Filter>
+    </ClInclude>
+    <ClInclude Include="M:\Torque2DCmake\engine\source\spine\Slot.h">
+      <Filter>torque2d\spine</Filter>
+    </ClInclude>
+    <ClInclude Include="M:\Torque2DCmake\engine\source\spine\SlotData.h">
+      <Filter>torque2d\spine</Filter>
+    </ClInclude>
+    <ClInclude Include="M:\Torque2DCmake\engine\source\spine\extension.h">
+      <Filter>torque2d\spine</Filter>
+    </ClInclude>
+    <ClInclude Include="M:\Torque2DCmake\engine\source\spine\spine.h">
+      <Filter>torque2d\spine</Filter>
+    </ClInclude>
+    <ClInclude Include="M:\Torque2DCmake\engine\source\string\findMatch.h">
+      <Filter>torque2d\string</Filter>
+    </ClInclude>
+    <ClInclude Include="M:\Torque2DCmake\engine\source\string\stringBuffer.h">
+      <Filter>torque2d\string</Filter>
+    </ClInclude>
+    <ClInclude Include="M:\Torque2DCmake\engine\source\string\stringBuffer_ScriptBinding.h">
+      <Filter>torque2d\string</Filter>
+    </ClInclude>
+    <ClInclude Include="M:\Torque2DCmake\engine\source\string\stringStack.h">
+      <Filter>torque2d\string</Filter>
+    </ClInclude>
+    <ClInclude Include="M:\Torque2DCmake\engine\source\string\stringTable.h">
+      <Filter>torque2d\string</Filter>
+    </ClInclude>
+    <ClInclude Include="M:\Torque2DCmake\engine\source\string\stringUnit.h">
+      <Filter>torque2d\string</Filter>
+    </ClInclude>
+    <ClInclude Include="M:\Torque2DCmake\engine\source\string\stringUnit_ScriptBinding.h">
+      <Filter>torque2d\string</Filter>
+    </ClInclude>
+    <ClInclude Include="M:\Torque2DCmake\engine\source\string\unicode.h">
+      <Filter>torque2d\string</Filter>
+    </ClInclude>
+    <ClInclude Include="M:\Torque2DCmake\engine\source\testing\unitTesting.h">
+      <Filter>torque2d\testing</Filter>
+    </ClInclude>
+    <ClInclude Include="M:\Torque2DCmake\engine\source\testing\unitTesting_ScriptBinding.h">
+      <Filter>torque2d\testing</Filter>
+    </ClInclude>
+    <ClInclude Include="M:\Torque2DCmake\engine\source\2d\levelInfo.h">
+      <Filter>torque2d\2d</Filter>
+    </ClInclude>
+    <ClInclude Include="M:\Torque2DCmake\engine\source\2d\objectTypes.h">
+      <Filter>torque2d\2d</Filter>
+    </ClInclude>
+    <ClInclude Include="M:\Torque2DCmake\engine\source\2d\assets\AnimationAsset.h">
+      <Filter>torque2d\2d\assets</Filter>
+    </ClInclude>
+    <ClInclude Include="M:\Torque2DCmake\engine\source\2d\assets\AnimationAsset_ScriptBinding.h">
+      <Filter>torque2d\2d\assets</Filter>
+    </ClInclude>
+    <ClInclude Include="M:\Torque2DCmake\engine\source\2d\assets\FontAsset.h">
+      <Filter>torque2d\2d\assets</Filter>
+    </ClInclude>
+    <ClInclude Include="M:\Torque2DCmake\engine\source\2d\assets\FontAsset_ScriptBinding.h">
+      <Filter>torque2d\2d\assets</Filter>
+    </ClInclude>
+    <ClInclude Include="M:\Torque2DCmake\engine\source\2d\assets\ImageAsset.h">
+      <Filter>torque2d\2d\assets</Filter>
+    </ClInclude>
+    <ClInclude Include="M:\Torque2DCmake\engine\source\2d\assets\ImageAsset_ScriptBinding.h">
+      <Filter>torque2d\2d\assets</Filter>
+    </ClInclude>
+    <ClInclude Include="M:\Torque2DCmake\engine\source\2d\assets\LevelAsset.h">
+      <Filter>torque2d\2d\assets</Filter>
+    </ClInclude>
+    <ClInclude Include="M:\Torque2DCmake\engine\source\2d\assets\LevelAsset_ScriptBinding.h">
+      <Filter>torque2d\2d\assets</Filter>
+    </ClInclude>
+    <ClInclude Include="M:\Torque2DCmake\engine\source\2d\assets\ParticleAsset.h">
+      <Filter>torque2d\2d\assets</Filter>
+    </ClInclude>
+    <ClInclude Include="M:\Torque2DCmake\engine\source\2d\assets\ParticleAssetEmitter.h">
+      <Filter>torque2d\2d\assets</Filter>
+    </ClInclude>
+    <ClInclude Include="M:\Torque2DCmake\engine\source\2d\assets\ParticleAssetEmitter_ScriptBinding.h">
+      <Filter>torque2d\2d\assets</Filter>
+    </ClInclude>
+    <ClInclude Include="M:\Torque2DCmake\engine\source\2d\assets\ParticleAssetField.h">
+      <Filter>torque2d\2d\assets</Filter>
+    </ClInclude>
+    <ClInclude Include="M:\Torque2DCmake\engine\source\2d\assets\ParticleAssetFieldCollection.h">
+      <Filter>torque2d\2d\assets</Filter>
+    </ClInclude>
+    <ClInclude Include="M:\Torque2DCmake\engine\source\2d\assets\ParticleAsset_ScriptBinding.h">
+      <Filter>torque2d\2d\assets</Filter>
+    </ClInclude>
+    <ClInclude Include="M:\Torque2DCmake\engine\source\2d\assets\SkeletonAsset.h">
+      <Filter>torque2d\2d\assets</Filter>
+    </ClInclude>
+    <ClInclude Include="M:\Torque2DCmake\engine\source\2d\assets\SkeletonAsset_ScriptBinding.h">
+      <Filter>torque2d\2d\assets</Filter>
+    </ClInclude>
+    <ClInclude Include="M:\Torque2DCmake\engine\source\2d\controllers\AmbientForceController.h">
+      <Filter>torque2d\2d\controllers</Filter>
+    </ClInclude>
+    <ClInclude Include="M:\Torque2DCmake\engine\source\2d\controllers\AmbientForceController_ScriptBinding.h">
+      <Filter>torque2d\2d\controllers</Filter>
+    </ClInclude>
+    <ClInclude Include="M:\Torque2DCmake\engine\source\2d\controllers\BuoyancyController.h">
+      <Filter>torque2d\2d\controllers</Filter>
+    </ClInclude>
+    <ClInclude Include="M:\Torque2DCmake\engine\source\2d\controllers\BuoyancyController_ScriptBinding.h">
+      <Filter>torque2d\2d\controllers</Filter>
+    </ClInclude>
+    <ClInclude Include="M:\Torque2DCmake\engine\source\2d\controllers\PointForceController.h">
+      <Filter>torque2d\2d\controllers</Filter>
+    </ClInclude>
+    <ClInclude Include="M:\Torque2DCmake\engine\source\2d\controllers\PointForceController_ScriptBinding.h">
+      <Filter>torque2d\2d\controllers</Filter>
+    </ClInclude>
+    <ClInclude Include="M:\Torque2DCmake\engine\source\2d\controllers\core\GroupedSceneController.h">
+      <Filter>torque2d\2d\controllers\core</Filter>
+    </ClInclude>
+    <ClInclude Include="M:\Torque2DCmake\engine\source\2d\controllers\core\GroupedSceneController_ScriptBinding.h">
+      <Filter>torque2d\2d\controllers\core</Filter>
+    </ClInclude>
+    <ClInclude Include="M:\Torque2DCmake\engine\source\2d\controllers\core\PickingSceneController.h">
+      <Filter>torque2d\2d\controllers\core</Filter>
+    </ClInclude>
+    <ClInclude Include="M:\Torque2DCmake\engine\source\2d\controllers\core\PickingSceneController_ScriptBinding.h">
+      <Filter>torque2d\2d\controllers\core</Filter>
+    </ClInclude>
+    <ClInclude Include="M:\Torque2DCmake\engine\source\2d\controllers\core\SceneController.h">
+      <Filter>torque2d\2d\controllers\core</Filter>
+    </ClInclude>
+    <ClInclude Include="M:\Torque2DCmake\engine\source\2d\core\BatchRender.h">
+      <Filter>torque2d\2d\core</Filter>
+    </ClInclude>
+    <ClInclude Include="M:\Torque2DCmake\engine\source\2d\core\CoreMath.h">
+      <Filter>torque2d\2d\core</Filter>
+    </ClInclude>
+    <ClInclude Include="M:\Torque2DCmake\engine\source\2d\core\ImageFrameProvider.h">
+      <Filter>torque2d\2d\core</Filter>
+    </ClInclude>
+    <ClInclude Include="M:\Torque2DCmake\engine\source\2d\core\ImageFrameProviderCore.h">
+      <Filter>torque2d\2d\core</Filter>
+    </ClInclude>
+    <ClInclude Include="M:\Torque2DCmake\engine\source\2d\core\ParticleSystem.h">
+      <Filter>torque2d\2d\core</Filter>
+    </ClInclude>
+    <ClInclude Include="M:\Torque2DCmake\engine\source\2d\core\RenderProxy.h">
+      <Filter>torque2d\2d\core</Filter>
+    </ClInclude>
+    <ClInclude Include="M:\Torque2DCmake\engine\source\2d\core\RenderProxy_ScriptBinding.h">
+      <Filter>torque2d\2d\core</Filter>
+    </ClInclude>
+    <ClInclude Include="M:\Torque2DCmake\engine\source\2d\core\SpriteBase.h">
+      <Filter>torque2d\2d\core</Filter>
+    </ClInclude>
+    <ClInclude Include="M:\Torque2DCmake\engine\source\2d\core\SpriteBase_ScriptBinding.h">
+      <Filter>torque2d\2d\core</Filter>
+    </ClInclude>
+    <ClInclude Include="M:\Torque2DCmake\engine\source\2d\core\SpriteBatch.h">
+      <Filter>torque2d\2d\core</Filter>
+    </ClInclude>
+    <ClInclude Include="M:\Torque2DCmake\engine\source\2d\core\SpriteBatchItem.h">
+      <Filter>torque2d\2d\core</Filter>
+    </ClInclude>
+    <ClInclude Include="M:\Torque2DCmake\engine\source\2d\core\SpriteBatchQuery.h">
+      <Filter>torque2d\2d\core</Filter>
+    </ClInclude>
+    <ClInclude Include="M:\Torque2DCmake\engine\source\2d\core\SpriteBatchQueryResult.h">
+      <Filter>torque2d\2d\core</Filter>
+    </ClInclude>
+    <ClInclude Include="M:\Torque2DCmake\engine\source\2d\core\Utility.h">
+      <Filter>torque2d\2d\core</Filter>
+    </ClInclude>
+    <ClInclude Include="M:\Torque2DCmake\engine\source\2d\core\Utility_ScriptBinding.h">
+      <Filter>torque2d\2d\core</Filter>
+    </ClInclude>
+    <ClInclude Include="M:\Torque2DCmake\engine\source\2d\core\Vector2.h">
+      <Filter>torque2d\2d\core</Filter>
+    </ClInclude>
+    <ClInclude Include="M:\Torque2DCmake\engine\source\2d\core\Vector2_ScriptBinding.h">
+      <Filter>torque2d\2d\core</Filter>
+    </ClInclude>
+    <ClInclude Include="M:\Torque2DCmake\engine\source\2d\experimental\composites\WaveComposite.h">
+      <Filter>torque2d\2d\experimental\composites</Filter>
+    </ClInclude>
+    <ClInclude Include="M:\Torque2DCmake\engine\source\2d\experimental\composites\WaveComposite_ScriptBinding.h">
+      <Filter>torque2d\2d\experimental\composites</Filter>
+    </ClInclude>
+    <ClInclude Include="M:\Torque2DCmake\engine\source\2d\gui\SceneWindow.h">
+      <Filter>torque2d\2d\gui</Filter>
+    </ClInclude>
+    <ClInclude Include="M:\Torque2DCmake\engine\source\2d\gui\SceneWindow_ScriptBinding.h">
+      <Filter>torque2d\2d\gui</Filter>
+    </ClInclude>
+    <ClInclude Include="M:\Torque2DCmake\engine\source\2d\gui\guiImageButtonCtrl.h">
+      <Filter>torque2d\2d\gui</Filter>
+    </ClInclude>
+    <ClInclude Include="M:\Torque2DCmake\engine\source\2d\gui\guiImageButtonCtrl_ScriptBindings.h">
+      <Filter>torque2d\2d\gui</Filter>
+    </ClInclude>
+    <ClInclude Include="M:\Torque2DCmake\engine\source\2d\gui\guiSceneObjectCtrl.h">
+      <Filter>torque2d\2d\gui</Filter>
+    </ClInclude>
+    <ClInclude Include="M:\Torque2DCmake\engine\source\2d\gui\guiSpriteCtrl.h">
+      <Filter>torque2d\2d\gui</Filter>
+    </ClInclude>
+    <ClInclude Include="M:\Torque2DCmake\engine\source\2d\gui\guiSpriteCtrl_ScriptBindings.h">
+      <Filter>torque2d\2d\gui</Filter>
+    </ClInclude>
+    <ClInclude Include="M:\Torque2DCmake\engine\source\2d\scene\ContactFilter.h">
+      <Filter>torque2d\2d\scene</Filter>
+    </ClInclude>
+    <ClInclude Include="M:\Torque2DCmake\engine\source\2d\scene\DebugDraw.h">
+      <Filter>torque2d\2d\scene</Filter>
+    </ClInclude>
+    <ClInclude Include="M:\Torque2DCmake\engine\source\2d\scene\DebugStats.h">
+      <Filter>torque2d\2d\scene</Filter>
+    </ClInclude>
+    <ClInclude Include="M:\Torque2DCmake\engine\source\2d\scene\PhysicsProxy.h">
+      <Filter>torque2d\2d\scene</Filter>
+    </ClInclude>
+    <ClInclude Include="M:\Torque2DCmake\engine\source\2d\scene\Scene.h">
+      <Filter>torque2d\2d\scene</Filter>
+    </ClInclude>
+    <ClInclude Include="M:\Torque2DCmake\engine\source\2d\scene\SceneRenderFactories.h">
+      <Filter>torque2d\2d\scene</Filter>
+    </ClInclude>
+    <ClInclude Include="M:\Torque2DCmake\engine\source\2d\scene\SceneRenderObject.h">
+      <Filter>torque2d\2d\scene</Filter>
+    </ClInclude>
+    <ClInclude Include="M:\Torque2DCmake\engine\source\2d\scene\SceneRenderQueue.h">
+      <Filter>torque2d\2d\scene</Filter>
+    </ClInclude>
+    <ClInclude Include="M:\Torque2DCmake\engine\source\2d\scene\SceneRenderRequest.h">
+      <Filter>torque2d\2d\scene</Filter>
+    </ClInclude>
+    <ClInclude Include="M:\Torque2DCmake\engine\source\2d\scene\SceneRenderState.h">
+      <Filter>torque2d\2d\scene</Filter>
+    </ClInclude>
+    <ClInclude Include="M:\Torque2DCmake\engine\source\2d\scene\Scene_ScriptBinding.h">
+      <Filter>torque2d\2d\scene</Filter>
+    </ClInclude>
+    <ClInclude Include="M:\Torque2DCmake\engine\source\2d\scene\WorldQuery.h">
+      <Filter>torque2d\2d\scene</Filter>
+    </ClInclude>
+    <ClInclude Include="M:\Torque2DCmake\engine\source\2d\scene\WorldQueryFilter.h">
+      <Filter>torque2d\2d\scene</Filter>
+    </ClInclude>
+    <ClInclude Include="M:\Torque2DCmake\engine\source\2d\scene\WorldQueryResult.h">
+      <Filter>torque2d\2d\scene</Filter>
+    </ClInclude>
+    <ClInclude Include="M:\Torque2DCmake\engine\source\2d\sceneobject\BaseDatablock.h">
+      <Filter>torque2d\2d\sceneobject</Filter>
+    </ClInclude>
+    <ClInclude Include="M:\Torque2DCmake\engine\source\2d\sceneobject\CompositeSprite.h">
+      <Filter>torque2d\2d\sceneobject</Filter>
+    </ClInclude>
+    <ClInclude Include="M:\Torque2DCmake\engine\source\2d\sceneobject\CompositeSprite_ScriptBinding.h">
+      <Filter>torque2d\2d\sceneobject</Filter>
+    </ClInclude>
+    <ClInclude Include="M:\Torque2DCmake\engine\source\2d\sceneobject\LightObject.h">
+      <Filter>torque2d\2d\sceneobject</Filter>
+    </ClInclude>
+    <ClInclude Include="M:\Torque2DCmake\engine\source\2d\sceneobject\LightObject_ScriptBinding.h">
+      <Filter>torque2d\2d\sceneobject</Filter>
+    </ClInclude>
+    <ClInclude Include="M:\Torque2DCmake\engine\source\2d\sceneobject\ParticlePlayer.h">
+      <Filter>torque2d\2d\sceneobject</Filter>
+    </ClInclude>
+    <ClInclude Include="M:\Torque2DCmake\engine\source\2d\sceneobject\ParticlePlayer_ScriptBinding.h">
+      <Filter>torque2d\2d\sceneobject</Filter>
+    </ClInclude>
+    <ClInclude Include="M:\Torque2DCmake\engine\source\2d\sceneobject\Path.h">
+      <Filter>torque2d\2d\sceneobject</Filter>
+    </ClInclude>
+    <ClInclude Include="M:\Torque2DCmake\engine\source\2d\sceneobject\Path_ScriptBinding.h">
+      <Filter>torque2d\2d\sceneobject</Filter>
+    </ClInclude>
+    <ClInclude Include="M:\Torque2DCmake\engine\source\2d\sceneobject\SceneObject.h">
+      <Filter>torque2d\2d\sceneobject</Filter>
+    </ClInclude>
+    <ClInclude Include="M:\Torque2DCmake\engine\source\2d\sceneobject\SceneObjectList.h">
+      <Filter>torque2d\2d\sceneobject</Filter>
+    </ClInclude>
+    <ClInclude Include="M:\Torque2DCmake\engine\source\2d\sceneobject\SceneObjectRotateToEvent.h">
+      <Filter>torque2d\2d\sceneobject</Filter>
+    </ClInclude>
+    <ClInclude Include="M:\Torque2DCmake\engine\source\2d\sceneobject\SceneObjectSet.h">
+      <Filter>torque2d\2d\sceneobject</Filter>
+    </ClInclude>
+    <ClInclude Include="M:\Torque2DCmake\engine\source\2d\sceneobject\SceneObjectSet_ScriptBinding.h">
+      <Filter>torque2d\2d\sceneobject</Filter>
+    </ClInclude>
+    <ClInclude Include="M:\Torque2DCmake\engine\source\2d\sceneobject\SceneObject_ScriptBinding.h">
+      <Filter>torque2d\2d\sceneobject</Filter>
+    </ClInclude>
+    <ClInclude Include="M:\Torque2DCmake\engine\source\2d\sceneobject\Scroller.h">
+      <Filter>torque2d\2d\sceneobject</Filter>
+    </ClInclude>
+    <ClInclude Include="M:\Torque2DCmake\engine\source\2d\sceneobject\Scroller_ScriptBinding.h">
+      <Filter>torque2d\2d\sceneobject</Filter>
+    </ClInclude>
+    <ClInclude Include="M:\Torque2DCmake\engine\source\2d\sceneobject\ShapeVector.h">
+      <Filter>torque2d\2d\sceneobject</Filter>
+    </ClInclude>
+    <ClInclude Include="M:\Torque2DCmake\engine\source\2d\sceneobject\ShapeVector_ScriptBinding.h">
+      <Filter>torque2d\2d\sceneobject</Filter>
+    </ClInclude>
+    <ClInclude Include="M:\Torque2DCmake\engine\source\2d\sceneobject\SkeletonObject.h">
+      <Filter>torque2d\2d\sceneobject</Filter>
+    </ClInclude>
+    <ClInclude Include="M:\Torque2DCmake\engine\source\2d\sceneobject\SkeletonObject_ScriptBinding.h">
+      <Filter>torque2d\2d\sceneobject</Filter>
+    </ClInclude>
+    <ClInclude Include="M:\Torque2DCmake\engine\source\2d\sceneobject\Sprite.h">
+      <Filter>torque2d\2d\sceneobject</Filter>
+    </ClInclude>
+    <ClInclude Include="M:\Torque2DCmake\engine\source\2d\sceneobject\Sprite_ScriptBinding.h">
+      <Filter>torque2d\2d\sceneobject</Filter>
+    </ClInclude>
+    <ClInclude Include="M:\Torque2DCmake\engine\source\2d\sceneobject\TextSprite.h">
+      <Filter>torque2d\2d\sceneobject</Filter>
+    </ClInclude>
+    <ClInclude Include="M:\Torque2DCmake\engine\source\2d\sceneobject\TextSprite_ScriptBinding.h">
+      <Filter>torque2d\2d\sceneobject</Filter>
+    </ClInclude>
+    <ClInclude Include="M:\Torque2DCmake\engine\source\2d\sceneobject\Trigger.h">
+      <Filter>torque2d\2d\sceneobject</Filter>
+    </ClInclude>
+    <ClInclude Include="M:\Torque2DCmake\engine\source\2d\sceneobject\Trigger_ScriptBinding.h">
+      <Filter>torque2d\2d\sceneobject</Filter>
+    </ClInclude>
+    <ClInclude Include="M:\Torque2DCmake\engine\source\platformWin32\GLWinExtFunc.h">
+      <Filter>torque2d\platformWin32</Filter>
+    </ClInclude>
+    <ClInclude Include="M:\Torque2DCmake\engine\source\platformWin32\GLWinFunc.h">
+      <Filter>torque2d\platformWin32</Filter>
+    </ClInclude>
+    <ClInclude Include="M:\Torque2DCmake\engine\source\platformWin32\VFSRes.h">
+      <Filter>torque2d\platformWin32</Filter>
+    </ClInclude>
+    <ClInclude Include="M:\Torque2DCmake\engine\source\platformWin32\cardProfile_ScriptBinding.h">
+      <Filter>torque2d\platformWin32</Filter>
+    </ClInclude>
+    <ClInclude Include="M:\Torque2DCmake\engine\source\platformWin32\gl_types.h">
+      <Filter>torque2d\platformWin32</Filter>
+    </ClInclude>
+    <ClInclude Include="M:\Torque2DCmake\engine\source\platformWin32\platformGL.h">
+      <Filter>torque2d\platformWin32</Filter>
+    </ClInclude>
+    <ClInclude Include="M:\Torque2DCmake\engine\source\platformWin32\platformWin32.h">
+      <Filter>torque2d\platformWin32</Filter>
+    </ClInclude>
+    <ClInclude Include="M:\Torque2DCmake\engine\source\platformWin32\win32NPatch.h">
+      <Filter>torque2d\platformWin32</Filter>
+    </ClInclude>
+    <ClInclude Include="M:\Torque2DCmake\engine\source\platformWin32\winConsole.h">
+      <Filter>torque2d\platformWin32</Filter>
+    </ClInclude>
+    <ClInclude Include="M:\Torque2DCmake\engine\source\platformWin32\winConsole_ScriptBinding.h">
+      <Filter>torque2d\platformWin32</Filter>
+    </ClInclude>
+    <ClInclude Include="M:\Torque2DCmake\engine\source\platformWin32\winDInputDevice.h">
+      <Filter>torque2d\platformWin32</Filter>
+    </ClInclude>
+    <ClInclude Include="M:\Torque2DCmake\engine\source\platformWin32\winDirectInput.h">
+      <Filter>torque2d\platformWin32</Filter>
+    </ClInclude>
+    <ClInclude Include="M:\Torque2DCmake\engine\source\platformWin32\winExec_ScriptBinding.h">
+      <Filter>torque2d\platformWin32</Filter>
+    </ClInclude>
+    <ClInclude Include="M:\Torque2DCmake\engine\source\platformWin32\winFont.h">
+      <Filter>torque2d\platformWin32</Filter>
+    </ClInclude>
+    <ClInclude Include="M:\Torque2DCmake\engine\source\platformWin32\winGLSpecial_ScriptBinding.h">
+      <Filter>torque2d\platformWin32</Filter>
+    </ClInclude>
+    <ClInclude Include="M:\Torque2DCmake\engine\source\platformWin32\winInput_ScriptBinding.h">
+      <Filter>torque2d\platformWin32</Filter>
+    </ClInclude>
+    <ClInclude Include="M:\Torque2DCmake\engine\source\platformWin32\winMath_ScriptBinding.h">
+      <Filter>torque2d\platformWin32</Filter>
+    </ClInclude>
+    <ClInclude Include="M:\Torque2DCmake\engine\source\platformWin32\winOGLVideo.h">
+      <Filter>torque2d\platformWin32</Filter>
+    </ClInclude>
+    <ClInclude Include="M:\Torque2DCmake\engine\source\platformWin32\winOGLVideo_ScriptBinding.h">
+      <Filter>torque2d\platformWin32</Filter>
+    </ClInclude>
+    <ClInclude Include="M:\Torque2DCmake\engine\source\platformWin32\winVersion.h">
+      <Filter>torque2d\platformWin32</Filter>
+    </ClInclude>
+    <ClInclude Include="M:\Torque2DCmake\engine\source\platformWin32\winVideo.h">
+      <Filter>torque2d\platformWin32</Filter>
+    </ClInclude>
+    <ClInclude Include="M:\Torque2DCmake\engine\source\platformWin32\winWindow.h">
+      <Filter>torque2d\platformWin32</Filter>
+    </ClInclude>
+    <ClInclude Include="M:\Torque2DCmake\engine\source\platformWin32\win_common_prefix.h">
+      <Filter>torque2d\platformWin32</Filter>
+    </ClInclude>
+    <ClInclude Include="M:\Torque2DCmake\engine\source\platformWin32\win_debug_prefix.h">
+      <Filter>torque2d\platformWin32</Filter>
+    </ClInclude>
+    <ClInclude Include="M:\Torque2DCmake\engine\source\platformWin32\win_release_prefix.h">
+      <Filter>torque2d\platformWin32</Filter>
+    </ClInclude>
+    <ClInclude Include="M:\Torque2DCmake\engine\source\platformWin32\nativeDialogs\win32DirectoryResolver.h">
+      <Filter>torque2d\platformWin32\nativeDialogs</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <CustomBuild Include="M:\Torque2DCmake\tools\CMake\CMakeLists.txt" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="M:\Torque2DCmake\engine\source\math\mMathAMD_ASM.asm">
+      <Filter>torque2d\math</Filter>
+    </None>
+    <None Include="M:\Torque2DCmake\engine\source\math\mMathSSE_ASM.asm">
+      <Filter>torque2d\math</Filter>
+    </None>
+    <None Include="M:\Torque2DCmake\engine\source\math\mMath_ASM.asm">
+      <Filter>torque2d\math</Filter>
+    </None>
+    <None Include="M:\Torque2DCmake\engine\source\platform\platformCPUInfo.asm">
+      <Filter>torque2d\platform</Filter>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <ResourceCompile Include="M:\Torque2DCmake\Projects\Test\Torque 2D.rc">
+      <Filter>Source Files</Filter>
+    </ResourceCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <Filter Include="Source Files">
+      <UniqueIdentifier>{7A39B9BB-1811-32ED-ADCA-7E62538D72D2}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="torque2d">
+      <UniqueIdentifier>{01F5E2E4-3E12-31AE-B804-1ED43FAEE293}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="torque2d\2d">
+      <UniqueIdentifier>{C9551A31-05CD-32F9-A7FB-2EAE5844EEA5}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="torque2d\2d\assets">
+      <UniqueIdentifier>{2E5C944B-90B7-3DE8-9A35-674013F746FA}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="torque2d\2d\controllers">
+      <UniqueIdentifier>{B582248F-C314-3CCA-AA81-CADB90A1EB3B}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="torque2d\2d\controllers\core">
+      <UniqueIdentifier>{8705EA2F-D6CE-3C6C-99C5-01E1DC76D449}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="torque2d\2d\core">
+      <UniqueIdentifier>{FB0BD665-98EA-3223-B8AC-0EA21D07C716}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="torque2d\2d\experimental">
+      <UniqueIdentifier>{B82557D3-0779-354A-99E5-47359B9050E4}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="torque2d\2d\experimental\composites">
+      <UniqueIdentifier>{F65E7EE2-B467-3A75-974D-3E11AE14C8F0}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="torque2d\2d\gui">
+      <UniqueIdentifier>{9F8E6756-CFD7-3442-AC56-7596CDDC909A}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="torque2d\2d\scene">
+      <UniqueIdentifier>{DF7219C9-881A-3D25-AF58-B494106504EF}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="torque2d\2d\sceneobject">
+      <UniqueIdentifier>{004D50A0-3849-3A28-AE3A-BA4E4C1E8DBA}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="torque2d\Box2D">
+      <UniqueIdentifier>{38D6A783-7D91-32FB-A7F1-EEBD5AA3A479}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="torque2d\Box2D\Collision">
+      <UniqueIdentifier>{939F242A-E9E8-35D1-AA71-1DD06B740213}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="torque2d\Box2D\Collision\Shapes">
+      <UniqueIdentifier>{86F1E7B2-E569-33DB-92C9-240CC90BFD21}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="torque2d\Box2D\Common">
+      <UniqueIdentifier>{7F371496-D0D3-3F73-A190-708153D98148}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="torque2d\Box2D\Dynamics">
+      <UniqueIdentifier>{B8EDF7B8-D4D3-36E9-8EE9-A6E2043D6E34}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="torque2d\Box2D\Dynamics\Contacts">
+      <UniqueIdentifier>{485C8802-F8A3-3CE3-98EA-D44930F6AFBE}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="torque2d\Box2D\Dynamics\Joints">
+      <UniqueIdentifier>{6083E82B-546A-3F27-A16B-799F9EAB3FF3}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="torque2d\Box2D\Particle">
+      <UniqueIdentifier>{58C018EF-1D65-38C2-82FC-26E3568CB711}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="torque2d\Box2D\Rope">
+      <UniqueIdentifier>{BC2FE9A6-4652-3638-AAAC-F182ABA7A9BC}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="torque2d\algorithm">
+      <UniqueIdentifier>{5DA669DB-A6F0-36C8-9F1B-A0DADAB0C08D}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="torque2d\assets">
+      <UniqueIdentifier>{8A051C48-45B7-367F-B899-BAE5D25AE024}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="torque2d\audio">
+      <UniqueIdentifier>{64BD3B09-BCC1-34E1-94AD-4EEFDE575B6A}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="torque2d\bitmapFont">
+      <UniqueIdentifier>{B8C1A80B-B568-3237-84BD-237B4AA6E54E}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="torque2d\collection">
+      <UniqueIdentifier>{224830AF-7AD5-3833-8BF2-6ABF58BA232A}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="torque2d\component">
+      <UniqueIdentifier>{9815D871-7120-349B-8735-BC9032374AF3}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="torque2d\component\behaviors">
+      <UniqueIdentifier>{780BA467-CD8F-3D22-9B0B-DE9AB555B472}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="torque2d\console">
+      <UniqueIdentifier>{52C0C1B7-7E75-3558-B44E-CDBE67DF498D}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="torque2d\debug">
+      <UniqueIdentifier>{51CC1AE1-0327-3DF6-9596-30DE259F870B}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="torque2d\debug\remote">
+      <UniqueIdentifier>{E0986AA1-B657-342F-A51D-A7C448D3963C}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="torque2d\delegates">
+      <UniqueIdentifier>{04BF44BD-AC59-3252-B1B2-D3F4957EC48A}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="torque2d\game">
+      <UniqueIdentifier>{82AEE551-793A-3579-9E7D-6CD2210AF74C}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="torque2d\graphics">
+      <UniqueIdentifier>{634BEF79-69E0-33A3-8E49-B345BED79AA0}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="torque2d\gui">
+      <UniqueIdentifier>{6D1C461A-C0D9-323E-BBEA-C90A7BED7E0C}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="torque2d\gui\buttons">
+      <UniqueIdentifier>{07BCC416-4749-3171-AFB2-4E26127B6B1F}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="torque2d\gui\containers">
+      <UniqueIdentifier>{FEA7B1AA-900C-3E4D-9ECC-2DC8E0A11D4D}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="torque2d\gui\editor">
+      <UniqueIdentifier>{AA2B7727-42EB-3F53-9EAD-1B45D7F7F9AB}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="torque2d\gui\language">
+      <UniqueIdentifier>{FE673EE7-CAE3-3A59-AA73-7F04DF3E0639}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="torque2d\input">
+      <UniqueIdentifier>{3E6E8467-A5FC-3815-B0C6-046B48266544}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="torque2d\io">
+      <UniqueIdentifier>{AB981896-3D15-3054-8F9C-ADCF4173A8F3}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="torque2d\io\resource">
+      <UniqueIdentifier>{E7D3592E-3B9E-3055-B5DA-E302AD90BB8B}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="torque2d\io\zip">
+      <UniqueIdentifier>{BDBBB035-8188-3471-957A-86B0E84839A6}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="torque2d\math">
+      <UniqueIdentifier>{813CC9EA-4181-3DF3-B2B4-48F2BD55D79E}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="torque2d\memory">
+      <UniqueIdentifier>{5F06B20A-BBF8-3B69-873B-D7DC38572E7B}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="torque2d\messaging">
+      <UniqueIdentifier>{3E4D6DBE-A19F-381A-93A7-059E5EFED148}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="torque2d\module">
+      <UniqueIdentifier>{94408981-3492-3188-BB29-64CF9E84379C}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="torque2d\network">
+      <UniqueIdentifier>{4B661DD0-8905-3AC1-AEC2-6E72247B5C55}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="torque2d\persistence">
+      <UniqueIdentifier>{2F882458-ADD8-3E4D-9871-32A26CA4DD20}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="torque2d\persistence\rapidjson">
+      <UniqueIdentifier>{115660C1-6E40-3312-BBDB-43E3D7D436A0}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="torque2d\persistence\rapidjson\include">
+      <UniqueIdentifier>{DD5F5A0A-640B-391B-82CC-55A962783C97}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="torque2d\persistence\rapidjson\include\rapidjson">
+      <UniqueIdentifier>{D38BEF62-8B75-316F-9F07-088C4DFFA147}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="torque2d\persistence\rapidjson\include\rapidjson\internal">
+      <UniqueIdentifier>{411D74CD-BCBE-3DDE-874F-E63A6BB32D35}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="torque2d\persistence\taml">
+      <UniqueIdentifier>{5821C75C-4D3C-3F60-A7C6-A5C52DEFDC77}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="torque2d\persistence\taml\binary">
+      <UniqueIdentifier>{60647D1E-66C9-3417-95A0-4563611EDE8B}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="torque2d\persistence\taml\json">
+      <UniqueIdentifier>{C9B1589A-6491-32DD-B77D-26BFFCC02C19}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="torque2d\persistence\taml\xml">
+      <UniqueIdentifier>{9637BCF3-A47E-3966-B549-BA4FC3C889F1}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="torque2d\persistence\tinyXML">
+      <UniqueIdentifier>{007EF584-2868-3B61-AF15-FE599E0C8F5A}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="torque2d\platform">
+      <UniqueIdentifier>{16298EFB-26D4-3380-9168-BEAB95B720F5}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="torque2d\platformWin32">
+      <UniqueIdentifier>{8B5270AB-AF7C-3A2D-937E-1F98C1E62AC0}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="torque2d\platformWin32\menus">
+      <UniqueIdentifier>{59C98C9B-1496-3817-8371-CFC5C40DD669}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="torque2d\platformWin32\nativeDialogs">
+      <UniqueIdentifier>{7B4FD897-1BFE-3B13-8A97-6F5AFDA8FD22}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="torque2d\platformWin32\threads">
+      <UniqueIdentifier>{3122A11F-BFE0-3A15-B3CB-9944DEACC836}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="torque2d\platform\menus">
+      <UniqueIdentifier>{30AD7650-ABE0-3E5B-9F61-992D52FE9184}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="torque2d\platform\nativeDialogs">
+      <UniqueIdentifier>{2CCB2E7D-33DC-35ED-B798-659F2C3923CD}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="torque2d\platform\threads">
+      <UniqueIdentifier>{5055F07B-415D-31D7-A737-C827527B27CE}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="torque2d\sim">
+      <UniqueIdentifier>{415620B8-8ECE-3E9E-A3D3-09365063B0A5}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="torque2d\spine">
+      <UniqueIdentifier>{F959A03C-5EB6-3B79-9AD8-C6DC12B9C5C0}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="torque2d\string">
+      <UniqueIdentifier>{EE038F03-82B5-3207-B8B1-72232EBA79A6}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="torque2d\testing">
+      <UniqueIdentifier>{522E0B7E-96F6-36D8-A705-4E26AFE8F151}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="torque2d\testing\tests">
+      <UniqueIdentifier>{2D7EA6F9-F131-3C08-BD39-B254954B89D4}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+</Project>

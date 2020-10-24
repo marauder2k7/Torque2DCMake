@@ -1,0 +1,539 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup Label="ProjectConfigurations">
+    <ProjectConfiguration Include="Debug|Win32">
+      <Configuration>Debug</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|Win32">
+      <Configuration>Release</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="MinSizeRel|Win32">
+      <Configuration>MinSizeRel</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="RelWithDebInfo|Win32">
+      <Configuration>RelWithDebInfo</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+  </ItemGroup>
+  <PropertyGroup Label="Globals">
+    <ProjectGuid>{7ED9D6B3-F9BE-3C03-A35B-968BCBD357C4}</ProjectGuid>
+    <WindowsTargetPlatformVersion>10.0.18362.0</WindowsTargetPlatformVersion>
+    <Keyword>Win32Proj</Keyword>
+    <Platform>Win32</Platform>
+    <ProjectName>OpenAL</ProjectName>
+    <VCProjectUpgraderObjectName>NoUpgrade</VCProjectUpgraderObjectName>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
+    <ConfigurationType>DynamicLibrary</ConfigurationType>
+    <CharacterSet>Unicode</CharacterSet>
+    <PlatformToolset>v141</PlatformToolset>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
+    <ConfigurationType>DynamicLibrary</ConfigurationType>
+    <CharacterSet>Unicode</CharacterSet>
+    <PlatformToolset>v141</PlatformToolset>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|Win32'" Label="Configuration">
+    <ConfigurationType>DynamicLibrary</ConfigurationType>
+    <CharacterSet>Unicode</CharacterSet>
+    <PlatformToolset>v141</PlatformToolset>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|Win32'" Label="Configuration">
+    <ConfigurationType>DynamicLibrary</ConfigurationType>
+    <CharacterSet>Unicode</CharacterSet>
+    <PlatformToolset>v141</PlatformToolset>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
+  <ImportGroup Label="ExtensionSettings">
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <PropertyGroup Label="UserMacros" />
+  <PropertyGroup>
+    <_ProjectFileVersion>10.0.20506.1</_ProjectFileVersion>
+    <OutDir Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">M:\Torque2DCmake\Projects\Test\</OutDir>
+    <IntDir Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">OpenAL.dir\Debug\</IntDir>
+    <TargetName Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">OpenAL32</TargetName>
+    <TargetExt Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">.dll</TargetExt>
+    <LinkIncremental Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</LinkIncremental>
+    <GenerateManifest Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</GenerateManifest>
+    <OutDir Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">M:\Torque2DCmake\Projects\Test\</OutDir>
+    <IntDir Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">OpenAL.dir\Release\</IntDir>
+    <TargetName Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">OpenAL32</TargetName>
+    <TargetExt Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">.dll</TargetExt>
+    <LinkIncremental Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">false</LinkIncremental>
+    <GenerateManifest Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</GenerateManifest>
+    <OutDir Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|Win32'">M:\Torque2DCmake\Projects\Test\</OutDir>
+    <IntDir Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|Win32'">OpenAL.dir\MinSizeRel\</IntDir>
+    <TargetName Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|Win32'">OpenAL32</TargetName>
+    <TargetExt Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|Win32'">.dll</TargetExt>
+    <LinkIncremental Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|Win32'">false</LinkIncremental>
+    <GenerateManifest Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|Win32'">true</GenerateManifest>
+    <OutDir Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|Win32'">M:\Torque2DCmake\Projects\Test\</OutDir>
+    <IntDir Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|Win32'">OpenAL.dir\RelWithDebInfo\</IntDir>
+    <TargetName Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|Win32'">OpenAL32</TargetName>
+    <TargetExt Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|Win32'">.dll</TargetExt>
+    <LinkIncremental Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|Win32'">true</LinkIncremental>
+    <GenerateManifest Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|Win32'">true</GenerateManifest>
+  </PropertyGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <ClCompile>
+      <AdditionalIncludeDirectories>M:\Torque2DCmake\engine\lib\openal-soft\include;M:\Torque2DCmake\engine\lib\openal-soft\common;M:\Torque2DCmake\Projects\Test\cmake\tools\CMake\openal-soft;M:\Torque2DCmake\engine\lib\openal-soft\OpenAL32\Include;M:\Torque2DCmake\engine\lib\openal-soft\Alc;C:\Program Files (x86)\Microsoft DirectX SDK (June 2010)\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AssemblerListingLocation>$(IntDir)</AssemblerListingLocation>
+      <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
+      <BufferSecurityCheck>false</BufferSecurityCheck>
+      <CompileAs>CompileAsC</CompileAs>
+      <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
+      <DisableSpecificWarnings>4098</DisableSpecificWarnings>
+      <EnableEnhancedInstructionSet>StreamingSIMDExtensions2</EnableEnhancedInstructionSet>
+      <EnableFiberSafeOptimizations>true</EnableFiberSafeOptimizations>
+      <EnableParallelCodeGeneration>false</EnableParallelCodeGeneration>
+      <ExceptionHandling>Sync</ExceptionHandling>
+      <FavorSizeOrSpeed>Speed</FavorSizeOrSpeed>
+      <FloatingPointExceptions>false</FloatingPointExceptions>
+      <FloatingPointModel>Precise</FloatingPointModel>
+      <FunctionLevelLinking>false</FunctionLevelLinking>
+      <InlineFunctionExpansion>Disabled</InlineFunctionExpansion>
+      <IntrinsicFunctions>true</IntrinsicFunctions>
+      <MultiProcessorCompilation>true</MultiProcessorCompilation>
+      <OmitFramePointers>true</OmitFramePointers>
+      <Optimization>Disabled</Optimization>
+      <PrecompiledHeader>NotUsing</PrecompiledHeader>
+      <RuntimeLibrary>MultiThreadedDebug</RuntimeLibrary>
+      <RuntimeTypeInfo>true</RuntimeTypeInfo>
+      <StringPooling>true</StringPooling>
+      <SuppressStartupBanner>true</SuppressStartupBanner>
+      <TreatWChar_tAsBuiltInType>false</TreatWChar_tAsBuiltInType>
+      <UseFullPaths>false</UseFullPaths>
+      <WarningLevel>Level4</WarningLevel>
+      <PreprocessorDefinitions>WIN32;_WINDOWS;UNICODE;_UNICODE;_CRT_SECURE_NO_WARNINGS;AL_BUILD_LIBRARY;AL_ALEXT_PROTOTYPES;_WIN32;_WIN32_WINNT=0x0502;_LARGEFILE_SOURCE;_LARGE_FILES;restrict=;HAVE_STRUCT_TIMESPEC;_CRT_NONSTDC_NO_DEPRECATE;strcasecmp=_stricmp;strncasecmp=_strnicmp;CMAKE_INTDIR="Debug";OpenAL_EXPORTS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <ObjectFileName>$(IntDir)</ObjectFileName>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>WIN32;_DEBUG;_WINDOWS;UNICODE;_UNICODE;_CRT_SECURE_NO_WARNINGS;AL_BUILD_LIBRARY;AL_ALEXT_PROTOTYPES;_WIN32;_WIN32_WINNT=0x0502;_LARGEFILE_SOURCE;_LARGE_FILES;restrict=;HAVE_STRUCT_TIMESPEC;_CRT_NONSTDC_NO_DEPRECATE;strcasecmp=_stricmp;strncasecmp=_strnicmp;CMAKE_INTDIR=\"Debug\";OpenAL_EXPORTS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <AdditionalIncludeDirectories>M:\Torque2DCmake\engine\lib\openal-soft\include;M:\Torque2DCmake\engine\lib\openal-soft\common;M:\Torque2DCmake\Projects\Test\cmake\tools\CMake\openal-soft;M:\Torque2DCmake\engine\lib\openal-soft\OpenAL32\Include;M:\Torque2DCmake\engine\lib\openal-soft\Alc;C:\Program Files (x86)\Microsoft DirectX SDK (June 2010)\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+    <Midl>
+      <AdditionalIncludeDirectories>M:\Torque2DCmake\engine\lib\openal-soft\include;M:\Torque2DCmake\engine\lib\openal-soft\common;M:\Torque2DCmake\Projects\Test\cmake\tools\CMake\openal-soft;M:\Torque2DCmake\engine\lib\openal-soft\OpenAL32\Include;M:\Torque2DCmake\engine\lib\openal-soft\Alc;C:\Program Files (x86)\Microsoft DirectX SDK (June 2010)\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <OutputDirectory>$(ProjectDir)/$(IntDir)</OutputDirectory>
+      <HeaderFileName>%(Filename).h</HeaderFileName>
+      <TypeLibraryName>%(Filename).tlb</TypeLibraryName>
+      <InterfaceIdentifierFileName>%(Filename)_i.c</InterfaceIdentifierFileName>
+      <ProxyFileName>%(Filename)_p.c</ProxyFileName>
+    </Midl>
+    <Link>
+      <AdditionalDependencies>Debug\common.lib;winmm.lib;kernel32.lib;user32.lib;gdi32.lib;winspool.lib;shell32.lib;ole32.lib;oleaut32.lib;uuid.lib;comdlg32.lib;advapi32.lib</AdditionalDependencies>
+      <AdditionalLibraryDirectories>%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalOptions>%(AdditionalOptions) /machine:X86</AdditionalOptions>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <IgnoreSpecificDefaultLibraries>%(IgnoreSpecificDefaultLibraries)</IgnoreSpecificDefaultLibraries>
+      <ImportLibrary>M:/Torque2DCmake/Projects/Test/cmake/tools/CMake/openal-soft/Debug/OpenAL32.lib</ImportLibrary>
+      <ProgramDataBaseFile>M:/Torque2DCmake/Projects/Test/OpenAL32.pdb</ProgramDataBaseFile>
+      <SubSystem>Console</SubSystem>
+    </Link>
+    <ProjectReference>
+      <LinkLibraryDependencies>false</LinkLibraryDependencies>
+    </ProjectReference>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <ClCompile>
+      <AdditionalIncludeDirectories>M:\Torque2DCmake\engine\lib\openal-soft\include;M:\Torque2DCmake\engine\lib\openal-soft\common;M:\Torque2DCmake\Projects\Test\cmake\tools\CMake\openal-soft;M:\Torque2DCmake\engine\lib\openal-soft\OpenAL32\Include;M:\Torque2DCmake\engine\lib\openal-soft\Alc;C:\Program Files (x86)\Microsoft DirectX SDK (June 2010)\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AssemblerListingLocation>$(IntDir)</AssemblerListingLocation>
+      <BufferSecurityCheck>false</BufferSecurityCheck>
+      <CompileAs>CompileAsC</CompileAs>
+      <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
+      <DisableSpecificWarnings>4098</DisableSpecificWarnings>
+      <EnableEnhancedInstructionSet>StreamingSIMDExtensions2</EnableEnhancedInstructionSet>
+      <EnableFiberSafeOptimizations>true</EnableFiberSafeOptimizations>
+      <EnableParallelCodeGeneration>false</EnableParallelCodeGeneration>
+      <ExceptionHandling>Sync</ExceptionHandling>
+      <FavorSizeOrSpeed>Speed</FavorSizeOrSpeed>
+      <FloatingPointExceptions>false</FloatingPointExceptions>
+      <FloatingPointModel>Precise</FloatingPointModel>
+      <FunctionLevelLinking>false</FunctionLevelLinking>
+      <InlineFunctionExpansion>AnySuitable</InlineFunctionExpansion>
+      <IntrinsicFunctions>true</IntrinsicFunctions>
+      <MultiProcessorCompilation>true</MultiProcessorCompilation>
+      <OmitFramePointers>true</OmitFramePointers>
+      <Optimization>MaxSpeed</Optimization>
+      <PrecompiledHeader>NotUsing</PrecompiledHeader>
+      <RuntimeLibrary>MultiThreaded</RuntimeLibrary>
+      <RuntimeTypeInfo>true</RuntimeTypeInfo>
+      <StringPooling>true</StringPooling>
+      <SuppressStartupBanner>true</SuppressStartupBanner>
+      <TreatWChar_tAsBuiltInType>false</TreatWChar_tAsBuiltInType>
+      <UseFullPaths>false</UseFullPaths>
+      <WarningLevel>Level4</WarningLevel>
+      <PreprocessorDefinitions>WIN32;_WINDOWS;UNICODE;_UNICODE;_CRT_SECURE_NO_WARNINGS;NDEBUG;AL_BUILD_LIBRARY;AL_ALEXT_PROTOTYPES;_WIN32;_WIN32_WINNT=0x0502;_LARGEFILE_SOURCE;_LARGE_FILES;restrict=;HAVE_STRUCT_TIMESPEC;_CRT_NONSTDC_NO_DEPRECATE;strcasecmp=_stricmp;strncasecmp=_strnicmp;CMAKE_INTDIR="Release";OpenAL_EXPORTS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <ObjectFileName>$(IntDir)</ObjectFileName>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>WIN32;_WINDOWS;UNICODE;_UNICODE;_CRT_SECURE_NO_WARNINGS;NDEBUG;AL_BUILD_LIBRARY;AL_ALEXT_PROTOTYPES;_WIN32;_WIN32_WINNT=0x0502;_LARGEFILE_SOURCE;_LARGE_FILES;restrict=;HAVE_STRUCT_TIMESPEC;_CRT_NONSTDC_NO_DEPRECATE;strcasecmp=_stricmp;strncasecmp=_strnicmp;CMAKE_INTDIR=\"Release\";OpenAL_EXPORTS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <AdditionalIncludeDirectories>M:\Torque2DCmake\engine\lib\openal-soft\include;M:\Torque2DCmake\engine\lib\openal-soft\common;M:\Torque2DCmake\Projects\Test\cmake\tools\CMake\openal-soft;M:\Torque2DCmake\engine\lib\openal-soft\OpenAL32\Include;M:\Torque2DCmake\engine\lib\openal-soft\Alc;C:\Program Files (x86)\Microsoft DirectX SDK (June 2010)\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+    <Midl>
+      <AdditionalIncludeDirectories>M:\Torque2DCmake\engine\lib\openal-soft\include;M:\Torque2DCmake\engine\lib\openal-soft\common;M:\Torque2DCmake\Projects\Test\cmake\tools\CMake\openal-soft;M:\Torque2DCmake\engine\lib\openal-soft\OpenAL32\Include;M:\Torque2DCmake\engine\lib\openal-soft\Alc;C:\Program Files (x86)\Microsoft DirectX SDK (June 2010)\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <OutputDirectory>$(ProjectDir)/$(IntDir)</OutputDirectory>
+      <HeaderFileName>%(Filename).h</HeaderFileName>
+      <TypeLibraryName>%(Filename).tlb</TypeLibraryName>
+      <InterfaceIdentifierFileName>%(Filename)_i.c</InterfaceIdentifierFileName>
+      <ProxyFileName>%(Filename)_p.c</ProxyFileName>
+    </Midl>
+    <Link>
+      <AdditionalDependencies>Release\common.lib;winmm.lib;kernel32.lib;user32.lib;gdi32.lib;winspool.lib;shell32.lib;ole32.lib;oleaut32.lib;uuid.lib;comdlg32.lib;advapi32.lib</AdditionalDependencies>
+      <AdditionalLibraryDirectories>%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalOptions>%(AdditionalOptions) /machine:X86</AdditionalOptions>
+      <GenerateDebugInformation>false</GenerateDebugInformation>
+      <IgnoreSpecificDefaultLibraries>%(IgnoreSpecificDefaultLibraries)</IgnoreSpecificDefaultLibraries>
+      <ImportLibrary>M:/Torque2DCmake/Projects/Test/cmake/tools/CMake/openal-soft/Release/OpenAL32.lib</ImportLibrary>
+      <ProgramDataBaseFile>M:/Torque2DCmake/Projects/Test/OpenAL32.pdb</ProgramDataBaseFile>
+      <SubSystem>Console</SubSystem>
+    </Link>
+    <ProjectReference>
+      <LinkLibraryDependencies>false</LinkLibraryDependencies>
+    </ProjectReference>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|Win32'">
+    <ClCompile>
+      <AdditionalIncludeDirectories>M:\Torque2DCmake\engine\lib\openal-soft\include;M:\Torque2DCmake\engine\lib\openal-soft\common;M:\Torque2DCmake\Projects\Test\cmake\tools\CMake\openal-soft;M:\Torque2DCmake\engine\lib\openal-soft\OpenAL32\Include;M:\Torque2DCmake\engine\lib\openal-soft\Alc;C:\Program Files (x86)\Microsoft DirectX SDK (June 2010)\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AssemblerListingLocation>$(IntDir)</AssemblerListingLocation>
+      <BufferSecurityCheck>false</BufferSecurityCheck>
+      <CompileAs>CompileAsC</CompileAs>
+      <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
+      <DisableSpecificWarnings>4098</DisableSpecificWarnings>
+      <EnableEnhancedInstructionSet>StreamingSIMDExtensions2</EnableEnhancedInstructionSet>
+      <EnableFiberSafeOptimizations>true</EnableFiberSafeOptimizations>
+      <EnableParallelCodeGeneration>false</EnableParallelCodeGeneration>
+      <ExceptionHandling>Sync</ExceptionHandling>
+      <FavorSizeOrSpeed>Speed</FavorSizeOrSpeed>
+      <FloatingPointExceptions>false</FloatingPointExceptions>
+      <FloatingPointModel>Precise</FloatingPointModel>
+      <FunctionLevelLinking>false</FunctionLevelLinking>
+      <InlineFunctionExpansion>OnlyExplicitInline</InlineFunctionExpansion>
+      <IntrinsicFunctions>true</IntrinsicFunctions>
+      <MultiProcessorCompilation>true</MultiProcessorCompilation>
+      <OmitFramePointers>true</OmitFramePointers>
+      <Optimization>MinSpace</Optimization>
+      <PrecompiledHeader>NotUsing</PrecompiledHeader>
+      <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
+      <RuntimeTypeInfo>true</RuntimeTypeInfo>
+      <StringPooling>true</StringPooling>
+      <SuppressStartupBanner>true</SuppressStartupBanner>
+      <TreatWChar_tAsBuiltInType>false</TreatWChar_tAsBuiltInType>
+      <UseFullPaths>false</UseFullPaths>
+      <WarningLevel>Level4</WarningLevel>
+      <PreprocessorDefinitions>WIN32;_WINDOWS;UNICODE;_UNICODE;_CRT_SECURE_NO_WARNINGS;NDEBUG;AL_BUILD_LIBRARY;AL_ALEXT_PROTOTYPES;_WIN32;_WIN32_WINNT=0x0502;_LARGEFILE_SOURCE;_LARGE_FILES;restrict=;HAVE_STRUCT_TIMESPEC;_CRT_NONSTDC_NO_DEPRECATE;strcasecmp=_stricmp;strncasecmp=_strnicmp;CMAKE_INTDIR="MinSizeRel";OpenAL_EXPORTS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <ObjectFileName>$(IntDir)</ObjectFileName>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>WIN32;_WINDOWS;UNICODE;_UNICODE;_CRT_SECURE_NO_WARNINGS;NDEBUG;AL_BUILD_LIBRARY;AL_ALEXT_PROTOTYPES;_WIN32;_WIN32_WINNT=0x0502;_LARGEFILE_SOURCE;_LARGE_FILES;restrict=;HAVE_STRUCT_TIMESPEC;_CRT_NONSTDC_NO_DEPRECATE;strcasecmp=_stricmp;strncasecmp=_strnicmp;CMAKE_INTDIR=\"MinSizeRel\";OpenAL_EXPORTS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <AdditionalIncludeDirectories>M:\Torque2DCmake\engine\lib\openal-soft\include;M:\Torque2DCmake\engine\lib\openal-soft\common;M:\Torque2DCmake\Projects\Test\cmake\tools\CMake\openal-soft;M:\Torque2DCmake\engine\lib\openal-soft\OpenAL32\Include;M:\Torque2DCmake\engine\lib\openal-soft\Alc;C:\Program Files (x86)\Microsoft DirectX SDK (June 2010)\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+    <Midl>
+      <AdditionalIncludeDirectories>M:\Torque2DCmake\engine\lib\openal-soft\include;M:\Torque2DCmake\engine\lib\openal-soft\common;M:\Torque2DCmake\Projects\Test\cmake\tools\CMake\openal-soft;M:\Torque2DCmake\engine\lib\openal-soft\OpenAL32\Include;M:\Torque2DCmake\engine\lib\openal-soft\Alc;C:\Program Files (x86)\Microsoft DirectX SDK (June 2010)\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <OutputDirectory>$(ProjectDir)/$(IntDir)</OutputDirectory>
+      <HeaderFileName>%(Filename).h</HeaderFileName>
+      <TypeLibraryName>%(Filename).tlb</TypeLibraryName>
+      <InterfaceIdentifierFileName>%(Filename)_i.c</InterfaceIdentifierFileName>
+      <ProxyFileName>%(Filename)_p.c</ProxyFileName>
+    </Midl>
+    <Link>
+      <AdditionalDependencies>MinSizeRel\common.lib;winmm.lib;kernel32.lib;user32.lib;gdi32.lib;winspool.lib;shell32.lib;ole32.lib;oleaut32.lib;uuid.lib;comdlg32.lib;advapi32.lib</AdditionalDependencies>
+      <AdditionalLibraryDirectories>%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalOptions>%(AdditionalOptions) /machine:X86</AdditionalOptions>
+      <GenerateDebugInformation>false</GenerateDebugInformation>
+      <IgnoreSpecificDefaultLibraries>%(IgnoreSpecificDefaultLibraries)</IgnoreSpecificDefaultLibraries>
+      <ImportLibrary>M:/Torque2DCmake/Projects/Test/cmake/tools/CMake/openal-soft/MinSizeRel/OpenAL32.lib</ImportLibrary>
+      <ProgramDataBaseFile>M:/Torque2DCmake/Projects/Test/OpenAL32.pdb</ProgramDataBaseFile>
+      <SubSystem>Console</SubSystem>
+    </Link>
+    <ProjectReference>
+      <LinkLibraryDependencies>false</LinkLibraryDependencies>
+    </ProjectReference>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|Win32'">
+    <ClCompile>
+      <AdditionalIncludeDirectories>M:\Torque2DCmake\engine\lib\openal-soft\include;M:\Torque2DCmake\engine\lib\openal-soft\common;M:\Torque2DCmake\Projects\Test\cmake\tools\CMake\openal-soft;M:\Torque2DCmake\engine\lib\openal-soft\OpenAL32\Include;M:\Torque2DCmake\engine\lib\openal-soft\Alc;C:\Program Files (x86)\Microsoft DirectX SDK (June 2010)\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AssemblerListingLocation>$(IntDir)</AssemblerListingLocation>
+      <BufferSecurityCheck>false</BufferSecurityCheck>
+      <CompileAs>CompileAsC</CompileAs>
+      <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
+      <DisableSpecificWarnings>4098</DisableSpecificWarnings>
+      <EnableEnhancedInstructionSet>StreamingSIMDExtensions2</EnableEnhancedInstructionSet>
+      <EnableFiberSafeOptimizations>true</EnableFiberSafeOptimizations>
+      <EnableParallelCodeGeneration>false</EnableParallelCodeGeneration>
+      <ExceptionHandling>Sync</ExceptionHandling>
+      <FavorSizeOrSpeed>Speed</FavorSizeOrSpeed>
+      <FloatingPointExceptions>false</FloatingPointExceptions>
+      <FloatingPointModel>Precise</FloatingPointModel>
+      <FunctionLevelLinking>false</FunctionLevelLinking>
+      <InlineFunctionExpansion>OnlyExplicitInline</InlineFunctionExpansion>
+      <IntrinsicFunctions>true</IntrinsicFunctions>
+      <MultiProcessorCompilation>true</MultiProcessorCompilation>
+      <OmitFramePointers>true</OmitFramePointers>
+      <Optimization>MaxSpeed</Optimization>
+      <PrecompiledHeader>NotUsing</PrecompiledHeader>
+      <RuntimeLibrary>MultiThreaded</RuntimeLibrary>
+      <RuntimeTypeInfo>true</RuntimeTypeInfo>
+      <StringPooling>true</StringPooling>
+      <SuppressStartupBanner>true</SuppressStartupBanner>
+      <TreatWChar_tAsBuiltInType>false</TreatWChar_tAsBuiltInType>
+      <UseFullPaths>false</UseFullPaths>
+      <WarningLevel>Level4</WarningLevel>
+      <PreprocessorDefinitions>WIN32;_WINDOWS;UNICODE;_UNICODE;_CRT_SECURE_NO_WARNINGS;NDEBUG;AL_BUILD_LIBRARY;AL_ALEXT_PROTOTYPES;_WIN32;_WIN32_WINNT=0x0502;_LARGEFILE_SOURCE;_LARGE_FILES;restrict=;HAVE_STRUCT_TIMESPEC;_CRT_NONSTDC_NO_DEPRECATE;strcasecmp=_stricmp;strncasecmp=_strnicmp;CMAKE_INTDIR="RelWithDebInfo";OpenAL_EXPORTS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <ObjectFileName>$(IntDir)</ObjectFileName>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>WIN32;_WINDOWS;UNICODE;_UNICODE;_CRT_SECURE_NO_WARNINGS;NDEBUG;AL_BUILD_LIBRARY;AL_ALEXT_PROTOTYPES;_WIN32;_WIN32_WINNT=0x0502;_LARGEFILE_SOURCE;_LARGE_FILES;restrict=;HAVE_STRUCT_TIMESPEC;_CRT_NONSTDC_NO_DEPRECATE;strcasecmp=_stricmp;strncasecmp=_strnicmp;CMAKE_INTDIR=\"RelWithDebInfo\";OpenAL_EXPORTS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <AdditionalIncludeDirectories>M:\Torque2DCmake\engine\lib\openal-soft\include;M:\Torque2DCmake\engine\lib\openal-soft\common;M:\Torque2DCmake\Projects\Test\cmake\tools\CMake\openal-soft;M:\Torque2DCmake\engine\lib\openal-soft\OpenAL32\Include;M:\Torque2DCmake\engine\lib\openal-soft\Alc;C:\Program Files (x86)\Microsoft DirectX SDK (June 2010)\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+    <Midl>
+      <AdditionalIncludeDirectories>M:\Torque2DCmake\engine\lib\openal-soft\include;M:\Torque2DCmake\engine\lib\openal-soft\common;M:\Torque2DCmake\Projects\Test\cmake\tools\CMake\openal-soft;M:\Torque2DCmake\engine\lib\openal-soft\OpenAL32\Include;M:\Torque2DCmake\engine\lib\openal-soft\Alc;C:\Program Files (x86)\Microsoft DirectX SDK (June 2010)\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <OutputDirectory>$(ProjectDir)/$(IntDir)</OutputDirectory>
+      <HeaderFileName>%(Filename).h</HeaderFileName>
+      <TypeLibraryName>%(Filename).tlb</TypeLibraryName>
+      <InterfaceIdentifierFileName>%(Filename)_i.c</InterfaceIdentifierFileName>
+      <ProxyFileName>%(Filename)_p.c</ProxyFileName>
+    </Midl>
+    <Link>
+      <AdditionalDependencies>RelWithDebInfo\common.lib;winmm.lib;kernel32.lib;user32.lib;gdi32.lib;winspool.lib;shell32.lib;ole32.lib;oleaut32.lib;uuid.lib;comdlg32.lib;advapi32.lib</AdditionalDependencies>
+      <AdditionalLibraryDirectories>%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalOptions>%(AdditionalOptions) /machine:X86</AdditionalOptions>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <IgnoreSpecificDefaultLibraries>%(IgnoreSpecificDefaultLibraries)</IgnoreSpecificDefaultLibraries>
+      <ImportLibrary>M:/Torque2DCmake/Projects/Test/cmake/tools/CMake/openal-soft/RelWithDebInfo/OpenAL32.lib</ImportLibrary>
+      <ProgramDataBaseFile>M:/Torque2DCmake/Projects/Test/OpenAL32.pdb</ProgramDataBaseFile>
+      <SubSystem>Console</SubSystem>
+    </Link>
+    <ProjectReference>
+      <LinkLibraryDependencies>false</LinkLibraryDependencies>
+    </ProjectReference>
+  </ItemDefinitionGroup>
+  <ItemGroup>
+    <CustomBuild Include="M:\Torque2DCmake\Projects\Test\cmake\CMakeFiles\30460db29136b53a38f52a2ec710f807\bsinc_inc.h.rule">
+      <Message Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Generating bsinc_inc.h</Message>
+      <Command Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">setlocal
+native-tools\bsincgen M:/Torque2DCmake/Projects/Test/cmake/tools/CMake/openal-soft/bsinc_inc.h
+if %errorlevel% neq 0 goto :cmEnd
+:cmEnd
+endlocal &amp; call :cmErrorLevel %errorlevel% &amp; goto :cmDone
+:cmErrorLevel
+exit /b %1
+:cmDone
+if %errorlevel% neq 0 goto :VCEnd</Command>
+      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">M:\Torque2DCmake\engine\lib\openal-soft\native-tools\bsincgen.c;%(AdditionalInputs)</AdditionalInputs>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">M:\Torque2DCmake\Projects\Test\cmake\tools\CMake\openal-soft\bsinc_inc.h</Outputs>
+      <LinkObjects Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">false</LinkObjects>
+      <Message Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Generating bsinc_inc.h</Message>
+      <Command Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">setlocal
+native-tools\bsincgen M:/Torque2DCmake/Projects/Test/cmake/tools/CMake/openal-soft/bsinc_inc.h
+if %errorlevel% neq 0 goto :cmEnd
+:cmEnd
+endlocal &amp; call :cmErrorLevel %errorlevel% &amp; goto :cmDone
+:cmErrorLevel
+exit /b %1
+:cmDone
+if %errorlevel% neq 0 goto :VCEnd</Command>
+      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">M:\Torque2DCmake\engine\lib\openal-soft\native-tools\bsincgen.c;%(AdditionalInputs)</AdditionalInputs>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">M:\Torque2DCmake\Projects\Test\cmake\tools\CMake\openal-soft\bsinc_inc.h</Outputs>
+      <LinkObjects Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">false</LinkObjects>
+      <Message Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|Win32'">Generating bsinc_inc.h</Message>
+      <Command Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|Win32'">setlocal
+native-tools\bsincgen M:/Torque2DCmake/Projects/Test/cmake/tools/CMake/openal-soft/bsinc_inc.h
+if %errorlevel% neq 0 goto :cmEnd
+:cmEnd
+endlocal &amp; call :cmErrorLevel %errorlevel% &amp; goto :cmDone
+:cmErrorLevel
+exit /b %1
+:cmDone
+if %errorlevel% neq 0 goto :VCEnd</Command>
+      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|Win32'">M:\Torque2DCmake\engine\lib\openal-soft\native-tools\bsincgen.c;%(AdditionalInputs)</AdditionalInputs>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|Win32'">M:\Torque2DCmake\Projects\Test\cmake\tools\CMake\openal-soft\bsinc_inc.h</Outputs>
+      <LinkObjects Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|Win32'">false</LinkObjects>
+      <Message Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|Win32'">Generating bsinc_inc.h</Message>
+      <Command Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|Win32'">setlocal
+native-tools\bsincgen M:/Torque2DCmake/Projects/Test/cmake/tools/CMake/openal-soft/bsinc_inc.h
+if %errorlevel% neq 0 goto :cmEnd
+:cmEnd
+endlocal &amp; call :cmErrorLevel %errorlevel% &amp; goto :cmDone
+:cmErrorLevel
+exit /b %1
+:cmDone
+if %errorlevel% neq 0 goto :VCEnd</Command>
+      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|Win32'">M:\Torque2DCmake\engine\lib\openal-soft\native-tools\bsincgen.c;%(AdditionalInputs)</AdditionalInputs>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|Win32'">M:\Torque2DCmake\Projects\Test\cmake\tools\CMake\openal-soft\bsinc_inc.h</Outputs>
+      <LinkObjects Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|Win32'">false</LinkObjects>
+    </CustomBuild>
+  </ItemGroup>
+  <ItemGroup>
+    <CustomBuild Include="M:\Torque2DCmake\engine\lib\openal-soft\CMakeLists.txt">
+      <Message Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Building Custom Rule M:/Torque2DCmake/engine/lib/openal-soft/CMakeLists.txt</Message>
+      <Command Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">setlocal
+"C:\Program Files\CMake\bin\cmake.exe" -SM:/Torque2DCmake -BM:/Torque2DCmake/Projects/Test/cmake --check-stamp-file M:/Torque2DCmake/Projects/Test/cmake/tools/CMake/openal-soft/CMakeFiles/generate.stamp
+if %errorlevel% neq 0 goto :cmEnd
+:cmEnd
+endlocal &amp; call :cmErrorLevel %errorlevel% &amp; goto :cmDone
+:cmErrorLevel
+exit /b %1
+:cmDone
+if %errorlevel% neq 0 goto :VCEnd</Command>
+      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">C:\Program Files\CMake\share\cmake-3.17\Modules\CMakeCheckCompilerFlagCommonPatterns.cmake;C:\Program Files\CMake\share\cmake-3.17\Modules\CMakeConfigurableFile.in;C:\Program Files\CMake\share\cmake-3.17\Modules\CheckCCompilerFlag.cmake;C:\Program Files\CMake\share\cmake-3.17\Modules\CheckCSourceCompiles.cmake;C:\Program Files\CMake\share\cmake-3.17\Modules\CheckCXXCompilerFlag.cmake;C:\Program Files\CMake\share\cmake-3.17\Modules\CheckCXXSourceCompiles.cmake;C:\Program Files\CMake\share\cmake-3.17\Modules\CheckFunctionExists.c;C:\Program Files\CMake\share\cmake-3.17\Modules\CheckFunctionExists.cmake;C:\Program Files\CMake\share\cmake-3.17\Modules\CheckIncludeFile.c.in;C:\Program Files\CMake\share\cmake-3.17\Modules\CheckIncludeFile.cmake;C:\Program Files\CMake\share\cmake-3.17\Modules\CheckIncludeFileCXX.cmake;C:\Program Files\CMake\share\cmake-3.17\Modules\CheckIncludeFiles.cmake;C:\Program Files\CMake\share\cmake-3.17\Modules\CheckLibraryExists.cmake;C:\Program Files\CMake\share\cmake-3.17\Modules\CheckStructHasMember.cmake;C:\Program Files\CMake\share\cmake-3.17\Modules\CheckSymbolExists.cmake;C:\Program Files\CMake\share\cmake-3.17\Modules\CheckTypeSize.c.in;C:\Program Files\CMake\share\cmake-3.17\Modules\CheckTypeSize.cmake;C:\Program Files\CMake\share\cmake-3.17\Modules\FindGit.cmake;C:\Program Files\CMake\share\cmake-3.17\Modules\FindPackageHandleStandardArgs.cmake;C:\Program Files\CMake\share\cmake-3.17\Modules\FindPackageMessage.cmake;C:\Program Files\CMake\share\cmake-3.17\Modules\FindThreads.cmake;C:\Program Files\CMake\share\cmake-3.17\Modules\GNUInstallDirs.cmake;M:\Torque2DCmake\Projects\Test\cmake\CMakeFiles\CheckIncludeFiles\HAVE_MMSYSTEM_H.c;M:\Torque2DCmake\Projects\Test\cmake\CMakeFiles\CheckIncludeFiles\HAVE_SLES_OPENSLES_ANDROID_H.c;M:\Torque2DCmake\Projects\Test\cmake\CMakeFiles\CheckTypeSize\SIZEOF_LONG.c;M:\Torque2DCmake\Projects\Test\cmake\CMakeFiles\CheckTypeSize\SIZEOF_LONG_LONG.c;M:\Torque2DCmake\engine\lib\openal-soft\cmake\CheckFileOffsetBits.c;M:\Torque2DCmake\engine\lib\openal-soft\cmake\CheckFileOffsetBits.cmake;M:\Torque2DCmake\engine\lib\openal-soft\cmake\CheckSharedFunctionExists.cmake;M:\Torque2DCmake\engine\lib\openal-soft\cmake\FindALSA.cmake;M:\Torque2DCmake\engine\lib\openal-soft\cmake\FindAudioIO.cmake;M:\Torque2DCmake\engine\lib\openal-soft\cmake\FindDSound.cmake;M:\Torque2DCmake\engine\lib\openal-soft\cmake\FindJACK.cmake;M:\Torque2DCmake\engine\lib\openal-soft\cmake\FindOSS.cmake;M:\Torque2DCmake\engine\lib\openal-soft\cmake\FindPortAudio.cmake;M:\Torque2DCmake\engine\lib\openal-soft\cmake\FindPulseAudio.cmake;M:\Torque2DCmake\engine\lib\openal-soft\cmake\FindQSA.cmake;M:\Torque2DCmake\engine\lib\openal-soft\cmake\FindSDL2.cmake;M:\Torque2DCmake\engine\lib\openal-soft\cmake\FindSoundIO.cmake;M:\Torque2DCmake\engine\lib\openal-soft\cmake\FindWindowsSDK.cmake;M:\Torque2DCmake\engine\lib\openal-soft\config.h.in;M:\Torque2DCmake\engine\lib\openal-soft\openal.pc.in;M:\Torque2DCmake\engine\lib\openal-soft\version.h.in;%(AdditionalInputs)</AdditionalInputs>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">M:\Torque2DCmake\Projects\Test\cmake\tools\CMake\openal-soft\CMakeFiles\generate.stamp</Outputs>
+      <LinkObjects Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">false</LinkObjects>
+      <Message Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Building Custom Rule M:/Torque2DCmake/engine/lib/openal-soft/CMakeLists.txt</Message>
+      <Command Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">setlocal
+"C:\Program Files\CMake\bin\cmake.exe" -SM:/Torque2DCmake -BM:/Torque2DCmake/Projects/Test/cmake --check-stamp-file M:/Torque2DCmake/Projects/Test/cmake/tools/CMake/openal-soft/CMakeFiles/generate.stamp
+if %errorlevel% neq 0 goto :cmEnd
+:cmEnd
+endlocal &amp; call :cmErrorLevel %errorlevel% &amp; goto :cmDone
+:cmErrorLevel
+exit /b %1
+:cmDone
+if %errorlevel% neq 0 goto :VCEnd</Command>
+      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">C:\Program Files\CMake\share\cmake-3.17\Modules\CMakeCheckCompilerFlagCommonPatterns.cmake;C:\Program Files\CMake\share\cmake-3.17\Modules\CMakeConfigurableFile.in;C:\Program Files\CMake\share\cmake-3.17\Modules\CheckCCompilerFlag.cmake;C:\Program Files\CMake\share\cmake-3.17\Modules\CheckCSourceCompiles.cmake;C:\Program Files\CMake\share\cmake-3.17\Modules\CheckCXXCompilerFlag.cmake;C:\Program Files\CMake\share\cmake-3.17\Modules\CheckCXXSourceCompiles.cmake;C:\Program Files\CMake\share\cmake-3.17\Modules\CheckFunctionExists.c;C:\Program Files\CMake\share\cmake-3.17\Modules\CheckFunctionExists.cmake;C:\Program Files\CMake\share\cmake-3.17\Modules\CheckIncludeFile.c.in;C:\Program Files\CMake\share\cmake-3.17\Modules\CheckIncludeFile.cmake;C:\Program Files\CMake\share\cmake-3.17\Modules\CheckIncludeFileCXX.cmake;C:\Program Files\CMake\share\cmake-3.17\Modules\CheckIncludeFiles.cmake;C:\Program Files\CMake\share\cmake-3.17\Modules\CheckLibraryExists.cmake;C:\Program Files\CMake\share\cmake-3.17\Modules\CheckStructHasMember.cmake;C:\Program Files\CMake\share\cmake-3.17\Modules\CheckSymbolExists.cmake;C:\Program Files\CMake\share\cmake-3.17\Modules\CheckTypeSize.c.in;C:\Program Files\CMake\share\cmake-3.17\Modules\CheckTypeSize.cmake;C:\Program Files\CMake\share\cmake-3.17\Modules\FindGit.cmake;C:\Program Files\CMake\share\cmake-3.17\Modules\FindPackageHandleStandardArgs.cmake;C:\Program Files\CMake\share\cmake-3.17\Modules\FindPackageMessage.cmake;C:\Program Files\CMake\share\cmake-3.17\Modules\FindThreads.cmake;C:\Program Files\CMake\share\cmake-3.17\Modules\GNUInstallDirs.cmake;M:\Torque2DCmake\Projects\Test\cmake\CMakeFiles\CheckIncludeFiles\HAVE_MMSYSTEM_H.c;M:\Torque2DCmake\Projects\Test\cmake\CMakeFiles\CheckIncludeFiles\HAVE_SLES_OPENSLES_ANDROID_H.c;M:\Torque2DCmake\Projects\Test\cmake\CMakeFiles\CheckTypeSize\SIZEOF_LONG.c;M:\Torque2DCmake\Projects\Test\cmake\CMakeFiles\CheckTypeSize\SIZEOF_LONG_LONG.c;M:\Torque2DCmake\engine\lib\openal-soft\cmake\CheckFileOffsetBits.c;M:\Torque2DCmake\engine\lib\openal-soft\cmake\CheckFileOffsetBits.cmake;M:\Torque2DCmake\engine\lib\openal-soft\cmake\CheckSharedFunctionExists.cmake;M:\Torque2DCmake\engine\lib\openal-soft\cmake\FindALSA.cmake;M:\Torque2DCmake\engine\lib\openal-soft\cmake\FindAudioIO.cmake;M:\Torque2DCmake\engine\lib\openal-soft\cmake\FindDSound.cmake;M:\Torque2DCmake\engine\lib\openal-soft\cmake\FindJACK.cmake;M:\Torque2DCmake\engine\lib\openal-soft\cmake\FindOSS.cmake;M:\Torque2DCmake\engine\lib\openal-soft\cmake\FindPortAudio.cmake;M:\Torque2DCmake\engine\lib\openal-soft\cmake\FindPulseAudio.cmake;M:\Torque2DCmake\engine\lib\openal-soft\cmake\FindQSA.cmake;M:\Torque2DCmake\engine\lib\openal-soft\cmake\FindSDL2.cmake;M:\Torque2DCmake\engine\lib\openal-soft\cmake\FindSoundIO.cmake;M:\Torque2DCmake\engine\lib\openal-soft\cmake\FindWindowsSDK.cmake;M:\Torque2DCmake\engine\lib\openal-soft\config.h.in;M:\Torque2DCmake\engine\lib\openal-soft\openal.pc.in;M:\Torque2DCmake\engine\lib\openal-soft\version.h.in;%(AdditionalInputs)</AdditionalInputs>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">M:\Torque2DCmake\Projects\Test\cmake\tools\CMake\openal-soft\CMakeFiles\generate.stamp</Outputs>
+      <LinkObjects Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">false</LinkObjects>
+      <Message Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|Win32'">Building Custom Rule M:/Torque2DCmake/engine/lib/openal-soft/CMakeLists.txt</Message>
+      <Command Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|Win32'">setlocal
+"C:\Program Files\CMake\bin\cmake.exe" -SM:/Torque2DCmake -BM:/Torque2DCmake/Projects/Test/cmake --check-stamp-file M:/Torque2DCmake/Projects/Test/cmake/tools/CMake/openal-soft/CMakeFiles/generate.stamp
+if %errorlevel% neq 0 goto :cmEnd
+:cmEnd
+endlocal &amp; call :cmErrorLevel %errorlevel% &amp; goto :cmDone
+:cmErrorLevel
+exit /b %1
+:cmDone
+if %errorlevel% neq 0 goto :VCEnd</Command>
+      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|Win32'">C:\Program Files\CMake\share\cmake-3.17\Modules\CMakeCheckCompilerFlagCommonPatterns.cmake;C:\Program Files\CMake\share\cmake-3.17\Modules\CMakeConfigurableFile.in;C:\Program Files\CMake\share\cmake-3.17\Modules\CheckCCompilerFlag.cmake;C:\Program Files\CMake\share\cmake-3.17\Modules\CheckCSourceCompiles.cmake;C:\Program Files\CMake\share\cmake-3.17\Modules\CheckCXXCompilerFlag.cmake;C:\Program Files\CMake\share\cmake-3.17\Modules\CheckCXXSourceCompiles.cmake;C:\Program Files\CMake\share\cmake-3.17\Modules\CheckFunctionExists.c;C:\Program Files\CMake\share\cmake-3.17\Modules\CheckFunctionExists.cmake;C:\Program Files\CMake\share\cmake-3.17\Modules\CheckIncludeFile.c.in;C:\Program Files\CMake\share\cmake-3.17\Modules\CheckIncludeFile.cmake;C:\Program Files\CMake\share\cmake-3.17\Modules\CheckIncludeFileCXX.cmake;C:\Program Files\CMake\share\cmake-3.17\Modules\CheckIncludeFiles.cmake;C:\Program Files\CMake\share\cmake-3.17\Modules\CheckLibraryExists.cmake;C:\Program Files\CMake\share\cmake-3.17\Modules\CheckStructHasMember.cmake;C:\Program Files\CMake\share\cmake-3.17\Modules\CheckSymbolExists.cmake;C:\Program Files\CMake\share\cmake-3.17\Modules\CheckTypeSize.c.in;C:\Program Files\CMake\share\cmake-3.17\Modules\CheckTypeSize.cmake;C:\Program Files\CMake\share\cmake-3.17\Modules\FindGit.cmake;C:\Program Files\CMake\share\cmake-3.17\Modules\FindPackageHandleStandardArgs.cmake;C:\Program Files\CMake\share\cmake-3.17\Modules\FindPackageMessage.cmake;C:\Program Files\CMake\share\cmake-3.17\Modules\FindThreads.cmake;C:\Program Files\CMake\share\cmake-3.17\Modules\GNUInstallDirs.cmake;M:\Torque2DCmake\Projects\Test\cmake\CMakeFiles\CheckIncludeFiles\HAVE_MMSYSTEM_H.c;M:\Torque2DCmake\Projects\Test\cmake\CMakeFiles\CheckIncludeFiles\HAVE_SLES_OPENSLES_ANDROID_H.c;M:\Torque2DCmake\Projects\Test\cmake\CMakeFiles\CheckTypeSize\SIZEOF_LONG.c;M:\Torque2DCmake\Projects\Test\cmake\CMakeFiles\CheckTypeSize\SIZEOF_LONG_LONG.c;M:\Torque2DCmake\engine\lib\openal-soft\cmake\CheckFileOffsetBits.c;M:\Torque2DCmake\engine\lib\openal-soft\cmake\CheckFileOffsetBits.cmake;M:\Torque2DCmake\engine\lib\openal-soft\cmake\CheckSharedFunctionExists.cmake;M:\Torque2DCmake\engine\lib\openal-soft\cmake\FindALSA.cmake;M:\Torque2DCmake\engine\lib\openal-soft\cmake\FindAudioIO.cmake;M:\Torque2DCmake\engine\lib\openal-soft\cmake\FindDSound.cmake;M:\Torque2DCmake\engine\lib\openal-soft\cmake\FindJACK.cmake;M:\Torque2DCmake\engine\lib\openal-soft\cmake\FindOSS.cmake;M:\Torque2DCmake\engine\lib\openal-soft\cmake\FindPortAudio.cmake;M:\Torque2DCmake\engine\lib\openal-soft\cmake\FindPulseAudio.cmake;M:\Torque2DCmake\engine\lib\openal-soft\cmake\FindQSA.cmake;M:\Torque2DCmake\engine\lib\openal-soft\cmake\FindSDL2.cmake;M:\Torque2DCmake\engine\lib\openal-soft\cmake\FindSoundIO.cmake;M:\Torque2DCmake\engine\lib\openal-soft\cmake\FindWindowsSDK.cmake;M:\Torque2DCmake\engine\lib\openal-soft\config.h.in;M:\Torque2DCmake\engine\lib\openal-soft\openal.pc.in;M:\Torque2DCmake\engine\lib\openal-soft\version.h.in;%(AdditionalInputs)</AdditionalInputs>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|Win32'">M:\Torque2DCmake\Projects\Test\cmake\tools\CMake\openal-soft\CMakeFiles\generate.stamp</Outputs>
+      <LinkObjects Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|Win32'">false</LinkObjects>
+      <Message Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|Win32'">Building Custom Rule M:/Torque2DCmake/engine/lib/openal-soft/CMakeLists.txt</Message>
+      <Command Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|Win32'">setlocal
+"C:\Program Files\CMake\bin\cmake.exe" -SM:/Torque2DCmake -BM:/Torque2DCmake/Projects/Test/cmake --check-stamp-file M:/Torque2DCmake/Projects/Test/cmake/tools/CMake/openal-soft/CMakeFiles/generate.stamp
+if %errorlevel% neq 0 goto :cmEnd
+:cmEnd
+endlocal &amp; call :cmErrorLevel %errorlevel% &amp; goto :cmDone
+:cmErrorLevel
+exit /b %1
+:cmDone
+if %errorlevel% neq 0 goto :VCEnd</Command>
+      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|Win32'">C:\Program Files\CMake\share\cmake-3.17\Modules\CMakeCheckCompilerFlagCommonPatterns.cmake;C:\Program Files\CMake\share\cmake-3.17\Modules\CMakeConfigurableFile.in;C:\Program Files\CMake\share\cmake-3.17\Modules\CheckCCompilerFlag.cmake;C:\Program Files\CMake\share\cmake-3.17\Modules\CheckCSourceCompiles.cmake;C:\Program Files\CMake\share\cmake-3.17\Modules\CheckCXXCompilerFlag.cmake;C:\Program Files\CMake\share\cmake-3.17\Modules\CheckCXXSourceCompiles.cmake;C:\Program Files\CMake\share\cmake-3.17\Modules\CheckFunctionExists.c;C:\Program Files\CMake\share\cmake-3.17\Modules\CheckFunctionExists.cmake;C:\Program Files\CMake\share\cmake-3.17\Modules\CheckIncludeFile.c.in;C:\Program Files\CMake\share\cmake-3.17\Modules\CheckIncludeFile.cmake;C:\Program Files\CMake\share\cmake-3.17\Modules\CheckIncludeFileCXX.cmake;C:\Program Files\CMake\share\cmake-3.17\Modules\CheckIncludeFiles.cmake;C:\Program Files\CMake\share\cmake-3.17\Modules\CheckLibraryExists.cmake;C:\Program Files\CMake\share\cmake-3.17\Modules\CheckStructHasMember.cmake;C:\Program Files\CMake\share\cmake-3.17\Modules\CheckSymbolExists.cmake;C:\Program Files\CMake\share\cmake-3.17\Modules\CheckTypeSize.c.in;C:\Program Files\CMake\share\cmake-3.17\Modules\CheckTypeSize.cmake;C:\Program Files\CMake\share\cmake-3.17\Modules\FindGit.cmake;C:\Program Files\CMake\share\cmake-3.17\Modules\FindPackageHandleStandardArgs.cmake;C:\Program Files\CMake\share\cmake-3.17\Modules\FindPackageMessage.cmake;C:\Program Files\CMake\share\cmake-3.17\Modules\FindThreads.cmake;C:\Program Files\CMake\share\cmake-3.17\Modules\GNUInstallDirs.cmake;M:\Torque2DCmake\Projects\Test\cmake\CMakeFiles\CheckIncludeFiles\HAVE_MMSYSTEM_H.c;M:\Torque2DCmake\Projects\Test\cmake\CMakeFiles\CheckIncludeFiles\HAVE_SLES_OPENSLES_ANDROID_H.c;M:\Torque2DCmake\Projects\Test\cmake\CMakeFiles\CheckTypeSize\SIZEOF_LONG.c;M:\Torque2DCmake\Projects\Test\cmake\CMakeFiles\CheckTypeSize\SIZEOF_LONG_LONG.c;M:\Torque2DCmake\engine\lib\openal-soft\cmake\CheckFileOffsetBits.c;M:\Torque2DCmake\engine\lib\openal-soft\cmake\CheckFileOffsetBits.cmake;M:\Torque2DCmake\engine\lib\openal-soft\cmake\CheckSharedFunctionExists.cmake;M:\Torque2DCmake\engine\lib\openal-soft\cmake\FindALSA.cmake;M:\Torque2DCmake\engine\lib\openal-soft\cmake\FindAudioIO.cmake;M:\Torque2DCmake\engine\lib\openal-soft\cmake\FindDSound.cmake;M:\Torque2DCmake\engine\lib\openal-soft\cmake\FindJACK.cmake;M:\Torque2DCmake\engine\lib\openal-soft\cmake\FindOSS.cmake;M:\Torque2DCmake\engine\lib\openal-soft\cmake\FindPortAudio.cmake;M:\Torque2DCmake\engine\lib\openal-soft\cmake\FindPulseAudio.cmake;M:\Torque2DCmake\engine\lib\openal-soft\cmake\FindQSA.cmake;M:\Torque2DCmake\engine\lib\openal-soft\cmake\FindSDL2.cmake;M:\Torque2DCmake\engine\lib\openal-soft\cmake\FindSoundIO.cmake;M:\Torque2DCmake\engine\lib\openal-soft\cmake\FindWindowsSDK.cmake;M:\Torque2DCmake\engine\lib\openal-soft\config.h.in;M:\Torque2DCmake\engine\lib\openal-soft\openal.pc.in;M:\Torque2DCmake\engine\lib\openal-soft\version.h.in;%(AdditionalInputs)</AdditionalInputs>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|Win32'">M:\Torque2DCmake\Projects\Test\cmake\tools\CMake\openal-soft\CMakeFiles\generate.stamp</Outputs>
+      <LinkObjects Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|Win32'">false</LinkObjects>
+    </CustomBuild>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="M:\Torque2DCmake\engine\lib\openal-soft\OpenAL32\Include\bs2b.h" />
+    <ClInclude Include="M:\Torque2DCmake\engine\lib\openal-soft\OpenAL32\Include\alMain.h" />
+    <ClInclude Include="M:\Torque2DCmake\engine\lib\openal-soft\OpenAL32\Include\alu.h" />
+    <ClInclude Include="M:\Torque2DCmake\engine\lib\openal-soft\OpenAL32\Include\alAuxEffectSlot.h" />
+    <ClCompile Include="M:\Torque2DCmake\engine\lib\openal-soft\OpenAL32\alAuxEffectSlot.c" />
+    <ClInclude Include="M:\Torque2DCmake\engine\lib\openal-soft\OpenAL32\Include\alBuffer.h" />
+    <ClCompile Include="M:\Torque2DCmake\engine\lib\openal-soft\OpenAL32\alBuffer.c" />
+    <ClInclude Include="M:\Torque2DCmake\engine\lib\openal-soft\OpenAL32\Include\alEffect.h" />
+    <ClCompile Include="M:\Torque2DCmake\engine\lib\openal-soft\OpenAL32\alEffect.c" />
+    <ClInclude Include="M:\Torque2DCmake\engine\lib\openal-soft\OpenAL32\Include\alError.h" />
+    <ClCompile Include="M:\Torque2DCmake\engine\lib\openal-soft\OpenAL32\alError.c" />
+    <ClCompile Include="M:\Torque2DCmake\engine\lib\openal-soft\OpenAL32\alExtension.c" />
+    <ClInclude Include="M:\Torque2DCmake\engine\lib\openal-soft\OpenAL32\Include\alFilter.h" />
+    <ClCompile Include="M:\Torque2DCmake\engine\lib\openal-soft\OpenAL32\alFilter.c" />
+    <ClInclude Include="M:\Torque2DCmake\engine\lib\openal-soft\OpenAL32\Include\alListener.h" />
+    <ClCompile Include="M:\Torque2DCmake\engine\lib\openal-soft\OpenAL32\alListener.c" />
+    <ClInclude Include="M:\Torque2DCmake\engine\lib\openal-soft\OpenAL32\Include\alSource.h" />
+    <ClCompile Include="M:\Torque2DCmake\engine\lib\openal-soft\OpenAL32\alSource.c" />
+    <ClCompile Include="M:\Torque2DCmake\engine\lib\openal-soft\OpenAL32\alState.c" />
+    <ClCompile Include="M:\Torque2DCmake\engine\lib\openal-soft\OpenAL32\event.c" />
+    <ClInclude Include="M:\Torque2DCmake\engine\lib\openal-soft\OpenAL32\Include\sample_cvt.h" />
+    <ClCompile Include="M:\Torque2DCmake\engine\lib\openal-soft\OpenAL32\sample_cvt.c" />
+    <ClCompile Include="M:\Torque2DCmake\engine\lib\openal-soft\Alc\ALc.c" />
+    <ClCompile Include="M:\Torque2DCmake\engine\lib\openal-soft\Alc\ALu.c" />
+    <ClCompile Include="M:\Torque2DCmake\engine\lib\openal-soft\Alc\alconfig.c" />
+    <ClInclude Include="M:\Torque2DCmake\engine\lib\openal-soft\Alc\alconfig.h" />
+    <ClCompile Include="M:\Torque2DCmake\engine\lib\openal-soft\Alc\bs2b.c" />
+    <ClCompile Include="M:\Torque2DCmake\engine\lib\openal-soft\Alc\converter.c" />
+    <ClInclude Include="M:\Torque2DCmake\engine\lib\openal-soft\Alc\converter.h" />
+    <ClInclude Include="M:\Torque2DCmake\engine\lib\openal-soft\Alc\inprogext.h" />
+    <ClCompile Include="M:\Torque2DCmake\engine\lib\openal-soft\Alc\mastering.c" />
+    <ClInclude Include="M:\Torque2DCmake\engine\lib\openal-soft\Alc\mastering.h" />
+    <ClCompile Include="M:\Torque2DCmake\engine\lib\openal-soft\Alc\ringbuffer.c" />
+    <ClInclude Include="M:\Torque2DCmake\engine\lib\openal-soft\Alc\ringbuffer.h" />
+    <ClCompile Include="M:\Torque2DCmake\engine\lib\openal-soft\Alc\effects\chorus.c" />
+    <ClCompile Include="M:\Torque2DCmake\engine\lib\openal-soft\Alc\effects\compressor.c" />
+    <ClCompile Include="M:\Torque2DCmake\engine\lib\openal-soft\Alc\effects\dedicated.c" />
+    <ClCompile Include="M:\Torque2DCmake\engine\lib\openal-soft\Alc\effects\distortion.c" />
+    <ClCompile Include="M:\Torque2DCmake\engine\lib\openal-soft\Alc\effects\echo.c" />
+    <ClCompile Include="M:\Torque2DCmake\engine\lib\openal-soft\Alc\effects\equalizer.c" />
+    <ClCompile Include="M:\Torque2DCmake\engine\lib\openal-soft\Alc\effects\modulator.c" />
+    <ClCompile Include="M:\Torque2DCmake\engine\lib\openal-soft\Alc\effects\null.c">
+      <ObjectFileName>$(IntDir)/Alc/effects/null.c.obj</ObjectFileName>
+    </ClCompile>
+    <ClCompile Include="M:\Torque2DCmake\engine\lib\openal-soft\Alc\effects\pshifter.c" />
+    <ClCompile Include="M:\Torque2DCmake\engine\lib\openal-soft\Alc\effects\reverb.c" />
+    <ClInclude Include="M:\Torque2DCmake\engine\lib\openal-soft\Alc\filters\defs.h" />
+    <ClCompile Include="M:\Torque2DCmake\engine\lib\openal-soft\Alc\filters\filter.c" />
+    <ClCompile Include="M:\Torque2DCmake\engine\lib\openal-soft\Alc\filters\nfc.c" />
+    <ClInclude Include="M:\Torque2DCmake\engine\lib\openal-soft\Alc\filters\nfc.h" />
+    <ClCompile Include="M:\Torque2DCmake\engine\lib\openal-soft\Alc\filters\splitter.c" />
+    <ClInclude Include="M:\Torque2DCmake\engine\lib\openal-soft\Alc\filters\splitter.h" />
+    <ClCompile Include="M:\Torque2DCmake\engine\lib\openal-soft\Alc\helpers.c" />
+    <ClInclude Include="M:\Torque2DCmake\engine\lib\openal-soft\Alc\alstring.h" />
+    <ClInclude Include="M:\Torque2DCmake\engine\lib\openal-soft\Alc\compat.h" />
+    <ClInclude Include="M:\Torque2DCmake\engine\lib\openal-soft\Alc\cpu_caps.h" />
+    <ClInclude Include="M:\Torque2DCmake\engine\lib\openal-soft\Alc\fpu_modes.h" />
+    <ClInclude Include="M:\Torque2DCmake\engine\lib\openal-soft\Alc\logging.h" />
+    <ClInclude Include="M:\Torque2DCmake\engine\lib\openal-soft\Alc\vector.h" />
+    <ClCompile Include="M:\Torque2DCmake\engine\lib\openal-soft\Alc\hrtf.c" />
+    <ClInclude Include="M:\Torque2DCmake\engine\lib\openal-soft\Alc\hrtf.h" />
+    <ClCompile Include="M:\Torque2DCmake\engine\lib\openal-soft\Alc\uhjfilter.c" />
+    <ClInclude Include="M:\Torque2DCmake\engine\lib\openal-soft\Alc\uhjfilter.h" />
+    <ClCompile Include="M:\Torque2DCmake\engine\lib\openal-soft\Alc\ambdec.c" />
+    <ClInclude Include="M:\Torque2DCmake\engine\lib\openal-soft\Alc\ambdec.h" />
+    <ClCompile Include="M:\Torque2DCmake\engine\lib\openal-soft\Alc\bformatdec.c" />
+    <ClInclude Include="M:\Torque2DCmake\engine\lib\openal-soft\Alc\bformatdec.h" />
+    <ClCompile Include="M:\Torque2DCmake\engine\lib\openal-soft\Alc\panning.c" />
+    <ClInclude Include="M:\Torque2DCmake\engine\lib\openal-soft\Alc\polymorphism.h" />
+    <ClCompile Include="M:\Torque2DCmake\engine\lib\openal-soft\Alc\mixvoice.c" />
+    <ClInclude Include="M:\Torque2DCmake\engine\lib\openal-soft\Alc\mixer\defs.h" />
+    <ClCompile Include="M:\Torque2DCmake\engine\lib\openal-soft\Alc\mixer\mixer_c.c" />
+    <ClCompile Include="M:\Torque2DCmake\engine\lib\openal-soft\Alc\mixer\mixer_sse.c" />
+    <ClCompile Include="M:\Torque2DCmake\engine\lib\openal-soft\Alc\mixer\mixer_sse2.c" />
+    <ClCompile Include="M:\Torque2DCmake\engine\lib\openal-soft\Alc\mixer\mixer_sse3.c" />
+    <ClCompile Include="M:\Torque2DCmake\engine\lib\openal-soft\Alc\mixer\mixer_sse41.c" />
+    <ClCompile Include="M:\Torque2DCmake\engine\lib\openal-soft\Alc\backends\base.c" />
+    <ClInclude Include="M:\Torque2DCmake\engine\lib\openal-soft\Alc\backends\base.h" />
+    <ClCompile Include="M:\Torque2DCmake\engine\lib\openal-soft\Alc\backends\loopback.c" />
+    <ClCompile Include="M:\Torque2DCmake\engine\lib\openal-soft\Alc\backends\null.c">
+      <ObjectFileName>$(IntDir)/Alc/backends/null.c.obj</ObjectFileName>
+    </ClCompile>
+    <ClCompile Include="M:\Torque2DCmake\engine\lib\openal-soft\Alc\backends\winmm.c" />
+    <ClCompile Include="M:\Torque2DCmake\engine\lib\openal-soft\Alc\backends\dsound.c" />
+    <ClCompile Include="M:\Torque2DCmake\engine\lib\openal-soft\Alc\backends\wasapi.c" />
+    <ClCompile Include="M:\Torque2DCmake\engine\lib\openal-soft\Alc\backends\wave.c" />
+    <ClInclude Include="M:\Torque2DCmake\Projects\Test\cmake\tools\CMake\openal-soft\bsinc_inc.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="M:\Torque2DCmake\Projects\Test\cmake\ZERO_CHECK.vcxproj">
+      <Project>{4BCEFF86-1683-3733-BDE1-54C47B613886}</Project>
+      <Name>ZERO_CHECK</Name>
+      <ReferenceOutputAssembly>false</ReferenceOutputAssembly>
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </ProjectReference>
+    <ProjectReference Include="M:\Torque2DCmake\Projects\Test\cmake\tools\CMake\openal-soft\common.vcxproj">
+      <Project>{1DF22B1E-D452-3B8C-B7DF-29AC40AB1B37}</Project>
+      <Name>common</Name>
+    </ProjectReference>
+    <ProjectReference Include="M:\Torque2DCmake\Projects\Test\cmake\tools\CMake\openal-soft\native-tools.vcxproj">
+      <Project>{13EEEB1D-3584-30E8-87DF-43EDD533E325}</Project>
+      <Name>native-tools</Name>
+      <ReferenceOutputAssembly>false</ReferenceOutputAssembly>
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </ProjectReference>
+  </ItemGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
+  <ImportGroup Label="ExtensionTargets">
+  </ImportGroup>
+</Project>

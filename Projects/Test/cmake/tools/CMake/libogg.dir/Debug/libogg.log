@@ -1,0 +1,4 @@
+﻿  Building Custom Rule M:/Torque2DCmake/tools/CMake/CMakeLists.txt
+  bitwise.c
+  framing.c
+  libogg.vcxproj -> M:\Torque2DCmake\Projects\Test\cmake\tools\CMake\Debug\libogg.lib

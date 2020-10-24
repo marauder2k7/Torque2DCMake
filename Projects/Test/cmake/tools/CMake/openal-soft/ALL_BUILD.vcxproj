@@ -1,0 +1,181 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup Label="ProjectConfigurations">
+    <ProjectConfiguration Include="Debug|Win32">
+      <Configuration>Debug</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|Win32">
+      <Configuration>Release</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="MinSizeRel|Win32">
+      <Configuration>MinSizeRel</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="RelWithDebInfo|Win32">
+      <Configuration>RelWithDebInfo</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+  </ItemGroup>
+  <PropertyGroup Label="Globals">
+    <ProjectGuid>{BF48AF03-8DC5-3D64-AE37-1799CF86CD20}</ProjectGuid>
+    <WindowsTargetPlatformVersion>10.0.18362.0</WindowsTargetPlatformVersion>
+    <Keyword>Win32Proj</Keyword>
+    <Platform>Win32</Platform>
+    <ProjectName>ALL_BUILD</ProjectName>
+    <VCProjectUpgraderObjectName>NoUpgrade</VCProjectUpgraderObjectName>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
+    <ConfigurationType>Utility</ConfigurationType>
+    <CharacterSet>MultiByte</CharacterSet>
+    <PlatformToolset>v141</PlatformToolset>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
+    <ConfigurationType>Utility</ConfigurationType>
+    <CharacterSet>MultiByte</CharacterSet>
+    <PlatformToolset>v141</PlatformToolset>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|Win32'" Label="Configuration">
+    <ConfigurationType>Utility</ConfigurationType>
+    <CharacterSet>MultiByte</CharacterSet>
+    <PlatformToolset>v141</PlatformToolset>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|Win32'" Label="Configuration">
+    <ConfigurationType>Utility</ConfigurationType>
+    <CharacterSet>MultiByte</CharacterSet>
+    <PlatformToolset>v141</PlatformToolset>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
+  <ImportGroup Label="ExtensionSettings">
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <PropertyGroup Label="UserMacros" />
+  <PropertyGroup>
+    <_ProjectFileVersion>10.0.20506.1</_ProjectFileVersion>
+    <IntDir Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">$(Platform)\$(Configuration)\$(ProjectName)\</IntDir>
+    <IntDir Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">$(Platform)\$(Configuration)\$(ProjectName)\</IntDir>
+    <IntDir Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|Win32'">$(Platform)\$(Configuration)\$(ProjectName)\</IntDir>
+    <IntDir Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|Win32'">$(Platform)\$(Configuration)\$(ProjectName)\</IntDir>
+  </PropertyGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <Midl>
+      <AdditionalIncludeDirectories>M:\Torque2DCmake\engine\lib\openal-soft\include;M:\Torque2DCmake\engine\lib\openal-soft\common;M:\Torque2DCmake\Projects\Test\cmake\tools\CMake\openal-soft;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <OutputDirectory>$(ProjectDir)/$(IntDir)</OutputDirectory>
+      <HeaderFileName>%(Filename).h</HeaderFileName>
+      <TypeLibraryName>%(Filename).tlb</TypeLibraryName>
+      <InterfaceIdentifierFileName>%(Filename)_i.c</InterfaceIdentifierFileName>
+      <ProxyFileName>%(Filename)_p.c</ProxyFileName>
+    </Midl>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <Midl>
+      <AdditionalIncludeDirectories>M:\Torque2DCmake\engine\lib\openal-soft\include;M:\Torque2DCmake\engine\lib\openal-soft\common;M:\Torque2DCmake\Projects\Test\cmake\tools\CMake\openal-soft;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <OutputDirectory>$(ProjectDir)/$(IntDir)</OutputDirectory>
+      <HeaderFileName>%(Filename).h</HeaderFileName>
+      <TypeLibraryName>%(Filename).tlb</TypeLibraryName>
+      <InterfaceIdentifierFileName>%(Filename)_i.c</InterfaceIdentifierFileName>
+      <ProxyFileName>%(Filename)_p.c</ProxyFileName>
+    </Midl>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|Win32'">
+    <Midl>
+      <AdditionalIncludeDirectories>M:\Torque2DCmake\engine\lib\openal-soft\include;M:\Torque2DCmake\engine\lib\openal-soft\common;M:\Torque2DCmake\Projects\Test\cmake\tools\CMake\openal-soft;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <OutputDirectory>$(ProjectDir)/$(IntDir)</OutputDirectory>
+      <HeaderFileName>%(Filename).h</HeaderFileName>
+      <TypeLibraryName>%(Filename).tlb</TypeLibraryName>
+      <InterfaceIdentifierFileName>%(Filename)_i.c</InterfaceIdentifierFileName>
+      <ProxyFileName>%(Filename)_p.c</ProxyFileName>
+    </Midl>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|Win32'">
+    <Midl>
+      <AdditionalIncludeDirectories>M:\Torque2DCmake\engine\lib\openal-soft\include;M:\Torque2DCmake\engine\lib\openal-soft\common;M:\Torque2DCmake\Projects\Test\cmake\tools\CMake\openal-soft;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <OutputDirectory>$(ProjectDir)/$(IntDir)</OutputDirectory>
+      <HeaderFileName>%(Filename).h</HeaderFileName>
+      <TypeLibraryName>%(Filename).tlb</TypeLibraryName>
+      <InterfaceIdentifierFileName>%(Filename)_i.c</InterfaceIdentifierFileName>
+      <ProxyFileName>%(Filename)_p.c</ProxyFileName>
+    </Midl>
+  </ItemDefinitionGroup>
+  <ItemGroup>
+    <CustomBuild Include="M:\Torque2DCmake\engine\lib\openal-soft\CMakeLists.txt">
+      <Message Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Building Custom Rule M:/Torque2DCmake/engine/lib/openal-soft/CMakeLists.txt</Message>
+      <Command Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">setlocal
+"C:\Program Files\CMake\bin\cmake.exe" -SM:/Torque2DCmake -BM:/Torque2DCmake/Projects/Test/cmake --check-stamp-file M:/Torque2DCmake/Projects/Test/cmake/tools/CMake/openal-soft/CMakeFiles/generate.stamp
+if %errorlevel% neq 0 goto :cmEnd
+:cmEnd
+endlocal &amp; call :cmErrorLevel %errorlevel% &amp; goto :cmDone
+:cmErrorLevel
+exit /b %1
+:cmDone
+if %errorlevel% neq 0 goto :VCEnd</Command>
+      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">C:\Program Files\CMake\share\cmake-3.17\Modules\CMakeCheckCompilerFlagCommonPatterns.cmake;C:\Program Files\CMake\share\cmake-3.17\Modules\CMakeConfigurableFile.in;C:\Program Files\CMake\share\cmake-3.17\Modules\CheckCCompilerFlag.cmake;C:\Program Files\CMake\share\cmake-3.17\Modules\CheckCSourceCompiles.cmake;C:\Program Files\CMake\share\cmake-3.17\Modules\CheckCXXCompilerFlag.cmake;C:\Program Files\CMake\share\cmake-3.17\Modules\CheckCXXSourceCompiles.cmake;C:\Program Files\CMake\share\cmake-3.17\Modules\CheckFunctionExists.c;C:\Program Files\CMake\share\cmake-3.17\Modules\CheckFunctionExists.cmake;C:\Program Files\CMake\share\cmake-3.17\Modules\CheckIncludeFile.c.in;C:\Program Files\CMake\share\cmake-3.17\Modules\CheckIncludeFile.cmake;C:\Program Files\CMake\share\cmake-3.17\Modules\CheckIncludeFileCXX.cmake;C:\Program Files\CMake\share\cmake-3.17\Modules\CheckIncludeFiles.cmake;C:\Program Files\CMake\share\cmake-3.17\Modules\CheckLibraryExists.cmake;C:\Program Files\CMake\share\cmake-3.17\Modules\CheckStructHasMember.cmake;C:\Program Files\CMake\share\cmake-3.17\Modules\CheckSymbolExists.cmake;C:\Program Files\CMake\share\cmake-3.17\Modules\CheckTypeSize.c.in;C:\Program Files\CMake\share\cmake-3.17\Modules\CheckTypeSize.cmake;C:\Program Files\CMake\share\cmake-3.17\Modules\FindGit.cmake;C:\Program Files\CMake\share\cmake-3.17\Modules\FindPackageHandleStandardArgs.cmake;C:\Program Files\CMake\share\cmake-3.17\Modules\FindPackageMessage.cmake;C:\Program Files\CMake\share\cmake-3.17\Modules\FindThreads.cmake;C:\Program Files\CMake\share\cmake-3.17\Modules\GNUInstallDirs.cmake;M:\Torque2DCmake\Projects\Test\cmake\CMakeFiles\CheckIncludeFiles\HAVE_MMSYSTEM_H.c;M:\Torque2DCmake\Projects\Test\cmake\CMakeFiles\CheckIncludeFiles\HAVE_SLES_OPENSLES_ANDROID_H.c;M:\Torque2DCmake\Projects\Test\cmake\CMakeFiles\CheckTypeSize\SIZEOF_LONG.c;M:\Torque2DCmake\Projects\Test\cmake\CMakeFiles\CheckTypeSize\SIZEOF_LONG_LONG.c;M:\Torque2DCmake\engine\lib\openal-soft\cmake\CheckFileOffsetBits.c;M:\Torque2DCmake\engine\lib\openal-soft\cmake\CheckFileOffsetBits.cmake;M:\Torque2DCmake\engine\lib\openal-soft\cmake\CheckSharedFunctionExists.cmake;M:\Torque2DCmake\engine\lib\openal-soft\cmake\FindALSA.cmake;M:\Torque2DCmake\engine\lib\openal-soft\cmake\FindAudioIO.cmake;M:\Torque2DCmake\engine\lib\openal-soft\cmake\FindDSound.cmake;M:\Torque2DCmake\engine\lib\openal-soft\cmake\FindJACK.cmake;M:\Torque2DCmake\engine\lib\openal-soft\cmake\FindOSS.cmake;M:\Torque2DCmake\engine\lib\openal-soft\cmake\FindPortAudio.cmake;M:\Torque2DCmake\engine\lib\openal-soft\cmake\FindPulseAudio.cmake;M:\Torque2DCmake\engine\lib\openal-soft\cmake\FindQSA.cmake;M:\Torque2DCmake\engine\lib\openal-soft\cmake\FindSDL2.cmake;M:\Torque2DCmake\engine\lib\openal-soft\cmake\FindSoundIO.cmake;M:\Torque2DCmake\engine\lib\openal-soft\cmake\FindWindowsSDK.cmake;M:\Torque2DCmake\engine\lib\openal-soft\config.h.in;M:\Torque2DCmake\engine\lib\openal-soft\openal.pc.in;M:\Torque2DCmake\engine\lib\openal-soft\version.h.in;%(AdditionalInputs)</AdditionalInputs>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">M:\Torque2DCmake\Projects\Test\cmake\tools\CMake\openal-soft\CMakeFiles\generate.stamp</Outputs>
+      <LinkObjects Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">false</LinkObjects>
+      <Message Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Building Custom Rule M:/Torque2DCmake/engine/lib/openal-soft/CMakeLists.txt</Message>
+      <Command Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">setlocal
+"C:\Program Files\CMake\bin\cmake.exe" -SM:/Torque2DCmake -BM:/Torque2DCmake/Projects/Test/cmake --check-stamp-file M:/Torque2DCmake/Projects/Test/cmake/tools/CMake/openal-soft/CMakeFiles/generate.stamp
+if %errorlevel% neq 0 goto :cmEnd
+:cmEnd
+endlocal &amp; call :cmErrorLevel %errorlevel% &amp; goto :cmDone
+:cmErrorLevel
+exit /b %1
+:cmDone
+if %errorlevel% neq 0 goto :VCEnd</Command>
+      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">C:\Program Files\CMake\share\cmake-3.17\Modules\CMakeCheckCompilerFlagCommonPatterns.cmake;C:\Program Files\CMake\share\cmake-3.17\Modules\CMakeConfigurableFile.in;C:\Program Files\CMake\share\cmake-3.17\Modules\CheckCCompilerFlag.cmake;C:\Program Files\CMake\share\cmake-3.17\Modules\CheckCSourceCompiles.cmake;C:\Program Files\CMake\share\cmake-3.17\Modules\CheckCXXCompilerFlag.cmake;C:\Program Files\CMake\share\cmake-3.17\Modules\CheckCXXSourceCompiles.cmake;C:\Program Files\CMake\share\cmake-3.17\Modules\CheckFunctionExists.c;C:\Program Files\CMake\share\cmake-3.17\Modules\CheckFunctionExists.cmake;C:\Program Files\CMake\share\cmake-3.17\Modules\CheckIncludeFile.c.in;C:\Program Files\CMake\share\cmake-3.17\Modules\CheckIncludeFile.cmake;C:\Program Files\CMake\share\cmake-3.17\Modules\CheckIncludeFileCXX.cmake;C:\Program Files\CMake\share\cmake-3.17\Modules\CheckIncludeFiles.cmake;C:\Program Files\CMake\share\cmake-3.17\Modules\CheckLibraryExists.cmake;C:\Program Files\CMake\share\cmake-3.17\Modules\CheckStructHasMember.cmake;C:\Program Files\CMake\share\cmake-3.17\Modules\CheckSymbolExists.cmake;C:\Program Files\CMake\share\cmake-3.17\Modules\CheckTypeSize.c.in;C:\Program Files\CMake\share\cmake-3.17\Modules\CheckTypeSize.cmake;C:\Program Files\CMake\share\cmake-3.17\Modules\FindGit.cmake;C:\Program Files\CMake\share\cmake-3.17\Modules\FindPackageHandleStandardArgs.cmake;C:\Program Files\CMake\share\cmake-3.17\Modules\FindPackageMessage.cmake;C:\Program Files\CMake\share\cmake-3.17\Modules\FindThreads.cmake;C:\Program Files\CMake\share\cmake-3.17\Modules\GNUInstallDirs.cmake;M:\Torque2DCmake\Projects\Test\cmake\CMakeFiles\CheckIncludeFiles\HAVE_MMSYSTEM_H.c;M:\Torque2DCmake\Projects\Test\cmake\CMakeFiles\CheckIncludeFiles\HAVE_SLES_OPENSLES_ANDROID_H.c;M:\Torque2DCmake\Projects\Test\cmake\CMakeFiles\CheckTypeSize\SIZEOF_LONG.c;M:\Torque2DCmake\Projects\Test\cmake\CMakeFiles\CheckTypeSize\SIZEOF_LONG_LONG.c;M:\Torque2DCmake\engine\lib\openal-soft\cmake\CheckFileOffsetBits.c;M:\Torque2DCmake\engine\lib\openal-soft\cmake\CheckFileOffsetBits.cmake;M:\Torque2DCmake\engine\lib\openal-soft\cmake\CheckSharedFunctionExists.cmake;M:\Torque2DCmake\engine\lib\openal-soft\cmake\FindALSA.cmake;M:\Torque2DCmake\engine\lib\openal-soft\cmake\FindAudioIO.cmake;M:\Torque2DCmake\engine\lib\openal-soft\cmake\FindDSound.cmake;M:\Torque2DCmake\engine\lib\openal-soft\cmake\FindJACK.cmake;M:\Torque2DCmake\engine\lib\openal-soft\cmake\FindOSS.cmake;M:\Torque2DCmake\engine\lib\openal-soft\cmake\FindPortAudio.cmake;M:\Torque2DCmake\engine\lib\openal-soft\cmake\FindPulseAudio.cmake;M:\Torque2DCmake\engine\lib\openal-soft\cmake\FindQSA.cmake;M:\Torque2DCmake\engine\lib\openal-soft\cmake\FindSDL2.cmake;M:\Torque2DCmake\engine\lib\openal-soft\cmake\FindSoundIO.cmake;M:\Torque2DCmake\engine\lib\openal-soft\cmake\FindWindowsSDK.cmake;M:\Torque2DCmake\engine\lib\openal-soft\config.h.in;M:\Torque2DCmake\engine\lib\openal-soft\openal.pc.in;M:\Torque2DCmake\engine\lib\openal-soft\version.h.in;%(AdditionalInputs)</AdditionalInputs>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">M:\Torque2DCmake\Projects\Test\cmake\tools\CMake\openal-soft\CMakeFiles\generate.stamp</Outputs>
+      <LinkObjects Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">false</LinkObjects>
+      <Message Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|Win32'">Building Custom Rule M:/Torque2DCmake/engine/lib/openal-soft/CMakeLists.txt</Message>
+      <Command Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|Win32'">setlocal
+"C:\Program Files\CMake\bin\cmake.exe" -SM:/Torque2DCmake -BM:/Torque2DCmake/Projects/Test/cmake --check-stamp-file M:/Torque2DCmake/Projects/Test/cmake/tools/CMake/openal-soft/CMakeFiles/generate.stamp
+if %errorlevel% neq 0 goto :cmEnd
+:cmEnd
+endlocal &amp; call :cmErrorLevel %errorlevel% &amp; goto :cmDone
+:cmErrorLevel
+exit /b %1
+:cmDone
+if %errorlevel% neq 0 goto :VCEnd</Command>
+      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|Win32'">C:\Program Files\CMake\share\cmake-3.17\Modules\CMakeCheckCompilerFlagCommonPatterns.cmake;C:\Program Files\CMake\share\cmake-3.17\Modules\CMakeConfigurableFile.in;C:\Program Files\CMake\share\cmake-3.17\Modules\CheckCCompilerFlag.cmake;C:\Program Files\CMake\share\cmake-3.17\Modules\CheckCSourceCompiles.cmake;C:\Program Files\CMake\share\cmake-3.17\Modules\CheckCXXCompilerFlag.cmake;C:\Program Files\CMake\share\cmake-3.17\Modules\CheckCXXSourceCompiles.cmake;C:\Program Files\CMake\share\cmake-3.17\Modules\CheckFunctionExists.c;C:\Program Files\CMake\share\cmake-3.17\Modules\CheckFunctionExists.cmake;C:\Program Files\CMake\share\cmake-3.17\Modules\CheckIncludeFile.c.in;C:\Program Files\CMake\share\cmake-3.17\Modules\CheckIncludeFile.cmake;C:\Program Files\CMake\share\cmake-3.17\Modules\CheckIncludeFileCXX.cmake;C:\Program Files\CMake\share\cmake-3.17\Modules\CheckIncludeFiles.cmake;C:\Program Files\CMake\share\cmake-3.17\Modules\CheckLibraryExists.cmake;C:\Program Files\CMake\share\cmake-3.17\Modules\CheckStructHasMember.cmake;C:\Program Files\CMake\share\cmake-3.17\Modules\CheckSymbolExists.cmake;C:\Program Files\CMake\share\cmake-3.17\Modules\CheckTypeSize.c.in;C:\Program Files\CMake\share\cmake-3.17\Modules\CheckTypeSize.cmake;C:\Program Files\CMake\share\cmake-3.17\Modules\FindGit.cmake;C:\Program Files\CMake\share\cmake-3.17\Modules\FindPackageHandleStandardArgs.cmake;C:\Program Files\CMake\share\cmake-3.17\Modules\FindPackageMessage.cmake;C:\Program Files\CMake\share\cmake-3.17\Modules\FindThreads.cmake;C:\Program Files\CMake\share\cmake-3.17\Modules\GNUInstallDirs.cmake;M:\Torque2DCmake\Projects\Test\cmake\CMakeFiles\CheckIncludeFiles\HAVE_MMSYSTEM_H.c;M:\Torque2DCmake\Projects\Test\cmake\CMakeFiles\CheckIncludeFiles\HAVE_SLES_OPENSLES_ANDROID_H.c;M:\Torque2DCmake\Projects\Test\cmake\CMakeFiles\CheckTypeSize\SIZEOF_LONG.c;M:\Torque2DCmake\Projects\Test\cmake\CMakeFiles\CheckTypeSize\SIZEOF_LONG_LONG.c;M:\Torque2DCmake\engine\lib\openal-soft\cmake\CheckFileOffsetBits.c;M:\Torque2DCmake\engine\lib\openal-soft\cmake\CheckFileOffsetBits.cmake;M:\Torque2DCmake\engine\lib\openal-soft\cmake\CheckSharedFunctionExists.cmake;M:\Torque2DCmake\engine\lib\openal-soft\cmake\FindALSA.cmake;M:\Torque2DCmake\engine\lib\openal-soft\cmake\FindAudioIO.cmake;M:\Torque2DCmake\engine\lib\openal-soft\cmake\FindDSound.cmake;M:\Torque2DCmake\engine\lib\openal-soft\cmake\FindJACK.cmake;M:\Torque2DCmake\engine\lib\openal-soft\cmake\FindOSS.cmake;M:\Torque2DCmake\engine\lib\openal-soft\cmake\FindPortAudio.cmake;M:\Torque2DCmake\engine\lib\openal-soft\cmake\FindPulseAudio.cmake;M:\Torque2DCmake\engine\lib\openal-soft\cmake\FindQSA.cmake;M:\Torque2DCmake\engine\lib\openal-soft\cmake\FindSDL2.cmake;M:\Torque2DCmake\engine\lib\openal-soft\cmake\FindSoundIO.cmake;M:\Torque2DCmake\engine\lib\openal-soft\cmake\FindWindowsSDK.cmake;M:\Torque2DCmake\engine\lib\openal-soft\config.h.in;M:\Torque2DCmake\engine\lib\openal-soft\openal.pc.in;M:\Torque2DCmake\engine\lib\openal-soft\version.h.in;%(AdditionalInputs)</AdditionalInputs>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|Win32'">M:\Torque2DCmake\Projects\Test\cmake\tools\CMake\openal-soft\CMakeFiles\generate.stamp</Outputs>
+      <LinkObjects Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|Win32'">false</LinkObjects>
+      <Message Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|Win32'">Building Custom Rule M:/Torque2DCmake/engine/lib/openal-soft/CMakeLists.txt</Message>
+      <Command Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|Win32'">setlocal
+"C:\Program Files\CMake\bin\cmake.exe" -SM:/Torque2DCmake -BM:/Torque2DCmake/Projects/Test/cmake --check-stamp-file M:/Torque2DCmake/Projects/Test/cmake/tools/CMake/openal-soft/CMakeFiles/generate.stamp
+if %errorlevel% neq 0 goto :cmEnd
+:cmEnd
+endlocal &amp; call :cmErrorLevel %errorlevel% &amp; goto :cmDone
+:cmErrorLevel
+exit /b %1
+:cmDone
+if %errorlevel% neq 0 goto :VCEnd</Command>
+      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|Win32'">C:\Program Files\CMake\share\cmake-3.17\Modules\CMakeCheckCompilerFlagCommonPatterns.cmake;C:\Program Files\CMake\share\cmake-3.17\Modules\CMakeConfigurableFile.in;C:\Program Files\CMake\share\cmake-3.17\Modules\CheckCCompilerFlag.cmake;C:\Program Files\CMake\share\cmake-3.17\Modules\CheckCSourceCompiles.cmake;C:\Program Files\CMake\share\cmake-3.17\Modules\CheckCXXCompilerFlag.cmake;C:\Program Files\CMake\share\cmake-3.17\Modules\CheckCXXSourceCompiles.cmake;C:\Program Files\CMake\share\cmake-3.17\Modules\CheckFunctionExists.c;C:\Program Files\CMake\share\cmake-3.17\Modules\CheckFunctionExists.cmake;C:\Program Files\CMake\share\cmake-3.17\Modules\CheckIncludeFile.c.in;C:\Program Files\CMake\share\cmake-3.17\Modules\CheckIncludeFile.cmake;C:\Program Files\CMake\share\cmake-3.17\Modules\CheckIncludeFileCXX.cmake;C:\Program Files\CMake\share\cmake-3.17\Modules\CheckIncludeFiles.cmake;C:\Program Files\CMake\share\cmake-3.17\Modules\CheckLibraryExists.cmake;C:\Program Files\CMake\share\cmake-3.17\Modules\CheckStructHasMember.cmake;C:\Program Files\CMake\share\cmake-3.17\Modules\CheckSymbolExists.cmake;C:\Program Files\CMake\share\cmake-3.17\Modules\CheckTypeSize.c.in;C:\Program Files\CMake\share\cmake-3.17\Modules\CheckTypeSize.cmake;C:\Program Files\CMake\share\cmake-3.17\Modules\FindGit.cmake;C:\Program Files\CMake\share\cmake-3.17\Modules\FindPackageHandleStandardArgs.cmake;C:\Program Files\CMake\share\cmake-3.17\Modules\FindPackageMessage.cmake;C:\Program Files\CMake\share\cmake-3.17\Modules\FindThreads.cmake;C:\Program Files\CMake\share\cmake-3.17\Modules\GNUInstallDirs.cmake;M:\Torque2DCmake\Projects\Test\cmake\CMakeFiles\CheckIncludeFiles\HAVE_MMSYSTEM_H.c;M:\Torque2DCmake\Projects\Test\cmake\CMakeFiles\CheckIncludeFiles\HAVE_SLES_OPENSLES_ANDROID_H.c;M:\Torque2DCmake\Projects\Test\cmake\CMakeFiles\CheckTypeSize\SIZEOF_LONG.c;M:\Torque2DCmake\Projects\Test\cmake\CMakeFiles\CheckTypeSize\SIZEOF_LONG_LONG.c;M:\Torque2DCmake\engine\lib\openal-soft\cmake\CheckFileOffsetBits.c;M:\Torque2DCmake\engine\lib\openal-soft\cmake\CheckFileOffsetBits.cmake;M:\Torque2DCmake\engine\lib\openal-soft\cmake\CheckSharedFunctionExists.cmake;M:\Torque2DCmake\engine\lib\openal-soft\cmake\FindALSA.cmake;M:\Torque2DCmake\engine\lib\openal-soft\cmake\FindAudioIO.cmake;M:\Torque2DCmake\engine\lib\openal-soft\cmake\FindDSound.cmake;M:\Torque2DCmake\engine\lib\openal-soft\cmake\FindJACK.cmake;M:\Torque2DCmake\engine\lib\openal-soft\cmake\FindOSS.cmake;M:\Torque2DCmake\engine\lib\openal-soft\cmake\FindPortAudio.cmake;M:\Torque2DCmake\engine\lib\openal-soft\cmake\FindPulseAudio.cmake;M:\Torque2DCmake\engine\lib\openal-soft\cmake\FindQSA.cmake;M:\Torque2DCmake\engine\lib\openal-soft\cmake\FindSDL2.cmake;M:\Torque2DCmake\engine\lib\openal-soft\cmake\FindSoundIO.cmake;M:\Torque2DCmake\engine\lib\openal-soft\cmake\FindWindowsSDK.cmake;M:\Torque2DCmake\engine\lib\openal-soft\config.h.in;M:\Torque2DCmake\engine\lib\openal-soft\openal.pc.in;M:\Torque2DCmake\engine\lib\openal-soft\version.h.in;%(AdditionalInputs)</AdditionalInputs>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|Win32'">M:\Torque2DCmake\Projects\Test\cmake\tools\CMake\openal-soft\CMakeFiles\generate.stamp</Outputs>
+      <LinkObjects Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|Win32'">false</LinkObjects>
+    </CustomBuild>
+  </ItemGroup>
+  <ItemGroup>
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="M:\Torque2DCmake\Projects\Test\cmake\ZERO_CHECK.vcxproj">
+      <Project>{4BCEFF86-1683-3733-BDE1-54C47B613886}</Project>
+      <Name>ZERO_CHECK</Name>
+      <ReferenceOutputAssembly>false</ReferenceOutputAssembly>
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </ProjectReference>
+    <ProjectReference Include="M:\Torque2DCmake\Projects\Test\cmake\tools\CMake\openal-soft\OpenAL.vcxproj">
+      <Project>{7ED9D6B3-F9BE-3C03-A35B-968BCBD357C4}</Project>
+      <Name>OpenAL</Name>
+    </ProjectReference>
+    <ProjectReference Include="M:\Torque2DCmake\Projects\Test\cmake\tools\CMake\openal-soft\common.vcxproj">
+      <Project>{1DF22B1E-D452-3B8C-B7DF-29AC40AB1B37}</Project>
+      <Name>common</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
+  <ImportGroup Label="ExtensionTargets">
+  </ImportGroup>
+</Project>

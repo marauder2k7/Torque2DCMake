@@ -1,0 +1,24 @@
+﻿  Building Custom Rule M:/Torque2DCmake/tools/CMake/CMakeLists.txt
+  analysis.c
+  bitrate.c
+  block.c
+  codebook.c
+  envelope.c
+  floor0.c
+  floor1.c
+  info.c
+  lookup.c
+  lpc.c
+  lsp.c
+  mapping0.c
+  mdct.c
+  psy.c
+  registry.c
+  res0.c
+  sharedbook.c
+  smallft.c
+  synthesis.c
+  vorbisenc.c
+  vorbisfile.c
+  window.c
+  libvorbis.vcxproj -> M:\Torque2DCmake\Projects\Test\cmake\tools\CMake\Debug\libvorbis.lib

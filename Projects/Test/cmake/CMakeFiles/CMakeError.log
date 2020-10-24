@@ -1,0 +1,533 @@
+Performing C SOURCE FILE Test HAVE_STD_C11 failed with the following output:
+Change Dir: M:/Torque2DCmake/Projects/Test/cmake/CMakeFiles/CMakeTmp
+
+Run Build Command(s):C:/Program Files (x86)/Microsoft Visual Studio/2017/Professional/MSBuild/15.0/Bin/MSBuild.exe cmTC_98e33.vcxproj /p:Configuration=Debug /p:Platform=Win32 /p:VisualStudioVersion=15.0 /v:m && Microsoft (R) Build Engine version 15.9.21+g9802d43bc3 for .NET Framework
+Copyright (C) Microsoft Corporation. All rights reserved.
+
+cl : Command line warning D9002: ignoring unknown option '-std=c11' [M:\Torque2DCmake\Projects\Test\cmake\CMakeFiles\CMakeTmp\cmTC_98e33.vcxproj]
+  src.c
+  cmTC_98e33.vcxproj -> M:\Torque2DCmake\Projects\Test\cmake\CMakeFiles\CMakeTmp\Debug\cmTC_98e33.exe
+
+
+Source file was:
+int main(void) { return 0; }
+Performing C SOURCE FILE Test HAVE_STD_C99 failed with the following output:
+Change Dir: M:/Torque2DCmake/Projects/Test/cmake/CMakeFiles/CMakeTmp
+
+Run Build Command(s):C:/Program Files (x86)/Microsoft Visual Studio/2017/Professional/MSBuild/15.0/Bin/MSBuild.exe cmTC_e72cf.vcxproj /p:Configuration=Debug /p:Platform=Win32 /p:VisualStudioVersion=15.0 /v:m && Microsoft (R) Build Engine version 15.9.21+g9802d43bc3 for .NET Framework
+Copyright (C) Microsoft Corporation. All rights reserved.
+
+cl : Command line warning D9002: ignoring unknown option '-std=c99' [M:\Torque2DCmake\Projects\Test\cmake\CMakeFiles\CMakeTmp\cmTC_e72cf.vcxproj]
+  src.c
+  cmTC_e72cf.vcxproj -> M:\Torque2DCmake\Projects\Test\cmake\CMakeFiles\CMakeTmp\Debug\cmTC_e72cf.exe
+
+
+Source file was:
+int main(void) { return 0; }
+Performing C SOURCE FILE Test HAVE_RESTRICT failed with the following output:
+Change Dir: M:/Torque2DCmake/Projects/Test/cmake/CMakeFiles/CMakeTmp
+
+Run Build Command(s):C:/Program Files (x86)/Microsoft Visual Studio/2017/Professional/MSBuild/15.0/Bin/MSBuild.exe cmTC_cc95b.vcxproj /p:Configuration=Debug /p:Platform=Win32 /p:VisualStudioVersion=15.0 /v:m && Microsoft (R) Build Engine version 15.9.21+g9802d43bc3 for .NET Framework
+Copyright (C) Microsoft Corporation. All rights reserved.
+
+  src.c
+M:\Torque2DCmake\Projects\Test\cmake\CMakeFiles\CMakeTmp\src.c(1): error C2061: syntax error: identifier 'foo' [M:\Torque2DCmake\Projects\Test\cmake\CMakeFiles\CMakeTmp\cmTC_cc95b.vcxproj]
+M:\Torque2DCmake\Projects\Test\cmake\CMakeFiles\CMakeTmp\src.c(1): error C2059: syntax error: ';' [M:\Torque2DCmake\Projects\Test\cmake\CMakeFiles\CMakeTmp\cmTC_cc95b.vcxproj]
+
+
+Source file was:
+int *restrict foo;
+                             int main() {return 0;}
+Performing C SOURCE FILE Test HAVE_LIBATOMIC failed with the following output:
+Change Dir: M:/Torque2DCmake/Projects/Test/cmake/CMakeFiles/CMakeTmp
+
+Run Build Command(s):C:/Program Files (x86)/Microsoft Visual Studio/2017/Professional/MSBuild/15.0/Bin/MSBuild.exe cmTC_f814d.vcxproj /p:Configuration=Debug /p:Platform=Win32 /p:VisualStudioVersion=15.0 /v:m && Microsoft (R) Build Engine version 15.9.21+g9802d43bc3 for .NET Framework
+Copyright (C) Microsoft Corporation. All rights reserved.
+
+  src.c
+M:\Torque2DCmake\Projects\Test\cmake\CMakeFiles\CMakeTmp\src.c(1): fatal error C1083: Cannot open include file: 'stdatomic.h': No such file or directory [M:\Torque2DCmake\Projects\Test\cmake\CMakeFiles\CMakeTmp\cmTC_f814d.vcxproj]
+
+
+Source file was:
+#include <stdatomic.h>
+int _Atomic foo = ATOMIC_VAR_INIT(0);
+int main()
+{
+    return atomic_fetch_add(&foo, 2);
+}
+Determining if the function __android_log_print exists in the log failed with the following output:
+Change Dir: M:/Torque2DCmake/Projects/Test/cmake/CMakeFiles/CMakeTmp
+
+Run Build Command(s):C:/Program Files (x86)/Microsoft Visual Studio/2017/Professional/MSBuild/15.0/Bin/MSBuild.exe cmTC_2bbc4.vcxproj /p:Configuration=Debug /p:Platform=Win32 /p:VisualStudioVersion=15.0 /v:m && Microsoft (R) Build Engine version 15.9.21+g9802d43bc3 for .NET Framework
+Copyright (C) Microsoft Corporation. All rights reserved.
+
+  CheckFunctionExists.c
+LINK : fatal error LNK1104: cannot open file 'log.lib' [M:\Torque2DCmake\Projects\Test\cmake\CMakeFiles\CMakeTmp\cmTC_2bbc4.vcxproj]
+
+
+
+Performing C SOURCE FILE Test HAVE_C11_STATIC_ASSERT failed with the following output:
+Change Dir: M:/Torque2DCmake/Projects/Test/cmake/CMakeFiles/CMakeTmp
+
+Run Build Command(s):C:/Program Files (x86)/Microsoft Visual Studio/2017/Professional/MSBuild/15.0/Bin/MSBuild.exe cmTC_bace8.vcxproj /p:Configuration=Debug /p:Platform=Win32 /p:VisualStudioVersion=15.0 /v:m && Microsoft (R) Build Engine version 15.9.21+g9802d43bc3 for .NET Framework
+Copyright (C) Microsoft Corporation. All rights reserved.
+
+  src.c
+M:\Torque2DCmake\Projects\Test\cmake\CMakeFiles\CMakeTmp\src.c(3): warning C4013: '_Static_assert' undefined; assuming extern returning int [M:\Torque2DCmake\Projects\Test\cmake\CMakeFiles\CMakeTmp\cmTC_bace8.vcxproj]
+src.obj : error LNK2019: unresolved external symbol __Static_assert referenced in function _main [M:\Torque2DCmake\Projects\Test\cmake\CMakeFiles\CMakeTmp\cmTC_bace8.vcxproj]
+M:\Torque2DCmake\Projects\Test\cmake\CMakeFiles\CMakeTmp\Debug\cmTC_bace8.exe : fatal error LNK1120: 1 unresolved externals [M:\Torque2DCmake\Projects\Test\cmake\CMakeFiles\CMakeTmp\cmTC_bace8.vcxproj]
+
+
+Source file was:
+int main()
+ {
+     _Static_assert(sizeof(int) == sizeof(int), "What");
+     return 0;
+ }
+Performing C SOURCE FILE Test HAVE_C11_ALIGNAS failed with the following output:
+Change Dir: M:/Torque2DCmake/Projects/Test/cmake/CMakeFiles/CMakeTmp
+
+Run Build Command(s):C:/Program Files (x86)/Microsoft Visual Studio/2017/Professional/MSBuild/15.0/Bin/MSBuild.exe cmTC_396dd.vcxproj /p:Configuration=Debug /p:Platform=Win32 /p:VisualStudioVersion=15.0 /v:m && Microsoft (R) Build Engine version 15.9.21+g9802d43bc3 for .NET Framework
+Copyright (C) Microsoft Corporation. All rights reserved.
+
+  src.c
+M:\Torque2DCmake\Projects\Test\cmake\CMakeFiles\CMakeTmp\src.c(1): error C2143: syntax error: missing ')' before 'constant' [M:\Torque2DCmake\Projects\Test\cmake\CMakeFiles\CMakeTmp\cmTC_396dd.vcxproj]
+M:\Torque2DCmake\Projects\Test\cmake\CMakeFiles\CMakeTmp\src.c(1): error C2143: syntax error: missing '{' before 'constant' [M:\Torque2DCmake\Projects\Test\cmake\CMakeFiles\CMakeTmp\cmTC_396dd.vcxproj]
+M:\Torque2DCmake\Projects\Test\cmake\CMakeFiles\CMakeTmp\src.c(1): error C2059: syntax error: 'constant' [M:\Torque2DCmake\Projects\Test\cmake\CMakeFiles\CMakeTmp\cmTC_396dd.vcxproj]
+M:\Torque2DCmake\Projects\Test\cmake\CMakeFiles\CMakeTmp\src.c(1): error C2059: syntax error: ')' [M:\Torque2DCmake\Projects\Test\cmake\CMakeFiles\CMakeTmp\cmTC_396dd.vcxproj]
+
+
+Source file was:
+_Alignas(16) int foo;
+ int main()
+ {
+     return 0;
+ }
+Performing C SOURCE FILE Test HAVE_C11_ATOMIC failed with the following output:
+Change Dir: M:/Torque2DCmake/Projects/Test/cmake/CMakeFiles/CMakeTmp
+
+Run Build Command(s):C:/Program Files (x86)/Microsoft Visual Studio/2017/Professional/MSBuild/15.0/Bin/MSBuild.exe cmTC_7c170.vcxproj /p:Configuration=Debug /p:Platform=Win32 /p:VisualStudioVersion=15.0 /v:m && Microsoft (R) Build Engine version 15.9.21+g9802d43bc3 for .NET Framework
+Copyright (C) Microsoft Corporation. All rights reserved.
+
+  src.c
+M:\Torque2DCmake\Projects\Test\cmake\CMakeFiles\CMakeTmp\src.c(1): fatal error C1083: Cannot open include file: 'stdatomic.h': No such file or directory [M:\Torque2DCmake\Projects\Test\cmake\CMakeFiles\CMakeTmp\cmTC_7c170.vcxproj]
+
+
+Source file was:
+#include <stdatomic.h>
+ int _Atomic foo = ATOMIC_VAR_INIT(0);
+ int main()
+ {
+     atomic_fetch_add(&foo, 2);
+     return 0;
+ }
+Performing C SOURCE FILE Test HAVE___BUILTIN_ASSUME_ALIGNED failed with the following output:
+Change Dir: M:/Torque2DCmake/Projects/Test/cmake/CMakeFiles/CMakeTmp
+
+Run Build Command(s):C:/Program Files (x86)/Microsoft Visual Studio/2017/Professional/MSBuild/15.0/Bin/MSBuild.exe cmTC_ed6f3.vcxproj /p:Configuration=Debug /p:Platform=Win32 /p:VisualStudioVersion=15.0 /v:m && Microsoft (R) Build Engine version 15.9.21+g9802d43bc3 for .NET Framework
+Copyright (C) Microsoft Corporation. All rights reserved.
+
+  src.c
+M:\Torque2DCmake\Projects\Test\cmake\CMakeFiles\CMakeTmp\src.c(5): warning C4013: '__builtin_assume_aligned' undefined; assuming extern returning int [M:\Torque2DCmake\Projects\Test\cmake\CMakeFiles\CMakeTmp\cmTC_ed6f3.vcxproj]
+M:\Torque2DCmake\Projects\Test\cmake\CMakeFiles\CMakeTmp\src.c(5): warning C4047: '=': 'float *' differs in levels of indirection from 'int' [M:\Torque2DCmake\Projects\Test\cmake\CMakeFiles\CMakeTmp\cmTC_ed6f3.vcxproj]
+m:\torque2dcmake\projects\test\cmake\cmakefiles\cmaketmp\src.c(5): warning C4700: uninitialized local variable 'ptr' used [M:\Torque2DCmake\Projects\Test\cmake\CMakeFiles\CMakeTmp\cmTC_ed6f3.vcxproj]
+src.obj : error LNK2019: unresolved external symbol ___builtin_assume_aligned referenced in function _main [M:\Torque2DCmake\Projects\Test\cmake\CMakeFiles\CMakeTmp\cmTC_ed6f3.vcxproj]
+M:\Torque2DCmake\Projects\Test\cmake\CMakeFiles\CMakeTmp\Debug\cmTC_ed6f3.exe : fatal error LNK1120: 1 unresolved externals [M:\Torque2DCmake\Projects\Test\cmake\CMakeFiles\CMakeTmp\cmTC_ed6f3.vcxproj]
+
+
+Source file was:
+
+int main()
+{
+    float *ptr;
+    ptr = __builtin_assume_aligned(ptr, 16);
+    return 0;
+}
+Performing C SOURCE FILE Test HAVE_MSSE_SWITCH failed with the following output:
+Change Dir: M:/Torque2DCmake/Projects/Test/cmake/CMakeFiles/CMakeTmp
+
+Run Build Command(s):C:/Program Files (x86)/Microsoft Visual Studio/2017/Professional/MSBuild/15.0/Bin/MSBuild.exe cmTC_1556d.vcxproj /p:Configuration=Debug /p:Platform=Win32 /p:VisualStudioVersion=15.0 /v:m && Microsoft (R) Build Engine version 15.9.21+g9802d43bc3 for .NET Framework
+Copyright (C) Microsoft Corporation. All rights reserved.
+
+cl : Command line warning D9002: ignoring unknown option '-msse' [M:\Torque2DCmake\Projects\Test\cmake\CMakeFiles\CMakeTmp\cmTC_1556d.vcxproj]
+  src.c
+  cmTC_1556d.vcxproj -> M:\Torque2DCmake\Projects\Test\cmake\CMakeFiles\CMakeTmp\Debug\cmTC_1556d.exe
+
+
+Source file was:
+int main(void) { return 0; }
+Performing C SOURCE FILE Test HAVE_MSSE2_SWITCH failed with the following output:
+Change Dir: M:/Torque2DCmake/Projects/Test/cmake/CMakeFiles/CMakeTmp
+
+Run Build Command(s):C:/Program Files (x86)/Microsoft Visual Studio/2017/Professional/MSBuild/15.0/Bin/MSBuild.exe cmTC_cc6fb.vcxproj /p:Configuration=Debug /p:Platform=Win32 /p:VisualStudioVersion=15.0 /v:m && Microsoft (R) Build Engine version 15.9.21+g9802d43bc3 for .NET Framework
+Copyright (C) Microsoft Corporation. All rights reserved.
+
+cl : Command line warning D9002: ignoring unknown option '-msse2' [M:\Torque2DCmake\Projects\Test\cmake\CMakeFiles\CMakeTmp\cmTC_cc6fb.vcxproj]
+  src.c
+  cmTC_cc6fb.vcxproj -> M:\Torque2DCmake\Projects\Test\cmake\CMakeFiles\CMakeTmp\Debug\cmTC_cc6fb.exe
+
+
+Source file was:
+int main(void) { return 0; }
+Performing C SOURCE FILE Test HAVE_MSSE3_SWITCH failed with the following output:
+Change Dir: M:/Torque2DCmake/Projects/Test/cmake/CMakeFiles/CMakeTmp
+
+Run Build Command(s):C:/Program Files (x86)/Microsoft Visual Studio/2017/Professional/MSBuild/15.0/Bin/MSBuild.exe cmTC_28c9a.vcxproj /p:Configuration=Debug /p:Platform=Win32 /p:VisualStudioVersion=15.0 /v:m && Microsoft (R) Build Engine version 15.9.21+g9802d43bc3 for .NET Framework
+Copyright (C) Microsoft Corporation. All rights reserved.
+
+cl : Command line warning D9002: ignoring unknown option '-msse3' [M:\Torque2DCmake\Projects\Test\cmake\CMakeFiles\CMakeTmp\cmTC_28c9a.vcxproj]
+  src.c
+  cmTC_28c9a.vcxproj -> M:\Torque2DCmake\Projects\Test\cmake\CMakeFiles\CMakeTmp\Debug\cmTC_28c9a.exe
+
+
+Source file was:
+int main(void) { return 0; }
+Performing C SOURCE FILE Test HAVE_MSSE4_1_SWITCH failed with the following output:
+Change Dir: M:/Torque2DCmake/Projects/Test/cmake/CMakeFiles/CMakeTmp
+
+Run Build Command(s):C:/Program Files (x86)/Microsoft Visual Studio/2017/Professional/MSBuild/15.0/Bin/MSBuild.exe cmTC_1d058.vcxproj /p:Configuration=Debug /p:Platform=Win32 /p:VisualStudioVersion=15.0 /v:m && Microsoft (R) Build Engine version 15.9.21+g9802d43bc3 for .NET Framework
+Copyright (C) Microsoft Corporation. All rights reserved.
+
+cl : Command line warning D9002: ignoring unknown option '-msse4.1' [M:\Torque2DCmake\Projects\Test\cmake\CMakeFiles\CMakeTmp\cmTC_1d058.vcxproj]
+  src.c
+  cmTC_1d058.vcxproj -> M:\Torque2DCmake\Projects\Test\cmake\CMakeFiles\CMakeTmp\Debug\cmTC_1d058.exe
+
+
+Source file was:
+int main(void) { return 0; }
+Performing C SOURCE FILE Test HAVE_MFPU_NEON_SWITCH failed with the following output:
+Change Dir: M:/Torque2DCmake/Projects/Test/cmake/CMakeFiles/CMakeTmp
+
+Run Build Command(s):C:/Program Files (x86)/Microsoft Visual Studio/2017/Professional/MSBuild/15.0/Bin/MSBuild.exe cmTC_c0bde.vcxproj /p:Configuration=Debug /p:Platform=Win32 /p:VisualStudioVersion=15.0 /v:m && Microsoft (R) Build Engine version 15.9.21+g9802d43bc3 for .NET Framework
+Copyright (C) Microsoft Corporation. All rights reserved.
+
+cl : Command line warning D9002: ignoring unknown option '-mfpu=neon' [M:\Torque2DCmake\Projects\Test\cmake\CMakeFiles\CMakeTmp\cmTC_c0bde.vcxproj]
+  src.c
+  cmTC_c0bde.vcxproj -> M:\Torque2DCmake\Projects\Test\cmake\CMakeFiles\CMakeTmp\Debug\cmTC_c0bde.exe
+
+
+Source file was:
+int main(void) { return 0; }
+Performing C SOURCE FILE Test HAVE_GCC_FORMAT failed with the following output:
+Change Dir: M:/Torque2DCmake/Projects/Test/cmake/CMakeFiles/CMakeTmp
+
+Run Build Command(s):C:/Program Files (x86)/Microsoft Visual Studio/2017/Professional/MSBuild/15.0/Bin/MSBuild.exe cmTC_39209.vcxproj /p:Configuration=Debug /p:Platform=Win32 /p:VisualStudioVersion=15.0 /v:m && Microsoft (R) Build Engine version 15.9.21+g9802d43bc3 for .NET Framework
+Copyright (C) Microsoft Corporation. All rights reserved.
+
+  src.c
+M:\Torque2DCmake\Projects\Test\cmake\CMakeFiles\CMakeTmp\src.c(1): error C2061: syntax error: identifier '__attribute__' [M:\Torque2DCmake\Projects\Test\cmake\CMakeFiles\CMakeTmp\cmTC_39209.vcxproj]
+M:\Torque2DCmake\Projects\Test\cmake\CMakeFiles\CMakeTmp\src.c(1): error C2059: syntax error: ';' [M:\Torque2DCmake\Projects\Test\cmake\CMakeFiles\CMakeTmp\cmTC_39209.vcxproj]
+M:\Torque2DCmake\Projects\Test\cmake\CMakeFiles\CMakeTmp\src.c(1): error C2059: syntax error: 'constant' [M:\Torque2DCmake\Projects\Test\cmake\CMakeFiles\CMakeTmp\cmTC_39209.vcxproj]
+M:\Torque2DCmake\Projects\Test\cmake\CMakeFiles\CMakeTmp\src.c(1): warning C4131: 'format': uses old-style declarator [M:\Torque2DCmake\Projects\Test\cmake\CMakeFiles\CMakeTmp\cmTC_39209.vcxproj]
+M:\Torque2DCmake\Projects\Test\cmake\CMakeFiles\CMakeTmp\src.c(1): warning C4431: missing type specifier - int assumed. Note: C no longer supports default-int [M:\Torque2DCmake\Projects\Test\cmake\CMakeFiles\CMakeTmp\cmTC_39209.vcxproj]
+M:\Torque2DCmake\Projects\Test\cmake\CMakeFiles\CMakeTmp\src.c(1): warning C4218: nonstandard extension used: must specify at least a storage class or a type [M:\Torque2DCmake\Projects\Test\cmake\CMakeFiles\CMakeTmp\cmTC_39209.vcxproj]
+
+
+Source file was:
+int foo(const char *str, ...) __attribute__((format(printf, 1, 2)));
+                         int main() {return 0;}
+Determining if the include file stdalign.h exists failed with the following output:
+Change Dir: M:/Torque2DCmake/Projects/Test/cmake/CMakeFiles/CMakeTmp
+
+Run Build Command(s):C:/Program Files (x86)/Microsoft Visual Studio/2017/Professional/MSBuild/15.0/Bin/MSBuild.exe cmTC_b7890.vcxproj /p:Configuration=Debug /p:Platform=Win32 /p:VisualStudioVersion=15.0 /v:m && Microsoft (R) Build Engine version 15.9.21+g9802d43bc3 for .NET Framework
+Copyright (C) Microsoft Corporation. All rights reserved.
+
+  CheckIncludeFile.c
+M:\Torque2DCmake\Projects\Test\cmake\CMakeFiles\CMakeTmp\CheckIncludeFile.c(1): fatal error C1083: Cannot open include file: 'stdalign.h': No such file or directory [M:\Torque2DCmake\Projects\Test\cmake\CMakeFiles\CMakeTmp\cmTC_b7890.vcxproj]
+
+
+
+Determining if the include file dirent.h exists failed with the following output:
+Change Dir: M:/Torque2DCmake/Projects/Test/cmake/CMakeFiles/CMakeTmp
+
+Run Build Command(s):C:/Program Files (x86)/Microsoft Visual Studio/2017/Professional/MSBuild/15.0/Bin/MSBuild.exe cmTC_c9e57.vcxproj /p:Configuration=Debug /p:Platform=Win32 /p:VisualStudioVersion=15.0 /v:m && Microsoft (R) Build Engine version 15.9.21+g9802d43bc3 for .NET Framework
+Copyright (C) Microsoft Corporation. All rights reserved.
+
+  CheckIncludeFile.c
+M:\Torque2DCmake\Projects\Test\cmake\CMakeFiles\CMakeTmp\CheckIncludeFile.c(1): fatal error C1083: Cannot open include file: 'dirent.h': No such file or directory [M:\Torque2DCmake\Projects\Test\cmake\CMakeFiles\CMakeTmp\cmTC_c9e57.vcxproj]
+
+
+
+Determining if the include file strings.h exists failed with the following output:
+Change Dir: M:/Torque2DCmake/Projects/Test/cmake/CMakeFiles/CMakeTmp
+
+Run Build Command(s):C:/Program Files (x86)/Microsoft Visual Studio/2017/Professional/MSBuild/15.0/Bin/MSBuild.exe cmTC_aaaf1.vcxproj /p:Configuration=Debug /p:Platform=Win32 /p:VisualStudioVersion=15.0 /v:m && Microsoft (R) Build Engine version 15.9.21+g9802d43bc3 for .NET Framework
+Copyright (C) Microsoft Corporation. All rights reserved.
+
+  CheckIncludeFile.c
+M:\Torque2DCmake\Projects\Test\cmake\CMakeFiles\CMakeTmp\CheckIncludeFile.c(1): fatal error C1083: Cannot open include file: 'strings.h': No such file or directory [M:\Torque2DCmake\Projects\Test\cmake\CMakeFiles\CMakeTmp\cmTC_aaaf1.vcxproj]
+
+
+
+Determining if the include file cpuid.h exists failed with the following output:
+Change Dir: M:/Torque2DCmake/Projects/Test/cmake/CMakeFiles/CMakeTmp
+
+Run Build Command(s):C:/Program Files (x86)/Microsoft Visual Studio/2017/Professional/MSBuild/15.0/Bin/MSBuild.exe cmTC_f275a.vcxproj /p:Configuration=Debug /p:Platform=Win32 /p:VisualStudioVersion=15.0 /v:m && Microsoft (R) Build Engine version 15.9.21+g9802d43bc3 for .NET Framework
+Copyright (C) Microsoft Corporation. All rights reserved.
+
+  CheckIncludeFile.c
+M:\Torque2DCmake\Projects\Test\cmake\CMakeFiles\CMakeTmp\CheckIncludeFile.c(1): fatal error C1083: Cannot open include file: 'cpuid.h': No such file or directory [M:\Torque2DCmake\Projects\Test\cmake\CMakeFiles\CMakeTmp\cmTC_f275a.vcxproj]
+
+
+
+Determining if the include file sys/sysconf.h exists failed with the following output:
+Change Dir: M:/Torque2DCmake/Projects/Test/cmake/CMakeFiles/CMakeTmp
+
+Run Build Command(s):C:/Program Files (x86)/Microsoft Visual Studio/2017/Professional/MSBuild/15.0/Bin/MSBuild.exe cmTC_e98b9.vcxproj /p:Configuration=Debug /p:Platform=Win32 /p:VisualStudioVersion=15.0 /v:m && Microsoft (R) Build Engine version 15.9.21+g9802d43bc3 for .NET Framework
+Copyright (C) Microsoft Corporation. All rights reserved.
+
+  CheckIncludeFile.c
+M:\Torque2DCmake\Projects\Test\cmake\CMakeFiles\CMakeTmp\CheckIncludeFile.c(1): fatal error C1083: Cannot open include file: 'sys/sysconf.h': No such file or directory [M:\Torque2DCmake\Projects\Test\cmake\CMakeFiles\CMakeTmp\cmTC_e98b9.vcxproj]
+
+
+
+Determining if the include file ieeefp.h exists failed with the following output:
+Change Dir: M:/Torque2DCmake/Projects/Test/cmake/CMakeFiles/CMakeTmp
+
+Run Build Command(s):C:/Program Files (x86)/Microsoft Visual Studio/2017/Professional/MSBuild/15.0/Bin/MSBuild.exe cmTC_c91c0.vcxproj /p:Configuration=Debug /p:Platform=Win32 /p:VisualStudioVersion=15.0 /v:m && Microsoft (R) Build Engine version 15.9.21+g9802d43bc3 for .NET Framework
+Copyright (C) Microsoft Corporation. All rights reserved.
+
+  CheckIncludeFile.c
+M:\Torque2DCmake\Projects\Test\cmake\CMakeFiles\CMakeTmp\CheckIncludeFile.c(1): fatal error C1083: Cannot open include file: 'ieeefp.h': No such file or directory [M:\Torque2DCmake\Projects\Test\cmake\CMakeFiles\CMakeTmp\cmTC_c91c0.vcxproj]
+
+
+
+Determining if the function pow exists in the m failed with the following output:
+Change Dir: M:/Torque2DCmake/Projects/Test/cmake/CMakeFiles/CMakeTmp
+
+Run Build Command(s):C:/Program Files (x86)/Microsoft Visual Studio/2017/Professional/MSBuild/15.0/Bin/MSBuild.exe cmTC_b35c5.vcxproj /p:Configuration=Debug /p:Platform=Win32 /p:VisualStudioVersion=15.0 /v:m && Microsoft (R) Build Engine version 15.9.21+g9802d43bc3 for .NET Framework
+Copyright (C) Microsoft Corporation. All rights reserved.
+
+  CheckFunctionExists.c
+C:\Program Files\CMake\share\cmake-3.17\Modules\CheckFunctionExists.c(7): warning C4391: 'char pow(void)': incorrect return type for intrinsic function, expected 'double' [M:\Torque2DCmake\Projects\Test\cmake\CMakeFiles\CMakeTmp\cmTC_b35c5.vcxproj]
+C:\Program Files\CMake\share\cmake-3.17\Modules\CheckFunctionExists.c(7): warning C4392: 'char pow(void)': incorrect number of arguments for intrinsic function, expected '2' arguments [M:\Torque2DCmake\Projects\Test\cmake\CMakeFiles\CMakeTmp\cmTC_b35c5.vcxproj]
+C:\Program Files\CMake\share\cmake-3.17\Modules\CheckFunctionExists.c(17): error C2168: 'pow': too few actual parameters for intrinsic function [M:\Torque2DCmake\Projects\Test\cmake\CMakeFiles\CMakeTmp\cmTC_b35c5.vcxproj]
+
+
+
+Determining if the function dlopen exists in the dl failed with the following output:
+Change Dir: M:/Torque2DCmake/Projects/Test/cmake/CMakeFiles/CMakeTmp
+
+Run Build Command(s):C:/Program Files (x86)/Microsoft Visual Studio/2017/Professional/MSBuild/15.0/Bin/MSBuild.exe cmTC_b7fa2.vcxproj /p:Configuration=Debug /p:Platform=Win32 /p:VisualStudioVersion=15.0 /v:m && Microsoft (R) Build Engine version 15.9.21+g9802d43bc3 for .NET Framework
+Copyright (C) Microsoft Corporation. All rights reserved.
+
+  CheckFunctionExists.c
+LINK : fatal error LNK1104: cannot open file 'dl.lib' [M:\Torque2DCmake\Projects\Test\cmake\CMakeFiles\CMakeTmp\cmTC_b7fa2.vcxproj]
+
+
+
+Determining if the include file dlfcn.h exists failed with the following output:
+Change Dir: M:/Torque2DCmake/Projects/Test/cmake/CMakeFiles/CMakeTmp
+
+Run Build Command(s):C:/Program Files (x86)/Microsoft Visual Studio/2017/Professional/MSBuild/15.0/Bin/MSBuild.exe cmTC_c5e39.vcxproj /p:Configuration=Debug /p:Platform=Win32 /p:VisualStudioVersion=15.0 /v:m && Microsoft (R) Build Engine version 15.9.21+g9802d43bc3 for .NET Framework
+Copyright (C) Microsoft Corporation. All rights reserved.
+
+  CheckIncludeFile.c
+M:\Torque2DCmake\Projects\Test\cmake\CMakeFiles\CMakeTmp\CheckIncludeFile.c(1): fatal error C1083: Cannot open include file: 'dlfcn.h': No such file or directory [M:\Torque2DCmake\Projects\Test\cmake\CMakeFiles\CMakeTmp\cmTC_c5e39.vcxproj]
+
+
+
+Performing C SOURCE FILE Test HAVE_BITSCANFORWARD64_INTRINSIC failed with the following output:
+Change Dir: M:/Torque2DCmake/Projects/Test/cmake/CMakeFiles/CMakeTmp
+
+Run Build Command(s):C:/Program Files (x86)/Microsoft Visual Studio/2017/Professional/MSBuild/15.0/Bin/MSBuild.exe cmTC_c20a0.vcxproj /p:Configuration=Debug /p:Platform=Win32 /p:VisualStudioVersion=15.0 /v:m && Microsoft (R) Build Engine version 15.9.21+g9802d43bc3 for .NET Framework
+Copyright (C) Microsoft Corporation. All rights reserved.
+
+  src.c
+M:\Torque2DCmake\Projects\Test\cmake\CMakeFiles\CMakeTmp\src.c(5): warning C4013: '_BitScanForward64' undefined; assuming extern returning int [M:\Torque2DCmake\Projects\Test\cmake\CMakeFiles\CMakeTmp\cmTC_c20a0.vcxproj]
+src.obj : error LNK2019: unresolved external symbol __BitScanForward64 referenced in function _main [M:\Torque2DCmake\Projects\Test\cmake\CMakeFiles\CMakeTmp\cmTC_c20a0.vcxproj]
+M:\Torque2DCmake\Projects\Test\cmake\CMakeFiles\CMakeTmp\Debug\cmTC_c20a0.exe : fatal error LNK1120: 1 unresolved externals [M:\Torque2DCmake\Projects\Test\cmake\CMakeFiles\CMakeTmp\cmTC_c20a0.vcxproj]
+
+
+Source file was:
+#include <intrin.h>
+        int main()
+        {
+            unsigned long idx = 0;
+            _BitScanForward64(&idx, 1);
+            return idx;
+        }
+Determining if the sysconf exist failed with the following output:
+Change Dir: M:/Torque2DCmake/Projects/Test/cmake/CMakeFiles/CMakeTmp
+
+Run Build Command(s):C:/Program Files (x86)/Microsoft Visual Studio/2017/Professional/MSBuild/15.0/Bin/MSBuild.exe cmTC_8aa48.vcxproj /p:Configuration=Debug /p:Platform=Win32 /p:VisualStudioVersion=15.0 /v:m && Microsoft (R) Build Engine version 15.9.21+g9802d43bc3 for .NET Framework
+Copyright (C) Microsoft Corporation. All rights reserved.
+
+  CheckSymbolExists.c
+M:\Torque2DCmake\Projects\Test\cmake\CMakeFiles\CMakeTmp\CheckSymbolExists.c(2): fatal error C1083: Cannot open include file: 'unistd.h': No such file or directory [M:\Torque2DCmake\Projects\Test\cmake\CMakeFiles\CMakeTmp\cmTC_8aa48.vcxproj]
+
+
+File M:/Torque2DCmake/Projects/Test/cmake/CMakeFiles/CMakeTmp/CheckSymbolExists.c:
+/* */
+#include <unistd.h>
+
+int main(int argc, char** argv)
+{
+  (void)argv;
+#ifndef sysconf
+  return ((int*)(&sysconf))[argc];
+#else
+  (void)argc;
+  return 0;
+#endif
+}
+Determining if the aligned_alloc exist failed with the following output:
+Change Dir: M:/Torque2DCmake/Projects/Test/cmake/CMakeFiles/CMakeTmp
+
+Run Build Command(s):C:/Program Files (x86)/Microsoft Visual Studio/2017/Professional/MSBuild/15.0/Bin/MSBuild.exe cmTC_3da66.vcxproj /p:Configuration=Debug /p:Platform=Win32 /p:VisualStudioVersion=15.0 /v:m && Microsoft (R) Build Engine version 15.9.21+g9802d43bc3 for .NET Framework
+Copyright (C) Microsoft Corporation. All rights reserved.
+
+  CheckSymbolExists.c
+M:\Torque2DCmake\Projects\Test\cmake\CMakeFiles\CMakeTmp\CheckSymbolExists.c(8): error C2065: 'aligned_alloc': undeclared identifier [M:\Torque2DCmake\Projects\Test\cmake\CMakeFiles\CMakeTmp\cmTC_3da66.vcxproj]
+
+
+File M:/Torque2DCmake/Projects/Test/cmake/CMakeFiles/CMakeTmp/CheckSymbolExists.c:
+/* */
+#include <stdlib.h>
+
+int main(int argc, char** argv)
+{
+  (void)argv;
+#ifndef aligned_alloc
+  return ((int*)(&aligned_alloc))[argc];
+#else
+  (void)argc;
+  return 0;
+#endif
+}
+Determining if the posix_memalign exist failed with the following output:
+Change Dir: M:/Torque2DCmake/Projects/Test/cmake/CMakeFiles/CMakeTmp
+
+Run Build Command(s):C:/Program Files (x86)/Microsoft Visual Studio/2017/Professional/MSBuild/15.0/Bin/MSBuild.exe cmTC_39d9f.vcxproj /p:Configuration=Debug /p:Platform=Win32 /p:VisualStudioVersion=15.0 /v:m && Microsoft (R) Build Engine version 15.9.21+g9802d43bc3 for .NET Framework
+Copyright (C) Microsoft Corporation. All rights reserved.
+
+  CheckSymbolExists.c
+M:\Torque2DCmake\Projects\Test\cmake\CMakeFiles\CMakeTmp\CheckSymbolExists.c(8): error C2065: 'posix_memalign': undeclared identifier [M:\Torque2DCmake\Projects\Test\cmake\CMakeFiles\CMakeTmp\cmTC_39d9f.vcxproj]
+
+
+File M:/Torque2DCmake/Projects/Test/cmake/CMakeFiles/CMakeTmp/CheckSymbolExists.c:
+/* */
+#include <stdlib.h>
+
+int main(int argc, char** argv)
+{
+  (void)argv;
+#ifndef posix_memalign
+  return ((int*)(&posix_memalign))[argc];
+#else
+  (void)argc;
+  return 0;
+#endif
+}
+Determining if the proc_pidpath exist failed with the following output:
+Change Dir: M:/Torque2DCmake/Projects/Test/cmake/CMakeFiles/CMakeTmp
+
+Run Build Command(s):C:/Program Files (x86)/Microsoft Visual Studio/2017/Professional/MSBuild/15.0/Bin/MSBuild.exe cmTC_aa26e.vcxproj /p:Configuration=Debug /p:Platform=Win32 /p:VisualStudioVersion=15.0 /v:m && Microsoft (R) Build Engine version 15.9.21+g9802d43bc3 for .NET Framework
+Copyright (C) Microsoft Corporation. All rights reserved.
+
+  CheckSymbolExists.c
+M:\Torque2DCmake\Projects\Test\cmake\CMakeFiles\CMakeTmp\CheckSymbolExists.c(2): fatal error C1083: Cannot open include file: 'libproc.h': No such file or directory [M:\Torque2DCmake\Projects\Test\cmake\CMakeFiles\CMakeTmp\cmTC_aa26e.vcxproj]
+
+
+File M:/Torque2DCmake/Projects/Test/cmake/CMakeFiles/CMakeTmp/CheckSymbolExists.c:
+/* */
+#include <libproc.h>
+
+int main(int argc, char** argv)
+{
+  (void)argv;
+#ifndef proc_pidpath
+  return ((int*)(&proc_pidpath))[argc];
+#else
+  (void)argc;
+  return 0;
+#endif
+}
+Determining if the function strcasecmp exists failed with the following output:
+Change Dir: M:/Torque2DCmake/Projects/Test/cmake/CMakeFiles/CMakeTmp
+
+Run Build Command(s):C:/Program Files (x86)/Microsoft Visual Studio/2017/Professional/MSBuild/15.0/Bin/MSBuild.exe cmTC_a09ed.vcxproj /p:Configuration=Debug /p:Platform=Win32 /p:VisualStudioVersion=15.0 /v:m && Microsoft (R) Build Engine version 15.9.21+g9802d43bc3 for .NET Framework
+Copyright (C) Microsoft Corporation. All rights reserved.
+
+  CheckFunctionExists.c
+CheckFunctionExists.obj : error LNK2019: unresolved external symbol _strcasecmp referenced in function _main [M:\Torque2DCmake\Projects\Test\cmake\CMakeFiles\CMakeTmp\cmTC_a09ed.vcxproj]
+M:\Torque2DCmake\Projects\Test\cmake\CMakeFiles\CMakeTmp\Debug\cmTC_a09ed.exe : fatal error LNK1120: 1 unresolved externals [M:\Torque2DCmake\Projects\Test\cmake\CMakeFiles\CMakeTmp\cmTC_a09ed.vcxproj]
+
+
+
+Determining if the function strncasecmp exists failed with the following output:
+Change Dir: M:/Torque2DCmake/Projects/Test/cmake/CMakeFiles/CMakeTmp
+
+Run Build Command(s):C:/Program Files (x86)/Microsoft Visual Studio/2017/Professional/MSBuild/15.0/Bin/MSBuild.exe cmTC_ac386.vcxproj /p:Configuration=Debug /p:Platform=Win32 /p:VisualStudioVersion=15.0 /v:m && Microsoft (R) Build Engine version 15.9.21+g9802d43bc3 for .NET Framework
+Copyright (C) Microsoft Corporation. All rights reserved.
+
+  CheckFunctionExists.c
+CheckFunctionExists.obj : error LNK2019: unresolved external symbol _strncasecmp referenced in function _main [M:\Torque2DCmake\Projects\Test\cmake\CMakeFiles\CMakeTmp\cmTC_ac386.vcxproj]
+M:\Torque2DCmake\Projects\Test\cmake\CMakeFiles\CMakeTmp\Debug\cmTC_ac386.exe : fatal error LNK1120: 1 unresolved externals [M:\Torque2DCmake\Projects\Test\cmake\CMakeFiles\CMakeTmp\cmTC_ac386.vcxproj]
+
+
+
+Determining if the getopt exist failed with the following output:
+Change Dir: M:/Torque2DCmake/Projects/Test/cmake/CMakeFiles/CMakeTmp
+
+Run Build Command(s):C:/Program Files (x86)/Microsoft Visual Studio/2017/Professional/MSBuild/15.0/Bin/MSBuild.exe cmTC_78073.vcxproj /p:Configuration=Debug /p:Platform=Win32 /p:VisualStudioVersion=15.0 /v:m && Microsoft (R) Build Engine version 15.9.21+g9802d43bc3 for .NET Framework
+Copyright (C) Microsoft Corporation. All rights reserved.
+
+  CheckSymbolExists.c
+M:\Torque2DCmake\Projects\Test\cmake\CMakeFiles\CMakeTmp\CheckSymbolExists.c(2): fatal error C1083: Cannot open include file: 'unistd.h': No such file or directory [M:\Torque2DCmake\Projects\Test\cmake\CMakeFiles\CMakeTmp\cmTC_78073.vcxproj]
+
+
+File M:/Torque2DCmake/Projects/Test/cmake/CMakeFiles/CMakeTmp/CheckSymbolExists.c:
+/* */
+#include <unistd.h>
+
+int main(int argc, char** argv)
+{
+  (void)argv;
+#ifndef getopt
+  return ((int*)(&getopt))[argc];
+#else
+  (void)argc;
+  return 0;
+#endif
+}
+Determining if the include file arm_neon.h exists failed with the following output:
+Change Dir: M:/Torque2DCmake/Projects/Test/cmake/CMakeFiles/CMakeTmp
+
+Run Build Command(s):C:/Program Files (x86)/Microsoft Visual Studio/2017/Professional/MSBuild/15.0/Bin/MSBuild.exe cmTC_8b556.vcxproj /p:Configuration=Debug /p:Platform=Win32 /p:VisualStudioVersion=15.0 /v:m && Microsoft (R) Build Engine version 15.9.21+g9802d43bc3 for .NET Framework
+Copyright (C) Microsoft Corporation. All rights reserved.
+
+  CheckIncludeFile.c
+C:\Program Files (x86)\Microsoft Visual Studio\2017\Professional\VC\Tools\MSVC\14.16.27023\include\arm_neon.h(17): fatal error C1189: #error:  This header is specific to ARM targets [M:\Torque2DCmake\Projects\Test\cmake\CMakeFiles\CMakeTmp\cmTC_8b556.vcxproj]
+
+
+
+Determining if files SLES/OpenSLES.h;SLES/OpenSLES_Android.h exist failed with the following output:
+Change Dir: M:/Torque2DCmake/Projects/Test/cmake/CMakeFiles/CMakeTmp
+
+Run Build Command(s):C:/Program Files (x86)/Microsoft Visual Studio/2017/Professional/MSBuild/15.0/Bin/MSBuild.exe cmTC_80057.vcxproj /p:Configuration=Debug /p:Platform=Win32 /p:VisualStudioVersion=15.0 /v:m && Microsoft (R) Build Engine version 15.9.21+g9802d43bc3 for .NET Framework
+Copyright (C) Microsoft Corporation. All rights reserved.
+
+  HAVE_SLES_OPENSLES_ANDROID_H.c
+M:\Torque2DCmake\Projects\Test\cmake\CMakeFiles\CheckIncludeFiles\HAVE_SLES_OPENSLES_ANDROID_H.c(2): fatal error C1083: Cannot open include file: 'SLES/OpenSLES.h': No such file or directory [M:\Torque2DCmake\Projects\Test\cmake\CMakeFiles\CMakeTmp\cmTC_80057.vcxproj]
+
+
+Source:
+/* */
+#include <SLES/OpenSLES.h>
+#include <SLES/OpenSLES_Android.h>
+
+
+int main(void){return 0;}
+
+Determining if the include file pthread.h exists failed with the following output:
+Change Dir: M:/Torque2DCmake/Projects/Test/cmake/CMakeFiles/CMakeTmp
+
+Run Build Command(s):C:/Program Files (x86)/Microsoft Visual Studio/2017/Professional/MSBuild/15.0/Bin/MSBuild.exe cmTC_4c5af.vcxproj /p:Configuration=Debug /p:Platform=Win32 /p:VisualStudioVersion=15.0 /v:m && Microsoft (R) Build Engine version 15.9.21+g9802d43bc3 for .NET Framework
+Copyright (C) Microsoft Corporation. All rights reserved.
+
+  CheckIncludeFile.c
+M:\Torque2DCmake\Projects\Test\cmake\CMakeFiles\CMakeTmp\CheckIncludeFile.c(1): fatal error C1083: Cannot open include file: 'pthread.h': No such file or directory [M:\Torque2DCmake\Projects\Test\cmake\CMakeFiles\CMakeTmp\cmTC_4c5af.vcxproj]
+
+
+

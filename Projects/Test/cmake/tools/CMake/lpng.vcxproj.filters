@@ -1,0 +1,87 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <ClCompile Include="M:\Torque2DCmake\engine\lib\lpng\example.c">
+      <Filter>lpng</Filter>
+    </ClCompile>
+    <ClCompile Include="M:\Torque2DCmake\engine\lib\lpng\png.c">
+      <Filter>lpng</Filter>
+    </ClCompile>
+    <ClCompile Include="M:\Torque2DCmake\engine\lib\lpng\pngerror.c">
+      <Filter>lpng</Filter>
+    </ClCompile>
+    <ClCompile Include="M:\Torque2DCmake\engine\lib\lpng\pngget.c">
+      <Filter>lpng</Filter>
+    </ClCompile>
+    <ClCompile Include="M:\Torque2DCmake\engine\lib\lpng\pngmem.c">
+      <Filter>lpng</Filter>
+    </ClCompile>
+    <ClCompile Include="M:\Torque2DCmake\engine\lib\lpng\pngpread.c">
+      <Filter>lpng</Filter>
+    </ClCompile>
+    <ClCompile Include="M:\Torque2DCmake\engine\lib\lpng\pngread.c">
+      <Filter>lpng</Filter>
+    </ClCompile>
+    <ClCompile Include="M:\Torque2DCmake\engine\lib\lpng\pngrio.c">
+      <Filter>lpng</Filter>
+    </ClCompile>
+    <ClCompile Include="M:\Torque2DCmake\engine\lib\lpng\pngrtran.c">
+      <Filter>lpng</Filter>
+    </ClCompile>
+    <ClCompile Include="M:\Torque2DCmake\engine\lib\lpng\pngrutil.c">
+      <Filter>lpng</Filter>
+    </ClCompile>
+    <ClCompile Include="M:\Torque2DCmake\engine\lib\lpng\pngset.c">
+      <Filter>lpng</Filter>
+    </ClCompile>
+    <ClCompile Include="M:\Torque2DCmake\engine\lib\lpng\pngtest.c">
+      <Filter>lpng</Filter>
+    </ClCompile>
+    <ClCompile Include="M:\Torque2DCmake\engine\lib\lpng\pngtrans.c">
+      <Filter>lpng</Filter>
+    </ClCompile>
+    <ClCompile Include="M:\Torque2DCmake\engine\lib\lpng\pngwio.c">
+      <Filter>lpng</Filter>
+    </ClCompile>
+    <ClCompile Include="M:\Torque2DCmake\engine\lib\lpng\pngwrite.c">
+      <Filter>lpng</Filter>
+    </ClCompile>
+    <ClCompile Include="M:\Torque2DCmake\engine\lib\lpng\pngwtran.c">
+      <Filter>lpng</Filter>
+    </ClCompile>
+    <ClCompile Include="M:\Torque2DCmake\engine\lib\lpng\pngwutil.c">
+      <Filter>lpng</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="M:\Torque2DCmake\engine\lib\lpng\png.h">
+      <Filter>lpng</Filter>
+    </ClInclude>
+    <ClInclude Include="M:\Torque2DCmake\engine\lib\lpng\pngconf.h">
+      <Filter>lpng</Filter>
+    </ClInclude>
+    <ClInclude Include="M:\Torque2DCmake\engine\lib\lpng\pngdebug.h">
+      <Filter>lpng</Filter>
+    </ClInclude>
+    <ClInclude Include="M:\Torque2DCmake\engine\lib\lpng\pnginfo.h">
+      <Filter>lpng</Filter>
+    </ClInclude>
+    <ClInclude Include="M:\Torque2DCmake\engine\lib\lpng\pnglibconf.h">
+      <Filter>lpng</Filter>
+    </ClInclude>
+    <ClInclude Include="M:\Torque2DCmake\engine\lib\lpng\pngpriv.h">
+      <Filter>lpng</Filter>
+    </ClInclude>
+    <ClInclude Include="M:\Torque2DCmake\engine\lib\lpng\pngstruct.h">
+      <Filter>lpng</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <CustomBuild Include="M:\Torque2DCmake\tools\CMake\CMakeLists.txt" />
+  </ItemGroup>
+  <ItemGroup>
+    <Filter Include="lpng">
+      <UniqueIdentifier>{C51A9D0E-6EB0-3B23-925F-D61D3EFB8DA4}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+</Project>

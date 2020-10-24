@@ -1,0 +1,240 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <ClCompile Include="M:\Torque2DCmake\engine\lib\libvorbis\lib\analysis.c">
+      <Filter>libvorbis\lib</Filter>
+    </ClCompile>
+    <ClCompile Include="M:\Torque2DCmake\engine\lib\libvorbis\lib\bitrate.c">
+      <Filter>libvorbis\lib</Filter>
+    </ClCompile>
+    <ClCompile Include="M:\Torque2DCmake\engine\lib\libvorbis\lib\block.c">
+      <Filter>libvorbis\lib</Filter>
+    </ClCompile>
+    <ClCompile Include="M:\Torque2DCmake\engine\lib\libvorbis\lib\codebook.c">
+      <Filter>libvorbis\lib</Filter>
+    </ClCompile>
+    <ClCompile Include="M:\Torque2DCmake\engine\lib\libvorbis\lib\envelope.c">
+      <Filter>libvorbis\lib</Filter>
+    </ClCompile>
+    <ClCompile Include="M:\Torque2DCmake\engine\lib\libvorbis\lib\floor0.c">
+      <Filter>libvorbis\lib</Filter>
+    </ClCompile>
+    <ClCompile Include="M:\Torque2DCmake\engine\lib\libvorbis\lib\floor1.c">
+      <Filter>libvorbis\lib</Filter>
+    </ClCompile>
+    <ClCompile Include="M:\Torque2DCmake\engine\lib\libvorbis\lib\info.c">
+      <Filter>libvorbis\lib</Filter>
+    </ClCompile>
+    <ClCompile Include="M:\Torque2DCmake\engine\lib\libvorbis\lib\lookup.c">
+      <Filter>libvorbis\lib</Filter>
+    </ClCompile>
+    <ClCompile Include="M:\Torque2DCmake\engine\lib\libvorbis\lib\lpc.c">
+      <Filter>libvorbis\lib</Filter>
+    </ClCompile>
+    <ClCompile Include="M:\Torque2DCmake\engine\lib\libvorbis\lib\lsp.c">
+      <Filter>libvorbis\lib</Filter>
+    </ClCompile>
+    <ClCompile Include="M:\Torque2DCmake\engine\lib\libvorbis\lib\mapping0.c">
+      <Filter>libvorbis\lib</Filter>
+    </ClCompile>
+    <ClCompile Include="M:\Torque2DCmake\engine\lib\libvorbis\lib\mdct.c">
+      <Filter>libvorbis\lib</Filter>
+    </ClCompile>
+    <ClCompile Include="M:\Torque2DCmake\engine\lib\libvorbis\lib\psy.c">
+      <Filter>libvorbis\lib</Filter>
+    </ClCompile>
+    <ClCompile Include="M:\Torque2DCmake\engine\lib\libvorbis\lib\registry.c">
+      <Filter>libvorbis\lib</Filter>
+    </ClCompile>
+    <ClCompile Include="M:\Torque2DCmake\engine\lib\libvorbis\lib\res0.c">
+      <Filter>libvorbis\lib</Filter>
+    </ClCompile>
+    <ClCompile Include="M:\Torque2DCmake\engine\lib\libvorbis\lib\sharedbook.c">
+      <Filter>libvorbis\lib</Filter>
+    </ClCompile>
+    <ClCompile Include="M:\Torque2DCmake\engine\lib\libvorbis\lib\smallft.c">
+      <Filter>libvorbis\lib</Filter>
+    </ClCompile>
+    <ClCompile Include="M:\Torque2DCmake\engine\lib\libvorbis\lib\synthesis.c">
+      <Filter>libvorbis\lib</Filter>
+    </ClCompile>
+    <ClCompile Include="M:\Torque2DCmake\engine\lib\libvorbis\lib\vorbisenc.c">
+      <Filter>libvorbis\lib</Filter>
+    </ClCompile>
+    <ClCompile Include="M:\Torque2DCmake\engine\lib\libvorbis\lib\vorbisfile.c">
+      <Filter>libvorbis\lib</Filter>
+    </ClCompile>
+    <ClCompile Include="M:\Torque2DCmake\engine\lib\libvorbis\lib\window.c">
+      <Filter>libvorbis\lib</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="M:\Torque2DCmake\engine\lib\libvorbis\include\vorbis\codec.h">
+      <Filter>libvorbis\include\vorbis</Filter>
+    </ClInclude>
+    <ClInclude Include="M:\Torque2DCmake\engine\lib\libvorbis\include\vorbis\vorbisenc.h">
+      <Filter>libvorbis\include\vorbis</Filter>
+    </ClInclude>
+    <ClInclude Include="M:\Torque2DCmake\engine\lib\libvorbis\include\vorbis\vorbisfile.h">
+      <Filter>libvorbis\include\vorbis</Filter>
+    </ClInclude>
+    <ClInclude Include="M:\Torque2DCmake\engine\lib\libvorbis\lib\backends.h">
+      <Filter>libvorbis\lib</Filter>
+    </ClInclude>
+    <ClInclude Include="M:\Torque2DCmake\engine\lib\libvorbis\lib\bitrate.h">
+      <Filter>libvorbis\lib</Filter>
+    </ClInclude>
+    <ClInclude Include="M:\Torque2DCmake\engine\lib\libvorbis\lib\books\coupled\res_books_51.h">
+      <Filter>libvorbis\lib\books\coupled</Filter>
+    </ClInclude>
+    <ClInclude Include="M:\Torque2DCmake\engine\lib\libvorbis\lib\books\coupled\res_books_stereo.h">
+      <Filter>libvorbis\lib\books\coupled</Filter>
+    </ClInclude>
+    <ClInclude Include="M:\Torque2DCmake\engine\lib\libvorbis\lib\books\floor\floor_books.h">
+      <Filter>libvorbis\lib\books\floor</Filter>
+    </ClInclude>
+    <ClInclude Include="M:\Torque2DCmake\engine\lib\libvorbis\lib\books\uncoupled\res_books_uncoupled.h">
+      <Filter>libvorbis\lib\books\uncoupled</Filter>
+    </ClInclude>
+    <ClInclude Include="M:\Torque2DCmake\engine\lib\libvorbis\lib\codebook.h">
+      <Filter>libvorbis\lib</Filter>
+    </ClInclude>
+    <ClInclude Include="M:\Torque2DCmake\engine\lib\libvorbis\lib\codec_internal.h">
+      <Filter>libvorbis\lib</Filter>
+    </ClInclude>
+    <ClInclude Include="M:\Torque2DCmake\engine\lib\libvorbis\lib\envelope.h">
+      <Filter>libvorbis\lib</Filter>
+    </ClInclude>
+    <ClInclude Include="M:\Torque2DCmake\engine\lib\libvorbis\lib\highlevel.h">
+      <Filter>libvorbis\lib</Filter>
+    </ClInclude>
+    <ClInclude Include="M:\Torque2DCmake\engine\lib\libvorbis\lib\lookup.h">
+      <Filter>libvorbis\lib</Filter>
+    </ClInclude>
+    <ClInclude Include="M:\Torque2DCmake\engine\lib\libvorbis\lib\lookup_data.h">
+      <Filter>libvorbis\lib</Filter>
+    </ClInclude>
+    <ClInclude Include="M:\Torque2DCmake\engine\lib\libvorbis\lib\lpc.h">
+      <Filter>libvorbis\lib</Filter>
+    </ClInclude>
+    <ClInclude Include="M:\Torque2DCmake\engine\lib\libvorbis\lib\lsp.h">
+      <Filter>libvorbis\lib</Filter>
+    </ClInclude>
+    <ClInclude Include="M:\Torque2DCmake\engine\lib\libvorbis\lib\masking.h">
+      <Filter>libvorbis\lib</Filter>
+    </ClInclude>
+    <ClInclude Include="M:\Torque2DCmake\engine\lib\libvorbis\lib\mdct.h">
+      <Filter>libvorbis\lib</Filter>
+    </ClInclude>
+    <ClInclude Include="M:\Torque2DCmake\engine\lib\libvorbis\lib\misc.h">
+      <Filter>libvorbis\lib</Filter>
+    </ClInclude>
+    <ClInclude Include="M:\Torque2DCmake\engine\lib\libvorbis\lib\modes\floor_all.h">
+      <Filter>libvorbis\lib\modes</Filter>
+    </ClInclude>
+    <ClInclude Include="M:\Torque2DCmake\engine\lib\libvorbis\lib\modes\psych_11.h">
+      <Filter>libvorbis\lib\modes</Filter>
+    </ClInclude>
+    <ClInclude Include="M:\Torque2DCmake\engine\lib\libvorbis\lib\modes\psych_16.h">
+      <Filter>libvorbis\lib\modes</Filter>
+    </ClInclude>
+    <ClInclude Include="M:\Torque2DCmake\engine\lib\libvorbis\lib\modes\psych_44.h">
+      <Filter>libvorbis\lib\modes</Filter>
+    </ClInclude>
+    <ClInclude Include="M:\Torque2DCmake\engine\lib\libvorbis\lib\modes\psych_8.h">
+      <Filter>libvorbis\lib\modes</Filter>
+    </ClInclude>
+    <ClInclude Include="M:\Torque2DCmake\engine\lib\libvorbis\lib\modes\residue_16.h">
+      <Filter>libvorbis\lib\modes</Filter>
+    </ClInclude>
+    <ClInclude Include="M:\Torque2DCmake\engine\lib\libvorbis\lib\modes\residue_44.h">
+      <Filter>libvorbis\lib\modes</Filter>
+    </ClInclude>
+    <ClInclude Include="M:\Torque2DCmake\engine\lib\libvorbis\lib\modes\residue_44p51.h">
+      <Filter>libvorbis\lib\modes</Filter>
+    </ClInclude>
+    <ClInclude Include="M:\Torque2DCmake\engine\lib\libvorbis\lib\modes\residue_44u.h">
+      <Filter>libvorbis\lib\modes</Filter>
+    </ClInclude>
+    <ClInclude Include="M:\Torque2DCmake\engine\lib\libvorbis\lib\modes\residue_8.h">
+      <Filter>libvorbis\lib\modes</Filter>
+    </ClInclude>
+    <ClInclude Include="M:\Torque2DCmake\engine\lib\libvorbis\lib\modes\setup_11.h">
+      <Filter>libvorbis\lib\modes</Filter>
+    </ClInclude>
+    <ClInclude Include="M:\Torque2DCmake\engine\lib\libvorbis\lib\modes\setup_16.h">
+      <Filter>libvorbis\lib\modes</Filter>
+    </ClInclude>
+    <ClInclude Include="M:\Torque2DCmake\engine\lib\libvorbis\lib\modes\setup_22.h">
+      <Filter>libvorbis\lib\modes</Filter>
+    </ClInclude>
+    <ClInclude Include="M:\Torque2DCmake\engine\lib\libvorbis\lib\modes\setup_32.h">
+      <Filter>libvorbis\lib\modes</Filter>
+    </ClInclude>
+    <ClInclude Include="M:\Torque2DCmake\engine\lib\libvorbis\lib\modes\setup_44.h">
+      <Filter>libvorbis\lib\modes</Filter>
+    </ClInclude>
+    <ClInclude Include="M:\Torque2DCmake\engine\lib\libvorbis\lib\modes\setup_44p51.h">
+      <Filter>libvorbis\lib\modes</Filter>
+    </ClInclude>
+    <ClInclude Include="M:\Torque2DCmake\engine\lib\libvorbis\lib\modes\setup_44u.h">
+      <Filter>libvorbis\lib\modes</Filter>
+    </ClInclude>
+    <ClInclude Include="M:\Torque2DCmake\engine\lib\libvorbis\lib\modes\setup_8.h">
+      <Filter>libvorbis\lib\modes</Filter>
+    </ClInclude>
+    <ClInclude Include="M:\Torque2DCmake\engine\lib\libvorbis\lib\modes\setup_X.h">
+      <Filter>libvorbis\lib\modes</Filter>
+    </ClInclude>
+    <ClInclude Include="M:\Torque2DCmake\engine\lib\libvorbis\lib\os.h">
+      <Filter>libvorbis\lib</Filter>
+    </ClInclude>
+    <ClInclude Include="M:\Torque2DCmake\engine\lib\libvorbis\lib\psy.h">
+      <Filter>libvorbis\lib</Filter>
+    </ClInclude>
+    <ClInclude Include="M:\Torque2DCmake\engine\lib\libvorbis\lib\registry.h">
+      <Filter>libvorbis\lib</Filter>
+    </ClInclude>
+    <ClInclude Include="M:\Torque2DCmake\engine\lib\libvorbis\lib\scales.h">
+      <Filter>libvorbis\lib</Filter>
+    </ClInclude>
+    <ClInclude Include="M:\Torque2DCmake\engine\lib\libvorbis\lib\smallft.h">
+      <Filter>libvorbis\lib</Filter>
+    </ClInclude>
+    <ClInclude Include="M:\Torque2DCmake\engine\lib\libvorbis\lib\window.h">
+      <Filter>libvorbis\lib</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <CustomBuild Include="M:\Torque2DCmake\tools\CMake\CMakeLists.txt" />
+  </ItemGroup>
+  <ItemGroup>
+    <Filter Include="libvorbis">
+      <UniqueIdentifier>{6FDCB161-9BF9-3CF6-80FA-5D857072291C}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="libvorbis\include">
+      <UniqueIdentifier>{7C1F8508-D521-367F-A1C9-EEEEC470BC2E}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="libvorbis\include\vorbis">
+      <UniqueIdentifier>{F4D3ACB2-E8D5-3076-BD22-18639D52E60E}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="libvorbis\lib">
+      <UniqueIdentifier>{605B58B3-237D-3434-8692-6E81D00D76A9}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="libvorbis\lib\books">
+      <UniqueIdentifier>{DE9787AF-2D68-3C9D-BBD0-4E49CD14C4CC}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="libvorbis\lib\books\coupled">
+      <UniqueIdentifier>{F9D62787-9A78-37BD-9FBE-13E1D6612D63}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="libvorbis\lib\books\floor">
+      <UniqueIdentifier>{89809DBF-8C3A-35C9-87E9-5E1C5E01B3F7}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="libvorbis\lib\books\uncoupled">
+      <UniqueIdentifier>{F775DB0F-D29F-3B78-82EA-0738D12F2978}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="libvorbis\lib\modes">
+      <UniqueIdentifier>{3249CAB1-7C79-3F3C-8E16-650ADF2DB738}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+</Project>
