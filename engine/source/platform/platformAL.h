@@ -284,15 +284,14 @@ typedef struct
 } OPENALFNTABLE, *LPOPENALFNTABLE;
 #endif
 
+ALboolean LoadOAL10Library(char *szOALFullPathName, LPOPENALFNTABLE lpOALFnTable);
+ALvoid UnloadOAL10Library();
 
 namespace Audio
 {
 
 bool OpenALInit();
 void OpenALShutdown();
-OPENALFNTABLE mOpenAL;
-ALboolean LoadOAL10Library(char *szOALFullPathName, LPOPENALFNTABLE lpOALFnTable);
-ALvoid UnloadOAL10Library();
 
 // special alx flags
 #define AL_GAIN_LINEAR                  0xFF01

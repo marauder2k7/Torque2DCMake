@@ -159,9 +159,8 @@ bool initializeLibraries()
 
     Processor::init();
     Math::init();
-
     Platform::init();    // platform specific initialization
-
+    //Audio::OpenALInit();
     // Initialize the particle system.
     ParticleSystem::Init();
     
@@ -182,10 +181,9 @@ void shutdownLibraries()
 
     TelnetDebugger::destroy();
     TelnetConsole::destroy();
-
     Sim::shutdown();
     Platform::shutdown();
-
+    //Audio::OpenALShutdown();
     NetStringTable::destroy();
     Con::shutdown();
 
@@ -221,7 +219,7 @@ bool initializeGame(int argc, const char **argv)
 
     initMessageBoxVars();
 
-
+    
     // Register the module manager.
     ModuleDatabase.registerObject( "ModuleDatabase" );
 
@@ -237,7 +235,7 @@ bool initializeGame(int argc, const char **argv)
 
     // Let the remote debugger process the command-line.
     RemoteDebuggerBridge::processCommandLine( argc, argv );
-
+    
     if(argc > 2 && dStricmp(argv[1], "-project") == 0)
     {
         char playerPath[1024];
@@ -257,7 +255,7 @@ bool initializeGame(int argc, const char **argv)
 
     const char* defaultScriptName = "main.cs";
     bool useDefaultScript = true;
-
+    
     // Check if any command-line parameters were passed (the first is just the app name).
     if (argc > 1)
     {
@@ -269,7 +267,7 @@ bool initializeGame(int argc, const char **argv)
             scriptStream = &scriptFileStream;
         }
     }
-
+    
     if (useDefaultScript)
     {
         bool success = false;
@@ -279,13 +277,13 @@ bool initializeGame(int argc, const char **argv)
         {
             char msg[1024];
             dSprintf(msg, sizeof(msg), "Failed to open \"%s\".", defaultScriptName);
-            printf(" Error : %s", msg);
+            Con::printf(" Error : %s", msg);
             return false;
         }
 
             scriptStream = &scriptFileStream;
     }
-
+    
     // Create a script buffer.
     const U32 size = scriptStream->getStreamSize();
     char* pScriptBuffer = new char[size + 1];
@@ -315,7 +313,6 @@ bool initializeGame(int argc, const char **argv)
         printf( "Quitting as an error occurred parsing the root script '%s'.", useDefaultScript ? defaultScriptName : argv[1] );
         return false;
     }
-
     return true;
 }
 
@@ -658,7 +655,7 @@ AndroidProfilerStart("SERVER_PROC");
    U32 realTime = Platform::getRealMilliseconds();
    if((realTime - lastAudioUpdate) >= AudioUpdatePeriod)
    {
-      alxUpdate();
+      //alxUpdate();
       lastAudioUpdate = realTime;
    }
 

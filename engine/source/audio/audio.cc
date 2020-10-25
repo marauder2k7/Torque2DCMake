@@ -45,6 +45,8 @@ extern ALvoid  alcMacOSXMixerOutputRateProc(const ALdouble value);
 
 #endif
 
+OPENALFNTABLE gOpenAL;
+
 #define MAX_AUDIOSOURCES      16                // maximum number of concurrent sources
 #define MIN_GAIN              0.05f             // anything with lower gain will not be started
 #define MIN_UNCULL_PERIOD     500               // time before buffer is checked to be unculled
@@ -2481,12 +2483,10 @@ void shutdownContext()
 //--------------------------------------------------------------------------
 bool OpenALInit()
 {
-   OpenALShutdown();
-
+   //OpenALShutdown();
    
-   
-   if(!LoadOAL10Library(NULL, &mOpenAL) != true)
-      return false;
+   if(!LoadOAL10Library(NULL, &gOpenAL) != AL_TRUE)
+      return AL_FALSE;
 
    // Open a device
 #ifdef TORQUE_OS_IOS
@@ -2610,65 +2610,7 @@ bool OpenALInit()
 //--------------------------------------------------------------------------
 void OpenALShutdown()
 {
-   alxStopAll();
-
-   //if(mInitialized)
-   {
-      alxEnvironmentDestroy();
-   }
-
-   while(mLoopingList.size())
-   {
-      mLoopingList.last()->mBuffer.purge();
-      delete mLoopingList.last();
-      mLoopingList.pop_back();
-   }
-
-   while(mLoopingFreeList.size())
-   {
-      mLoopingFreeList.last()->mBuffer.purge();
-      delete mLoopingFreeList.last();
-      mLoopingFreeList.pop_back();
-   }
-
-   for(U32 i = 0; i < MAX_AUDIOSOURCES; i++)
-   {
-	   ALint tempbuff = 0;
-      mOpenAL.alGetSourcei( mSource[i], AL_BUFFER, &tempbuff);
-
-	   if (mOpenAL.alIsBuffer(tempbuff) && tempbuff !=0)
-	   {
-		   ALuint buffer = tempbuff;
-         mOpenAL.alSourceUnqueueBuffers( mSource[i], 1, &buffer);
-		   alxCheckError("OpenALShutdown()","alSourceUnqueueBuffers");
-	   }
-   }
-
-   mOpenAL.alDeleteSources(mNumSources, mSource);
-
-   if (mContext)
-   {
-#if defined(TORQUE_OS_ANDROID) || defined(TORQUE_OS_LINUX) || defined(TORQUE_OS_OPENBSD)
-	   alcDestroyContext((ALCcontext*)mContext);
-#elif defined(TORQUE_OS_EMSCRIPTEN)
-      alcDestroyContext((ALCcontext*)mContext);
-#else
-      mOpenAL.alcDestroyContext((ALCcontext*)mContext);
-#endif
-
-      mContext = NULL;
-   }
-   if (mDevice)
-   {
-#if defined(TORQUE_OS_ANDROID) || defined(TORQUE_OS_LINUX) || defined(TORQUE_OS_OPENBSD)
-	   alcCloseDevice((ALCdevice*)mDevice);
-#elif defined(TORQUE_OS_EMSCRIPTEN)
-      alcCloseDevice((ALCdevice*)mDevice);
-#else
-      mOpenAL.alcCloseDevice((ALCdevice*)mDevice);
-#endif
-      mDevice = NULL;
-   }
+   UnloadOAL10Library();
 }
 
 
