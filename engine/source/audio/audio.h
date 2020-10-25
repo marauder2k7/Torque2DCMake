@@ -35,6 +35,26 @@
 #include "audio/AudioAsset.h"
 #endif
 
+#ifndef ALAPIENTRY
+#define ALAPIENTRY
+#endif
+
+#ifndef ALCAPIENTRY
+#define ALCAPIENTRY
+#endif
+// AL 1.0 did not define the ALchar and ALCchar types, so define them here
+// if they don't exist
+
+#ifndef ALchar
+#define ALchar char
+#endif
+
+#ifndef ALCchar
+#define ALCchar char
+#endif
+
+const OPENALFNTABLE mOpenAL;
+
 //-Mat default sample rate, change as needed
 #define DEFAULT_SOUND_OUTPUT_RATE		44100
 

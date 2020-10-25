@@ -30,6 +30,8 @@
 #include "vorbis/vorbisfile.h"
 #endif
 
+#include "audio/audio.h"
+
 #ifndef _MMATH_H_
 #include "math/mMath.h"
 #endif
@@ -38,7 +40,6 @@
 //Luma:	include proper path for this file
 #include "platformiOS/SoundEngine.h"
 #endif
-
 
 //#define LOG_SOUND_LOADS
 
@@ -154,13 +155,13 @@ AudioBuffer::AudioBuffer(StringTableEntry filename)
 
 AudioBuffer::~AudioBuffer()
 {
-   if( alIsBuffer(malBuffer) )
+   if(mOpenAL.alIsBuffer(malBuffer) )
   {
-    alGetError();
-    alDeleteBuffers( 1, &malBuffer );
+      mOpenAL.alGetError();
+      mOpenAL.alDeleteBuffers( 1, &malBuffer );
 
     ALenum error;
-    error = alGetError();
+    error = mOpenAL.alGetError();
     AssertWarn( error == AL_NO_ERROR, "AudioBuffer::~AudioBuffer() - failed to release buffer" );
     switch (error)
     {
@@ -239,19 +240,19 @@ ResourceInstance* AudioBuffer::construct(Stream &)
 //-----------------------------------------------------------------
 ALuint AudioBuffer::getALBuffer()
 {
-   if (!alcGetCurrentContext())
+   if (!mOpenAL.alcGetCurrentContext())
       return 0;
 
    // clear the error state
-   alGetError();
+   mOpenAL.alGetError();
 
    // Intangir> fix for newest openAL from creative (it returns true, yea right 0 is not a valid buffer)
    // it MIGHT not work at all for all i know.
-   if (malBuffer && alIsBuffer(malBuffer))
+   if (malBuffer && mOpenAL.alIsBuffer(malBuffer))
       return malBuffer;
 
-   alGenBuffers(1, &malBuffer);
-   if(alGetError() != AL_NO_ERROR)
+   mOpenAL.alGenBuffers(1, &malBuffer);
+   if(mOpenAL.alGetError() != AL_NO_ERROR)
       return 0;
 
    ResourceObject * obj = ResourceManager->find(mFilename);
@@ -294,7 +295,7 @@ ALuint AudioBuffer::getALBuffer()
          return(malBuffer);
    }
 
-   alDeleteBuffers(1, &malBuffer);
+   mOpenAL.alDeleteBuffers(1, &malBuffer);
    return 0;
 }
 
@@ -431,9 +432,9 @@ bool AudioBuffer::readWAV(ResourceObject *obj)
    ResourceManager->closeStream(stream);
    if (data)
    {
-      alBufferData(malBuffer, format, data, size, freq);
+      mOpenAL.alBufferData(malBuffer, format, data, size, freq);
       delete [] data;
-      return (alGetError() == AL_NO_ERROR);
+      return (mOpenAL.alGetError() == AL_NO_ERROR);
    }
 
    return false;
@@ -508,9 +509,9 @@ bool AudioBuffer::readOgg(ResourceObject *obj)
 	ResourceManager->closeStream(stream);
 	if (data)
 	{
-		alBufferData(malBuffer, format, data, size, freq);
+      mOpenAL.alBufferData(malBuffer, format, data, size, freq);
 		delete[] data;
-		return (alGetError() == AL_NO_ERROR);
+		return (mOpenAL.alGetError() == AL_NO_ERROR);
 	}
 
 	return false;

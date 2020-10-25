@@ -201,9 +201,10 @@ addPath("${srcDir}/2d/scene")
 addPath("${srcDir}/2d/sceneobject")
 
 if(TORQUE_SFX_OPENAL)
+addInclude(${libDir}/openal-soft/include)
 	if(WIN32)
 		option(AL_ALEXT_PROTOTYPES "Use Extended OpenAL options" ON)
-		addInclude("${libDir}/openal-soft/include")
+		
 		set(BLACKLIST "${srcDir}/graphics/bitmapPvr.cc" "${srcDir}/platform/platformNet_Emscripten.cpp")
 	endif()
 	if(UNIX AND NOT APPLE)

@@ -28,6 +28,7 @@
 //--------------------------------------
 
 #include "audio/wavStreamSource.h"
+#include "audio/audio.h"
 
 #define BUFFERSIZE 32768
 
@@ -131,7 +132,7 @@ void WavStreamSource::clear()
     mSource			  = 0;
 
     if(mBufferList[0] != 0)
-        alDeleteBuffers(NUMBUFFERS, mBufferList);
+       mOpenAL.alDeleteBuffers(NUMBUFFERS, mBufferList);
     for(int i = 0; i < NUMBUFFERS; i++)
         mBufferList[i] = 0;
 
@@ -160,8 +161,8 @@ bool WavStreamSource::initStream() {
 
    char   data[BUFFERSIZE];
 
-   alSourceStop(mSource);
-   alSourcei(mSource, AL_BUFFER, 0);
+   mOpenAL.alSourceStop(mSource);
+   mOpenAL.alSourcei(mSource, AL_BUFFER, 0);
 
     stream = ResourceManager->openStream(mFilename);
     if(stream != NULL) {
@@ -193,10 +194,10 @@ bool WavStreamSource::initStream() {
         dataStart = stream->getPosition();
 
         // Clear Error Code
-        alGetError();
+        mOpenAL.alGetError();
 
-        alGenBuffers(NUMBUFFERS, mBufferList);
-        if ((error = alGetError()) != AL_NO_ERROR) {
+        mOpenAL.alGenBuffers(NUMBUFFERS, mBufferList);
+        if ((error = mOpenAL.alGetError()) != AL_NO_ERROR) {
             return false;
         }
 
@@ -211,8 +212,8 @@ bool WavStreamSource::initStream() {
                 bFinished = AL_TRUE;
             stream->read(DataToRead, data);
             DataLeft -= DataToRead;
-            alBufferData(mBufferList[loop], format, data, DataToRead, freq);	
-            if ((error = alGetError()) != AL_NO_ERROR) {
+            mOpenAL.alBufferData(mBufferList[loop], format, data, DataToRead, freq);
+            if ((error = mOpenAL.alGetError()) != AL_NO_ERROR) {
                 return false;
             }
             ++numBuffers;
@@ -221,13 +222,13 @@ bool WavStreamSource::initStream() {
         }
 
         // Queue the buffers on the source
-        alSourceQueueBuffers(mSource, numBuffers, mBufferList);
-        if ((error = alGetError()) != AL_NO_ERROR) {
+        mOpenAL.alSourceQueueBuffers(mSource, numBuffers, mBufferList);
+        if ((error = mOpenAL.alGetError()) != AL_NO_ERROR) {
             return false;
         }
 
         buffersinqueue = numBuffers;
-        alSourcei(mSource, AL_LOOPING, AL_FALSE);
+        mOpenAL.alSourcei(mSource, AL_LOOPING, AL_FALSE);
         bReady = true;
     }
     else {
@@ -255,10 +256,10 @@ bool WavStreamSource::updateBuffers() {
     }
 
     // reset AL error code
-    alGetError();
+    mOpenAL.alGetError();
 
     // Get status
-    alGetSourcei(mSource, AL_BUFFERS_PROCESSED, &processed);
+    mOpenAL.alGetSourcei(mSource, AL_BUFFERS_PROCESSED, &processed);
 
     // If some buffers have been played, unqueue them and load new audio into them, then add them to the queue
     if (processed > 0)
@@ -266,8 +267,8 @@ bool WavStreamSource::updateBuffers() {
 
         while (processed)
         {
-            alSourceUnqueueBuffers(mSource, 1, &BufferID);
-            if ((error = alGetError()) != AL_NO_ERROR)
+            mOpenAL.alSourceUnqueueBuffers(mSource, 1, &BufferID);
+            if ((error = mOpenAL.alGetError()) != AL_NO_ERROR)
                 return false;
 
             if (!bFinished)
@@ -281,13 +282,13 @@ bool WavStreamSource::updateBuffers() {
                 stream->read(DataToRead, data);
                 DataLeft -= DataToRead;
                     
-                alBufferData(BufferID, format, data, DataToRead, freq);
-                if ((error = alGetError()) != AL_NO_ERROR)
+                mOpenAL.alBufferData(BufferID, format, data, DataToRead, freq);
+                if ((error = mOpenAL.alGetError()) != AL_NO_ERROR)
                     return false;
 
                 // Queue buffer
-                alSourceQueueBuffers(mSource, 1, &BufferID);
-                if ((error = alGetError()) != AL_NO_ERROR)
+                mOpenAL.alSourceQueueBuffers(mSource, 1, &BufferID);
+                if ((error = mOpenAL.alGetError()) != AL_NO_ERROR)
                     return false;
 
                 processed--;
@@ -323,7 +324,7 @@ void WavStreamSource::freeStream() {
 
     if(bBuffersAllocated) {
         if(mBufferList[0] != 0)
-            alDeleteBuffers(NUMBUFFERS, mBufferList);
+           mOpenAL.alDeleteBuffers(NUMBUFFERS, mBufferList);
         for(int i = 0; i < NUMBUFFERS; i++)
             mBufferList[i] = 0;
 

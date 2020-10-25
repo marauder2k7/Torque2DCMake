@@ -29,6 +29,7 @@
 #include "2d/sceneobject/SceneObject.h"
 #include "2d/core/Utility.h"
 #include "2d/gui/SceneWindow.h"
+#include "audio/audio.h"
 
 #ifndef _ASSET_MANAGER_H_
 #include "assets/assetManager.h"
@@ -1531,8 +1532,8 @@ void SceneWindow::processTick( void )
 
         F32 listenerpos[] = { campos.x, campos.y, 5.f };
 
-        alListenerfv(AL_POSITION, listenerpos);
-        alListenerfv(AL_VELOCITY, listenervelocity);
+        mOpenAL.alListenerfv(AL_POSITION, listenerpos);
+        mOpenAL.alListenerfv(AL_VELOCITY, listenervelocity);
     }
 }
 

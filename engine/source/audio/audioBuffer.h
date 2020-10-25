@@ -35,6 +35,7 @@
 
 //--------------------------------------------------------------------------
 
+
 class AudioBuffer: public ResourceInstance
 {
    friend class AudioThread;

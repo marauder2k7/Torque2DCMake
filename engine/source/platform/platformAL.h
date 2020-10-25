@@ -64,14 +64,6 @@
 #  include "platform/eaxtypes.h"
 #endif
 
-#if defined(TORQUE_OS_IOS)
-
-#define AssertNoOALError(inMessage)				\
-	result = alGetError();							\
-	AssertFatal( result == AL_NO_ERROR, inMessage)	\
- 
-#endif
-
 #ifndef ALAPIENTRY
 #define ALAPIENTRY
 #endif
@@ -292,14 +284,15 @@ typedef struct
 } OPENALFNTABLE, *LPOPENALFNTABLE;
 #endif
 
+
 namespace Audio
 {
 
 bool OpenALInit();
 void OpenALShutdown();
-
-bool OpenALDLLInit();
-void OpenALDLLShutdown();
+OPENALFNTABLE mOpenAL;
+ALboolean LoadOAL10Library(char *szOALFullPathName, LPOPENALFNTABLE lpOALFnTable);
+ALvoid UnloadOAL10Library();
 
 // special alx flags
 #define AL_GAIN_LINEAR                  0xFF01

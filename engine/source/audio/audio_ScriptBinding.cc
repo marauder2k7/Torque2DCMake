@@ -46,6 +46,7 @@
 #include "platformiOS/iOSStreamSource.h"
 #endif
 
+#include "audio/audio.h"
 
 extern ALuint alxGetWaveLen(ALuint buffer);
 
@@ -220,7 +221,7 @@ ConsoleFunctionWithDocs(alGetString, ConsoleString, 2, 2, ( ALEnum ))
       return "";
    }
 
-   return (const char*)alGetString(e);
+   return (const char*)mOpenAL.alGetString(e);
 }
 
 
@@ -663,7 +664,7 @@ ConsoleFunctionWithDocs(alGetListeneri, ConsoleInt, 2, 2, ( ALEnum ))
    }
 
    S32 value;
-   alGetListeneri(e, &value);
+   mOpenAL.alGetListeneri(e, &value);
    return(value);
 }
 

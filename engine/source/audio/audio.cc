@@ -181,6 +181,27 @@ inline LoopingList::iterator LoopingList::findImage(AUDIOHANDLE handle)
    return(0);
 }
 
+void alxGetListenerPoint3F(ALenum pname, Point3F *value)
+{
+   ALfloat ptArray[10];
+   ptArray[0] = value->x;
+   ptArray[1] = value->y;
+   ptArray[2] = value->z;
+   mOpenAL.alGetListenerfv(pname, ptArray);
+   value->x = ptArray[0];
+   value->y = ptArray[1];
+   value->z = ptArray[2];
+}
+
+void alxListenerPoint3F(ALenum pname, const Point3F *value)
+{
+   ALfloat ptArray[10];
+   ptArray[0] = value->x;
+   ptArray[1] = value->y;
+   ptArray[2] = value->z;
+   mOpenAL.alListenerfv(pname, ptArray);
+}
+
 inline S32 QSORT_CALLBACK loopingImageSort(const void * p1, const void * p2)
 {
    const LoopingImage * ip1 = *(const LoopingImage**)p1;
@@ -282,7 +303,7 @@ static bool findFreeSource(U32 *index)
 // - volumes are attenuated by channel only
 static bool cullSource(U32 *index, F32 volume)
 {
-   alGetError();
+   mOpenAL.alGetError();
 
    F32 minVolume = volume;
    S32 best = -1;
@@ -341,7 +362,7 @@ static bool cullSource(U32 *index, F32 volume)
       }
    }
 
-   alSourceStop(mSource[best]);
+   mOpenAL.alSourceStop(mSource[best]);
    mHandle[best] = NULL_AUDIOHANDLE;
    mBuffer[best] = 0;
    *index = best;
@@ -407,7 +428,7 @@ bool alxIsValidHandle(AUDIOHANDLE handle)
 
       // if it is active but not playing then it has stopped...
       ALint state = AL_STOPPED;
-      alGetSourcei(mSource[idx], AL_SOURCE_STATE, &state);
+      mOpenAL.alGetSourcei(mSource[idx], AL_SOURCE_STATE, &state);
       return(state == AL_PLAYING);
    }
 
@@ -433,7 +454,7 @@ bool alxIsPlaying(AUDIOHANDLE handle)
       return(false);
 
    ALint state = 0;
-   alGetSourcei(mSource[idx], AL_SOURCE_STATE, &state);
+   mOpenAL.alGetSourcei(mSource[idx], AL_SOURCE_STATE, &state);
    return(state == AL_PLAYING);
 }
 
@@ -511,40 +532,40 @@ static void alxSourceEnvironment(ALuint source, AudioStreamSource * image)
 // - all the settings are cached by openAL (miles version), so no worries setting them here
 static void alxSourcePlay(ALuint source, Resource<AudioBuffer> buffer, const Audio::Description& desc, const MatrixF *transform)
 {
-   alSourcei(source, AL_BUFFER, buffer->getALBuffer());
-   alSourcef(source, AL_GAIN, Audio::linearToDB(desc.mVolume * mAudioChannelVolumes[desc.mVolumeChannel] * mMasterVolume));
-   alSourcei(source, AL_LOOPING, desc.mIsLooping ? AL_TRUE : AL_FALSE);
-   alSourcef(source, AL_PITCH, 1.f);
+   mOpenAL.alSourcei(source, AL_BUFFER, buffer->getALBuffer());
+   mOpenAL.alSourcef(source, AL_GAIN, Audio::linearToDB(desc.mVolume * mAudioChannelVolumes[desc.mVolumeChannel] * mMasterVolume));
+   mOpenAL.alSourcei(source, AL_LOOPING, desc.mIsLooping ? AL_TRUE : AL_FALSE);
+   mOpenAL.alSourcef(source, AL_PITCH, 1.f);
 
-   alSourcei(source, AL_CONE_INNER_ANGLE, desc.mConeInsideAngle);
-   alSourcei(source, AL_CONE_OUTER_ANGLE, desc.mConeOutsideAngle);
-   alSourcef(source, AL_CONE_OUTER_GAIN, desc.mConeOutsideVolume);
+   mOpenAL.alSourcei(source, AL_CONE_INNER_ANGLE, desc.mConeInsideAngle);
+   mOpenAL.alSourcei(source, AL_CONE_OUTER_ANGLE, desc.mConeOutsideAngle);
+   mOpenAL.alSourcef(source, AL_CONE_OUTER_GAIN, desc.mConeOutsideVolume);
 
    if(transform != NULL)
    {
 #ifdef REL_WORKAROUND
       alSourcei(source, AL_SOURCE_ABSOLUTE, AL_TRUE);
 #else
-      alSourcei(source, AL_SOURCE_RELATIVE, AL_FALSE);
+      mOpenAL.alSourcei(source, AL_SOURCE_RELATIVE, AL_FALSE);
 #endif
 
       Point3F p;
       transform->getColumn(3, &p);
-      alSource3f(source, AL_POSITION, p.x, p.y, p.z);
+      mOpenAL.alSource3f(source, AL_POSITION, p.x, p.y, p.z);
 
       //Always use ConeVector (which is tied to transform)
-      alSource3f(source, AL_DIRECTION, desc.mConeVector.x, desc.mConeVector.y, desc.mConeVector.z);
+      mOpenAL.alSource3f(source, AL_DIRECTION, desc.mConeVector.x, desc.mConeVector.y, desc.mConeVector.z);
 
    }
    else
    {
       // 2D sound
-      alSourcei(source, AL_SOURCE_RELATIVE, AL_TRUE);
-      alSource3f(source, AL_POSITION, 0.0f, 0.0f, 1.0f);
+      mOpenAL.alSourcei(source, AL_SOURCE_RELATIVE, AL_TRUE);
+      mOpenAL.alSource3f(source, AL_POSITION, 0.0f, 0.0f, 1.0f);
    }
 
-   alSourcef(source, AL_REFERENCE_DISTANCE, desc.mReferenceDistance);
-   alSourcef(source, AL_MAX_DISTANCE, desc.mMaxDistance);
+   mOpenAL.alSourcef(source, AL_REFERENCE_DISTANCE, desc.mReferenceDistance);
+   mOpenAL.alSourcef(source, AL_MAX_DISTANCE, desc.mMaxDistance);
 
 /* todo
    // environmental audio stuff:
@@ -583,13 +604,13 @@ static void alxSourcePlay(AudioStreamSource *streamSource)
 
    streamSource->initStream();
 
-   alSourcef(source, AL_GAIN, Audio::linearToDB(desc.mVolume * mAudioChannelVolumes[desc.mVolumeChannel] * mMasterVolume));
+   mOpenAL.alSourcef(source, AL_GAIN, Audio::linearToDB(desc.mVolume * mAudioChannelVolumes[desc.mVolumeChannel] * mMasterVolume));
 //   alSourcei(source, AL_LOOPING, AL_FALSE);
-   alSourcef(source, AL_PITCH, 1.f);
+   mOpenAL.alSourcef(source, AL_PITCH, 1.f);
 
-   alSourcei(source, AL_CONE_INNER_ANGLE, desc.mConeInsideAngle);
-   alSourcei(source, AL_CONE_OUTER_ANGLE, desc.mConeOutsideAngle);
-   alSourcef(source, AL_CONE_OUTER_GAIN, desc.mConeOutsideVolume);
+   mOpenAL.alSourcei(source, AL_CONE_INNER_ANGLE, desc.mConeInsideAngle);
+   mOpenAL.alSourcei(source, AL_CONE_OUTER_ANGLE, desc.mConeOutsideAngle);
+   mOpenAL.alSourcef(source, AL_CONE_OUTER_GAIN, desc.mConeOutsideVolume);
 
    if(streamSource->mDescription.mIs3D)
    {
@@ -600,30 +621,30 @@ static void alxSourcePlay(AudioStreamSource *streamSource)
 #ifdef REL_WORKAROUND
       alSourcei(source, AL_SOURCE_ABSOLUTE, AL_TRUE);
 #else
-      alSourcei(source, AL_SOURCE_RELATIVE, AL_FALSE);
+      mOpenAL.alSourcei(source, AL_SOURCE_RELATIVE, AL_FALSE);
 #endif
 
       Point3F p;
       transform.getColumn(3, &p);
-      alSource3f(source, AL_POSITION, p.x, p.y, p.z);
+      mOpenAL.alSource3f(source, AL_POSITION, p.x, p.y, p.z);
 
       //Always use ConeVector (which is tied to transform)
-      alSource3f(source, AL_DIRECTION, desc.mConeVector.x, desc.mConeVector.y, desc.mConeVector.z);
+      mOpenAL.alSource3f(source, AL_DIRECTION, desc.mConeVector.x, desc.mConeVector.y, desc.mConeVector.z);
    }
    else
    {
       // 2D sound
       // JMQ: slam the stream source's position to our desired value
       streamSource->mPosition = Point3F(0.0f, 0.0f, 1.0f);
-      alSourcei(source, AL_SOURCE_RELATIVE, AL_TRUE);
-      alSource3f(source, AL_POSITION,
+      mOpenAL.alSourcei(source, AL_SOURCE_RELATIVE, AL_TRUE);
+      mOpenAL.alSource3f(source, AL_POSITION,
                  streamSource->mPosition.x,
                  streamSource->mPosition.y,
                  streamSource->mPosition.z);
    }
 
-   alSourcef(source, AL_REFERENCE_DISTANCE, desc.mReferenceDistance);
-   alSourcef(source, AL_MAX_DISTANCE, desc.mMaxDistance);
+   mOpenAL.alSourcef(source, AL_REFERENCE_DISTANCE, desc.mReferenceDistance);
+   mOpenAL.alSourcef(source, AL_MAX_DISTANCE, desc.mMaxDistance);
 
 /* todo
    // environmental audio stuff:
@@ -761,7 +782,7 @@ AUDIOHANDLE alxCreateSource(const Audio::Description& desc,
    }
 
    // clear the error state
-   alGetError();
+   mOpenAL.alGetError();
 
    // grab the buffer
    Resource<AudioBuffer> buffer;
@@ -920,7 +941,7 @@ AUDIOHANDLE alxPlay(AUDIOHANDLE handle)
          if(itr2)
             (*itr2)->mHandle &= ~(AUDIOHANDLE_INACTIVE_BIT | AUDIOHANDLE_LOADING_BIT);
 
-         alSourcePlay(mSource[index]);
+         mOpenAL.alSourcePlay(mSource[index]);
 
          return(handle);
       }
@@ -990,10 +1011,10 @@ bool alxPause( AUDIOHANDLE handle )
         return false;
     U32 index = alxFindIndex( handle );
 
-    alSourcePause( mSource[index] );
+    mOpenAL.alSourcePause( mSource[index] );
 
     ALint state;
-	alGetSourcei(mSource[index], AL_SOURCE_STATE, &state);
+    mOpenAL.alGetSourcei(mSource[index], AL_SOURCE_STATE, &state);
 
 	if( state==AL_PAUSED)
 	{
@@ -1001,7 +1022,7 @@ bool alxPause( AUDIOHANDLE handle )
 		return true;
 	}
 
-	alGetSourcei(mSource[index], AL_SAMPLE_OFFSET, &mResumePosition[index]);
+   mOpenAL.alGetSourcei(mSource[index], AL_SAMPLE_OFFSET, &mResumePosition[index]);
 	return alxCheckError("alxPause()","alGetSourcei");
 }
 
@@ -1015,12 +1036,12 @@ void alxUnPause( AUDIOHANDLE handle )
 
 	if( mResumePosition[index] != -1 )
 	{
-		alSourcei( source, AL_SAMPLE_OFFSET, mResumePosition[index]);
+      mOpenAL.alSourcei( source, AL_SAMPLE_OFFSET, mResumePosition[index]);
 		mResumePosition[index] = -1;
 	}
 	alxCheckError("alxUnPause()","alSourcei");
 
-	alSourcePlay( source );
+   mOpenAL.alSourcePlay( source );
 	alxCheckError("alxUnPause()","alSourcePlay");
 }
 //--------------------------------------------------------------------------
@@ -1033,10 +1054,10 @@ void alxStop(AUDIOHANDLE handle)
    {
       if(!(mHandle[index] & AUDIOHANDLE_INACTIVE_BIT))
       {
-         alSourceStop(mSource[index]);
+         mOpenAL.alSourceStop(mSource[index]);
       }
 
-      alSourcei(mSource[index], AL_BUFFER, AL_NONE);
+      mOpenAL.alSourcei(mSource[index], AL_BUFFER, AL_NONE);
       mSampleEnvironment[index] = 0;
       mHandle[index] = NULL_AUDIOHANDLE;
       mBuffer[index] = 0;
@@ -1417,13 +1438,13 @@ void alxUpdateTypeGain(U32 type)
          continue;
 
       ALint state = AL_STOPPED;
-      alGetSourcei(mSource[i], AL_SOURCE_STATE, &state);
+      mOpenAL.alGetSourcei(mSource[i], AL_SOURCE_STATE, &state);
 
       if(state == AL_PLAYING)
       {
          // volume = SourceVolume * ChannelVolume * MasterVolume
          F32 vol = mClampF(mSourceVolume[i] * mAudioChannelVolumes[mType[i]] * mMasterVolume, 0.f, 1.f);
-         alSourcef(mSource[i], AL_GAIN, Audio::linearToDB(vol) );
+         mOpenAL.alSourcef(mSource[i], AL_GAIN, Audio::linearToDB(vol) );
       }
    }
 }
@@ -1465,11 +1486,11 @@ void alxSourcef(AUDIOHANDLE handle, ALenum pname, ALfloat value)
 // #endif
          {
             F32 vol = mClampF(mSourceVolume[idx] * mAudioChannelVolumes[mType[idx]] * mMasterVolume, 0.f, 1.f);
-            alSourcef(source, AL_GAIN, Audio::linearToDB(vol) );
+            mOpenAL.alSourcef(source, AL_GAIN, Audio::linearToDB(vol) );
          }
       }
       else
-         alSourcef(source, pname, value);
+         mOpenAL.alSourcef(source, pname, value);
    }
    alxLoopSourcef(handle, pname, value);
    alxStreamSourcef(handle, pname, value);
@@ -1479,7 +1500,7 @@ void alxSourcefv(AUDIOHANDLE handle, ALenum pname, ALfloat *values)
 {
    ALuint source = alxFindSource(handle);
    if(source != INVALID_SOURCE)
-      alSourcefv(source, pname, values);
+      mOpenAL.alSourcefv(source, pname, values);
 
    if((pname == AL_POSITION) || (pname == AL_DIRECTION) || (pname == AL_VELOCITY)) {
       alxLoopSource3f(handle, pname, values[0], values[1], values[2]);
@@ -1496,7 +1517,7 @@ void alxSource3f(AUDIOHANDLE handle, ALenum pname, ALfloat value1, ALfloat value
       values[0] = value1;
       values[1] = value2;
       values[2] = value3;
-      alSourcefv(source, pname, values);
+      mOpenAL.alSourcefv(source, pname, values);
    }
    alxLoopSource3f(handle, pname, value1, value2, value3);
    alxStreamSource3f(handle, pname, value1, value2, value3);
@@ -1506,7 +1527,7 @@ void alxSourcei(AUDIOHANDLE handle, ALenum pname, ALint value)
 {
    ALuint source = alxFindSource(handle);
    if(source != INVALID_SOURCE)
-      alSourcei(source, pname, value);
+      mOpenAL.alSourcei(source, pname, value);
    alxLoopSourcei(handle, pname, value);
    alxStreamSourcei(handle, pname, value);
 }
@@ -1525,8 +1546,8 @@ void alxSourceMatrixF(AUDIOHANDLE handle, const MatrixF *transform)
    if(source != INVALID_SOURCE)
    {
       // OpenAL uses a Right-Handed corrdinate system so flip the orientation vector
-      alSource3f(source, AL_POSITION, pos.x, pos.y, pos.z);
-      alSource3f(source, AL_DIRECTION, -dir.x, -dir.y, -dir.z);
+      mOpenAL.alSource3f(source, AL_POSITION, pos.x, pos.y, pos.z);
+      mOpenAL.alSource3f(source, AL_DIRECTION, -dir.x, -dir.y, -dir.z);
    }
 
    alxLoopSource3f(handle, AL_POSITION, pos.x, pos.y, pos.z);
@@ -1558,7 +1579,7 @@ void alxGetSourcef(AUDIOHANDLE handle, ALenum pname, ALfloat *value)
             *value = mSourceVolume[idx];
       }
       else
-         alGetSourcef(source, pname, value);
+         mOpenAL.alGetSourcef(source, pname, value);
    }
    else if(handle & AUDIOHANDLE_LOOPING_BIT)
       alxLoopGetSourcef(handle, pname, value);
@@ -1578,7 +1599,7 @@ void alxGetSource3f(AUDIOHANDLE handle, ALenum pname, ALfloat *value1, ALfloat *
    if(source != INVALID_SOURCE)
    {
       ALfloat values[3];
-      alGetSourcefv(source, pname, values);
+      mOpenAL.alGetSourcefv(source, pname, values);
       *value1 = values[0];
       *value2 = values[1];
       *value3 = values[2];
@@ -1593,7 +1614,7 @@ void alxGetSourcei(AUDIOHANDLE handle, ALenum pname, ALint *value)
 {
    ALuint source = alxFindSource(handle);
    if(source != INVALID_SOURCE)
-      alGetSourcei(source, pname, value);
+      mOpenAL.alGetSourcei(source, pname, value);
    else if(handle & AUDIOHANDLE_LOOPING_BIT)
       alxLoopGetSourcei(handle, pname, value);
    else
@@ -1609,7 +1630,7 @@ void alxListenerMatrixF(const MatrixF *transform)
 {
    Point3F p1, p2;
    transform->getColumn(3, &p1);
-   alListener3f(AL_POSITION, p1.x, p1.y, p1.z);
+   mOpenAL.alListener3f(AL_POSITION, p1.x, p1.y, p1.z);
 
    transform->getColumn(2, &p1);    // Up Vector
    transform->getColumn(1, &p2);    // Forward Vector
@@ -1622,7 +1643,7 @@ void alxListenerMatrixF(const MatrixF *transform)
    orientation[4] = p2.y;
    orientation[5] = p2.z;
 
-   alListenerfv(AL_ORIENTATION, orientation);
+   mOpenAL.alListenerfv(AL_ORIENTATION, orientation);
 }
 
 //--------------------------------------------------------------------------
@@ -1635,7 +1656,7 @@ void alxListenerf(ALenum param, ALfloat value)
       value = Audio::linearToDB(value);
       param = AL_GAIN;
    }
-   alListenerf(param, value);
+   mOpenAL.alListenerf(param, value);
 }
 
 //--------------------------------------------------------------------------
@@ -1645,11 +1666,11 @@ void alxGetListenerf(ALenum param, ALfloat *value)
 {
    if (param == AL_GAIN_LINEAR)
    {
-      alGetListenerf(AL_GAIN, value);
+      mOpenAL.alGetListenerf(AL_GAIN, value);
       *value = Audio::DBToLinear(*value);
    }
    else
-      alGetListenerf(param, value);
+      mOpenAL.alGetListenerf(param, value);
 }
 
 
@@ -1821,7 +1842,7 @@ void alxLoopingUpdate()
          ALuint source = mSource[index];
 
          // setup play info
-         alGetError();
+         mOpenAL.alGetError();
 
          alxSourcePlay(source, *itr);
          if(mEnvironmentEnabled)
@@ -1922,7 +1943,7 @@ void alxStreamingUpdate()
          (*itr)->mSource = mSource[index];
 
          // setup play info
-         alGetError();
+         mOpenAL.alGetError();
 
          if(mEnvironmentEnabled)
             alxSourceEnvironment(source, *itr);
@@ -1944,7 +1965,7 @@ void alxCloseHandles()
          continue;
 
       ALint state = 0;
-      alGetSourcei(mSource[i], AL_SOURCE_STATE, &state);
+      mOpenAL.alGetSourcei(mSource[i], AL_SOURCE_STATE, &state);
       if(state == AL_PLAYING || state == AL_PAUSED)
          continue;
 
@@ -1979,7 +2000,7 @@ void alxCloseHandles()
 //         }
       }
 
-      alSourcei(mSource[i], AL_BUFFER, AL_NONE);
+      mOpenAL.alSourcei(mSource[i], AL_BUFFER, AL_NONE);
       mHandle[i] = NULL_AUDIOHANDLE;
       mBuffer[i] = 0;
    }
@@ -2005,7 +2026,7 @@ void alxUpdateScores(bool sourcesOnly)
       }
 
 	  ALint state = 0;
-	  alGetSourcei(mSource[i], AL_SOURCE_STATE, &state);
+     mOpenAL.alGetSourcei(mSource[i], AL_SOURCE_STATE, &state);
 	  if(state==AL_PAUSED)
 		  continue;
 
@@ -2020,17 +2041,17 @@ void alxUpdateScores(bool sourcesOnly)
       if(val == AL_TRUE)
 #else
       ALint val = AL_FALSE;
-      alGetSourcei(mSource[i], AL_SOURCE_RELATIVE, &val);
+      mOpenAL.alGetSourcei(mSource[i], AL_SOURCE_RELATIVE, &val);
       if(val == AL_FALSE)
 #endif
       {
          // approximate 3d volume
          Point3F pos;
-         alGetSourcefv(mSource[i], AL_POSITION, (ALfloat*)((F32*)pos) );
+         mOpenAL.alGetSourcefv(mSource[i], AL_POSITION, (ALfloat*)((F32*)pos) );
 
          ALfloat min=0, max=1;
-         alGetSourcef(mSource[i], AL_REFERENCE_DISTANCE, &min);
-         alGetSourcef(mSource[i], AL_MAX_DISTANCE, &max);
+         mOpenAL.alGetSourcef(mSource[i], AL_REFERENCE_DISTANCE, &min);
+         mOpenAL.alGetSourcef(mSource[i], AL_MAX_DISTANCE, &max);
 
          pos -= listener;
          F32 dist = pos.magnitudeSafe();
@@ -2122,22 +2143,22 @@ void alxUpdateMaxDistance()
       if(val == AL_FALSE)
 #else
       ALint val = AL_FALSE;
-      alGetSourcei(mSource[i], AL_SOURCE_RELATIVE, &val);
+      mOpenAL.alGetSourcei(mSource[i], AL_SOURCE_RELATIVE, &val);
       if(val == AL_TRUE)
 #endif
          continue;
 
       Point3F pos;
-      alGetSourcefv(mSource[i], AL_POSITION, (F32*)pos);
+      mOpenAL.alGetSourcefv(mSource[i], AL_POSITION, (F32*)pos);
 
       F32 dist = 0.f;
-      alGetSourcef(mSource[i], AL_MAX_DISTANCE, &dist);
+      mOpenAL.alGetSourcef(mSource[i], AL_MAX_DISTANCE, &dist);
 
       pos -= listener;
       dist -= pos.len();
 
       F32 gain = (dist < 0.f) ? 0.f : mSourceVolume[i] * mAudioChannelVolumes[mType[i]] * mMasterVolume;
-      alSourcef(mSource[i], AL_GAIN, Audio::linearToDB(gain));
+      mOpenAL.alSourcef(mSource[i], AL_GAIN, Audio::linearToDB(gain));
 
    }
 }
@@ -2174,10 +2195,10 @@ ALuint alxGetWaveLen(ALuint buffer)
    ALint channels = 0;
    ALint size;
 
-   alGetBufferi(buffer, AL_FREQUENCY, &frequency);
-   alGetBufferi(buffer, AL_BITS, &bits);
-   alGetBufferi(buffer, AL_CHANNELS, &channels);
-   alGetBufferi(buffer, AL_SIZE, &size);
+   mOpenAL.alGetBufferi(buffer, AL_FREQUENCY, &frequency);
+   mOpenAL.alGetBufferi(buffer, AL_BITS, &bits);
+   mOpenAL.alGetBufferi(buffer, AL_CHANNELS, &channels);
+   mOpenAL.alGetBufferi(buffer, AL_SIZE, &size);
 
    if(!frequency || !bits || !channels)
    {
@@ -2191,7 +2212,7 @@ ALuint alxGetWaveLen(ALuint buffer)
 
 bool alxCheckError(const char* sourceFuncName, const char* alFuncName)
 {
-  ALenum errorVal = alGetError();
+  ALenum errorVal = mOpenAL.alGetError();
   switch (errorVal)
   {
     case AL_NO_ERROR:
@@ -2271,14 +2292,14 @@ void alxEnableEnvironmental(bool enable)
       alGetSourcei(mSource[i], AL_SOURCE_ABSOLUTE, &val);
       if(val == AL_FALSE)
 #else
-      alGetSourcei(mSource[i], AL_SOURCE_RELATIVE, &val);
+      mOpenAL.alGetSourcei(mSource[i], AL_SOURCE_RELATIVE, &val);
       if(val == AL_TRUE)
 #endif
          continue;
 
       // stopped?
       val = AL_STOPPED;
-      alGetSourcei(mSource[i], AL_SOURCE_STATE, &val);
+      mOpenAL.alGetSourcei(mSource[i], AL_SOURCE_STATE, &val);
 
       // only looping sources can reenable environmental effects (no description around
       // for the non-loopers)
@@ -2461,8 +2482,10 @@ void shutdownContext()
 bool OpenALInit()
 {
    OpenALShutdown();
+
    
-   if(!OpenALDLLInit())
+   
+   if(!LoadOAL10Library(NULL, &mOpenAL) != true)
       return false;
 
    // Open a device
@@ -2492,7 +2515,7 @@ bool OpenALInit()
 #elif defined(TORQUE_OS_ANDROID)
    mDevice = alcOpenDevice("openal-soft");
 #else
-   mDevice = (ALCdevice*)alcOpenDevice((const ALCchar*)NULL);
+   mDevice = (ALCdevice*)mOpenAL.alcOpenDevice((const ALCchar*)NULL);
 #endif
    if (mDevice == (ALCvoid *)NULL)
       return false;
@@ -2522,7 +2545,7 @@ bool OpenALInit()
    mContext = alcCreateContext((ALCdevice*)mDevice, NULL);;
 #elif defined(TORQUE_OS_IOS)
 #else
-   mContext = alcCreateContext((ALCdevice*)mDevice,NULL);
+   mContext = mOpenAL.alcCreateContext((ALCdevice*)mDevice,NULL);
 #endif
    if (mContext == NULL)
       return false;
@@ -2531,14 +2554,14 @@ bool OpenALInit()
 #if defined(TORQUE_OS_ANDROID) || defined(TORQUE_OS_LINUX) || defined(TORQUE_OS_EMSCRIPTEN) || defined(TORQUE_OS_OPENBSD)
    alcMakeContextCurrent((ALCcontext*)mContext);
 #else
-   alcMakeContextCurrent((ALCcontext*)mContext);
+   mOpenAL.alcMakeContextCurrent((ALCcontext*)mContext);
 #endif
-   ALenum err = alGetError();
+   ALenum err = mOpenAL.alGetError();
    mRequestSources = MAX_AUDIOSOURCES;	
    while(true)
    {
-      alGenSources(mRequestSources, mSource);
-      err = alGetError();
+      mOpenAL.alGenSources(mRequestSources, mSource);
+      err = mOpenAL.alGetError();
       if (err == AL_NO_ERROR)
          break;
    
@@ -2560,13 +2583,13 @@ bool OpenALInit()
       mAudioChannelVolumes[i] = 1.0f;
 
    // Clear Error Code
-   alGetError();
+   mOpenAL.alGetError();
 
    // Similiar to DSound Model w/o min distance clamping
-   alEnable(AL_DISTANCE_MODEL);
-   alDistanceModel(AL_INVERSE_DISTANCE);
-   alDopplerFactor(1.f);
-   alListenerf(AL_GAIN_LINEAR, 1.f);
+   mOpenAL.alEnable(AL_DISTANCE_MODEL);
+   mOpenAL.alDistanceModel(AL_INVERSE_DISTANCE);
+   mOpenAL.alDopplerFactor(1.f);
+   mOpenAL.alListenerf(AL_GAIN_LINEAR, 1.f);
 
    //The audio listener is initialized at position 0,0
    //Listener orientation
@@ -2577,9 +2600,9 @@ bool OpenALInit()
    F32 listenerVel[] = { 0.f, 0.f, 0.f };
    F32 listenerOrientation[] = { 0.f, 0.f, -1.0f, 0.f, 1.f, 0.f };
 
-   alListenerfv(AL_POSITION, listenerPos);
-   alListenerfv(AL_VELOCITY, listenerVel);
-   alListenerfv(AL_ORIENTATION, listenerOrientation);
+   mOpenAL.alListenerfv(AL_POSITION, listenerPos);
+   mOpenAL.alListenerfv(AL_VELOCITY, listenerVel);
+   mOpenAL.alListenerfv(AL_ORIENTATION, listenerOrientation);
 
    return true;
 }
@@ -2607,24 +2630,21 @@ void OpenALShutdown()
       delete mLoopingFreeList.last();
       mLoopingFreeList.pop_back();
    }
-   
-   //clear error buffer
-   alGetError();
 
    for(U32 i = 0; i < MAX_AUDIOSOURCES; i++)
    {
 	   ALint tempbuff = 0;
-	   alGetSourcei( mSource[i], AL_BUFFER, &tempbuff);
+      mOpenAL.alGetSourcei( mSource[i], AL_BUFFER, &tempbuff);
 
-	   if (alIsBuffer(tempbuff) && tempbuff !=0)
+	   if (mOpenAL.alIsBuffer(tempbuff) && tempbuff !=0)
 	   {
 		   ALuint buffer = tempbuff;
-		   alSourceUnqueueBuffers( mSource[i], 1, &buffer);
+         mOpenAL.alSourceUnqueueBuffers( mSource[i], 1, &buffer);
 		   alxCheckError("OpenALShutdown()","alSourceUnqueueBuffers");
 	   }
    }
 
-   alDeleteSources(mNumSources, mSource);
+   mOpenAL.alDeleteSources(mNumSources, mSource);
 
    if (mContext)
    {
@@ -2633,7 +2653,7 @@ void OpenALShutdown()
 #elif defined(TORQUE_OS_EMSCRIPTEN)
       alcDestroyContext((ALCcontext*)mContext);
 #else
-	   alcDestroyContext((ALCcontext*)mContext);
+      mOpenAL.alcDestroyContext((ALCcontext*)mContext);
 #endif
 
       mContext = NULL;
@@ -2645,12 +2665,10 @@ void OpenALShutdown()
 #elif defined(TORQUE_OS_EMSCRIPTEN)
       alcCloseDevice((ALCdevice*)mDevice);
 #else
-	   alcCloseDevice((ALCdevice*)mDevice);
+      mOpenAL.alcCloseDevice((ALCdevice*)mDevice);
 #endif
       mDevice = NULL;
    }
-
-   OpenALDLLShutdown();
 }
 
 

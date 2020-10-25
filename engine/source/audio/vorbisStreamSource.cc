@@ -7,6 +7,8 @@
 
 #include "audio/vorbisStreamSource.h"
 
+#include "audio/audio.h"
+
 #define BUFFERSIZE 32768
 #define CHUNKSIZE 4096
 
@@ -84,7 +86,7 @@ void VorbisStreamSource::clear()
    mSource           = 0;
 
    if(mBufferList[0] != 0)
-      alDeleteBuffers(NUMBUFFERS, mBufferList);
+      mOpenAL.alDeleteBuffers(NUMBUFFERS, mBufferList);
    for(int i = 0; i < NUMBUFFERS; i++)
       mBufferList[i] = 0;
 
@@ -116,8 +118,8 @@ bool VorbisStreamSource::initStream()
    // https://206.163.64.242/mantis/view_bug_page.php?f_id=0000242
    static char data[BUFFERSIZE*2];
 
-   alSourceStop(mSource);
-   alSourcei(mSource, AL_BUFFER, 0);
+   mOpenAL.alSourceStop(mSource);
+   mOpenAL.alSourcei(mSource, AL_BUFFER, 0);
 
    stream = ResourceManager->openStream(mFilename);
    if(stream != NULL)
@@ -167,10 +169,10 @@ bool VorbisStreamSource::initStream()
       DataLeft = DataSize;
 
       // Clear Error Code
-      alGetError();
+      mOpenAL.alGetError();
 
-      alGenBuffers(NUMBUFFERS, mBufferList);
-      if ((error = alGetError()) != AL_NO_ERROR)
+      mOpenAL.alGenBuffers(NUMBUFFERS, mBufferList);
+      if ((error = mOpenAL.alGetError()) != AL_NO_ERROR)
          return false;
 
       bBuffersAllocated = true;
@@ -190,21 +192,21 @@ bool VorbisStreamSource::initStream()
          }
 
          DataLeft -= ret;
-         alBufferData(mBufferList[loop], format, data, ret, freq);
+         mOpenAL.alBufferData(mBufferList[loop], format, data, ret, freq);
          ++numBuffers;
 
-         if ((error = alGetError()) != AL_NO_ERROR)
+         if ((error = mOpenAL.alGetError()) != AL_NO_ERROR)
             return false;
          if(bFinished)
             break;
       }
 
       // Queue the buffers on the source
-      alSourceQueueBuffers(mSource, NUMBUFFERS, mBufferList);
-      if ((error = alGetError()) != AL_NO_ERROR)
+      mOpenAL.alSourceQueueBuffers(mSource, NUMBUFFERS, mBufferList);
+      if ((error = mOpenAL.alGetError()) != AL_NO_ERROR)
          return false;
 
-      alSourcei(mSource, AL_LOOPING, AL_FALSE);
+      mOpenAL.alSourcei(mSource, AL_LOOPING, AL_FALSE);
       bReady = true;
    }
    else
@@ -235,18 +237,18 @@ bool VorbisStreamSource::updateBuffers()
       resetStream();
 
    // reset AL error code
-   alGetError();
+   mOpenAL.alGetError();
 
 #if 1 //def TORQUE_OS_LINUX
    // JMQ: this doesn't really help on linux.  it may make things worse.
    // if it doesn't help on mac/win either, could disable it.
    ALint state;
-   alGetSourcei(mSource, AL_SOURCE_STATE, &state);
+   mOpenAL.alGetSourcei(mSource, AL_SOURCE_STATE, &state);
    if (state == AL_STOPPED)
    {
       // um, yeah.  you should be playing
       // restart
-      alSourcePlay(mSource);
+      mOpenAL.alSourcePlay(mSource);
       //#ifdef TORQUE_DEBUG
       //Con::errorf(">><<>><< THE MUSIC STOPPED >><<>><<");
       //#endif
@@ -259,15 +261,15 @@ bool VorbisStreamSource::updateBuffers()
 #endif
 
    // Get status
-   alGetSourcei(mSource, AL_BUFFERS_PROCESSED, &processed);
+   mOpenAL.alGetSourcei(mSource, AL_BUFFERS_PROCESSED, &processed);
 
    // If some buffers have been played, unqueue them and load new audio into them, then add them to the queue
    if (processed > 0)
    {
       while (processed)
       {
-         alSourceUnqueueBuffers(mSource, 1, &BufferID);
-         if ((error = alGetError()) != AL_NO_ERROR)
+         mOpenAL.alSourceUnqueueBuffers(mSource, 1, &BufferID);
+         if ((error = mOpenAL.alGetError()) != AL_NO_ERROR)
             return false;
 
          if (!bFinished)
@@ -282,13 +284,13 @@ bool VorbisStreamSource::updateBuffers()
             {
                DataLeft -= ret;
 
-               alBufferData(BufferID, format, data, ret, freq);
-               if ((error = alGetError()) != AL_NO_ERROR)
+               mOpenAL.alBufferData(BufferID, format, data, ret, freq);
+               if ((error = mOpenAL.alGetError()) != AL_NO_ERROR)
                   return false;
 
                // Queue buffer
-               alSourceQueueBuffers(mSource, 1, &BufferID);
-               if ((error = alGetError()) != AL_NO_ERROR)
+               mOpenAL.alSourceQueueBuffers(mSource, 1, &BufferID);
+               if ((error = mOpenAL.alGetError()) != AL_NO_ERROR)
                   return false;
             }
 
@@ -328,7 +330,7 @@ void VorbisStreamSource::freeStream()
    if(bBuffersAllocated)
    {
       if(mBufferList[0] != 0)
-         alDeleteBuffers(NUMBUFFERS, mBufferList);
+         mOpenAL.alDeleteBuffers(NUMBUFFERS, mBufferList);
       for(int i = 0; i < NUMBUFFERS; i++)
          mBufferList[i] = 0;
 
@@ -412,7 +414,7 @@ void VorbisStreamSource::setNewFile(const char * file)
       DataLeft = DataSize;
 
       // Clear Error Code
-      alGetError();
+      mOpenAL.alGetError();
 
       bFinished = AL_FALSE;
       bVorbisFileInitialized = true;

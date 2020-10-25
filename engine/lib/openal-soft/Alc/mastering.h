@@ -1,57 +1,103 @@
 #ifndef MASTERING_H
 #define MASTERING_H
 
+#include <memory>
+
 #include "AL/al.h"
 
-/* For BUFFERSIZE. */
-#include "alMain.h"
+/* For FloatBufferLine/BUFFERSIZE. */
+#include "alcmain.h"
+#include "almalloc.h"
 
-typedef struct Compressor {
-    ALfloat PreGain;
-    ALfloat PostGain;
-    ALboolean SummedLink;
-    ALfloat AttackMin;
-    ALfloat AttackMax;
-    ALfloat ReleaseMin;
-    ALfloat ReleaseMax;
-    ALfloat Ratio;
-    ALfloat Threshold;
-    ALfloat Knee;
-    ALuint SampleRate;
+struct SlidingHold;
 
-    ALuint RmsSum;
-    ALuint *RmsWindow;
-    ALsizei RmsIndex;
-    ALfloat Envelope[BUFFERSIZE];
-    ALfloat EnvLast;
-} Compressor;
 
-/* The compressor requires the following information for proper
- * initialization:
+/* General topology and basic automation was based on the following paper:
  *
- *   PreGainDb      - Gain applied before detection (in dB).
- *   PostGainDb     - Gain applied after compression (in dB).
- *   SummedLink     - Whether to use summed (true) or maxed (false) linking.
- *   RmsSensing     - Whether to use RMS (true) or Peak (false) sensing.
- *   AttackTimeMin  - Minimum attack time (in seconds).
- *   AttackTimeMax  - Maximum attack time.  Automates when min != max.
- *   ReleaseTimeMin - Minimum release time (in seconds).
- *   ReleaseTimeMax - Maximum release time.  Automates when min != max.
- *   Ratio          - Compression ratio (x:1).  Set to 0 for true limiter.
- *   ThresholdDb    - Triggering threshold (in dB).
- *   KneeDb         - Knee width (below threshold; in dB).
- *   SampleRate     - Sample rate to process.
+ *   D. Giannoulis, M. Massberg and J. D. Reiss,
+ *   "Parameter Automation in a Dynamic Range Compressor,"
+ *   Journal of the Audio Engineering Society, v61 (10), Oct. 2013
+ *
+ * Available (along with supplemental reading) at:
+ *
+ *   http://c4dm.eecs.qmul.ac.uk/audioengineering/compressors/
  */
-Compressor *CompressorInit(const ALfloat PreGainDb, const ALfloat PostGainDb,
-    const ALboolean SummedLink, const ALboolean RmsSensing, const ALfloat AttackTimeMin,
-    const ALfloat AttackTimeMax, const ALfloat ReleaseTimeMin, const ALfloat ReleaseTimeMax,
-    const ALfloat Ratio, const ALfloat ThresholdDb, const ALfloat KneeDb,
-    const ALuint SampleRate);
+struct Compressor {
+    ALuint mNumChans{0u};
 
-void ApplyCompression(struct Compressor *Comp, const ALsizei NumChans, const ALsizei SamplesToDo,
-                      ALfloat (*restrict OutBuffer)[BUFFERSIZE]);
+    struct {
+        bool Knee : 1;
+        bool Attack : 1;
+        bool Release : 1;
+        bool PostGain : 1;
+        bool Declip : 1;
+    } mAuto{};
 
-inline ALuint GetCompressorSampleRate(const Compressor *Comp)
-{ return Comp->SampleRate; }
+    ALuint mLookAhead{0};
+
+    ALfloat mPreGain{0.0f};
+    ALfloat mPostGain{0.0f};
+
+    ALfloat mThreshold{0.0f};
+    ALfloat mSlope{0.0f};
+    ALfloat mKnee{0.0f};
+
+    ALfloat mAttack{0.0f};
+    ALfloat mRelease{0.0f};
+
+    alignas(16) ALfloat mSideChain[2*BUFFERSIZE]{};
+    alignas(16) ALfloat mCrestFactor[BUFFERSIZE]{};
+
+    SlidingHold *mHold{nullptr};
+    FloatBufferLine *mDelay{nullptr};
+
+    ALfloat mCrestCoeff{0.0f};
+    ALfloat mGainEstimate{0.0f};
+    ALfloat mAdaptCoeff{0.0f};
+
+    ALfloat mLastPeakSq{0.0f};
+    ALfloat mLastRmsSq{0.0f};
+    ALfloat mLastRelease{0.0f};
+    ALfloat mLastAttack{0.0f};
+    ALfloat mLastGainDev{0.0f};
+
+
+    ~Compressor();
+    void process(const ALuint SamplesToDo, FloatBufferLine *OutBuffer);
+    ALsizei getLookAhead() const noexcept { return static_cast<ALsizei>(mLookAhead); }
+
+    DEF_PLACE_NEWDEL()
+};
+
+/* The compressor is initialized with the following settings:
+ *
+ *   NumChans       - Number of channels to process.
+ *   SampleRate     - Sample rate to process.
+ *   AutoKnee       - Whether to automate the knee width parameter.
+ *   AutoAttack     - Whether to automate the attack time parameter.
+ *   AutoRelease    - Whether to automate the release time parameter.
+ *   AutoPostGain   - Whether to automate the make-up (post) gain parameter.
+ *   AutoDeclip     - Whether to automate clipping reduction.  Ignored when
+ *                    not automating make-up gain.
+ *   LookAheadTime  - Look-ahead time (in seconds).
+ *   HoldTime       - Peak hold-time (in seconds).
+ *   PreGainDb      - Gain applied before detection (in dB).
+ *   PostGainDb     - Make-up gain applied after compression (in dB).
+ *   ThresholdDb    - Triggering threshold (in dB).
+ *   Ratio          - Compression ratio (x:1).  Set to INFINIFTY for true
+ *                    limiting.  Ignored when automating knee width.
+ *   KneeDb         - Knee width (in dB).  Ignored when automating knee
+ *                    width.
+ *   AttackTimeMin  - Attack time (in seconds).  Acts as a maximum when
+ *                    automating attack time.
+ *   ReleaseTimeMin - Release time (in seconds).  Acts as a maximum when
+ *                    automating release time.
+ */
+std::unique_ptr<Compressor> CompressorInit(const ALuint NumChans, const ALfloat SampleRate,
+    const ALboolean AutoKnee, const ALboolean AutoAttack, const ALboolean AutoRelease,
+    const ALboolean AutoPostGain, const ALboolean AutoDeclip, const ALfloat LookAheadTime,
+    const ALfloat HoldTime, const ALfloat PreGainDb, const ALfloat PostGainDb,
+    const ALfloat ThresholdDb, const ALfloat Ratio, const ALfloat KneeDb, const ALfloat AttackTime,
+    const ALfloat ReleaseTime);
 
 #endif /* MASTERING_H */
