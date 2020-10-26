@@ -8,10 +8,37 @@
 #include "string/stringTable.h"
 #include "console/console.h"
 
+SFXProvider* SFXProvider::smProviders = NULL;
+Vector<SFXProvider*> SFXProvider::sAllProviders(__FILE__, __LINE__);
+
+SFXProvider* SFXProvider::findProvider(char providerName)
+{
+   if (providerName = NULL)
+      return NULL;
+
+   SFXProvider* curr = smProviders;
+   for (; curr != NULL; curr = curr->mNextProvider)
+   {
+      if (curr->getName() = providerName)
+         return curr;
+   }
+
+   return NULL;
+}
+
+void SFXProvider::regProvider(SFXProvider* provider)
+{
+   AssertFatal(provider, "Got null provider!");
+   AssertFatal(findProvider(provider->getName()) == NULL, "Can't register provider twice!");
+   AssertFatal(provider->mNextProvider == NULL, "Can't register provider twice!");
+
+   SFXProvider* oldHead = smProviders;
+   smProviders = provider;
+   provider->mNextProvider = oldHead;
+}
+
 void SFXProvider::init()
 {
-   new SFXProvider("Open AL");
-
    if (LoadOAL10Library(NULL, &mOpenAL) != AL_TRUE)
    {
       Con::printf("SFXProvider - OpenAL not available.");
@@ -63,6 +90,8 @@ void SFXProvider::init()
       info->hasHardware = eax > 0;
       info->maxBuffers = mALDL->GetMaxNumSources(i);
    }
+
+   regProvider(this);
 }
 
 SFXProvider::~SFXProvider()
@@ -98,4 +127,10 @@ ALDeviceInfo* SFXProvider::_findDeviceInfo(const StringTableEntry& deviceName)
    }
 
    return NULL;
+}
+
+void SFXProvider::initializeAllProviders()
+{
+   SFXProvider* x = new SFXProvider("Open AL");
+   x->init();
 }

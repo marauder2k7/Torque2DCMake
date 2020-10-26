@@ -251,7 +251,8 @@ private:
         Selected  = BIT(4),   ///< This object has been marked as selected. (in editor)
         Expanded  = BIT(5),   ///< This object has been marked as expanded. (in editor)
         ModStaticFields  = BIT(6),    ///< The object allows you to read/modify static fields
-        ModDynamicFields = BIT(7)     ///< The object allows you to read/modify dynamic fields
+        ModDynamicFields = BIT(7),     ///< The object allows you to read/modify dynamic fields
+        AutoDelete       = BIT(8)
     };
 
 public:
@@ -272,7 +273,7 @@ public:
 
     enum WriteFlags {
         SelectedOnly = BIT(0) ///< Passed to SimObject::write to indicate that only objects
-                            ///  marked as selected should be outputted. Used in SimSet.
+                              ///  marked as selected should be outputted. Used in SimSet.
     };
 
 private:
@@ -701,6 +702,7 @@ public:
     /// @{
     bool isSelected() const { return mFlags.test(Selected); }
     bool isExpanded() const { return mFlags.test(Expanded); }
+    bool isAutoDeleted() const { return mFlags.test(AutoDelete); }
     void setSelected(bool sel) { if(sel) mFlags.set(Selected); else mFlags.clear(Selected); }
     void setExpanded(bool exp) { if(exp) mFlags.set(Expanded); else mFlags.clear(Expanded); }
     void setModDynamicFields(bool dyn) { if(dyn) mFlags.set(ModDynamicFields); else mFlags.clear(ModDynamicFields); }
@@ -739,5 +741,7 @@ public:
     virtual bool handlesConsoleMethod(const char * fname, S32 * routingId) { return false; }
     DECLARE_CONOBJECT(SimObject);
 };
+
+
 
 #endif // _SIM_OBJECT_H_

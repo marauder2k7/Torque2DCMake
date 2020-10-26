@@ -32,7 +32,6 @@
 S32 sgBackgroundProcessSleepTime = 200;
 S32 sgTimeManagerProcessInterval = 0;
 
-
 void Platform::initConsole()
 {
    Con::addVariable("Pref::backgroundSleepTime", TypeS32, &sgBackgroundProcessSleepTime);

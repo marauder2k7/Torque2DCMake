@@ -40,8 +40,8 @@
 #include "2d/assets/AnimationAsset.h"
 #endif
 
-#ifndef _AUDIO_ASSET_H_
-#include "audio/AudioAsset.h"
+#ifndef _SFXASSET_H_
+#include "sfx/sfxAsset.h"
 #endif
 
 #ifndef _STRINGUNIT_H_

@@ -29,6 +29,9 @@
 #ifndef _BITSET_H_
 #include "collection/bitSet.h"
 #endif
+#ifndef _REFBASE_H_
+#include "collection/refBase.h"
+#endif
 #include <stdarg.h>
 
 class SimObject;

@@ -48,6 +48,16 @@ public:
 
    friend class SFXVoice;
 
+   enum ECaps
+   {
+      CAPS_Reverb = BIT(0),    ///< Device supports reverb environments.
+      CAPS_VoiceManagement = BIT(1),    ///< Device manages voices on its own; deactivates virtualization code in SFX system.
+      CAPS_Occlusion = BIT(2),    ///< Device has its own sound occlusion handling (SFXOcclusionManager).
+      CAPS_DSPEffects = BIT(3),    ///< Device implements DSP effects (SFXDSPManager).
+      CAPS_MultiListener = BIT(4),    ///< Device supports multiple listeners.
+      CAPS_FMODDesigner = BIT(5),    ///< FMOD Designer support.
+   };
+
    SFXDevice(  SFXProvider *provider,
                const OPENALFNTABLE &openal,
                StringTableEntry name,
@@ -116,12 +126,15 @@ protected:
 public:
 
    // SFXDevice.
-   SFXBuffer* createBuffer(const SFXStream& stream, SFXDescription* description);
+   SFXBuffer* createBuffer(const SFXStream* stream, SFXDescription* description);
+   SFXBuffer* createBuffer(const char& filename, SFXDescription* description) { return NULL; }
+
    SFXVoice* createVoice(bool is3D, SFXBuffer *buffer);
    void setListener(U32 index, const SFXListenerProperties& listener);
    void setDistanceModel(SFXDistanceModel model);
    void setDopplerFactor(F32 factor);
    void setRolloffFactor(F32 factor);
+   virtual void setNumListeners(U32 num) {}
 
    #if defined(AL_ALEXT_PROTOTYPES)
    //function for openAL to open slots
@@ -134,6 +147,27 @@ public:
    void setReverb(const SFXReverbProperties& reverb);
    #endif
 
+   /// Returns the provider which created this device.
+   SFXProvider* getProvider() const { return mProvider; }
+
+   /// Is the device set to use hardware processing.
+   bool getUseHardware() const { return mUseHardware; }
+
+   /// The maximum number of playback buffers this device will use.
+   S32 getMaxBuffers() const { return mMaxBuffers; }
+
+   /// Returns the name of this device.
+   StringTableEntry getName() const { return mName; }
+
+   U32 getCaps() const { return mCaps; }
+
+   /// Return the current total number of sound buffers.
+   U32 getBufferCount() const { return mBuffers.size(); }
+
+   /// Return the current total number of voices.
+   U32 getVoiceCount() const { return mVoices.size(); }
+
+   void update();
 };
 
 #endif

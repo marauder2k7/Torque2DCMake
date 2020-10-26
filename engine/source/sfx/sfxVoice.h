@@ -29,17 +29,16 @@
 #ifndef _PLATFORM_THREADS_MUTEX_H_
 #include "platform/threads/mutex.h"
 #endif
-
+#ifdef _SFXBUFFER_H_
+#include "sfx/sfxBuffer.h"
+#endif // !_SFXBUFFER_H_
 #include "collection/refBase.h"
-
-#include "2d/core/Vector2.h"
-
 #include "sfx/sfxCommon.h"
 
 class SFXBuffer;
 class SFXDevice;
 
-class SFXVoice
+class SFXVoice : public StrongRefBase
 {
 public:
 
@@ -104,15 +103,48 @@ public:
 
    ~SFXVoice();
 
+   ///
+   const SFXFormat& getFormat();
+
+   /// Return the current playback position (in number of samples).
+   ///
+   /// @note For looping sounds, this will return the position in the
+   ///   current cycle and not the total number of samples played so far.
+   U32 getPosition() const;
+
+   /// Sets the playback position to the given sample count.
+   ///
+   /// @param sample Offset in number of samples.  This is allowed to use an offset
+   ///   accumulated from multiple cycles.  Each cycle will wrap around back to the
+   ///   beginning of the buffer.
+   void setPosition(U32 sample);
+
    /// SFXVoice
    void setMinMaxDistance(F32 min, F32 max);
+
+   SFXStatus getStatus() const;
+
    void play(bool looping);
+
+   void stop();
+
+   void pause();
+
    void setVelocity(const ALfloat* velocity);
+
    void setTransform(const MatrixF& transform);
+
    void setVolume(F32 volume);
+
    void setPitch(F32 pitch);
+
    void setCone(F32 innerAngle, F32 outerAngle, F32 outerVolume);
+
+   void setReverb(const SFXSoundReverbProperties& reverb) {}
+
    void setRolloffFactor(F32 factor);
+
+   bool isVirtual() const { return false; }
 };
 
 #endif // _SFXALVOICE_H_

@@ -5,10 +5,21 @@
 #ifndef _PLATFORM_H_
 #include "platform/platform.h"
 #endif
-
 #ifndef _MMATHFN_H_
 #include "math/mMathFn.h"
-#endif // !_MMATHFN_H_
+#endif
+#ifndef _MRANDOM_H_
+#include "math/mRandom.h"
+#endif
+#ifndef _MMATRIX_H_
+#include "math/mMatrix.h"
+#endif
+#ifndef _TYPETRAITS_H_
+#include "platform/typetraits.h"
+#endif
+#ifndef _DYNAMIC_CONSOLETYPES_H_
+#include "console/consoleTypes.h"
+#endif
 
 class SFXEnvironment;
 
@@ -85,6 +96,41 @@ enum SFXDistanceModel
    SFXDistanceModelLogarithmic,        ///< Volume halves every min distance steps starting from min distance; attenuation stops at max distance.
    SFXDistanceModelExponent,           /// exponential falloff for distance attenuation.
 };
+
+inline F32 SFXDistanceAttenuation(SFXDistanceModel model, F32 minDistance, F32 maxDistance, F32 distance, F32 volume, F32 rolloffFactor)
+{
+   F32 gain = 1.0f;
+
+   switch (model)
+   {
+   case SFXDistanceModelLinear:
+
+      distance = getMax(distance, minDistance);
+      distance = getMin(distance, maxDistance);
+
+      gain = (1 - (distance - minDistance) / (maxDistance - minDistance));
+      break;
+
+   case SFXDistanceModelLogarithmic:
+
+      distance = getMax(distance, minDistance);
+      distance = getMin(distance, maxDistance);
+
+      gain = minDistance / (minDistance + rolloffFactor * (distance - minDistance));
+      break;
+
+      ///create exponential distance model    
+   case SFXDistanceModelExponent:
+      distance = getMax(distance, minDistance);
+      distance = getMin(distance, maxDistance);
+
+      gain = pow((distance / minDistance), (-rolloffFactor));
+      break;
+
+   }
+
+   return (volume * gain);
+}
 
 //EnumTable(SFXStatus);
 
@@ -391,5 +437,22 @@ public:
       iDecayHFLimit = mClampF(iDecayHFLimit, 0, 1);
    }
 };
+
+inline const char* SFXStatusToString(SFXStatus status)
+{
+   switch (status)
+   {
+   case SFXStatusPlaying:     return "playing";
+   case SFXStatusStopped:     return "stopped";
+   case SFXStatusPaused:      return "paused";
+   case SFXStatusBlocked:     return "blocked";
+   case SFXStatusTransition:  return "transition";
+
+   case SFXStatusNull:
+   default:;
+   }
+
+   return "null";
+}
 
 #endif // !_SFXCOMMON_H_

@@ -129,10 +129,112 @@ SFXVoice::~SFXVoice()
    mOpenAL.alDeleteSources(1, &mSourceName);
 }
 
+const SFXFormat & SFXVoice::getFormat()
+{
+   return mBuffer->getFormat();
+}
+
+U32 SFXVoice::getPosition() const
+{
+   // When stopped, always return 0.
+
+   if (getStatus() == SFXStatusStopped)
+      return 0;
+
+   // It depends on the device if and when it will return a count of the total samples
+   // played so far.  With streaming buffers, all devices will do that.  With non-streaming
+   // buffers, some may do for looping voices thus returning a number that exceeds the actual
+   // source stream size.  So, clamp things into range here and also take care of any offsetting
+   // resulting from a setPosition() call.
+
+   U32 pos = _tell() + mOffset;
+   const U32 numStreamSamples = mBuffer->getFormat().getSampleCount(mBuffer->getDuration());
+
+   if (mBuffer->mIsLooping)
+      pos %= numStreamSamples;
+   else if (pos > numStreamSamples)
+   {
+      // Ensure we never report out-of-range positions even if the device does.
+
+      pos = numStreamSamples;
+   }
+
+   return pos;
+}
+
+void SFXVoice::setPosition(U32 inSample)
+{
+   // Clamp to sample range.
+   const U32 sample = inSample % (mBuffer->getFormat().getSampleCount(mBuffer->getDuration()) - 1);
+
+   // Don't perform a seek when we already are at the
+   // given position.  Especially avoids a costly stream
+   // clone when seeking on a streamed voice.
+
+   if (getPosition() == sample)
+      return;
+
+   if (!mBuffer->isStreaming())
+   {
+      // Non-streaming sound.  Just seek in the device buffer.
+
+      _seek(sample);
+   }
+   else
+   {
+      // Streaming sound.  Reset the stream and playback.
+      //
+      // Unfortunately, the logic here is still prone to subtle timing dependencies
+      // in relation to the buffer updates.  In retrospect, I feel that solving all issues
+      // of asynchronous operation on a per-voice/buffer level has greatly complicated
+      // the system.  It seems now that it would have been a lot simpler to have a single
+      // asynchronous buffer/voice manager that manages the updates of all voices and buffers
+      // currently in the system in one spot.  Packet reads could still be pushed out to
+      // the thread pool but queue updates would all be handled centrally in one spot.  This
+      // would do away with problems like those (mostly) solved by the multi-step procedure
+      // here.
+
+      // Go into transition.
+
+      SFXStatus oldStatus;
+      while (true)
+      {
+         oldStatus = mStatus;
+         if (oldStatus != SFXStatusTransition)
+            break;
+      }
+
+      // Switch the stream.
+
+      _resetStream(sample, false);
+
+      // Come out of transition.
+
+      SFXStatus newStatus = oldStatus;
+      if (oldStatus == SFXStatusPlaying)
+         newStatus = SFXStatusBlocked;
+   }
+}
+
 void SFXVoice::setMinMaxDistance(F32 min, F32 max)
 {
    mOpenAL.alSourcef(mSourceName, AL_REFERENCE_DISTANCE, min);
    mOpenAL.alSourcef(mSourceName, AL_MAX_DISTANCE, max);
+}
+
+SFXStatus SFXVoice::getStatus() const
+{
+   // Detect when the device has finished playback.  Only for
+   // non-streaming voices.  For streaming voices, we rely on
+   // the buffer to send us a STATUS_AtEnd signal when it is
+   // done playing.
+
+   if (mStatus == SFXStatusPlaying &&
+      !mBuffer->isStreaming() &&
+      _status() == SFXStatusStopped)
+      mStatus = SFXStatusStopped;
+
+   return mStatus;
 }
 
 void SFXVoice::play(bool looping)
@@ -162,6 +264,27 @@ void SFXVoice::play(bool looping)
 
          break;
       }
+   }
+}
+
+void SFXVoice::stop()
+{
+   while (mStatus != SFXStatusStopped &&
+      mStatus != SFXStatusNull)
+   {
+      _stop();
+      break;
+   }
+}
+
+void SFXVoice::pause()
+{
+   while (mStatus != SFXStatusPaused &&
+      mStatus != SFXStatusNull &&
+      mStatus != SFXStatusStopped)
+   {
+      _pause();
+      break;
    }
 }
 

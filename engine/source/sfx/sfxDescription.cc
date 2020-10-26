@@ -1,3 +1,5 @@
+#include "sfx/sfxTypes.h"
+
 #include "sfx/sfxDescription.h"
 #include "console/consoleTypes.h"
 
@@ -16,12 +18,13 @@ SFXDescription::SFXDescription()
    mReferenceDistance = 25.f;
    mRollOffFactor = 5.0f;
    mMaxDistance = 50.f;
-
+   mFadeInTime = 0.0f;
+   mFadeOutTime = 0.0f;
    mConeInsideAngle = 360;
    mConeOutsideAngle = 360;
    mConeOutsideVolume = 1.0f;
    mConeVector = { 0.f, 0.f, 1.f };
-
+   mSourceGroup = NULL;
    // environment info
    mEnvironmentLevel = 0.f;
 }
@@ -30,6 +33,7 @@ void SFXDescription::initPersistFields()
 {
    Parent::initPersistFields();
 
+   addField("sourceGroup", TypeSFXSourceName, Offset(mSourceGroup, SFXDescription));
    addField("Volume", TypeF32, Offset(mVolume, SFXDescription));
    addField("Pitch", TypeF32, Offset(mPitch, SFXDescription));
    addField("VolumeChannel", TypeS32, Offset(mVolumeChannel, SFXDescription));
@@ -45,6 +49,8 @@ void SFXDescription::initPersistFields()
    addField("ConeOutsideVolume", TypeF32, Offset(mConeOutsideVolume, SFXDescription));
    addField("ConeVector", TypeF32Vector, Offset(mConeVector, SFXDescription));
    addField("EnvironmentLevel", TypeF32, Offset(mEnvironmentLevel, SFXDescription));
+   addField("fadeInTime", TypeF32, Offset(mFadeInTime, SFXDescription));
+   addField("fadeOutTime", TypeF32, Offset(mFadeOutTime, SFXDescription));
 }
 
 bool SFXDescription::onAdd()
@@ -71,7 +77,7 @@ void SFXDescription::packData(BitStream * stream)
    stream->writeInt(mConeInsideAngle, 9);
    stream->writeInt(mConeOutsideAngle, 9);
    stream->writeFloat(mConeOutsideVolume, 6);
-
+   sfxWrite(stream, mSourceGroup);
    if (mUseReverb)
    {
       stream->write(mReverb.flDensity);
@@ -116,6 +122,9 @@ void SFXDescription::unpackData(BitStream * stream)
    mConeInsideAngle = stream->readInt(9);
    mConeOutsideAngle = stream->readInt(9);
    mConeOutsideVolume = stream->readFloat(6);
+   char errorStr;
+   if (!sfxReadAndResolve(stream, &mSourceGroup,(char &)errorStr))
+      Con::errorf("SFXDescription::unpackData: %s", errorStr);
 
    if (mUseReverb)
    {

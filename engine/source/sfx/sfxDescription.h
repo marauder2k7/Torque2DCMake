@@ -12,6 +12,8 @@
 #include "sfx/sfxCommon.h"
 #endif
 
+class SFXSource;
+
 class SFXDescription : public SimDataBlock
 {
    typedef SimDataBlock Parent;
@@ -32,6 +34,18 @@ public:
 
    F32  mReferenceDistance;
    F32  mRollOffFactor;
+
+   /// The source to which sources playing with this description will
+      /// be added.
+   SFXSource* mSourceGroup;
+
+   /// Number of seconds until playback reaches full volume after starting/resuming.
+   /// Zero to deactivate (default).
+   F32 mFadeInTime;
+
+   /// Number of seconds to fade out fading before stopping/pausing.
+   /// Zero to deactivate (default).
+   F32 mFadeOutTime;
 
    /// If true the sound uses custom reverb properties.
    bool mUseReverb;

@@ -170,7 +170,12 @@ void SFXDevice::setReverb(const SFXReverbProperties & reverb)
    }
 }
 
-SFXBuffer * SFXDevice::createBuffer(const SFXStream& stream, SFXDescription * description)
+void SFXDevice::update()
+{
+
+}
+
+SFXBuffer * SFXDevice::createBuffer(const SFXStream* stream, SFXDescription * description)
 {
    SFXBuffer* buffer = SFXBuffer::create(mOpenAL,
                                           stream,

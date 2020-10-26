@@ -5,6 +5,13 @@
 
 #include "sfx/sfxBuffer.h"
 
+SFXBuffer::SFXBuffer(const OPENALFNTABLE & oalft, const SFXStream * stream, SFXDescription * description, bool useHardware) :
+                                                                                             mIs3d(description->mIs3D),
+                                                                                             mUseHardware(useHardware),
+                                                                                             mOpenAL(oalft)
+{
+}
+
 void SFXBuffer::_flush()
 {
    _getUniqueVoice()->_stop();
@@ -27,32 +34,13 @@ void SFXBuffer::_flush()
    _getUniqueVoice()->mSampleOffset = 0;
 }
 
-bool SFXBuffer::readWAV(ResourceObject * obj)
+SFXBuffer * SFXBuffer::create(const OPENALFNTABLE & oalft, const SFXStream * stream, SFXDescription * description, bool useHardware)
 {
-   return false;
-}
-
-SFXBuffer * SFXBuffer::create(const OPENALFNTABLE &oalft,
-                              StringTableEntry filename, 
-                              SFXDescription* description,
-                              bool useHardware)
-{
-   SFXBuffer *buffer = new SFXBuffer(  oalft,
-                                       filename,
-                                       description,
-                                       useHardware);
-      return buffer;
-}
-
-SFXBuffer::SFXBuffer(const OPENALFNTABLE &oalft,
-                     StringTableEntry filename,
-                     SFXDescription* description,
-                     bool useHardware) : mIs3d(description->mIs3D),
-                     mUseHardware(useHardware),
-                     mOpenAL(oalft)
-{
-   AssertFatal(StringTable->lookup(filename), "AudioBuffer:: filename is not a string table entry");
-   mFilename = filename;
+   SFXBuffer *buffer = new SFXBuffer(oalft,
+                           stream,
+                           description,
+                           useHardware);
+                        return buffer;
 }
 
 SFXBuffer::~SFXBuffer()

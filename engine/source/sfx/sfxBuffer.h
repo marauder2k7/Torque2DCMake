@@ -43,7 +43,8 @@
 class SFXVoice;
 
 
-class SFXBuffer : public ResourceInstance
+class SFXBuffer : public StrongRefBase,
+                  public IPolled
 {
 public:
 
@@ -69,7 +70,7 @@ protected:
    Vector<ALuint> mFreeBuffers;
 
    SFXBuffer(  const OPENALFNTABLE &oalft,
-               const SFXStream &stream,
+               const SFXStream* stream,
                SFXDescription* description,
                bool useHardware);
 
@@ -137,14 +138,6 @@ protected:
 
    void _flush();
 
-   bool readRIFFchunk(Stream &s, const char *seekLabel, U32 *size);
-   bool readWAV(ResourceObject *obj);
-
-#ifndef TORQUE_OS_IOS
-   bool readOgg(ResourceObject *obj);
-   long oggRead(struct OggVorbis_File* vf, char *buffer, int length, int bigendianp, int *bitstream);
-#endif
-
 public:
 
    /// @return The current buffer loading/queue status.
@@ -185,12 +178,13 @@ public:
 
 
    static SFXBuffer* create(const OPENALFNTABLE &oalft,
-      const SFXStream &stream,
+      const SFXStream* stream,
       SFXDescription* description,
       bool useHardware);
 
+   SFXBuffer(const OPENALFNTABLE & oalft, const Stream * stream, SFXDescription * description, bool useHardware);
+
    ~SFXBuffer();
-   ALuint getALBuffer();
    bool isLoading() { return(mLoading); }
 
 };

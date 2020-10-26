@@ -23,6 +23,8 @@
 #ifndef _SIM_OBJECT_PTR_H_
 #define _SIM_OBJECT_PTR_H_
 
+#include "collection/refBase.h"
+
 #ifndef _PLATFORM_H_
 #include "platform/platform.h"
 #endif
@@ -52,63 +54,59 @@
 ///     // And reassign it - it will automatically update the references.
 ///     mOrbitObject = Sim::findObject("anotherObject");
 /// @endcode
-template <class T> class SimObjectPtr
+template <typename T> 
+class SimObjectPtr : public WeakRefPtr< T >
 {
-  private:
-   SimObject *mObj;
+public:
 
-  public:
-   SimObjectPtr() { mObj = 0; }
-   SimObjectPtr(T* ptr)
+   typedef WeakRefPtr< T > Parent;
+
+   SimObjectPtr() {}
+   SimObjectPtr(T *ptr) { this->mReference = NULL; set(ptr); }
+   SimObjectPtr(const SimObjectPtr& ref) { this->mReference = NULL; set(ref.mReference); }
+
+   T* getObject() const { return Parent::getPointer(); }
+
+   ~SimObjectPtr() { set((WeakRefBase::WeakReference*)NULL); }
+
+   SimObjectPtr<T>& operator=(const SimObjectPtr ref)
    {
-      mObj = ptr;
-      if(mObj)
-         mObj->registerReference(&mObj);
-   }
-   SimObjectPtr(const SimObjectPtr<T>& rhs)
-   {
-      mObj = const_cast<T*>(static_cast<const T*>(rhs));
-      if(mObj)
-         mObj->registerReference(&mObj);
-   }
-   SimObjectPtr<T>& operator=(const SimObjectPtr<T>& rhs)
-   {
-      if(this == &rhs)
-         return(*this);
-      if(mObj)
-         mObj->unregisterReference(&mObj);
-      mObj = const_cast<T*>(static_cast<const T*>(rhs));
-      if(mObj)
-         mObj->registerReference(&mObj);
-      return(*this);
-   }
-   ~SimObjectPtr()
-   {
-      if(mObj)
-         mObj->unregisterReference(&mObj);
-   }
-   SimObjectPtr<T>& operator= (T *ptr)
-   {
-      if(mObj != (SimObject *) ptr)
-      {
-         if(mObj)
-            mObj->unregisterReference(&mObj);
-         mObj = (SimObject *) ptr;
-         if (mObj)
-            mObj->registerReference(&mObj);
-      }
+      set(ref.mReference);
       return *this;
    }
-#if defined(__MWERKS__) && (__MWERKS__ < 0x2400)
-   // CW 5.3 seems to get confused comparing SimObjectPtrs...
-   bool operator == (const SimObject *ptr) { return mObj == ptr; }
-   bool operator != (const SimObject *ptr) { return mObj != ptr; }
-#endif
-   bool isNull() const   { return mObj == 0; }
-   bool notNull() const   { return mObj != 0; }
-   T* operator->() const { return static_cast<T*>(mObj); }
-   T& operator*() const  { return *static_cast<T*>(mObj); }
-   operator T*() const   { return static_cast<T*>(mObj)? static_cast<T*>(mObj) : 0; }
+   SimObjectPtr<T>& operator=(T *ptr)
+   {
+      set(ptr);
+      return *this;
+   }
+
+protected:
+   void set(WeakRefBase::WeakReference * ref)
+   {
+      if (ref == this->mReference)
+         return;
+
+      if (this->mReference)
+      {
+         // Auto-delete
+         T* obj = this->getPointer();
+         if (this->mReference->getRefCount() == 2 && obj && obj->isAutoDeleted())
+            obj->deleteObject();
+
+         this->mReference->decRefCount();
+      }
+      this->mReference = NULL;
+      if (ref)
+      {
+         this->mReference = ref;
+         this->mReference->incRefCount();
+      }
+   }
+
+   void set(T * obj)
+   {
+      set(obj ? obj->getWeakReference() : (WeakRefBase::WeakReference *)NULL);
+   }
 };
 
 #endif // _SIM_OBJECT_PTR_H_
