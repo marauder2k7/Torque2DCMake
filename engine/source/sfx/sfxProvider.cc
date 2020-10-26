@@ -8,20 +8,9 @@
 #include "string/stringTable.h"
 #include "console/console.h"
 
-SFXProvider::~SFXProvider()
-{
-   UnloadOAL10Library();
-
-   ALDeviceInfoVector::iterator iter = mDeviceInfo.begin();
-   for (; iter != mDeviceInfo.end(); iter++)
-      delete *iter;
-
-   if (mALDL)
-      delete mALDL;
-}
-
 void SFXProvider::init()
 {
+   new SFXProvider("Open AL");
 
    if (LoadOAL10Library(NULL, &mOpenAL) != AL_TRUE)
    {
@@ -74,6 +63,18 @@ void SFXProvider::init()
       info->hasHardware = eax > 0;
       info->maxBuffers = mALDL->GetMaxNumSources(i);
    }
+}
+
+SFXProvider::~SFXProvider()
+{
+   UnloadOAL10Library();
+
+   ALDeviceInfoVector::iterator iter = mDeviceInfo.begin();
+   for (; iter != mDeviceInfo.end(); iter++)
+      delete *iter;
+
+   if (mALDL)
+      delete mALDL;
 }
 
 SFXDevice* SFXProvider::createDevice(const StringTableEntry& deviceName, bool useHardware, S32 maxBuffers)

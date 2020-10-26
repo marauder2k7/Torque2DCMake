@@ -21,7 +21,7 @@ class SFXProvider
 {
 public:
 
-   SFXProvider()
+   SFXProvider(const char *name)
    {
       dMemset(&mOpenAL, 0, sizeof(mOpenAL)); mALDL = NULL;
    }
