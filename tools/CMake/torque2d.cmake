@@ -207,6 +207,8 @@ addPath("${srcDir}/2d/experimental/composites")
 addPath("${srcDir}/2d/gui")
 addPath("${srcDir}/2d/scene")
 addPath("${srcDir}/2d/sceneobject")
+addPath("${srcDir}/sfx")
+addPath("${srcDir}/sfx/win32")
 
 if(TORQUE_SFX_OPENAL)
 addInclude(${libDir}/openal-soft/include)

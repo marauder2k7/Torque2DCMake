@@ -256,7 +256,7 @@ macro(generateFiltersSpecial relDir)
         string(REGEX REPLACE "(.*)(/[^/]*)$" "\\1" SRCGR ${SRCGR})
         # do not have any ../ dirs
         string(REPLACE "../" "" SRCGR ${SRCGR})
-        IF("${SRCGR}" MATCHES "^torque2d/My Projects/.*$")
+        IF("${SRCGR}" MATCHES "^torque2d/Projects/.*$")
             string(REPLACE "torque2d/Projects/${PROJECT_NAME}/" "" SRCGR ${SRCGR})
             string(REPLACE "/source" "" SRCGR ${SRCGR})
         endif()

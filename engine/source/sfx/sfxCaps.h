@@ -1,5 +1,5 @@
 //-----------------------------------------------------------------------------
-// Copyright (c) 2013 GarageGames, LLC
+// Copyright (c) 2012 GarageGames, LLC
 //
 // Permission is hereby granted, free of charge, to any person obtaining a copy
 // of this software and associated documentation files (the "Software"), to
@@ -20,34 +20,21 @@
 // IN THE SOFTWARE.
 //-----------------------------------------------------------------------------
 
-function AppCore::create( %this )
+#ifndef _SFXALCAPS_H_
+#define _SFXALCAPS_H_
+
+enum SFXALCaps
 {
-    // Load system scripts
-    exec("./scripts/constants.cs");
-    exec("./scripts/defaultPreferences.cs");
-    exec("./scripts/canvas.cs");
-    exec("./scripts/openal.cs");
-	exec("./scripts/levelManagement.cs");
-    
-    // Initialize the canvas
-    initializeCanvas($appName);
-	
-    // Set the canvas color
-    Canvas.BackgroundColor = "CornflowerBlue";
-    Canvas.UseBackgroundColor = true;
-	
-	// Initialize audio
-    initializeOpenAL();
-	
-	setNetPort(0);
-    
-	ModuleDatabase.LoadExplicit( "Sandbox" );
-}
+   SFXALCapture = 0,
+   SFXALEFX,
+   SFXALOffset,
+   SFXALLinearDistance,
+   SFXALExponentDistance,
+   SFXALEAX2,
+   SFXALEAX3,
+   SFXALEAX4,
+   SFXALEAX5,
+   SFXALEAXRAM
+};
 
-//-----------------------------------------------------------------------------
-
-function AppCore::destroy( %this )
-{
-
-}
-
+#endif

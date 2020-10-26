@@ -315,7 +315,6 @@ bool AudioBuffer::readWAV(ResourceObject *obj)
    ALsizei size   = 0;
    ALsizei freq   = 22050;
    ALboolean loop = AL_FALSE;
-
    Stream *stream = ResourceManager->openStream(obj);
    if (!stream)
       return false;

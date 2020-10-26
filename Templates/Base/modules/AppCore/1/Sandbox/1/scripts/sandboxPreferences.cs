@@ -20,34 +20,20 @@
 // IN THE SOFTWARE.
 //-----------------------------------------------------------------------------
 
-function AppCore::create( %this )
-{
-    // Load system scripts
-    exec("./scripts/constants.cs");
-    exec("./scripts/defaultPreferences.cs");
-    exec("./scripts/canvas.cs");
-    exec("./scripts/openal.cs");
-	exec("./scripts/levelManagement.cs");
-    
-    // Initialize the canvas
-    initializeCanvas($appName);
-	
-    // Set the canvas color
-    Canvas.BackgroundColor = "CornflowerBlue";
-    Canvas.UseBackgroundColor = true;
-	
-	// Initialize audio
-    initializeOpenAL();
-	
-	setNetPort(0);
-    
-	ModuleDatabase.LoadExplicit( "Sandbox" );
-}
-
-//-----------------------------------------------------------------------------
-
-function AppCore::destroy( %this )
-{
-
-}
-
+// Sandbox.
+$pref::Sandbox::defaultToyId           = "MultiplayerToy";
+$pref::Sandbox::defaultToyVersionId    = 1;
+$pref::Sandbox::defaultBackgroundColor = "Black";
+$pref::Sandbox::metricsOption   = false;
+$pref::Sandbox::fpsmetricsOption = true;
+$pref::Sandbox::controllersOption = false;
+$pref::Sandbox::jointsOption    = false;
+$pref::Sandbox::wireframeOption = false;
+$pref::Sandbox::aabbOption      = false;
+$pref::Sandbox::oobbOption      = false;
+$pref::Sandbox::sleepOption     = false;
+$pref::Sandbox::collisionOption = false;
+$pref::Sandbox::positionOption  = false;
+$pref::Sandbox::sortOption      = false;
+$pref::Sandbox::cameraMouseZoomRate = 0.1;
+$pref::Sandbox::cameraTouchZoomRate = 0.001;
