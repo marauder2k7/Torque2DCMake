@@ -20,43 +20,31 @@
 // IN THE SOFTWARE.
 //-----------------------------------------------------------------------------
 
-#include "platform/platform.h"
-#include "sim/simBase.h"
-#include "string/stringTable.h"
-#include "console/console.h"
-#include "io/fileStream.h"
-#include "input/actionMap.h"
-#include "io/resource/resourceManager.h"
-#include "io/fileObject.h"
-#include "console/consoleInternal.h"
-#include "debug/profiler.h"
-#include "console/ConsoleTypeValidators.h"
-#include "memory/frameAllocator.h"
+//--------------------------------------
+// audioStreamSource.cc
+// implementation of streaming audio source
+//
+// Kurtis Seebaldt
+//--------------------------------------
 
-// Script bindings.
-#include "simBase_ScriptBinding.h"
+#include "sfx/sfxStreamSourceFactory.h"
 
-namespace Sim
+#include "sfx/sfxWavStreamSource.h"
+
+#ifndef TORQUE_OS_IOS
+#include "sfx/sfxVorbisStreamSource.h"
+#endif
+
+SFXStreamSource* SFXStreamSourceFactory::getNewInstance(const OPENALFNTABLE &oalft,const char *filename)
 {
-   // Don't forget to InstantiateNamed* in simManager.cc - DMM
-   ImplementNamedSet(ActiveActionMapSet)
-   ImplementNamedSet(GhostAlwaysSet)
-   ImplementNamedSet(BehaviorSet)
-   ImplementNamedSet(SFXSourceSet)
-   ImplementNamedSet(SFXDescriptionSet)
-   ImplementNamedSet(SFXTrackSet)
-   ImplementNamedSet(SFXEnvironmentSet)
-   ImplementNamedSet(SFXStateSet)
-   ImplementNamedSet(AchievementSet);
-   ImplementNamedGroup(ActionMapGroup)
-   ImplementNamedGroup(ClientGroup)
-   ImplementNamedGroup(GuiGroup)
-   ImplementNamedGroup(GuiDataGroup)
-   ImplementNamedGroup(TCPGroup)
+   S32 len = dStrlen(filename);
+   if (len > 3 && !dStricmp(filename + len - 4, ".wav"))
+      return new SFXWavStreamSource(oalft, filename);
 
-   //groups created on the client
-   ImplementNamedGroup(ClientConnectionGroup)
-   ImplementNamedGroup(ChunkFileGroup)
-}   
+#ifndef TORQUE_OS_IOS
+   if (len > 3 && !dStricmp(filename + len - 4, ".ogg"))
+      return new SFXVorbisStreamSource(oalft,filename);
+#endif
 
-//-----------------------------------------------------------------------------
+   return NULL;
+}

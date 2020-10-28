@@ -80,7 +80,6 @@ Win32PlatState::Win32PlatState()
    log_fp      = NULL;
    hinstOpenGL = NULL;
    hinstGLU    = NULL;
-   hinstOpenAL = NULL;
    appWindow   = NULL;
    appDC       = NULL;
    appInstance = NULL;

@@ -22,7 +22,31 @@
 
 #include "sfx/sfxEnvironment.h"
 #include "network/netConnection.h"
-#include "io/bitStream.h"
+#include "console/consoleTypes.h"
+//--------------------------------------------------------------------------
+namespace
+{
+   void writeRangedF32(BitStream * bstream, F32 val, F32 min, F32 max, U32 numBits)
+   {
+      val = (mClampF(val, min, max) - min) / (max - min);
+      bstream->writeInt((S32)(val * ((1 << numBits) - 1)), numBits);
+   }
+
+   F32 readRangedF32(BitStream * bstream, F32 min, F32 max, U32 numBits)
+   {
+      return(min + (F32(bstream->readInt(numBits)) / F32((1 << numBits) - 1)) * (max - min));
+   }
+
+   void writeRangedS32(BitStream * bstream, S32 val, S32 min, S32 max)
+   {
+      bstream->writeRangedU32((val - min), 0, (max - min));
+   }
+
+   S32 readRangedS32(BitStream * bstream, S32 min, S32 max)
+   {
+      return(bstream->readRangedU32(0, (max - min)) + min);
+   }
+}
 
 
 IMPLEMENT_CO_DATABLOCK_V1(SFXEnvironment);
@@ -42,14 +66,18 @@ static const U32 sReverbFlagCore1 = 0x200;
 static const U32 sReverbFlagHighQualityReverb = 0x400;
 static const U32 sReverbFlagHighQualityDPL2Reverb = 0x800;
 
-
 //-----------------------------------------------------------------------------
 
 SFXEnvironment::SFXEnvironment()
 {
-}
 
+}
 //-----------------------------------------------------------------------------
+
+IMPLEMENT_CONSOLETYPE(SFXEnvironment)
+IMPLEMENT_GETDATATYPE(SFXEnvironment)
+IMPLEMENT_SETDATATYPE(SFXEnvironment)
+
 
 void SFXEnvironment::initPersistFields()
 {
@@ -113,9 +141,22 @@ bool SFXEnvironment::onAdd()
    if (!Parent::onAdd())
       return false;
 
+   Sim::getSFXEnvironmentSet()->addObject(this);
+
    return true;
 }
 
+//-----------------------------------------------------------------------------
+
+bool SFXEnvironment::preload(bool server, char* errorStr)
+{
+   if (!Parent::preload(server, errorStr))
+      return false;
+
+   validate();
+
+   return true;
+}
 
 //-----------------------------------------------------------------------------
 
@@ -267,3 +308,7 @@ void SFXSampleEnvironment::unpackData(BitStream* stream)
    mOutsideVolumeHF = readRangedS32(stream, -10000, 0);
    mFlags = stream->readInt(3);
 }
+
+IMPLEMENT_CONSOLETYPE(SFXSampleEnvironment)
+IMPLEMENT_GETDATATYPE(SFXSampleEnvironment)
+IMPLEMENT_SETDATATYPE(SFXSampleEnvironment)

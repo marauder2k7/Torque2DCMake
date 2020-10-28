@@ -20,9 +20,6 @@
 // IN THE SOFTWARE.
 //-----------------------------------------------------------------------------
 
-#ifndef _AUDIODESCRIPTION_H_
-#include "audio/audioDescriptions.h"
-#endif
 /*! Gets the system-wide scene-object count.
     @return The system-wide scene-object count.
 */
@@ -4480,7 +4477,7 @@ ConsoleMethodWithDocs(SceneObject, safeDelete, ConsoleVoid, 2, 2, ())
 ConsoleMethodWithDocs(SceneObject, playSound, ConsoleInt, 3, 4, ())
 {
     // Fetch asset Id.    
-    const char* pAssetId = argv[2];
+    /*const char* pAssetId = argv[2];
 
     // Acquire audio asset.
     AudioAsset* pAudioAsset = AssetDatabase.acquireAsset<AudioAsset>(pAssetId);
@@ -4525,7 +4522,8 @@ ConsoleMethodWithDocs(SceneObject, playSound, ConsoleInt, 3, 4, ())
     // Release asset.
     AssetDatabase.releaseAsset(pAssetId);
     object->addAudioHandle(handle);
-    return handle;
+    return handle;*/
+   return 0;
 }
 
 /*! Stops a sound attached to a SceneObject
@@ -4533,7 +4531,7 @@ ConsoleMethodWithDocs(SceneObject, playSound, ConsoleInt, 3, 4, ())
 */
 ConsoleMethodWithDocs(SceneObject, stopSound, ConsoleVoid, 3, 3, (S32 index))
 {
-    const S32 index = dAtoi(argv[2]);
+    /*const S32 index = dAtoi(argv[2]);
     
     if (!object->getSoundsCount())
     {
@@ -4551,7 +4549,7 @@ ConsoleMethodWithDocs(SceneObject, stopSound, ConsoleVoid, 3, 3, (S32 index))
     }
 
     alxStop(handle);
-    object->refreshsources();
+    object->refreshsources();*/
 }
 
 /*! gets the amount of sounds currently attached to a SceneObject

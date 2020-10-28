@@ -43,13 +43,15 @@
 #include "graphics/TextureManager.h"
 #endif
 
-#ifndef _PLATFORMAUDIO_H_
-#include "platform/platformAudio.h"
-#endif
+#ifndef _PLATFORM_H_
+#include "platform/platform.h"
+#endif // !_PLATFORM_H_
 
-#ifndef _AUDIO_ASSET_H_
-#include "audio/AudioAsset.h"
-#endif
+
+#ifndef _SFXASSET_H_
+#include "sfx/sfxAsset.h"
+#endif // !_SFXASSET_H_
+
 
 #include "graphics/gFont.h"
 
@@ -173,8 +175,8 @@ public:
    Vector<RectI> mBitmapArrayRects;                ///< Used for controls which use an array of bitmaps such as checkboxes
 
    // sound members
-   AssetPtr<AudioAsset> mSoundButtonDown;                 ///< Sound played when the object is "down" ie a button is pushed
-   AssetPtr<AudioAsset> mSoundButtonOver;                 ///< Sound played when the mouse is over the object
+   AssetPtr<SFXAsset> mSoundButtonDown;                 ///< Sound played when the object is "down" ie a button is pushed
+   AssetPtr<SFXAsset> mSoundButtonOver;                 ///< Sound played when the mouse is over the object
 
    GuiControlProfile* mProfileForChildren;         ///< Profile used with children controls (such as the scroll bar on a popup menu) when defined.
 public:

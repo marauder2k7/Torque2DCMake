@@ -43,7 +43,7 @@ protected:
 
    StringTableEntry mValidateCommand;
    StringTableEntry mEscapeCommand;
-   AssetPtr<AudioAsset>  mDeniedSound;
+   //AssetPtr<AudioAsset>  mDeniedSound;
 
    // for animating the cursor
    S32      mNumFramesElapsed;

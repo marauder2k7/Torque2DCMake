@@ -611,7 +611,7 @@ public:
     inline U32              getSerialId( void ) const                   { return mSerialId; }
 
     // Audio
-    void addAudioHandle(AUDIOHANDLE handle);
+    //void addAudioHandle(AUDIOHANDLE handle);
     U32                 getSound(S32 index);
     S32                 getSoundsCount();
     void                refreshsources();

@@ -71,7 +71,6 @@ struct Win32PlatState
    FILE *log_fp;
    HINSTANCE hinstOpenGL;
    HINSTANCE hinstGLU;
-   HINSTANCE hinstOpenAL;
    HWND appWindow;
    HDC appDC;
    HINSTANCE appInstance;

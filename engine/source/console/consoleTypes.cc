@@ -470,11 +470,11 @@ ConsoleSetType( TypeFlag )
 //////////////////////////////////////////////////////////////////////////
 // TypeSimObjectPtr
 //////////////////////////////////////////////////////////////////////////
-ConsoleType( SimObjectPtr, TypeSimObjectPtr, sizeof(SimObject*), "" )
+ConsoleType(SimObject, TypeSimObjectPtr, sizeof(SimObject*), "")
 
-ConsoleSetType( TypeSimObjectPtr )
+ConsoleSetType(TypeSimObjectPtr)
 {
-   if(argc == 1)
+   if (argc == 1)
    {
       SimObject **obj = (SimObject **)dptr;
       *obj = Sim::findObject(argv[0]);
@@ -483,12 +483,37 @@ ConsoleSetType( TypeSimObjectPtr )
       Con::printf("(TypeSimObjectPtr) Cannot set multiple args to a single S32.");
 }
 
-ConsoleGetType( TypeSimObjectPtr )
+ConsoleGetType(TypeSimObjectPtr)
 {
    SimObject **obj = (SimObject**)dptr;
-   char* returnBuffer = Con::getReturnBuffer(256);
-   const char* Id =  *obj ? (*obj)->getName() ? (*obj)->getName() : (*obj)->getIdString() : StringTable->EmptyString;
-   dSprintf(returnBuffer, 256, "%s", Id);
+   static const U32 bufSize = 128;
+   char* returnBuffer = Con::getReturnBuffer(bufSize);
+   dSprintf(returnBuffer, bufSize, "%s", *obj ? (*obj)->getName() ? (*obj)->getName() : (*obj)->getIdString() : "");
+   return returnBuffer;
+}
+
+//////////////////////////////////////////////////////////////////////////
+// TypeSimObjectWeakPtr
+//////////////////////////////////////////////////////////////////////////
+ConsoleType(SimObject, TypeSimObjectWeakPtr, sizeof(SimObject*), "")
+
+ConsoleSetType(TypeSimObjectWeakPtr)
+{
+   if (argc == 1)
+   {
+      SimObject **obj = (SimObject **)dptr;
+      *obj = Sim::findObject(argv[0]);
+   }
+   else
+      Con::printf("(TypeSimObjectPtr) Cannot set multiple args to a single S32.");
+}
+
+ConsoleGetType(TypeSimObjectWeakPtr)
+{
+   SimObject **obj = (SimObject**)dptr;
+   static const U32 bufSize = 128;
+   char* returnBuffer = Con::getReturnBuffer(bufSize);
+   dSprintf(returnBuffer, bufSize, "%s", *obj ? (*obj)->getName() ? (*obj)->getName() : (*obj)->getIdString() : "");
    return returnBuffer;
 }
 

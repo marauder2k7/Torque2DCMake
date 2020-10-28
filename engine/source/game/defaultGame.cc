@@ -26,7 +26,6 @@
 #include "platform/platform.h"
 #include "platform/platformVideo.h"
 #include "platform/platformInput.h"
-#include "platform/platformAudio.h"
 #include "platform/event.h"
 #include "game/gameInterface.h"
 #include "collection/vector.h"
@@ -58,6 +57,7 @@
 #include "platform/nativeDialogs/msgBox.h"
 #include "platform/nativeDialogs/fileDialog.h"
 #include "memory/safeDelete.h"
+#include "sfx/sfxDevice.h"
 
 #include <stdio.h>
 
@@ -153,14 +153,13 @@ bool initializeLibraries()
    
     Platform::initConsole();
     NetStringTable::create();
-   
     TelnetConsole::create();
     TelnetDebugger::create();
 
     Processor::init();
     Math::init();
+    SFXDevice::init();
     Platform::init();    // platform specific initialization
-    //Audio::OpenALInit();
     // Initialize the particle system.
     ParticleSystem::Init();
     
@@ -251,7 +250,7 @@ bool initializeGame(int argc, const char **argv)
     ResourceManager->addPath( Platform::getCurrentDirectory() );
 
     FileStream scriptFileStream; 
-    Stream* scriptStream;
+    Stream* scriptStream = NULL;
 
     const char* defaultScriptName = "main.cs";
     bool useDefaultScript = true;

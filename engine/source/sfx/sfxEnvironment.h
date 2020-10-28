@@ -33,27 +33,6 @@
 #include "sfx/sfxCommon.h"
 #endif
 
-void writeRangedF32(BitStream * bstream, F32 val, F32 min, F32 max, U32 numBits)
-{
-   val = (mClampF(val, min, max) - min) / (max - min);
-   bstream->writeInt((S32)(val * ((1 << numBits) - 1)), numBits);
-}
-
-F32 readRangedF32(BitStream * bstream, F32 min, F32 max, U32 numBits)
-{
-   return(min + (F32(bstream->readInt(numBits)) / F32((1 << numBits) - 1)) * (max - min));
-}
-
-void writeRangedS32(BitStream * bstream, S32 val, S32 min, S32 max)
-{
-   bstream->writeRangedU32((val - min), 0, (max - min));
-}
-
-S32 readRangedS32(BitStream * bstream, S32 min, S32 max)
-{
-   return(bstream->readRangedU32(0, (max - min)) + min);
-}
-
 
 /// A datablock that defines a reverb environment.
 class SFXEnvironment : public SimDataBlock
@@ -74,17 +53,18 @@ public:
    ///
    void validate();
 
-   DECLARE_CONOBJECT(SFXEnvironment);
    static void initPersistFields();
 
    virtual bool onAdd();
-   virtual bool preload(bool server, char& errorStr);
+   virtual bool preload(bool server, char* errorStr);
    virtual void packData(BitStream* stream);
    virtual void unpackData(BitStream* stream);
    virtual void inspectPostApply();
 
    /// @return The reverb properties of the sound environment.
    const SFXReverbProperties& getReverb() const { return mReverb; }
+
+   DECLARE_CONOBJECT(SFXEnvironment);
 };
 
 class SFXSampleEnvironment : public SimDataBlock
@@ -115,6 +95,5 @@ public:
 
    DECLARE_CONOBJECT(SFXSampleEnvironment);
 };
-
 
 #endif // _SFXENVIRONMENT_H_

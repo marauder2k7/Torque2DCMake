@@ -261,8 +261,8 @@ void GuiControlProfile::initPersistFields()
 
    addField("bitmap",        TypeFilename,   Offset(mBitmapName, GuiControlProfile));
 
-   addField("soundButtonDown", TypeAudioAssetPtr,  Offset(mSoundButtonDown, GuiControlProfile));
-   addField("soundButtonOver", TypeAudioAssetPtr,  Offset(mSoundButtonOver, GuiControlProfile));
+   addField("soundButtonDown", TypeSFXAssetPtr,  Offset(mSoundButtonDown, GuiControlProfile));
+   addField("soundButtonOver", TypeSFXAssetPtr,  Offset(mSoundButtonOver, GuiControlProfile));
    addField("profileForChildren", TypeSimObjectPtr,  Offset(mProfileForChildren, GuiControlProfile));
 }
 

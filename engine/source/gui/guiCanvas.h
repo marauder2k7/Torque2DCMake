@@ -35,6 +35,8 @@
 #ifndef _PLATFORMINPUT_H_
 #include "platform/platformInput.h"
 #endif
+
+#include "2d/core/Utility.h"
 /// A canvas on which rendering occurs.
 ///
 ///

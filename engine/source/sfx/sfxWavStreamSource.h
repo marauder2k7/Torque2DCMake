@@ -20,43 +20,53 @@
 // IN THE SOFTWARE.
 //-----------------------------------------------------------------------------
 
-#include "platform/platform.h"
-#include "sim/simBase.h"
-#include "string/stringTable.h"
-#include "console/console.h"
-#include "io/fileStream.h"
-#include "input/actionMap.h"
-#include "io/resource/resourceManager.h"
-#include "io/fileObject.h"
-#include "console/consoleInternal.h"
-#include "debug/profiler.h"
-#include "console/ConsoleTypeValidators.h"
-#include "memory/frameAllocator.h"
+#ifndef _SFXWAVSTREAMSOURCE_H_
+#define _SFXWAVSTREAMSOURCE_H_
 
-// Script bindings.
-#include "simBase_ScriptBinding.h"
+#ifndef _SFXSTREAMSOURCE_H_
+#include "sfx/sfxStreamSource.h"
+#endif
 
-namespace Sim
+#ifndef _LOADOAL_H_
+#include "sfx/loadOal.h"
+#endif // !_LOADAL_H_
+
+
+class SFXWavStreamSource : public SFXStreamSource
 {
-   // Don't forget to InstantiateNamed* in simManager.cc - DMM
-   ImplementNamedSet(ActiveActionMapSet)
-   ImplementNamedSet(GhostAlwaysSet)
-   ImplementNamedSet(BehaviorSet)
-   ImplementNamedSet(SFXSourceSet)
-   ImplementNamedSet(SFXDescriptionSet)
-   ImplementNamedSet(SFXTrackSet)
-   ImplementNamedSet(SFXEnvironmentSet)
-   ImplementNamedSet(SFXStateSet)
-   ImplementNamedSet(AchievementSet);
-   ImplementNamedGroup(ActionMapGroup)
-   ImplementNamedGroup(ClientGroup)
-   ImplementNamedGroup(GuiGroup)
-   ImplementNamedGroup(GuiDataGroup)
-   ImplementNamedGroup(TCPGroup)
+public:
+   SFXWavStreamSource(const OPENALFNTABLE &oalft,const char *filename);
+   virtual ~SFXWavStreamSource();
 
-   //groups created on the client
-   ImplementNamedGroup(ClientConnectionGroup)
-   ImplementNamedGroup(ChunkFileGroup)
-}   
+   virtual bool initStream();
+   virtual bool updateBuffers();
+   virtual void freeStream();
+   virtual F32 getElapsedTime();
+   virtual F32 getTotalTime();
 
-//-----------------------------------------------------------------------------
+private:
+   const OPENALFNTABLE &mOpenAL;
+   ALuint      mBufferList[NUMBUFFERS];
+   S32			mNumBuffers;
+   S32		   mBufferSize;
+   Stream	   *stream;
+
+   bool		   bReady;
+   bool			bFinished;
+
+   ALenum      format;
+   ALsizei     size;
+   ALsizei     freq;
+
+   ALuint		DataSize;
+   ALuint		DataLeft;
+   ALuint		dataStart;
+   ALuint		buffersinqueue;
+
+   bool			bBuffersAllocated;
+
+   void clear();
+   void resetStream();
+};
+
+#endif // _SFXWAVSTREAMSOURCE_H_

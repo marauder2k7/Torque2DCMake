@@ -384,7 +384,7 @@ bool AssetManager::removeDeclaredAsset( const char* pAssetId )
     }
 
     // Do we have an asset loaded?
-    if ( pAssetDefinition->mpAssetBase.notNull() )
+    if ( pAssetDefinition->mpAssetBase.isNull() )
     {
         // Yes, so delete it.
         // NOTE: If anything is using this then this'll cause a crash.  Objects should always use safe reference methods however.

@@ -1,237 +1,23 @@
-
 #ifndef _SFXCOMMON_H_
 #define _SFXCOMMON_H_
 
 #ifndef _PLATFORM_H_
 #include "platform/platform.h"
 #endif
-#ifndef _MMATHFN_H_
-#include "math/mMathFn.h"
-#endif
-#ifndef _MRANDOM_H_
-#include "math/mRandom.h"
-#endif
-#ifndef _MMATRIX_H_
-#include "math/mMatrix.h"
-#endif
+#ifndef _SFXDEVICE_H_
+#include "sfx/sfxDevice.h"
+#endif // !_SFXDEVICE_H_
+
+#ifdef _VECTOR_H_
+#include "collection/vector.h"
+#endif // !_VECTOR_H_
 #ifndef _TYPETRAITS_H_
 #include "platform/typetraits.h"
 #endif
-#ifndef _DYNAMIC_CONSOLETYPES_H_
-#include "console/consoleTypes.h"
-#endif
+
+#include "math/mMath.h"
 
 class SFXEnvironment;
-
-//-----------------------------------------------------------------------------
-//    SFXListenerProperties.
-//-----------------------------------------------------------------------------
-
-
-///
-class SFXListenerProperties
-{
-public:
-
-   typedef void Parent;
-
-   /// Position and orientation of the listener.
-   MatrixF mTransform;
-
-   ///
-   Point3F mVelocity;
-
-   SFXListenerProperties()
-      : mTransform(true),
-      mVelocity(0.0f, 0.0f, 0.0f) {}
-
-   SFXListenerProperties(const MatrixF& transform, const Point3F& velocity)
-      : mTransform(transform),
-      mVelocity(velocity) {}
-
-   ///
-   const MatrixF& getTransform() const { return mTransform; }
-   MatrixF& getTransform() { return mTransform; }
-
-   ///
-   const Point3F& getVelocity() const { return mVelocity; }
-   Point3F& getVelocity() { return mVelocity; }
-};
-
-//-----------------------------------------------------------------------------
-//    SFXStatus.
-//-----------------------------------------------------------------------------
-
-
-/// The sound playback state.
-enum SFXStatus
-{
-   /// Initial state; no operation yet performed on sound.
-   SFXStatusNull,
-
-   /// Sound is playing.
-   SFXStatusPlaying,
-
-   /// Sound has been stopped.
-   SFXStatusStopped,
-
-   /// Sound is paused.
-   SFXStatusPaused,
-
-   /// Sound stream is starved and playback blocked.
-   SFXStatusBlocked,
-
-   /// Temporary state while transitioning to another state.  This is used when multiple
-   /// threads concurrently maintain a status and need to perform a sequence of actions before
-   /// being able to fully go from a previous to a new current state.  In this case, the
-   /// transition state marks the status as being under update on another thread.
-   ///
-   /// @note Not all places that use SFXStatus actually use this state.
-   SFXStatusTransition,
-};
-
-enum SFXDistanceModel
-{
-   SFXDistanceModelLinear,             ///< Volume decreases linearly from min to max where it reaches zero.
-   SFXDistanceModelLogarithmic,        ///< Volume halves every min distance steps starting from min distance; attenuation stops at max distance.
-   SFXDistanceModelExponent,           /// exponential falloff for distance attenuation.
-};
-
-inline F32 SFXDistanceAttenuation(SFXDistanceModel model, F32 minDistance, F32 maxDistance, F32 distance, F32 volume, F32 rolloffFactor)
-{
-   F32 gain = 1.0f;
-
-   switch (model)
-   {
-   case SFXDistanceModelLinear:
-
-      distance = getMax(distance, minDistance);
-      distance = getMin(distance, maxDistance);
-
-      gain = (1 - (distance - minDistance) / (maxDistance - minDistance));
-      break;
-
-   case SFXDistanceModelLogarithmic:
-
-      distance = getMax(distance, minDistance);
-      distance = getMin(distance, maxDistance);
-
-      gain = minDistance / (minDistance + rolloffFactor * (distance - minDistance));
-      break;
-
-      ///create exponential distance model    
-   case SFXDistanceModelExponent:
-      distance = getMax(distance, minDistance);
-      distance = getMin(distance, maxDistance);
-
-      gain = pow((distance / minDistance), (-rolloffFactor));
-      break;
-
-   }
-
-   return (volume * gain);
-}
-
-//EnumTable(SFXStatus);
-
-class SFXFormat
-{
-protected:
-
-   /// The number of sound channels in the data.
-   U8 mChannels;
-
-   /// The number of bits per sound sample.
-   U8 mBitsPerSample;
-
-   /// The frequency in samples per second.
-   U32 mSamplesPerSecond;
-
-public:
-
-   SFXFormat(U8 channels = 0,
-      U8 bitsPerSample = 0,
-      U32 samplesPerSecond = 0)
-      : mChannels(channels),
-      mBitsPerSample(bitsPerSample),
-      mSamplesPerSecond(samplesPerSecond)
-   {}
-
-   /// Copy constructor.
-   SFXFormat(const SFXFormat &format)
-      : mChannels(format.mChannels),
-      mBitsPerSample(format.mBitsPerSample),
-      mSamplesPerSecond(format.mSamplesPerSecond)
-   {}
-
-public:
-
-   /// Sets the format.
-   void set(U8 channels,
-      U8 bitsPerSample,
-      U32 samplesPerSecond)
-   {
-      mChannels = channels;
-      mBitsPerSample = bitsPerSample;
-      mSamplesPerSecond = samplesPerSecond;
-   }
-
-   /// Comparision between formats.
-   bool operator == (const SFXFormat& format) const
-   {
-      return   mChannels == format.mChannels &&
-         mBitsPerSample == format.mBitsPerSample &&
-         mSamplesPerSecond == format.mSamplesPerSecond;
-   }
-
-   /// Returns the number of sound channels.
-   U8 getChannels() const { return mChannels; }
-
-   /// Returns true if there is a single sound channel.
-   bool isMono() const { return mChannels == 1; }
-
-   /// Is true if there are two sound channels.
-   bool isStereo() const { return mChannels == 2; }
-
-   /// Is true if there are more than two sound channels.
-   bool isMultiChannel() const { return mChannels > 2; }
-
-   /// 
-   U32 getSamplesPerSecond() const { return mSamplesPerSecond; }
-
-   /// The bits of data per channel.
-   U8 getBitsPerChannel() const { return mBitsPerSample / mChannels; }
-
-   /// The number of bytes of data per channel.
-   U8 getBytesPerChannel() const { return getBitsPerChannel() / 8; }
-
-   /// The number of bits per sound sample.
-   U8 getBitsPerSample() const { return mBitsPerSample; }
-
-   /// The number of bytes of data per sample.
-   /// @note Be aware that this comprises all channels.
-   U8 getBytesPerSample() const { return mBitsPerSample / 8; }
-
-   /// Returns the duration from the sample count.
-   U32 getDuration(U32 samples) const
-   {
-      // Use 64bit types to avoid overflow during division. 
-      return ((U64)samples * (U64)1000) / (U64)mSamplesPerSecond;
-   }
-
-   ///
-   U32 getSampleCount(U32 ms) const
-   {
-      return U64(mSamplesPerSecond) * U64(ms) / U64(1000);
-   }
-
-   /// Returns the data length in bytes.
-   U32 getDataLength(U32 ms) const
-   {
-      U32 bytes = (((U64)ms * (U64)mSamplesPerSecond) * (U64)getBytesPerSample()) / (U64)1000;
-      return bytes;
-   }
-};
 
 //-----------------------------------------------------------------------------
 //    SFXReverb.
@@ -438,21 +224,5 @@ public:
    }
 };
 
-inline const char* SFXStatusToString(SFXStatus status)
-{
-   switch (status)
-   {
-   case SFXStatusPlaying:     return "playing";
-   case SFXStatusStopped:     return "stopped";
-   case SFXStatusPaused:      return "paused";
-   case SFXStatusBlocked:     return "blocked";
-   case SFXStatusTransition:  return "transition";
 
-   case SFXStatusNull:
-   default:;
-   }
-
-   return "null";
-}
-
-#endif // !_SFXCOMMON_H_
+#endif

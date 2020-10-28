@@ -21,7 +21,7 @@
 //-----------------------------------------------------------------------------
 
 #ifndef _SFXASSET_H_
-#include "sfx/sfxAsset.h"
+#include "sfxAsset.h"
 #endif
 
 #ifndef _ASSET_PTR_H_
@@ -31,6 +31,7 @@
 #ifndef _CONSOLETYPES_H_
 #include "console/consoleTypes.h"
 #endif
+#include "sfxDevice.h"
 
 //-----------------------------------------------------------------------------
 
@@ -61,7 +62,7 @@ ConsoleSetType(TypeSFXAssetPtr)
       if (pAssetPtr == NULL)
       {
          // No, so fail.
-         Con::warnf("(TypeAudioAssetPtr) - Failed to set asset Id '%d'.", pFieldValue);
+         Con::warnf("(TypeSFXAssetPtr) - Failed to set asset Id '%d'.", pFieldValue);
          return;
       }
 
@@ -72,7 +73,7 @@ ConsoleSetType(TypeSFXAssetPtr)
    }
 
    // Warn.
-   Con::warnf("(TypeAudioAssetPtr) - Cannot set multiple args to a single asset.");
+   Con::warnf("(TypeSFXAssetPtr) - Cannot set multiple args to a single asset.");
 }
 
 //--------------------------------------------------------------------------
@@ -112,14 +113,14 @@ void SFXAsset::initPersistFields()
    addProtectedField("Looping", TypeBool, Offset(mDescription.mIsLooping, SFXAsset), &setLooping, &defaultProtectedGetFn, &writeLooping, "");
    addProtectedField("Streaming", TypeBool, Offset(mDescription.mIsStreaming, SFXAsset), &setStreaming, &defaultProtectedGetFn, &writeStreaming, "");
 
-   addField("is3D",              TypeBool,    Offset(mDescription.mIs3D, SFXAsset));
-   addField("referenceDistance", TypeF32,     Offset(mDescription.mReferenceDistance, SFXAsset));
-   addField("maxDistance",       TypeF32,     Offset(mDescription.mMaxDistance, SFXAsset));
-   addField("coneInsideAngle",   TypeS32,     Offset(mDescription.mConeInsideAngle, SFXAsset));
-   addField("coneOutsideAngle",  TypeS32,     Offset(mDescription.mConeOutsideAngle, SFXAsset));
-   addField("coneOutsideVolume", TypeF32,     Offset(mDescription.mConeOutsideVolume, SFXAsset));
-   addField("coneVector",        TypePoint3F, Offset(mDescription.mConeVector, SFXAsset));
-   addField("environmentLevel",  TypeF32,     Offset(mDescription.mEnvironmentLevel, SFXAsset));
+   //addField("is3D",              TypeBool,    Offset(mDescription.mIs3D, AudioAsset));
+   //addField("referenceDistance", TypeF32,     Offset(mDescription.mReferenceDistance, AudioAsset));
+   //addField("maxDistance",       TypeF32,     Offset(mDescription.mMaxDistance, AudioAsset));
+   //addField("coneInsideAngle",   TypeS32,     Offset(mDescription.mConeInsideAngle, AudioAsset));
+   //addField("coneOutsideAngle",  TypeS32,     Offset(mDescription.mConeOutsideAngle, AudioAsset));
+   //addField("coneOutsideVolume", TypeF32,     Offset(mDescription.mConeOutsideVolume, AudioAsset));
+   //addField("coneVector",        TypePoint3F, Offset(mDescription.mConeVector, AudioAsset));
+   //addField("environmentLevel",  TypeF32,     Offset(mDescription.mEnvironmentLevel, AudioAsset));
 }
 
 //------------------------------------------------------------------------------
@@ -148,7 +149,7 @@ void SFXAsset::copyTo(SimObject* object)
 void SFXAsset::initializeAsset(void)
 {
    // Call parent.
-   SFXAsset::initializeAsset();
+   Parent::initializeAsset();
 
    // Ensure the audio-file is expanded.
    mAudioFile = expandAssetFilePath(mAudioFile);
@@ -253,7 +254,7 @@ void SFXAsset::setStreaming(const bool streaming)
 
 //--------------------------------------------------------------------------
 
-void SFXAsset::setDescription(const SFXDescription& audioDescription)
+void SFXAsset::setDescription(const SFXDevice::DefDescription& audioDescription)
 {
    // Update.
    mDescription = audioDescription;

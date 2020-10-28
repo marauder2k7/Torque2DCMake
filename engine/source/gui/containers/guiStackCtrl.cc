@@ -178,7 +178,7 @@ void GuiStackControl::stackFromBottom()
    for(S32 i=size()-1; i>=0; i--)
    {
       // Place control
-      GuiControl * gc = dynamic_cast<GuiControl*>(operator [](i));
+      gc = dynamic_cast<GuiControl*>(operator [](i));
 
       if(gc)
       {

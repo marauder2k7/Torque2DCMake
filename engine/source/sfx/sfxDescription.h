@@ -1,3 +1,25 @@
+//-----------------------------------------------------------------------------
+// Copyright (c) 2013 GarageGames, LLC
+//
+// Permission is hereby granted, free of charge, to any person obtaining a copy
+// of this software and associated documentation files (the "Software"), to
+// deal in the Software without restriction, including without limitation the
+// rights to use, copy, modify, merge, publish, distribute, sublicense, and/or
+// sell copies of the Software, and to permit persons to whom the Software is
+// furnished to do so, subject to the following conditions:
+//
+// The above copyright notice and this permission notice shall be included in
+// all copies or substantial portions of the Software.
+//
+// THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+// IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+// FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+// AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+// LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING
+// FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS
+// IN THE SOFTWARE.
+//-----------------------------------------------------------------------------
+
 #ifndef _SFXDESCRIPTION_H_
 #define _SFXDESCRIPTION_H_
 
@@ -10,9 +32,10 @@
 
 #ifndef _SFXCOMMON_H_
 #include "sfx/sfxCommon.h"
-#endif
+#endif // !_SFXCOMMON_H_
 
-class SFXSource;
+
+//--------------------------------------------------------------------------
 
 class SFXDescription : public SimDataBlock
 {
@@ -20,77 +43,30 @@ class SFXDescription : public SimDataBlock
 
 public:
 
-   /// The 0 to 1 volume scale.
-   F32 mVolume;
+   F32  mVolume;    // 0-1    1=loudest volume
    S32  mVolumeChannel;
-   /// The pitch scale.
-   F32 mPitch;
-
-   /// If true the sound will loop.
    bool mIsLooping;
    bool mIsStreaming;
-   /// If true the sound will be 3D positional.
-   bool mIs3D;
 
+   bool mIs3D;
    F32  mReferenceDistance;
    F32  mRollOffFactor;
-
-   /// The source to which sources playing with this description will
-      /// be added.
-   SFXSource* mSourceGroup;
-
-   /// Number of seconds until playback reaches full volume after starting/resuming.
-   /// Zero to deactivate (default).
-   F32 mFadeInTime;
-
-   /// Number of seconds to fade out fading before stopping/pausing.
-   /// Zero to deactivate (default).
-   F32 mFadeOutTime;
-
-   /// If true the sound uses custom reverb properties.
-   bool mUseReverb;
-
-   /// The distance from the emitter at which the
-      /// sound volume becomes zero.
-      ///
-      /// This is only valid for 3D sounds.
-   F32 mMaxDistance;
-
-   /// The angle in degrees of the inner part of
-   /// the cone.  It must be within 0 to 360.
-   ///
-   /// This is only valid for 3D sounds.
-   U32 mConeInsideAngle;
-
-   /// The angle in degrees of the outer part of
-   /// the cone.  It must be greater than mConeInsideAngle
-   /// and less than to 360.
-   ///
-   /// This is only valid for 3D sounds.
-   U32 mConeOutsideAngle;
-
-   /// The volume scalar for on/beyond the outside angle.
-   ///
-   /// This is only valid for 3D sounds.
-   F32 mConeOutsideVolume;
-
+   F32  mMaxDistance;
+   S32  mConeInsideAngle;
+   S32  mConeOutsideAngle;
+   F32  mConeOutsideVolume;
    Point3F mConeVector;
-
-   SFXSoundReverbProperties mReverb;
 
    // environment info
    F32 mEnvironmentLevel;
 
    SFXDescription();
-   DECLARE_CONOBJECT(SFXDescription);
-   static void initPersistFields();
-
    // SimDataBlock.
    virtual bool onAdd();
-   virtual void packData(BitStream* stream);
-   virtual void unpackData(BitStream* stream);
 
+   static void initPersistFields();
+
+   DECLARE_CONOBJECT(SFXDescription);
 };
 
-
-#endif // _SFXDESCRIPTION_H_
+#endif  // _H_AUDIODATABLOCK_

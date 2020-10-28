@@ -201,7 +201,7 @@ Scene::Scene() :
 Scene::~Scene()
 {
     // Unregister the scene controllers set.
-    if ( mControllers.notNull() )
+    if ( mControllers.isNull() )
         mControllers->deleteObject();
 
     // Decrease scene count.
@@ -3890,7 +3890,7 @@ void Scene::onTamlPostRead( const TamlCustomNodes& customNodes )
         for( TamlCustomNodeVector::const_iterator jointNodeItr = jointChildren.begin(); jointNodeItr != jointChildren.end(); ++jointNodeItr )
         {
             // Fetch joint node,
-            TamlCustomNode* pJointNode = *jointNodeItr;
+            pJointNode = *jointNodeItr;
 
             // Fetch node name.
             StringTableEntry nodeName = pJointNode->getNodeName();
@@ -4347,7 +4347,7 @@ void Scene::onTamlPostRead( const TamlCustomNodes& customNodes )
                 b2Vec2 localAnchorB = b2Vec2_zero;
                 bool collideConnected = false;
 
-                bool enableLimit;
+                bool enableLimit = false;
                 F32 lowerTransLimit = 0.0f;
                 F32 upperTransLimit = 1.0f;
 

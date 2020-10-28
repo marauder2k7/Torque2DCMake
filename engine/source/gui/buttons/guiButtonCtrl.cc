@@ -23,7 +23,6 @@
 #include "console/console.h"
 #include "graphics/dgl.h"
 #include "console/consoleTypes.h"
-#include "platform/platformAudio.h"
 #include "gui/guiCanvas.h"
 #include "gui/buttons/guiButtonCtrl.h"
 #include "gui/guiDefaultControlRender.h"

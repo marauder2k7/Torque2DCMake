@@ -29,10 +29,15 @@
 #ifndef _BITSET_H_
 #include "collection/bitSet.h"
 #endif
-#ifndef _REFBASE_H_
-#include "collection/refBase.h"
-#endif
 #include <stdarg.h>
+
+#ifdef TORQUE_COMPILER_VISUALC
+#define TORQUE_API extern "C" __declspec( dllexport )
+#elif defined( TORQUE_COMPILER_GCC )
+#define TORQUE_API extern "C" __attribute__( ( visibility( "default" ) ) )
+#else
+#error Unsupported compiler.
+#endif
 
 class SimObject;
 struct EnumTable;
@@ -875,6 +880,14 @@ public:
 
 #  define ConsoleMethodRootGroupEndWithDocs(className)
 #  define ConsoleMethodGroupEndWithDocs(className)
+
+#define DefineNewEngineMethod( className, name, returnType, args, defaultArgs, usage )                                                          \
+   struct _ ## className ## name ## frame                                                                                                       \
+   {                                                                                                                                            \
+      typedef className ObjectType;                                                                                                             \
+      className* object;                                                                                                                        \
+      inline returnType _exec args const;                                                                                                       \
+   };                                                                                                                                           \
 
 #else
 

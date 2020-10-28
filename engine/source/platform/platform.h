@@ -92,7 +92,6 @@ class Point2I;
 #  define TORQUE_TMM_ARGS
 #  define TORQUE_TMM_LOC
 #endif
-
 //------------------------------------------------------------------------------
 
 struct Platform

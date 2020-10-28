@@ -20,43 +20,24 @@
 // IN THE SOFTWARE.
 //-----------------------------------------------------------------------------
 
-#include "platform/platform.h"
-#include "sim/simBase.h"
-#include "string/stringTable.h"
-#include "console/console.h"
-#include "io/fileStream.h"
-#include "input/actionMap.h"
-#include "io/resource/resourceManager.h"
-#include "io/fileObject.h"
-#include "console/consoleInternal.h"
-#include "debug/profiler.h"
-#include "console/ConsoleTypeValidators.h"
-#include "memory/frameAllocator.h"
+//--------------------------------------------
+// audioStreamSource.h
+// header for streaming audio source
+//
+// Kurtis Seebaldt
+//--------------------------------------------
 
-// Script bindings.
-#include "simBase_ScriptBinding.h"
+#ifndef _SFXSTREAMSOURCEFACTORY_H_
+#define _SFXSTREAMSOURCEFACTORY_H_
 
-namespace Sim
+#ifndef _SFXSTREAMSOURCE_H_
+#include "sfx/sfxStreamSource.h"
+#endif
+
+class SFXStreamSourceFactory
 {
-   // Don't forget to InstantiateNamed* in simManager.cc - DMM
-   ImplementNamedSet(ActiveActionMapSet)
-   ImplementNamedSet(GhostAlwaysSet)
-   ImplementNamedSet(BehaviorSet)
-   ImplementNamedSet(SFXSourceSet)
-   ImplementNamedSet(SFXDescriptionSet)
-   ImplementNamedSet(SFXTrackSet)
-   ImplementNamedSet(SFXEnvironmentSet)
-   ImplementNamedSet(SFXStateSet)
-   ImplementNamedSet(AchievementSet);
-   ImplementNamedGroup(ActionMapGroup)
-   ImplementNamedGroup(ClientGroup)
-   ImplementNamedGroup(GuiGroup)
-   ImplementNamedGroup(GuiDataGroup)
-   ImplementNamedGroup(TCPGroup)
+public:
+   static SFXStreamSource* getNewInstance(const OPENALFNTABLE &oalft, const char* filename);
+};
 
-   //groups created on the client
-   ImplementNamedGroup(ClientConnectionGroup)
-   ImplementNamedGroup(ChunkFileGroup)
-}   
-
-//-----------------------------------------------------------------------------
+#endif // _AUDIOSTREAMSOURCEFACTORY_H_

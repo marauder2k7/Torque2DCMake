@@ -25,11 +25,11 @@
 
 #ifndef _SFXDEVICE_H_
 #include "sfx/sfxDevice.h"
-#endif
+#endif // !_SFXDEVICE_H_
 
 #ifndef _SFXBUFFER_H_
 #include "sfx/sfxBuffer.h"
-#endif
+#endif // !_SFXBUFFER_H_
 
 #ifndef _BITSTREAM_H_
 #include "io/bitStream.h"
@@ -58,7 +58,7 @@ private:
    typedef AssetBase Parent;
 
    StringTableEntry mAudioFile;
-   SFXDescription mDescription;
+   SFXDevice::DefDescription mDescription;
 
 public:
    SFXAsset();
@@ -80,8 +80,8 @@ public:
    void setStreaming(const bool streaming);
    inline bool getStreaming(void) const { return mDescription.mIsStreaming; }
 
-   void setDescription(const SFXDescription& audioDescription);
-   inline const SFXDescription& getAudioDescription(void) const { return mDescription; }
+   void setDescription(const SFXDevice::DefDescription& audioDescription);
+   inline const SFXDevice::DefDescription& getAudioDescription(void) const { return mDescription; }
 
    DECLARE_CONOBJECT(SFXAsset);
 
@@ -109,5 +109,4 @@ protected:
    static bool writeStreaming(void* obj, StringTableEntry pFieldName) { return static_cast<SFXAsset*>(obj)->getStreaming() == true; }
 };
 
-#endif  // _SFXASSET_H_
-#pragma once
+#endif  // _AUDIO_ASSET_H_

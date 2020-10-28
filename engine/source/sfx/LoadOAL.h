@@ -24,19 +24,13 @@
 #define _LOADOAL_H_
 
 #ifndef _PLATFORM_H_
-#  include "platform/platform.h"
+#include "platform/platform.h"
 #endif
 
 #if defined(TORQUE_OS_OSX)
 //#define AL_ALEXT_PROTOTYPES true
 #  include <OpenAL/al.h>
 #  include <OpenAL/alc.h>
-#elif defined(TORQUE_OS_LINUX)
-#  include <AL/al.h>
-#  include <AL/alc.h>
-#  include <AL/alext.h>
-#  include <AL/efx.h>
-#  include <AL/efx-presets.h>
 #elif defined(TORQUE_OS_IOS)
 #include <OpenAL/al.h>
 #include <OpenAL/alc.h>
@@ -44,9 +38,12 @@
 //Android uses openal soft from https://github.com/AerialX/openal-soft-android
 #include <AL/al.h>
 #include <AL/alc.h>
-#elif defined(TORQUE_OS_EMSCRIPTEN)
-#include <AL/al.h>
-#include <AL/alc.h>
+#elif defined(TORQUE_OS_LINUX)
+#  include <AL/al.h>
+#  include <AL/alc.h>
+#  include <AL/alext.h>
+#  include <AL/efx.h>
+#  include <AL/efx-presets.h>
 #else
 #  include <al/al.h>
 #  include <al/alc.h>

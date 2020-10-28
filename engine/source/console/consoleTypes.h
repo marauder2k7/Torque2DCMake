@@ -50,7 +50,9 @@ DefineConsoleType( TypeFilename )
 DefineConsoleType( TypeEnum )
 DefineConsoleType( TypeFlag )
 DefineConsoleType( TypeSimObjectPtr )
+DefineConsoleType(TypeSimObjectWeakPtr)
 DefineConsoleType( TypeSimObjectName )
 DefineConsoleType( TypeSimObjectId )
+DefineConsoleType( TypeSimObject )
 
 #endif

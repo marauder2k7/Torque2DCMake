@@ -263,7 +263,7 @@ SceneObject::~SceneObject()
        for (typeAudioHandleVector::iterator itr = mAudioHandles.begin(); itr != mAudioHandles.end(); ++itr)
        {
        U32 handle = *itr;
-       alxStop(handle);
+       //alxStop(handle);
        }
        mAudioHandles.clear();
     }
@@ -662,8 +662,8 @@ void SceneObject::integrateObject( const F32 totalTime, const F32 elapsedTime, D
         {
             U32 handle = *itr;
             Point2F vel = getLinearVelocity();
-            alxSource3f(handle, AL_POSITION, position.x, position.y, 0.f);
-            alxSource3f(handle, AL_VELOCITY, vel.x, vel.y, 0.f);
+            //alxSource3f(handle, AL_POSITION, position.x, position.y, 0.f);
+            //alxSource3f(handle, AL_VELOCITY, vel.x, vel.y, 0.f);
         }
     }
 }
@@ -895,12 +895,12 @@ void SceneObject::sceneRenderOverlay( const SceneRenderState* sceneRenderState )
             for (typeAudioHandleVector::iterator itr = mAudioHandles.begin(); itr != mAudioHandles.end(); ++itr)
             {
                 U32 handle = *itr;
-                ALfloat MaxDistance = 0.f;
-                ALfloat RefDistance = 0.f;
-                alxGetSourcef(handle, AL_MAX_DISTANCE, &MaxDistance);
-                alxGetSourcef(handle, AL_REFERENCE_DISTANCE, &RefDistance);
-                pScene->mDebugDraw.DrawCircle(getRenderPosition(), MaxDistance, ColorF(1.f, 0.2f, 0.2f));
-                pScene->mDebugDraw.DrawCircle(getRenderPosition(), RefDistance, ColorF(1.f, 0.0f, 0.0f));
+                //ALfloat MaxDistance = 0.f;
+                //ALfloat RefDistance = 0.f;
+                //alxGetSourcef(handle, AL_MAX_DISTANCE, &MaxDistance);
+                //alxGetSourcef(handle, AL_REFERENCE_DISTANCE, &RefDistance);
+                //pScene->mDebugDraw.DrawCircle(getRenderPosition(), MaxDistance, ColorF(1.f, 0.2f, 0.2f));
+                //pScene->mDebugDraw.DrawCircle(getRenderPosition(), RefDistance, ColorF(1.f, 0.0f, 0.0f));
             }
         }
         
@@ -4074,11 +4074,11 @@ bool SceneObject::writeField(StringTableEntry fieldname, const char* value)
    return true;
 }
 
-void SceneObject::addAudioHandle(AUDIOHANDLE handle)
+/*void SceneObject::addAudioHandle(AUDIOHANDLE handle)
 {
    mAudioHandles.push_back_unique(handle);
    Con::printf("New Vector size : %i", mAudioHandles.size());
-}
+}*/
 
 S32 SceneObject::getSoundsCount(void)
 {
@@ -4088,39 +4088,39 @@ S32 SceneObject::getSoundsCount(void)
 U32 SceneObject::getSound(S32 index)
 {
     if (mAudioHandles.size() - 1 < index)
-        return NULL_AUDIOHANDLE;
+        return 0;
     U32 handle = mAudioHandles[index];
     return handle;
 }
 
 void SceneObject::refreshsources()
 {
-if (mAudioHandles.size())
-{
-    S32 index = 0;
-    for (typeAudioHandleVector::iterator itr = mAudioHandles.begin(); itr != mAudioHandles.end(); ++itr)
-    {
-        U32 handle = *itr;
+   /*if (mAudioHandles.size())
+   {
+       S32 index = 0;
+       for (typeAudioHandleVector::iterator itr = mAudioHandles.begin(); itr != mAudioHandles.end(); ++itr)
+       {
+           U32 handle = *itr;
 
-        if (handle)
-        {
-            if (!alxIsValidHandle(handle))
-            mHandleDeletionList.push_back(index);
+           if (handle)
+           {
+               if (!alxIsValidHandle(handle))
+               mHandleDeletionList.push_back(index);
 
-            index++;
-        }
-    }
+               index++;
+           }
+       }
         
-    if (mHandleDeletionList.size())
-    {
+       if (mHandleDeletionList.size())
+       {
 
-        for (Vector<S32>::iterator delitr = mHandleDeletionList.begin(); delitr != mHandleDeletionList.end(); ++delitr)
-        {
-            mAudioHandles.erase(*delitr);
-        }
-            mHandleDeletionList.clear();
-    }
-}
+           for (Vector<S32>::iterator delitr = mHandleDeletionList.begin(); delitr != mHandleDeletionList.end(); ++delitr)
+           {
+               mAudioHandles.erase(*delitr);
+           }
+               mHandleDeletionList.clear();
+       }
+   }*/
 }
 
 
