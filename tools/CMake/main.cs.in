@@ -33,6 +33,9 @@ setScriptExecEcho( false );
 // Controls whether all script execution is traced (echoed) to the console or not.
 trace( false );
 
+// Set the name of our application
+$appName = "@TORQUE_APP_NAME@";
+
 // Sets whether to ignore compiled TorqueScript files (DSOs) or not.
 $Scripts::ignoreDSOs = true;
 

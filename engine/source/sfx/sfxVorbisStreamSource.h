@@ -28,25 +28,25 @@ public:
    virtual F32 getTotalTime();
 
 private:
-   const OPENALFNTABLE &mOpenAL;
-   ALuint				    mBufferList[NUMBUFFERS];
+   const OPENALFNTABLE  &mOpenAL;
+   ALuint				   mBufferList[NUMBUFFERS];
    S32						mNumBuffers;
    S32						mBufferSize;
    Stream				   *stream;
 
-   bool					bReady;
-   bool					bFinished;
+   bool					   bReady;
+   bool					   bFinished;
 
-   ALenum  format;
-   ALsizei size;
-   ALsizei freq;
+   ALenum               format;
+   ALsizei              size;
+   ALsizei              freq;
 
-   ALuint			DataSize;
-   ALuint			DataLeft;
-   ALuint			buffersinqueue;
+   ALuint			      DataSize;
+   ALuint			      DataLeft;
+   ALuint			      buffersinqueue;
 
-   bool			bBuffersAllocated;
-   bool			bVorbisFileInitialized;
+   bool			         bBuffersAllocated;
+   bool			         bVorbisFileInitialized;
 
    int current_section;
    OggVorbis_File vf;

@@ -251,8 +251,7 @@ private:
         Selected  = BIT(4),   ///< This object has been marked as selected. (in editor)
         Expanded  = BIT(5),   ///< This object has been marked as expanded. (in editor)
         ModStaticFields  = BIT(6),    ///< The object allows you to read/modify static fields
-        ModDynamicFields = BIT(7),     ///< The object allows you to read/modify dynamic fields
-        AutoDelete       = BIT(8)
+        ModDynamicFields = BIT(7)     ///< The object allows you to read/modify dynamic fields
     };
 
 public:
@@ -702,7 +701,6 @@ public:
     /// @{
     bool isSelected() const { return mFlags.test(Selected); }
     bool isExpanded() const { return mFlags.test(Expanded); }
-    bool isAutoDeleted() const { return mFlags.test(AutoDelete); }
     void setSelected(bool sel) { if(sel) mFlags.set(Selected); else mFlags.clear(Selected); }
     void setExpanded(bool exp) { if(exp) mFlags.set(Expanded); else mFlags.clear(Expanded); }
     void setModDynamicFields(bool dyn) { if(dyn) mFlags.set(ModDynamicFields); else mFlags.clear(ModDynamicFields); }

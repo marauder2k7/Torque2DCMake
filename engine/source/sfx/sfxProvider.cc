@@ -37,6 +37,7 @@ void SFXProvider::init()
 
 SFXProvider::~SFXProvider()
 {
+   Con::printf("SFXDevice: Unload OpenAL!");
    UnloadOAL10Library();
 }
 
@@ -44,7 +45,7 @@ SFXDevice *SFXProvider::createDevice()
 {
    // Hack to always create!
    if (mTrue)
-      return new SFXDevice( mOpenAL);
+      return new SFXDevice(this, mOpenAL);
 
    return NULL;
 }

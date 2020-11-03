@@ -42,11 +42,8 @@ namespace Sim
    ImplementNamedSet(ActiveActionMapSet)
    ImplementNamedSet(GhostAlwaysSet)
    ImplementNamedSet(BehaviorSet)
-   ImplementNamedSet(SFXSourceSet)
    ImplementNamedSet(SFXDescriptionSet)
-   ImplementNamedSet(SFXTrackSet)
    ImplementNamedSet(SFXEnvironmentSet)
-   ImplementNamedSet(SFXStateSet)
    ImplementNamedSet(AchievementSet);
    ImplementNamedGroup(ActionMapGroup)
    ImplementNamedGroup(ClientGroup)

@@ -160,19 +160,25 @@ void SimObject::unregisterObject()
 
 void SimObject::deleteObject()
 {
-    // Sanity!
-    AssertISV( getScriptCallbackGuard() == 0, "SimObject::deleteObject: Object is being deleted whilst performing a script callback!" );
+   //This is a hack to deal with nullptr being sent to getScriptCallbackGuard()
+   if (this != nullptr)
+   {
+      // Sanity!
+      AssertISV(getScriptCallbackGuard() == 0, "SimObject::deleteObject: Object is being deleted whilst performing a script callback!");
 
-    AssertFatal(mFlags.test(Added),
-        "SimObject::deleteObject: Object not registered.");
-    AssertFatal(!isDeleted(),"SimManager::deleteObject: "
-        "Object has already been deleted");
-    AssertFatal(!isRemoved(),"SimManager::deleteObject: "
-        "Object in the process of being removed");
-    mFlags.set(Deleted);
+      AssertFatal(mFlags.test(Added),
+         "SimObject::deleteObject: Object not registered.");
+      AssertFatal(!isDeleted(), "SimManager::deleteObject: "
+         "Object has already been deleted");
+      AssertFatal(!isRemoved(), "SimManager::deleteObject: "
+         "Object in the process of being removed");
+      mFlags.set(Deleted);
 
-   unregisterObject();
-   delete this;
+      unregisterObject();
+      delete this;
+   }
+
+   return;
 }
 
 //---------------------------------------------------------------------------

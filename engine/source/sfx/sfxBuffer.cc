@@ -138,8 +138,16 @@ static long _ov_tell_func(void *datasource)
 }
 #endif
 
+//---------------------------------------------------------------
 
-//--------------------------------------
+SFXBuffer * SFXBuffer::create(const OPENALFNTABLE & oalft, StringTableEntry filename)
+{
+   SFXBuffer *buffer = new SFXBuffer(oalft,
+      filename);
+
+   return buffer;
+}
+
 SFXBuffer::SFXBuffer(const OPENALFNTABLE &oalft,StringTableEntry filename)
    :  mOpenAL(oalft),
       mFilename(filename)
@@ -149,13 +157,7 @@ SFXBuffer::SFXBuffer(const OPENALFNTABLE &oalft,StringTableEntry filename)
    malBuffer = 0;
 }
 
-SFXBuffer * SFXBuffer::create(const OPENALFNTABLE & oalft, StringTableEntry filename)
-{
-   SFXBuffer *buffer = new SFXBuffer(oalft,
-                                    filename);
-
-   return buffer;
-}
+//---------------------------------------------------------------
 
 SFXBuffer::~SFXBuffer()
 {
@@ -192,7 +194,8 @@ SFXBuffer::~SFXBuffer()
    }
 }
 
-//--------------------------------------
+//---------------------------------------------------------------
+
 Resource<SFXBuffer> SFXBuffer::find(const OPENALFNTABLE &oalft,const char *filename)
 {
    U32 mark = FrameAllocator::getWaterMark();
@@ -215,6 +218,7 @@ Resource<SFXBuffer> SFXBuffer::find(const OPENALFNTABLE &oalft,const char *filen
    }
 
    // if resource still not there, try to create it if file exists
+   // we only need the oalft for this part. 
    if (bool(buffer) == false)
    {
       // see if the file exists -- first try default
@@ -241,7 +245,8 @@ ResourceInstance* SFXBuffer::construct(Stream &)
    return NULL;
 }
 
-//-----------------------------------------------------------------
+//---------------------------------------------------------------
+
 ALuint SFXBuffer::getALBuffer()
 {
    if (!mOpenAL.alcGetCurrentContext())
@@ -306,6 +311,7 @@ ALuint SFXBuffer::getALBuffer()
 /*!   The Read a WAV file from the given ResourceObject and initialize
       an alBuffer with it.
 */
+
 bool SFXBuffer::readWAV(ResourceObject *obj)
 {
    WAVChunkHdr chunkHdr;

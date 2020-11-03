@@ -13,26 +13,53 @@
 #include "sfx/LoadOal.h"
 #endif
 
+class SFXProvider;
+
+enum SFXCaps
+{
+   SFXCapture = 0,
+   SFXEFX,
+   SFXOffset,
+   SFXLinearDistance,
+   SFXExponentDistance,
+   SFXEAX2,
+   SFXEAX3,
+   SFXEAX4,
+   SFXEAX5,
+   SFXEAXRAM
+};
+
 class SFXDevice
 {
 
 public:
-   SFXDevice(const OPENALFNTABLE &openal);
+   SFXDevice(SFXProvider* provider,const OPENALFNTABLE &openal);
    ~SFXDevice();
 
 protected:
 
-   OPENALFNTABLE mOpenAL;
+   static SFXDevice* smDevice;
 
-   ALCcontext *mContext;
+   SFXProvider*   mProvider;
 
-   ALCdevice *mDevice;
+   OPENALFNTABLE  mOpenAL;
 
-   U32 maxSources;
+   ALCcontext     *mContext;
+
+   ALCdevice      *mDevice;
+
+   ///--- device identifier
+   const char     *mDeviceName;
+   S32            mMajorVersion;
+   S32            mMinorVersion;
+   S32            mCaps;
+   U32            maxSources;
+   ///---
 
 
 public:
    static void init();
+   static void shutdown();
 
    unsigned int GetMaxNumSources();
 

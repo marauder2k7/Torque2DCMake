@@ -158,8 +158,8 @@ bool initializeLibraries()
 
     Processor::init();
     Math::init();
-    SFXDevice::init();
     Platform::init();    // platform specific initialization
+    SFXDevice::init();
     // Initialize the particle system.
     ParticleSystem::Init();
     
@@ -182,7 +182,7 @@ void shutdownLibraries()
     TelnetConsole::destroy();
     Sim::shutdown();
     Platform::shutdown();
-    //Audio::OpenALShutdown();
+    SFXDevice::shutdown();
     NetStringTable::destroy();
     Con::shutdown();
 
