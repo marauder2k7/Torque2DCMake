@@ -233,6 +233,10 @@ addInclude(${libDir}/libvorbis/include)
 addLib(libvorbis)
 addLib(libogg)
 
+###############################################################################
+# platform specific things
+###############################################################################
+
 if(WIN32)
     addPath("${srcDir}/platformWin32")
     addPath("${srcDir}/platformWin32/nativeDialogs")
@@ -259,6 +263,7 @@ finishExecutable()
 # Set Visual Studio startup project
 if((${CMAKE_VERSION} VERSION_EQUAL 3.6.0) OR (${CMAKE_VERSION} VERSION_GREATER 3.6.0) AND MSVC)
 set_property(DIRECTORY ${CMAKE_SOURCE_DIR} PROPERTY VS_STARTUP_PROJECT ${TORQUE_APP_NAME})
+set_target_properties(${TORQUE_APP_NAME} PROPERTIES VS_DEBUGGER_WORKING_DIRECTORY ${projectOutDir})
 endif()
 
 if(NOT EXISTS "${projectOutDir}/${PROJECT_NAME}.torsion")
@@ -305,6 +310,15 @@ if(WIN32)
 	set(TORQUE_EXTERNAL_LIBS "COMCTL32.LIB;COMDLG32.LIB;USER32.LIB;ADVAPI32.LIB;GDI32.LIB;RPCRT4.LIB;WINMM.LIB;WS2_32.LIB;vfw32.lib;Imm32.lib;shell32.lib;shlwapi.lib;ole32.lib" CACHE STRING "external libs to link against")
 	mark_as_advanced(TORQUE_EXTERNAL_LIBS)
 	addLib("${TORQUE_EXTERNAL_LIBS}")
+endif()
+
+if(UNIX AND NOT APPLE)
+    # copy pasted from T3D build system, some might not be needed
+	set(TORQUE_EXTERNAL_LIBS "stdc++ m dl pthread rt X11 Xft SDL " CACHE STRING "external libs to link against")
+	mark_as_advanced(TORQUE_EXTERNAL_LIBS)
+
+    string(REPLACE " " ";" TORQUE_EXTERNAL_LIBS_LIST ${TORQUE_EXTERNAL_LIBS})
+    addLib( "${TORQUE_EXTERNAL_LIBS_LIST}" )
 endif()
 
 
