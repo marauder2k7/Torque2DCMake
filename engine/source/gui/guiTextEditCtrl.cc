@@ -94,7 +94,7 @@ void GuiTextEditCtrl::initPersistFields()
    addField("escapeCommand",     TypeString,    Offset(mEscapeCommand,     GuiTextEditCtrl));
    addField("historySize",       TypeS32,       Offset(mHistorySize,       GuiTextEditCtrl));
    addField("tabComplete",       TypeBool,      Offset(mTabComplete,       GuiTextEditCtrl));     
-   //addField("deniedSound",       TypeAudioAssetPtr, Offset(mDeniedSound, GuiTextEditCtrl));
+   addField("deniedSound",       TypeSFXAssetPtr, Offset(mDeniedSound, GuiTextEditCtrl));
    addField("sinkAllKeyEvents",  TypeBool,      Offset(mSinkAllKeyEvents,  GuiTextEditCtrl));
    addField("password",          TypeBool,      Offset(mPasswordText,      GuiTextEditCtrl));
    addField("passwordMask",      TypeString,    Offset(mPasswordMask,      GuiTextEditCtrl));

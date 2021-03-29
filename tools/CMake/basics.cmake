@@ -15,7 +15,7 @@ if(NOT TORQUE_APP_DIR)
 endif()
 
 if(NOT projectOutDir)
-	set (projectOutDir "${TORQUE_APP_DIR}")
+	set (projectOutDir "${TORQUE_APP_DIR}/game")
 endif()
 
 set(libDir		"${CMAKE_SOURCE_DIR}/engine/lib")

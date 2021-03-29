@@ -404,8 +404,8 @@ void GuiControlProfile::initPersistFields()
    addField("bitmap",        TypeFilename,   Offset(mBitmapName, GuiControlProfile));
    addProtectedField("imageAsset", TypeAssetId, Offset(mImageAssetID, GuiControlProfile), &setImageAsset, &getImageAsset, "The image asset ID used to render the control");
 
-   addField("soundButtonDown", TypeAudioAssetPtr,  Offset(mSoundButtonDown, GuiControlProfile));
-   addField("soundButtonOver", TypeAudioAssetPtr,  Offset(mSoundButtonOver, GuiControlProfile));
+   addField("soundButtonDown", TypeSFXAssetPtr,  Offset(mSoundButtonDown, GuiControlProfile));
+   addField("soundButtonOver", TypeSFXAssetPtr,  Offset(mSoundButtonOver, GuiControlProfile));
    addField("profileForChildren", TypeString,      Offset(mProfileForChildrenName, GuiControlProfile));
 
    addField("category", TypeString, Offset(mCategory, GuiControlProfile));

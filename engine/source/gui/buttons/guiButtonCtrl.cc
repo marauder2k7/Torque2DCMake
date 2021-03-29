@@ -106,8 +106,8 @@ void GuiButtonCtrl::onTouchEnter(const GuiEvent &event)
 	}
 	else if (mActive && mProfile->mSoundButtonOver)
 	{
-		AUDIOHANDLE handle = alxCreateSource(mProfile->mSoundButtonOver);
-		alxPlay(handle);
+		//AUDIOHANDLE handle = alxCreateSource(mProfile->mSoundButtonOver);
+		//alxPlay(handle);
 	}
 
 	Con::executef(this, 1, "onTouchEnter");

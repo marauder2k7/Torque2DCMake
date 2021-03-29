@@ -150,7 +150,7 @@ void GuiMLTextCtrl::initPersistFields()
    addField("lineSpacing",       TypeS32,    Offset(mLineSpacingPixels, GuiMLTextCtrl));
    addField("allowColorChars",   TypeBool,   Offset(mAllowColorChars,   GuiMLTextCtrl));
    addField("maxChars",          TypeS32,    Offset(mMaxBufferSize,     GuiMLTextCtrl));
-   addField("deniedSound",       TypeAudioAssetPtr, Offset(mDeniedSound, GuiMLTextCtrl));
+   addField("deniedSound",       TypeSFXAssetPtr, Offset(mDeniedSound, GuiMLTextCtrl));
    addField("text",              TypeCaseString,  Offset( mInitialText, GuiMLTextCtrl ) );
 }
 
@@ -726,8 +726,8 @@ void GuiMLTextCtrl::insertChars(const char* inputChars,
       // Play the "Denied" sound:
       if ( numInputChars > 0 && mDeniedSound.notNull() )
       {
-         AUDIOHANDLE handle = alxCreateSource( mDeniedSound );
-         alxPlay( handle );
+         //AUDIOHANDLE handle = alxCreateSource( mDeniedSound );
+         //alxPlay( handle );
       }
       return;
    }
