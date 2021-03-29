@@ -86,7 +86,7 @@ bool GuiFilterCtrl::onWake()
    if (!Parent::onWake())
       return false;
 
-   if (S32(mControlPointRequest) != mFilter.size())
+   if (U32(mControlPointRequest) != mFilter.size())
    {
       mFilter.setSize(mControlPointRequest);
       identity();
@@ -140,7 +140,7 @@ void GuiFilterCtrl::onMouseUp(const GuiEvent &)
 
 void GuiFilterCtrl::onPreRender()
 {
-   if(S32(mControlPointRequest) != mFilter.size())
+   if(U32(mControlPointRequest) != mFilter.size())
    {
       mFilter.setSize(mControlPointRequest);
       identity();
@@ -222,16 +222,16 @@ void GuiFilterCtrl::onRender(Point2I offset, const RectI &updateRect)
    // draw the knots
    for (U32 k=0; k < (U32)mFilter.size(); k++)
    {
-      RectI kn;
-      kn.point.x = (S32)(((F32)ext.x/(F32)(mFilter.size()-1)*(F32)k));
-      kn.point.y = (S32)(ext.y - ((F32)ext.y * mFilter[k]));
-      kn.point += pos + Point2I(-2,-2);
-      kn.extent = Point2I(5,5);
+      RectI r;
+      r.point.x = (S32)(((F32)ext.x/(F32)(mFilter.size()-1)*(F32)k));
+      r.point.y = (S32)(ext.y - ((F32)ext.y * mFilter[k]));
+      r.point += pos + Point2I(-2,-2);
+      r.extent = Point2I(5,5);
 
       dglDrawRectFill(r, ColorI(255,0,0));
    }
 
-   renderChildControls(offset, updateRect);
+   renderChildControls(offset, mBounds, updateRect);
 }
 
 

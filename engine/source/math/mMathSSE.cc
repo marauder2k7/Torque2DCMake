@@ -1,5 +1,5 @@
 //-----------------------------------------------------------------------------
-// Copyright (c) 2012 GarageGames, LLC
+// Copyright (c) 2013 GarageGames, LLC
 //
 // Permission is hereby granted, free of charge, to any person obtaining a copy
 // of this software and associated documentation files (the "Software"), to
@@ -194,8 +194,7 @@ void SSE_MatrixF_x_MatrixF_Aligned(const F32 *matA, const F32 *matB, F32 *result
 // EXCEPT if we're in an old version of Codewarrior that can't handle SSE code.
 // TODO: the NASM implementation of SSE_MatrixF_x_MatrixF_Aligned is missing,
 // so we temporary disable this until fixed (needed for linux dedicated build)
-//#elif defined(TORQUE_SUPPORTS_NASM)
-#elif 0
+#elif defined(TORQUE_SUPPORTS_NASM)
 #define ADD_SSE_FN
 extern "C"
 {

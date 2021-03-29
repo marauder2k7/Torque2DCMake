@@ -233,17 +233,16 @@ void GuiFormCtrl::onRender(Point2I offset, const RectI &updateRect)
    boundsRect.extent.y -= mThumbSize.y;
 
    // draw the border of the form if specified
-   if (mProfile->mOpaque)
-      dglDrawRectFill(boundsRect, mProfile->mFillColor);
+   dglDrawRectFill(boundsRect, mProfile->mFillColor);
 
-   if (mProfile->mBorder)
-      renderBorder(boundsRect, mProfile);
+   //if (mProfile->mBorder)
+      //renderBorder(boundsRect, mProfile);
 
    // If we don't have a child (other than the menu), put some text in the child area
    if(size() <= 1)
    {
       dglSetBitmapModulation(ColorI(0,0,0));
-      renderJustifiedText(boundsRect.point, boundsRect.extent, "[none]");
+      renderText(boundsRect.point, boundsRect.extent, "[none]", mProfile);
    }
 
    S32 textWidth = 0;
@@ -253,7 +252,7 @@ void GuiFormCtrl::onRender(Point2I offset, const RectI &updateRect)
    {
       dglClearBitmapModulation();
 
-      S32 barStart = (mHasMenu ? mThumbSize.x : 1 + mProfile->mBorderThickness) + offset.x + textWidth;
+      S32 barStart = 0;//(mHasMenu ? mThumbSize.x : 1 + mProfile->mBorderSize) + offset.x + textWidth;
       S32 barTop   = mThumbSize.y/2 + offset.y - mProfile->mBitmapArrayRects[3].extent.y /2;
 
       Point2I barOffset(barStart, barTop);
@@ -286,15 +285,15 @@ void GuiFormCtrl::onRender(Point2I offset, const RectI &updateRect)
          mProfile->mBitmapArrayRects[4]);
 
       dglSetBitmapModulation((mMouseOver ? mProfile->mFontColorHL : mProfile->mFontColor));
-      renderJustifiedText(Point2I(mThumbSize.x, 0) + offset, Point2I(mBounds.extent.x - mThumbSize.x - mProfile->mBitmapArrayRects[4].extent.x, mThumbSize.y), (mUseSmallCaption ? mSmallCaption : mCaption) );
+      renderText(Point2I(mThumbSize.x, 0) + offset, Point2I(mBounds.extent.x - mThumbSize.x - mProfile->mBitmapArrayRects[4].extent.x, mThumbSize.y), (mUseSmallCaption ? mSmallCaption : mCaption), mProfile);
 
    }
 
    // Render the children
-   renderChildControls(offset, updateRect);
+   renderChildControls(offset, mBounds, updateRect);
 }
 
-void GuiFormCtrl::onMouseDragged(const GuiEvent &event)
+void GuiFormCtrl::onTouchDragged(const GuiEvent &event)
 {
    GuiControl *parent = getParent();
    GuiCanvas *root = getRoot();
@@ -316,7 +315,7 @@ void GuiFormCtrl::onMouseDragged(const GuiEvent &event)
 }
 
 
-void GuiFormCtrl::onMouseMove(const GuiEvent &event)
+void GuiFormCtrl::onTouchMove(const GuiEvent &event)
 {
    Point2I localMove = globalToLocalCoord(event.mousePoint);
 
@@ -327,7 +326,7 @@ void GuiFormCtrl::onMouseMove(const GuiEvent &event)
 
 }
 
-void GuiFormCtrl::onMouseEnter(const GuiEvent &event)
+void GuiFormCtrl::onTouchEnter(const GuiEvent &event)
 {
    setUpdate();
    if(isMouseLocked())
@@ -342,7 +341,7 @@ void GuiFormCtrl::onMouseEnter(const GuiEvent &event)
 
 }
 
-void GuiFormCtrl::onMouseLeave(const GuiEvent &event)
+void GuiFormCtrl::onTouchLeave(const GuiEvent &event)
 {
    setUpdate();
    if(isMouseLocked())
@@ -350,7 +349,7 @@ void GuiFormCtrl::onMouseLeave(const GuiEvent &event)
    mMouseOver = false;
 }
 
-void GuiFormCtrl::onMouseDown(const GuiEvent &event)
+void GuiFormCtrl::onTouchDown(const GuiEvent &event)
 {
    Point2I localClick = globalToLocalCoord(event.mousePoint);
 
@@ -422,13 +421,13 @@ void GuiFormCtrl::onMouseDown(const GuiEvent &event)
 
       GuiControl *ctrl = findHitControl(localClick);
       if (ctrl && ctrl != this)
-         ctrl->onMouseDown(event);
+         ctrl->onTouchDown(event);
 
    }
 
 }
 
-void GuiFormCtrl::onMouseUp(const GuiEvent &event)
+void GuiFormCtrl::onTouchUp(const GuiEvent &event)
 {
    // Make sure we only get events we ought to be getting...
    if (! mActive)

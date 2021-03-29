@@ -1462,7 +1462,9 @@ static void handleExtendedMasterServerListResponse(BitStream* stream, U32 key, U
 {
    U16 packetIndex, packetTotal;
    U32 i;
-   U16 serverCount;
+   U16 serverCount, port;
+   U8 netNum[16];
+   char addressBuffer[256];
    NetAddress addr;
 
    stream->read(&packetIndex);

@@ -100,7 +100,6 @@ void Input::init()
       {
          // Add the arrow cursor to the stack
          smCursorManager->pushCursor(CursorManager::curArrow);
-         Con::printf("   Cursor Manager enabled.");
       }
       else
       {
@@ -112,6 +111,8 @@ void Input::init()
    setModifierKeys(0);
    fillAsciiTable();
    Con::printf( "" );
+
+
 }
 
 //------------------------------------------------------------------------------

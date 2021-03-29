@@ -153,6 +153,7 @@ bool initializeLibraries()
    
     Platform::initConsole();
     NetStringTable::create();
+   
     TelnetConsole::create();
     TelnetDebugger::create();
 
@@ -218,7 +219,7 @@ bool initializeGame(int argc, const char **argv)
 
     initMessageBoxVars();
 
-    
+
     // Register the module manager.
     ModuleDatabase.registerObject( "ModuleDatabase" );
 
@@ -234,7 +235,7 @@ bool initializeGame(int argc, const char **argv)
 
     // Let the remote debugger process the command-line.
     RemoteDebuggerBridge::processCommandLine( argc, argv );
-    
+
     if(argc > 2 && dStricmp(argv[1], "-project") == 0)
     {
         char playerPath[1024];
@@ -250,11 +251,11 @@ bool initializeGame(int argc, const char **argv)
     ResourceManager->addPath( Platform::getCurrentDirectory() );
 
     FileStream scriptFileStream; 
-    Stream* scriptStream = NULL;
+    Stream* scriptStream;
 
     const char* defaultScriptName = "main.cs";
     bool useDefaultScript = true;
-    
+
     // Check if any command-line parameters were passed (the first is just the app name).
     if (argc > 1)
     {
@@ -266,7 +267,7 @@ bool initializeGame(int argc, const char **argv)
             scriptStream = &scriptFileStream;
         }
     }
-    
+
     if (useDefaultScript)
     {
         bool success = false;
@@ -276,13 +277,13 @@ bool initializeGame(int argc, const char **argv)
         {
             char msg[1024];
             dSprintf(msg, sizeof(msg), "Failed to open \"%s\".", defaultScriptName);
-            Con::printf(" Error : %s", msg);
+            printf(" Error : %s", msg);
             return false;
         }
 
             scriptStream = &scriptFileStream;
     }
-    
+
     // Create a script buffer.
     const U32 size = scriptStream->getStreamSize();
     char* pScriptBuffer = new char[size + 1];
@@ -312,6 +313,7 @@ bool initializeGame(int argc, const char **argv)
         printf( "Quitting as an error occurred parsing the root script '%s'.", useDefaultScript ? defaultScriptName : argv[1] );
         return false;
     }
+
     return true;
 }
 

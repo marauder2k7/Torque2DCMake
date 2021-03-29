@@ -523,7 +523,7 @@ void GuiEditCtrl::onRender(Point2I offset, const RectI &updateRect)
       }
    }
 
-   renderChildControls(offset, updateRect);
+   renderChildControls(offset, mBounds, updateRect);
 
    if(mActive && mCurrentAddSet && (mGridSnap.x && mGridSnap.y) && 
        (mMouseDownMode == MovingSelection || mMouseDownMode == SizingSelection))
@@ -671,11 +671,11 @@ void GuiEditCtrl::getCursor(GuiCursor *&cursor, bool &showCursor, const GuiEvent
        cursor = mMoveCursor;
 }
 
-void GuiEditCtrl::onMouseDown(const GuiEvent &event)
+void GuiEditCtrl::onTouchDown(const GuiEvent &event)
 {
    if (! mActive)
    {
-      Parent::onMouseDown(event);
+      Parent::onTouchDown(event);
       return;
    }
    if(!mContentControl)
@@ -830,11 +830,11 @@ void GuiEditCtrl::removeSelection(S32 id)
       }
    }
 }
-void GuiEditCtrl::onMouseUp(const GuiEvent &event)
+void GuiEditCtrl::onTouchUp(const GuiEvent &event)
 {
    if (! mActive || !mContentControl || !mCurrentAddSet )
    {
-      Parent::onMouseUp(event);
+      Parent::onTouchUp(event);
       return;
    }
 
@@ -891,11 +891,11 @@ void GuiEditCtrl::onMouseUp(const GuiEvent &event)
    mMouseDownMode = Selecting;
 }
 
-void GuiEditCtrl::onMouseDragged(const GuiEvent &event)
+void GuiEditCtrl::onTouchDragged(const GuiEvent &event)
 {
    if (! mActive || !mContentControl || !mCurrentAddSet)
    {
-      Parent::onMouseDragged(event);
+      Parent::onTouchDragged(event);
       return;
    }
 
@@ -1442,8 +1442,8 @@ public:
       //Sim::findObject(refCtrl, &ref);
       ref = dynamic_cast<GuiScrollCtrl *>(o);
       Point2I choffset(0,0);
-      if(ref)
-         choffset = ref->getChildPos();
+      //if(ref)
+      //   choffset = ref->getChildPos();
       if(mBounds.extent.x > mBounds.extent.y)
       {
          // it's horizontal.

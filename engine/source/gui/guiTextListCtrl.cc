@@ -335,7 +335,8 @@ void GuiTextListCtrl::onRenderCell(Point2I offset, Point2I cell, bool selected, 
       {
          RectI highlightRect = RectI(offset.x, offset.y, mCellSize.x, mCellSize.y);
          highlightRect.inset( 0, -1 );
-         renderFilledBorder( highlightRect, mProfile->mBorderColorHL, mProfile->mFillColorHL);
+		 //renderBody(highlightRect, mProfile, mProfile->mFillColorHL);
+         //renderBorder( highlightRect, mProfile->mBorderColorHL, mProfile->mBorderSize);
          dglSetBitmapModulation(mProfile->mFontColorHL);
       }
       else
@@ -504,7 +505,7 @@ void GuiTextListCtrl::setSize(Point2I newSize)
       {
          GuiScrollCtrl* parent = dynamic_cast<GuiScrollCtrl *>(getParent());
          if ( parent )
-            mCellSize.x = parent->getContentExtent().x;
+            mCellSize.x = 100;//parent->getContentExtent().x;
       }
       else
       {
@@ -523,7 +524,7 @@ void GuiTextListCtrl::setSize(Point2I newSize)
       mCellSize.y = mFont->getHeight() + 2;
    }
 
-   Point2I newExtent( newSize.x * mCellSize.x + mHeaderDim.x, newSize.y * mCellSize.y + mHeaderDim.y );
+   Point2I newExtent( newSize.x * mCellSize.x, newSize.y * mCellSize.y);
    resize( mBounds.point, newExtent );
 }
 

@@ -54,46 +54,46 @@
 /// @endcode
 template <class T> class SimObjectPtr
 {
-private:
+  private:
    SimObject *mObj;
 
-public:
+  public:
    SimObjectPtr() { mObj = 0; }
    SimObjectPtr(T* ptr)
    {
       mObj = ptr;
-      if (mObj)
+      if(mObj)
          mObj->registerReference(&mObj);
    }
    SimObjectPtr(const SimObjectPtr<T>& rhs)
    {
       mObj = const_cast<T*>(static_cast<const T*>(rhs));
-      if (mObj)
+      if(mObj)
          mObj->registerReference(&mObj);
    }
    SimObjectPtr<T>& operator=(const SimObjectPtr<T>& rhs)
    {
-      if (this == &rhs)
+      if(this == &rhs)
          return(*this);
-      if (mObj)
+      if(mObj)
          mObj->unregisterReference(&mObj);
       mObj = const_cast<T*>(static_cast<const T*>(rhs));
-      if (mObj)
+      if(mObj)
          mObj->registerReference(&mObj);
       return(*this);
    }
    ~SimObjectPtr()
    {
-      if (mObj)
+      if(mObj)
          mObj->unregisterReference(&mObj);
    }
    SimObjectPtr<T>& operator= (T *ptr)
    {
-      if (mObj != (SimObject *)ptr)
+      if(mObj != (SimObject *) ptr)
       {
-         if (mObj)
+         if(mObj)
             mObj->unregisterReference(&mObj);
-         mObj = (SimObject *)ptr;
+         mObj = (SimObject *) ptr;
          if (mObj)
             mObj->registerReference(&mObj);
       }
@@ -104,11 +104,11 @@ public:
    bool operator == (const SimObject *ptr) { return mObj == ptr; }
    bool operator != (const SimObject *ptr) { return mObj != ptr; }
 #endif
-   bool isNull() const { return mObj == 0; }
-   bool notNull() const { return mObj != 0; }
+   bool isNull() const   { return mObj == 0; }
+   bool notNull() const   { return mObj != 0; }
    T* operator->() const { return static_cast<T*>(mObj); }
-   T& operator*() const { return *static_cast<T*>(mObj); }
-   operator T*() const { return static_cast<T*>(mObj) ? static_cast<T*>(mObj) : 0; }
+   T& operator*() const  { return *static_cast<T*>(mObj); }
+   operator T*() const   { return static_cast<T*>(mObj)? static_cast<T*>(mObj) : 0; }
 };
 
 #endif // _SIM_OBJECT_PTR_H_
