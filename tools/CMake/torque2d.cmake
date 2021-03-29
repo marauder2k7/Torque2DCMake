@@ -389,7 +389,7 @@ if(TORQUE_TEMPLATE)
 
     foreach(ITEM ${INSTALL_FILES_AND_DIRS})
         get_filename_component( dir ${ITEM} DIRECTORY )
-        STRING(REGEX REPLACE "${CMAKE_SOURCE_DIR}/Templates/${TORQUE_TEMPLATE}/" "${TORQUE_APP_DIR}/" INSTALL_DIR ${dir})
+        STRING(REGEX REPLACE "${CMAKE_SOURCE_DIR}/Templates/${TORQUE_TEMPLATE}/" "${TORQUE_APP_DIR}/game/" INSTALL_DIR ${dir})
         install( FILES ${ITEM} DESTINATION ${INSTALL_DIR} )
     endforeach()
 endif()
