@@ -32,8 +32,8 @@
 #endif
 
 /// RapidJson.
-#include "persistence/rapidjson/include/rapidjson/document.h"
-#include "persistence/rapidjson/include/rapidjson/prettywriter.h"
+#include "rapidjson/document.h"
+#include "rapidjson/prettywriter.h"
 
 //-----------------------------------------------------------------------------
 

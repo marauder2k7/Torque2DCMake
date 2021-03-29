@@ -229,11 +229,6 @@ class Stream {
       while(count--)
          write(3, (void*)tab);
    }
-
-   Stream* Stream::clone() const
-   {
-      return NULL;
-   }
 };
 
 #endif //_STREAM_H_

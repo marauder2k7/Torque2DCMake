@@ -667,7 +667,7 @@ void GuiListBoxCtrl::updateSize()
    GuiScrollCtrl* parent = dynamic_cast<GuiScrollCtrl *>(getParent());
 
    if ( mFitParentWidth && parent )
-      mItemSize.x = parent->getContentExtent().x;
+      mItemSize.x = 100;//parent->getContentExtent().x;
    else
    {
       // Find the maximum width cell:
@@ -700,13 +700,8 @@ void GuiListBoxCtrl::parentResized(const Point2I &oldParentExtent, const Point2I
 //////////////////////////////////////////////////////////////////////////
 void GuiListBoxCtrl::onRender( Point2I offset, const RectI &updateRect )
 {
-   RectI clipRect(updateRect.point, updateRect.extent);
-
    if( !mProfile )
       return;
-
-   // Save our original clip rect
-   RectI oldClipRect = clipRect;
 
    for ( S32 i = 0; i < mItems.size(); i++)
    {
@@ -736,8 +731,6 @@ void GuiListBoxCtrl::onRender( Point2I offset, const RectI &updateRect )
       // Render our item
       onRenderItem( itemRect, mItems[i] );
    }
-
-   dglSetClipRect( oldClipRect );
 }
 
 void GuiListBoxCtrl::onRenderItem( RectI itemRect, LBItem *item )
@@ -746,7 +739,7 @@ void GuiListBoxCtrl::onRenderItem( RectI itemRect, LBItem *item )
       dglDrawRectFill( itemRect, mProfile->mFillColor );
 
    dglSetBitmapModulation(mProfile->mFontColor);
-   renderJustifiedText(itemRect.point + Point2I( 2, 0 ), itemRect.extent, item->itemText);
+   renderText(itemRect.point + Point2I( 2, 0 ), itemRect.extent, item->itemText, mProfile);
 }
 
 void GuiListBoxCtrl::drawBox(const Point2I &box, S32 size, ColorI &outlineColor, ColorI &boxColor)
@@ -762,15 +755,15 @@ void GuiListBoxCtrl::drawBox(const Point2I &box, S32 size, ColorI &outlineColor,
 // Mouse Events
 //////////////////////////////////////////////////////////////////////////
 
-void GuiListBoxCtrl::onMouseDragged(const GuiEvent &event)
+void GuiListBoxCtrl::onTouchDragged(const GuiEvent &event)
 {
-   Parent::onMouseDragged(event);
+   Parent::onTouchDragged(event);
 
-   if(isMethod("onMouseDragged"))
-      Con::executef(this, 1, "onMouseDragged");
+   if(isMethod("onTouchDragged"))
+      Con::executef(this, 1, "onTouchDragged");
 }
 
-void GuiListBoxCtrl::onMouseDown( const GuiEvent &event )
+void GuiListBoxCtrl::onTouchDown( const GuiEvent &event )
 {
    Point2I localPoint = globalToLocalCoord(event.mousePoint);
    

@@ -50,9 +50,6 @@
 #ifndef _GUIBUTTONCTRL_H_
 #include "gui/buttons/guiButtonCtrl.h"
 #endif
-#ifndef _GUIBACKGROUNDCTRL_H_
-#include "gui/guiBackgroundCtrl.h"
-#endif
 #ifndef _GUISCROLLCTRL_H_
 #include "gui/containers/guiScrollCtrl.h"
 #endif
@@ -66,7 +63,7 @@ protected:
    GuiPopupTextListCtrlEx *mTextList; 
 public:
    GuiPopUpBackgroundCtrlEx(GuiPopUpMenuCtrlEx *ctrl, GuiPopupTextListCtrlEx* textList);
-   void onMouseDown(const GuiEvent &event);
+   void onTouchDown(const GuiEvent &event);
 };
 
 class GuiPopupTextListCtrlEx : public GuiTextListCtrl
@@ -88,14 +85,14 @@ class GuiPopupTextListCtrlEx : public GuiTextListCtrl
 
       // GuiControl overloads:
       bool onKeyDown(const GuiEvent &event);
-      void onMouseUp(const GuiEvent &event);
-      void onMouseMove(const GuiEvent &event);
+      void onTouchUp(const GuiEvent &event);
+      void onTouchMove(const GuiEvent &event);
       void onRenderCell(Point2I offset, Point2I cell, bool selected, bool mouseOver);
 };
 
-class GuiPopUpMenuCtrlEx : public GuiTextCtrl
+class GuiPopUpMenuCtrlEx : public GuiControl
 {
-   typedef GuiTextCtrl Parent;
+   typedef GuiControl Parent;
 
   public:
    struct Entry
@@ -161,10 +158,10 @@ class GuiPopUpMenuCtrlEx : public GuiTextCtrl
    void onAction();
    virtual void closePopUp();
    void clear();
-   void onMouseDown(const GuiEvent &event);
-   void onMouseUp(const GuiEvent &event);
-   void onMouseEnter(const GuiEvent &event); // DAW: Added
-   void onMouseLeave(const GuiEvent &); // DAW: Added
+   void onTouchDown(const GuiEvent &event);
+   void onTouchUp(const GuiEvent &event);
+   void onTouchEnter(const GuiEvent &event); // DAW: Added
+   void onTouchLeave(const GuiEvent &); // DAW: Added
    void setupAutoScroll(const GuiEvent &event);
    void autoScroll();
    bool onKeyDown(const GuiEvent &event);

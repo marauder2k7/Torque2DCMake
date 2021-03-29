@@ -22,7 +22,7 @@
 
 #include "console/consoleTypes.h"
 #include "console/console.h"
-#include "graphics/color.h"
+#include "graphics/gColor.h"
 #include "gui/guiTextCtrl.h"
 #include "graphics/dgl.h"
 #include "gui/language/lang.h"
@@ -112,6 +112,8 @@ bool GuiTextCtrl::onWake()
    }
    
    //resize
+   //DEPRECIATED
+   /*
    if ( mProfile->mAutoSizeWidth )
    {
       if ( mProfile->mAutoSizeHeight )
@@ -122,6 +124,7 @@ bool GuiTextCtrl::onWake()
    else if ( mProfile->mAutoSizeHeight )
       resize( mBounds.point, Point2I( mBounds.extent.x, mFont->getHeight() + 4 ) );
 
+*/
    return true;
 }
 
@@ -154,19 +157,6 @@ void GuiTextCtrl::setText(const char *txt)
 		mProfile->decRefCount();
 		return;
 	}
-
-	//resize
-   if (mProfile->mAutoSizeWidth)
-   {
-      if (mProfile->mAutoSizeHeight)
-         resize(mBounds.point, Point2I(mFont->getStrWidth((const UTF8 *)mText), mFont->getHeight() + 4));
-      else
-         resize(mBounds.point, Point2I(mFont->getStrWidth((const UTF8 *)mText), mBounds.extent.y));
-   }
-   else if (mProfile->mAutoSizeHeight)
-   {
-      resize(mBounds.point, Point2I(mBounds.extent.x, mFont->getHeight() + 4));
-   }
       
    setVariable((char*)mText);
    setUpdate();
@@ -215,16 +205,16 @@ void GuiTextCtrl::onRender(Point2I offset, const RectI &updateRect)
         const UTF8* truncatedBufferPtr = truncatedBuffer.getPtr8();
         
         dglSetBitmapModulation(fontColor);
-		renderJustifiedText(offset, mBounds.extent, (char*)truncatedBufferPtr);
+		renderText(offset, mBounds.extent, (char*)truncatedBufferPtr, mProfile);
     }
     else
     {
 		dglSetBitmapModulation(fontColor);
-		renderJustifiedText(offset, mBounds.extent, (char*)mText);
+		renderText(offset, mBounds.extent, (char*)mText, mProfile);
 	}
 
     //render the child controls
-    renderChildControls(offset, updateRect);
+    renderChildControls(offset, mBounds, updateRect);
 }
 
 // -=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=- //

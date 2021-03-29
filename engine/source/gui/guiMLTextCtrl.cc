@@ -150,7 +150,7 @@ void GuiMLTextCtrl::initPersistFields()
    addField("lineSpacing",       TypeS32,    Offset(mLineSpacingPixels, GuiMLTextCtrl));
    addField("allowColorChars",   TypeBool,   Offset(mAllowColorChars,   GuiMLTextCtrl));
    addField("maxChars",          TypeS32,    Offset(mMaxBufferSize,     GuiMLTextCtrl));
-   //addField("deniedSound",       TypeAudioAssetPtr, Offset(mDeniedSound, GuiMLTextCtrl));
+   addField("deniedSound",       TypeAudioAssetPtr, Offset(mDeniedSound, GuiMLTextCtrl));
    addField("text",              TypeCaseString,  Offset( mInitialText, GuiMLTextCtrl ) );
 }
 
@@ -724,11 +724,11 @@ void GuiMLTextCtrl::insertChars(const char* inputChars,
    if (numCharsToInsert <= 0)
    {
       // Play the "Denied" sound:
-      //if ( numInputChars > 0 && mDeniedSound.notNull() )
-      //{
-         //AUDIOHANDLE handle = alxCreateSource( mDeniedSound );
-         //alxPlay( handle );
-      //}
+      if ( numInputChars > 0 && mDeniedSound.notNull() )
+      {
+         AUDIOHANDLE handle = alxCreateSource( mDeniedSound );
+         alxPlay( handle );
+      }
       return;
    }
 
@@ -1100,9 +1100,9 @@ void GuiMLTextCtrl::emitBitmapToken(GuiMLTextCtrl::Bitmap *bmp, U32 textStart, b
             {
                // insert it:
                U32 x = minx;
-               if(mCurJustify == CenterJustify)
+               if(mCurJustify == CenterAlign)
                   x += (width - ref->extent.x) >> 1;
-               else if(mCurJustify == RightJustify)
+               else if(mCurJustify == RightAlign)
                   x += width - ref->extent.x;
                ref->point.x = x;
                ref->point.y = mCurY;
@@ -1348,12 +1348,12 @@ GuiMLTextCtrl::Atom *GuiMLTextCtrl::splitAtomListEmit(Atom *list, U32 width)
    *emitPtr = 0;
    // now emit it:
    // going from mCurX to mCurX + width:
-   if(mCurJustify == CenterJustify)
+   if(mCurJustify == CenterAlign)
    {
       if ( width > totalWidth )
          mCurX += (width - totalWidth) >> 1;
    }
-   else if(mCurJustify == RightJustify)
+   else if(mCurJustify == RightAlign)
    {
       if ( width > totalWidth )
          mCurX += width - totalWidth;
@@ -1440,7 +1440,7 @@ void GuiMLTextCtrl::reflow()
 
    mCurLMargin = 0;
    mCurRMargin = width;
-   mCurJustify = LeftJustify;
+   mCurJustify = LeftAlign;
    mCurDiv = 0;
    mCurY = 0;
    mCurX = 0;
@@ -1746,7 +1746,7 @@ void GuiMLTextCtrl::reflow()
          if(!dStrnicmp(str +1, "just:left>", 10))
          {
             processEmitAtoms();
-            mCurJustify = LeftJustify;
+            mCurJustify = LeftAlign;
             mScanPos += 11;
             continue;
          }
@@ -1754,7 +1754,7 @@ void GuiMLTextCtrl::reflow()
          if(!dStrnicmp(str +1, "just:right>", 11))
          {
             processEmitAtoms();
-            mCurJustify = RightJustify;
+            mCurJustify = RightAlign;
             mScanPos += 12;
             continue;
          }
@@ -1762,7 +1762,7 @@ void GuiMLTextCtrl::reflow()
          if(!dStrnicmp(str +1, "just:center>", 12))
          {
             processEmitAtoms();
-            mCurJustify = CenterJustify;
+            mCurJustify = CenterAlign;
             mScanPos += 13;
             continue;
          }

@@ -268,7 +268,6 @@ public:
    operator const T*() const    { return (obj) ? (const T*)obj->mInstance :  (const T*)NULL; }
    void unlock();
    void purge();
-   void * create(const char * filename);
 };
 
 #define INVALID_ID ((U32)(~0))
