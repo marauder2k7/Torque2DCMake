@@ -115,9 +115,8 @@ static void pngFatalErrorFn(png_structp     /*png_ptr*/,
 
 
 //--------------------------------------
-static void pngWarningFn(png_structp png_ptr, png_const_charp pMessage)
+static void pngWarningFn(png_structp, png_const_charp pMessage)
 {
-   png_voidp error_ptr = png_get_error_ptr(png_ptr);
    AssertWarn(false, avar("Warning reading PNG file:\n %s", pMessage));
 }
 
