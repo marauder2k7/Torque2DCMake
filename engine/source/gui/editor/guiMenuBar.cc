@@ -875,7 +875,7 @@ void GuiMenuBar::checkMenuMouseMove(const GuiEvent &event)
    }
 }
 
-void GuiMenuBar::onTouchMove(const GuiEvent &event)
+void GuiMenuBar::onMouseMove(const GuiEvent &event)
 {
    Menu *hit = findHitMenu(event.mousePoint);
     if(hit != mouseOverMenu)
@@ -896,7 +896,7 @@ void GuiMenuBar::onTouchMove(const GuiEvent &event)
     }
 }
 
-void GuiMenuBar::onTouchLeave(const GuiEvent &event)
+void GuiMenuBar::onMouseLeave(const GuiEvent &event)
 {
    if(mouseOverMenu)
         setUpdate();
@@ -912,7 +912,7 @@ void GuiMenuBar::onTouchLeave(const GuiEvent &event)
    mMouseOverCounter = 0;
 }
 
-void GuiMenuBar::onTouchDragged(const GuiEvent &event)
+void GuiMenuBar::onMouseDragged(const GuiEvent &event)
 {
    Menu *hit = findHitMenu(event.mousePoint);
     
@@ -936,14 +936,14 @@ void GuiMenuBar::onTouchDragged(const GuiEvent &event)
     }
 }
 
-void GuiMenuBar::onTouchDown(const GuiEvent &event)
+void GuiMenuBar::onMouseDown(const GuiEvent &event)
 {
    mouseDownMenu = mouseOverMenu = findHitMenu(event.mousePoint);
     setUpdate();
    onAction();
 }
 
-void GuiMenuBar::onTouchUp(const GuiEvent &event)
+void GuiMenuBar::onMouseUp(const GuiEvent &event)
 {
    mouseDownMenu = NULL;
     setUpdate();
@@ -954,12 +954,13 @@ void GuiMenuBar::onRender(Point2I offset, const RectI &updateRect)
 
    RectI ctrlRect(offset, mBounds.extent);
 
-   //fill the update rect with the fill color
-   dglDrawRectFill(RectI(offset, mBounds.extent), mProfile->mFillColor);
+   //if opaque, fill the update rect with the fill color
+   if (mProfile->mOpaque)
+      dglDrawRectFill(RectI(offset, mBounds.extent), mProfile->mFillColor);
 
    //if there's a border, draw the border
-   //if (mProfile->mBorder)
-   //   renderBorder(ctrlRect, mProfile);
+   if (mProfile->mBorder)
+      renderBorder(ctrlRect, mProfile);
 
    for(Menu *walk = menuList; walk; walk = walk->nextMenu)
    {
@@ -980,14 +981,10 @@ void GuiMenuBar::onRender(Point2I offset, const RectI &updateRect)
         RectI highlightBounds = bounds;
         highlightBounds.inset(1,1);
          if(walk == mouseDownMenu)
-		 {
-			 renderUniversalRect(highlightBounds, mProfile, GuiControlState::HighlightState);
-         }
-		 else if(walk == mouseOverMenu && mouseDownMenu == NULL)
-		 {
-			 renderUniversalRect(highlightBounds, mProfile, GuiControlState::NormalState);
-		 }
-	  }
+            renderFilledBorder(highlightBounds, mProfile->mBorderColorHL, mProfile->mFillColorHL );
+         else if(walk == mouseOverMenu && mouseDownMenu == NULL)
+            renderFilledBorder(highlightBounds, mProfile->mBorderColor, mProfile->mFillColor );
+      }
 
       // Do we draw a bitmap?
       if(walk->bitmapIndex != -1)
@@ -1020,7 +1017,7 @@ void GuiMenuBar::onRender(Point2I offset, const RectI &updateRect)
       }
    }
 
-   renderChildControls( offset, mBounds, updateRect );
+   renderChildControls( offset, updateRect );
 }
 
 void GuiMenuBar::buildAcceleratorMap()
@@ -1086,13 +1083,13 @@ GuiMenuBackgroundCtrl::GuiMenuBackgroundCtrl(GuiMenuBar *ctrl, GuiMenuTextListCt
    mTextList = textList;
 }
 
-void GuiMenuBackgroundCtrl::onTouchDown(const GuiEvent &event)
+void GuiMenuBackgroundCtrl::onMouseDown(const GuiEvent &event)
 {
    mTextList->setSelectedCell(Point2I(-1,-1));
    mMenuBarCtrl->closeMenu();
 }
 
-void GuiMenuBackgroundCtrl::onTouchMove(const GuiEvent &event)
+void GuiMenuBackgroundCtrl::onMouseMove(const GuiEvent &event)
 {
    GuiCanvas *root = getRoot();
    GuiControl *ctrlHit = root->findHitControl(event.mousePoint, mLayer - 1);
@@ -1100,7 +1097,7 @@ void GuiMenuBackgroundCtrl::onTouchMove(const GuiEvent &event)
       mMenuBarCtrl->checkMenuMouseMove(event);
 }
 
-void GuiMenuBackgroundCtrl::onTouchDragged(const GuiEvent &event)
+void GuiMenuBackgroundCtrl::onMouseDragged(const GuiEvent &event)
 {
    GuiCanvas *root = getRoot();
    GuiControl *ctrlHit = root->findHitControl(event.mousePoint, mLayer - 1);
@@ -1211,13 +1208,13 @@ bool GuiMenuTextListCtrl::onKeyDown(const GuiEvent &event)
    return Parent::onKeyDown(event);
 }
 
-void GuiMenuTextListCtrl::onTouchDown(const GuiEvent &event)
+void GuiMenuTextListCtrl::onMouseDown(const GuiEvent &event)
 {
-   Parent::onTouchDown(event);
+   Parent::onMouseDown(event);
    mMenuBarCtrl->closeMenu();
 }
 
-void GuiMenuTextListCtrl::onTouchUp(const GuiEvent &event)
+void GuiMenuTextListCtrl::onMouseUp(const GuiEvent &event)
 {
    // ok, this is kind of strange... but!
    // here's the deal: if we get a mouse up in this control
@@ -1225,7 +1222,7 @@ void GuiMenuTextListCtrl::onTouchUp(const GuiEvent &event)
    // so: activate the menu result as though this event were,
    // instead, a mouse down.
 
-   onTouchDown(event);
+   onMouseDown(event);
 }
 
 void GuiMenuTextListCtrl::onCellHighlighted(Point2I cell)
@@ -1249,7 +1246,7 @@ GuiSubmenuBackgroundCtrl::GuiSubmenuBackgroundCtrl(GuiMenuBar *ctrl, GuiMenuText
 {
 }
 
-void GuiSubmenuBackgroundCtrl::onTouchDown(const GuiEvent &event)
+void GuiSubmenuBackgroundCtrl::onMouseDown(const GuiEvent &event)
 {
    mTextList->setSelectedCell(Point2I(-1,-1));
    mMenuBarCtrl->closeMenu();

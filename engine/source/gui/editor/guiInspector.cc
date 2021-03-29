@@ -20,7 +20,7 @@
 // IN THE SOFTWARE.
 //-----------------------------------------------------------------------------
 #include "gui/editor/guiInspector.h"
-#include "gui/buttons/guiButtonCtrl.h"
+#include "gui/buttons/guiIconButtonCtrl.h"
 #include "memory/frameAllocator.h"
 
 //////////////////////////////////////////////////////////////////////////
@@ -37,6 +37,7 @@ GuiInspector::GuiInspector()
 {
    mGroups.clear();
    mTarget = NULL;
+   mPadding = 1;
 }
 
 GuiInspector::~GuiInspector()
@@ -176,7 +177,7 @@ void GuiInspector::inspectObject( SimObject *object )
       {
          mGroups.erase(i);
          general->deleteObject();
-         resize(getPosition(), getExtent());
+         updatePanes();
       }
    }
 
@@ -552,7 +553,7 @@ bool GuiInspectorGroup::onAdd()
 bool GuiInspectorGroup::createContent()
 {
    // Create our field stack control
-   mStack = new GuiGridCtrl();
+   mStack = new GuiStackControl();
    if( !mStack )
       return false;
 
@@ -638,7 +639,7 @@ bool GuiInspectorGroup::inspectGroup()
       return false;
 
    // to prevent crazy resizing, we'll just freeze our stack for a sec..
-   //mStack->freeze(true);
+   mStack->freeze(true);
 
    bool bNoGroup = false;
 
@@ -755,8 +756,8 @@ bool GuiInspectorGroup::inspectGroup()
          }       
       }
    }
-   //mStack->freeze(false);
-   //mStack->updatePanes();
+   mStack->freeze(false);
+   mStack->updatePanes();
 
    // If we've no new items, there's no need to resize anything!
    if( bNewItems == false && !mChildren.empty() )
@@ -781,9 +782,9 @@ bool GuiInspectorDynamicGroup::createContent()
       return false;
 
    // add a button that lets us add new dynamic fields.
-   GuiButtonCtrl* addFieldBtn = new GuiButtonCtrl();
+   GuiIconButtonCtrl* addFieldBtn = new GuiIconButtonCtrl();
    {
-      //addFieldBtn->setBitmap("tools/gui/images/iconAdd");
+      addFieldBtn->setBitmap("tools/gui/images/iconAdd");
 
       SimObject* profilePtr = Sim::findObject("EditorButton");
       if( profilePtr != NULL )
@@ -1085,7 +1086,7 @@ GuiControl* GuiInspectorDynamicField::constructRenameControl()
    mEdit->resize(valueRect.point, valueRect.extent);
 
    // Finally, add a delete button for this field
-   GuiButtonCtrl * delButt = new GuiButtonCtrl();
+   GuiIconButtonCtrl * delButt = new GuiIconButtonCtrl();
    if( delButt != NULL )
    {
       dSprintf(szBuffer, 512, "%d.%s = \"\";%d.inspectGroup();", mTarget->getId(), getFieldName(), mParent->getId());

@@ -785,7 +785,7 @@ void GuiMessageVectorCtrl::findSpecialFromCoord(const Point2I& point, S32* speci
 
 void GuiMessageVectorCtrl::onMouseDown(const GuiEvent& event)
 {
-   Parent::onTouchDown(event);
+   Parent::onMouseDown(event);
    mouseUnlock();
 
    mMouseDown = true;
@@ -797,7 +797,7 @@ void GuiMessageVectorCtrl::onMouseDown(const GuiEvent& event)
 
 void GuiMessageVectorCtrl::onMouseUp(const GuiEvent& event)
 {
-   Parent::onTouchUp(event);
+   Parent::onMouseUp(event);
    mouseUnlock();
 
    // Is this an up from a dragged click?

@@ -122,7 +122,7 @@ GL_FUNCTION(void,       glBlendEquationEXT, (GLenum mode), return; )
 GL_GROUP_END()
 
 //NV_vertex_array_range
-#ifdef TORQUE_OS_WIN
+#ifdef TORQUE_OS_WIN32
 GL_GROUP_BEGIN(NV_vertex_array_range)
 GL_FUNCTION(void, glVertexArrayRangeNV, (GLsizei length, void* pointer), return; )
 GL_FUNCTION(void, glFlushVertexArrayRangeNV, (), return; )

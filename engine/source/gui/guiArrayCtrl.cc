@@ -26,6 +26,8 @@
 #include "gui/containers/guiScrollCtrl.h"
 #include "gui/guiArrayCtrl.h"
 
+IMPLEMENT_CONOBJECT(GuiArrayCtrl);
+
 // -=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=- //
 
 GuiArrayCtrl::GuiArrayCtrl()
@@ -36,6 +38,7 @@ GuiArrayCtrl::GuiArrayCtrl()
    mSize = Point2I(5, 30);
    mSelectedCell.set(-1, -1);
    mMouseOverCell.set(-1, -1);
+   mHeaderDim.set(0, 0);
    mIsContainer = true;
 }
 
@@ -61,7 +64,7 @@ void GuiArrayCtrl::onSleep()
 void GuiArrayCtrl::setSize(Point2I newSize)
 {
    mSize = newSize;
-   Point2I newExtent(newSize.x * mCellSize.x, newSize.y * mCellSize.y);
+   Point2I newExtent(newSize.x * mCellSize.x + mHeaderDim.x, newSize.y * mCellSize.y + mHeaderDim.y);
 
    resize(mBounds.point, newExtent);
 }
@@ -132,6 +135,46 @@ void GuiArrayCtrl::scrollCellVisible(Point2I cell)
 
 // -=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=- //
 
+void GuiArrayCtrl::onRenderColumnHeaders(Point2I offset, Point2I parentOffset, Point2I headerDim)
+{
+   if (mProfile->mBorder)
+   {
+      RectI cellR(offset.x + headerDim.x, parentOffset.y, mBounds.extent.x - headerDim.x, headerDim.y);
+      dglDrawRectFill(cellR, mProfile->mBorderColor);
+   }
+}
+
+void GuiArrayCtrl::onRenderRowHeader(Point2I offset, Point2I parentOffset, Point2I headerDim, Point2I cell)
+{
+   ColorI color;
+   RectI cellR;
+   if (cell.x % 2)
+      color.set(255, 0, 0, 255);
+   else
+      color.set(0, 255, 0, 255);
+
+   cellR.point.set(parentOffset.x, offset.y);
+   cellR.extent.set(headerDim.x, mCellSize.y);
+   dglDrawRectFill(cellR, color);
+}
+
+void GuiArrayCtrl::onRenderCell(Point2I offset, Point2I cell, bool selected, bool mouseOver)
+{
+   ColorI color(255 * (cell.x % 2), 255 * (cell.y % 2), 255 * ((cell.x + cell.y) % 2), 255);
+   if (selected)
+   {
+      color.set(255, 0, 0, 255);
+   }
+   else if (mouseOver)
+   {
+      color.set(0, 0, 255, 255);
+   }
+
+   //draw the cell
+   RectI cellR(offset.x, offset.y, mCellSize.x, mCellSize.y);
+   dglDrawRectFill(cellR, color);
+}
+
 void GuiArrayCtrl::onRender(Point2I offset, const RectI &updateRect)
 {
    //make sure we have a parent
@@ -141,9 +184,36 @@ void GuiArrayCtrl::onRender(Point2I offset, const RectI &updateRect)
 
    S32 i, j;
    RectI headerClip;
-   RectI clipRect = dglGetClipRect();
+   RectI clipRect(updateRect.point, updateRect.extent);
 
    Point2I parentOffset = parent->localToGlobalCoord(Point2I(0, 0));
+
+   //if we have column headings
+   if (mHeaderDim.y > 0)
+   {
+      headerClip.point.x =   parentOffset.x + mHeaderDim.x;
+      headerClip.point.y =   parentOffset.y;
+      headerClip.extent.x =  clipRect.extent.x;// - headerClip.point.x; // This seems to fix some strange problems with some Gui's, bug? -pw
+      headerClip.extent.y =  mHeaderDim.y;
+
+      if (headerClip.intersect(clipRect))
+      {
+         dglSetClipRect(headerClip);
+
+         //now render the header
+         onRenderColumnHeaders(offset, parentOffset, mHeaderDim);
+
+         clipRect.point.y = headerClip.point.y + headerClip.extent.y - 1;
+      }
+      offset.y += mHeaderDim.y;
+   }
+
+   //if we have row headings
+   if (mHeaderDim.x > 0)
+   {
+      clipRect.point.x = getMax(clipRect.point.x, parentOffset.x + mHeaderDim.x);
+      offset.x += mHeaderDim.x;
+   }
 
    //save the original for clipping the row headers
    RectI origClipRect = clipRect;
@@ -157,6 +227,24 @@ void GuiArrayCtrl::onRender(Point2I offset, const RectI &updateRect)
       //break once we've reached the last visible row
       if(j * mCellSize.y + offset.y >= updateRect.point.y + updateRect.extent.y)
          break;
+
+      //render the header
+      if (mHeaderDim.x > 0)
+      {
+         headerClip.point.x = parentOffset.x;
+         headerClip.extent.x = mHeaderDim.x;
+         headerClip.point.y = offset.y + j * mCellSize.y;
+         headerClip.extent.y = mCellSize.y;
+         if (headerClip.intersect(origClipRect))
+         {
+            dglSetClipRect(headerClip);
+
+            //render the row header
+            onRenderRowHeader(Point2I(0, offset.y + j * mCellSize.y),
+                              Point2I(parentOffset.x, offset.y + j * mCellSize.y),
+                              mHeaderDim, Point2I(0, j));
+         }
+      }
 
       //render the cells for the row
       for (i = 0; i < mSize.x; i++)
@@ -189,15 +277,16 @@ void GuiArrayCtrl::onRender(Point2I offset, const RectI &updateRect)
    }
 }
 
-void GuiArrayCtrl::onTouchDown(const GuiEvent &event)
+void GuiArrayCtrl::onMouseDown(const GuiEvent &event)
 {
    if ( !mActive || !mAwake || !mVisible )
       return;
 
    //let the guiControl method take care of the rest
-   Parent::onTouchDown(event);
+   Parent::onMouseDown(event);
 
    Point2I pt = globalToLocalCoord(event.mousePoint);
+   pt.x -= mHeaderDim.x; pt.y -= mHeaderDim.y;
    Point2I cell(
          (pt.x < 0 ? -1 : pt.x / mCellSize.x), 
          (pt.y < 0 ? -1 : pt.y / mCellSize.y)
@@ -218,49 +307,55 @@ void GuiArrayCtrl::onTouchDown(const GuiEvent &event)
    }
 }
 
-void GuiArrayCtrl::onTouchEnter(const GuiEvent &event)
+void GuiArrayCtrl::onMouseEnter(const GuiEvent &event)
 {
    Point2I pt = globalToLocalCoord(event.mousePoint);
+   pt.x -= mHeaderDim.x; pt.y -= mHeaderDim.y;
 
    //get the cell
    Point2I cell((pt.x < 0 ? -1 : pt.x / mCellSize.x), (pt.y < 0 ? -1 : pt.y / mCellSize.y));
    if (cell.x >= 0 && cell.x < mSize.x && cell.y >= 0 && cell.y < mSize.y)
    {
       mMouseOverCell = cell;
-      setUpdateRegion(Point2I(cell.x * mCellSize.x, cell.y * mCellSize.y), mCellSize );
+      setUpdateRegion(Point2I(cell.x * mCellSize.x + mHeaderDim.x,
+                              cell.y * mCellSize.y + mHeaderDim.y), mCellSize );
       onCellHighlighted(mMouseOverCell);
    }
 }
 
-void GuiArrayCtrl::onTouchLeave(const GuiEvent & /*event*/)
+void GuiArrayCtrl::onMouseLeave(const GuiEvent & /*event*/)
 {
-   setUpdateRegion(Point2I(mMouseOverCell.x * mCellSize.x, mMouseOverCell.y * mCellSize.y), mCellSize);
+   setUpdateRegion(Point2I(mMouseOverCell.x * mCellSize.x + mHeaderDim.x,
+                           mMouseOverCell.y * mCellSize.y + mHeaderDim.y), mCellSize);
    mMouseOverCell.set(-1,-1);
    onCellHighlighted(mMouseOverCell);
 }
 
-void GuiArrayCtrl::onTouchDragged(const GuiEvent &event)
+void GuiArrayCtrl::onMouseDragged(const GuiEvent &event)
 {
    // for the array control, the behaviour of onMouseDragged is the same
    // as on mouse moved - basically just recalc the currend mouse over cell
    // and set the update regions if necessary
-   GuiArrayCtrl::onTouchMove(event);
+   GuiArrayCtrl::onMouseMove(event);
 }
 
-void GuiArrayCtrl::onTouchMove(const GuiEvent &event)
+void GuiArrayCtrl::onMouseMove(const GuiEvent &event)
 {
    Point2I pt = globalToLocalCoord(event.mousePoint);
+   pt.x -= mHeaderDim.x; pt.y -= mHeaderDim.y;
    Point2I cell((pt.x < 0 ? -1 : pt.x / mCellSize.x), (pt.y < 0 ? -1 : pt.y / mCellSize.y));
    if (cell.x != mMouseOverCell.x || cell.y != mMouseOverCell.y)
    {
       if (mMouseOverCell.x != -1)
       {
-         setUpdateRegion(Point2I(mMouseOverCell.x * mCellSize.x, mMouseOverCell.y * mCellSize.y), mCellSize);
+         setUpdateRegion(Point2I(mMouseOverCell.x * mCellSize.x + mHeaderDim.x,
+                           mMouseOverCell.y * mCellSize.y + mHeaderDim.y), mCellSize);
       }
 
       if (cell.x >= 0 && cell.x < mSize.x && cell.y >= 0 && cell.y < mSize.y)
       {
-         setUpdateRegion(Point2I(cell.x * mCellSize.x, cell.y * mCellSize.y), mCellSize);
+         setUpdateRegion(Point2I(cell.x * mCellSize.x + mHeaderDim.x,
+                           cell.y * mCellSize.y + mHeaderDim.y), mCellSize);
          mMouseOverCell = cell;
       }
       else
@@ -339,6 +434,7 @@ void GuiArrayCtrl::onRightMouseDown(const GuiEvent &event)
    Parent::onRightMouseDown( event );
 
    Point2I pt = globalToLocalCoord( event.mousePoint );
+   pt.x -= mHeaderDim.x; pt.y -= mHeaderDim.y;
    Point2I cell((pt.x < 0 ? -1 : pt.x / mCellSize.x), (pt.y < 0 ? -1 : pt.y / mCellSize.y));
    if (cell.x >= 0 && cell.x < mSize.x && cell.y >= 0 && cell.y < mSize.y)
    {

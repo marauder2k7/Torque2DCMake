@@ -39,7 +39,7 @@
 #include "platform/nativeDialogs/msgBox.h"
 #endif
 
-#ifndef TORQUE_OS_WIN
+#ifndef TORQUE_OS_WIN32
 #include <algorithm>
 #endif
 
@@ -92,7 +92,6 @@ class Point2I;
 #  define TORQUE_TMM_ARGS
 #  define TORQUE_TMM_LOC
 #endif
-
 //------------------------------------------------------------------------------
 
 struct Platform

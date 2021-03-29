@@ -95,10 +95,6 @@ GuiCanvas::GuiCanvas()
    mDoubleClickHeight = Input::getDoubleClickHeight();
    mDoubleClickTime = Input::getDoubleClickTime();
 
-   mTouchDetectionSize = 100;
-   mPotentialTouchEvent = false;
-   mHideCursorBecauseOfTouch = false;
-
     /// Background color.
     mBackgroundColor.set( 0.0f, 0.0f, 0.0f, 0.0f );
     mUseBackgroundColor = true;
@@ -279,32 +275,6 @@ void GuiCanvas::processMouseMoveEvent(const MouseMoveEvent *event)
          mMiddleMouseLast = false;
          mRightMouseLast = false;
       }
-
-		//should we try to detect a touch event pretending to be a mouse event?
-		if( Con::getBoolVariable( "$pref::Gui::hideCursorWhenTouchEventDetected", false ))
-		{
-			mPotentialTouchEvent = false;
-			Point2F jump = mPrevMouseMovePosition - cursorPt;
-			if ((mAbs((S32)jump.x) > mTouchDetectionSize) || (mAbs((S32)jump.y) > mTouchDetectionSize))
-			{
-				mPotentialTouchEvent = true;
-				mPotentialMouseEventCount = 0;
-			}
-			else if(mHideCursorBecauseOfTouch && !mMouseButtonDown)
-			{
-				if(mPotentialMouseEventCount > 20) 
-				{
-					//This is our 20th small movement with no click or drag so it must be a mouse!
-					mHideCursorBecauseOfTouch = false;
-					mPotentialMouseEventCount = 0;
-				}
-				else 
-				{
-					mPotentialMouseEventCount++;
-				}
-			}
-			mPrevMouseMovePosition.set(cursorPt.x, cursorPt.y);
-		}
 
         if (mMouseButtonDown)
             rootMouseDragged(mLastEvent);
@@ -505,15 +475,6 @@ bool GuiCanvas::processInputEvent(const InputEvent *event)
                mLastMouseDownTime = curTime;
                mLastEvent.mouseClickCount = mLastMouseClickCount;
 
-			   if(mHideCursorBecauseOfTouch)
-			   {
-					mPotentialMouseEventCount = 0;
-				}
-			   if(mPotentialTouchEvent)
-			   {
-					mHideCursorBecauseOfTouch = true;
-			   }
-
                rootMouseDown(mLastEvent);
             }
             //else button was released
@@ -526,7 +487,6 @@ bool GuiCanvas::processInputEvent(const InputEvent *event)
          }
          else if(event->objInst == KEY_BUTTON1) // right button
          {
-			mHideCursorBecauseOfTouch = false;
             if(event->action == SI_MAKE)
             {
                U32 curTime = Platform::getVirtualMilliseconds();
@@ -557,7 +517,6 @@ bool GuiCanvas::processInputEvent(const InputEvent *event)
          }
          else if(event->objInst == KEY_BUTTON2) // middle button
          {
-			 mHideCursorBecauseOfTouch = false;
             if(event->action == SI_MAKE)
             {
                U32 curTime = Platform::getVirtualMilliseconds();
@@ -598,7 +557,7 @@ void GuiCanvas::rootMouseDown(const GuiEvent &event)
 
    //pass the event to the mouse locked control
    if (bool(mMouseCapturedControl))
-      mMouseCapturedControl->onTouchDown(event);
+      mMouseCapturedControl->onMouseDown(event);
 
    //else pass it to whoever is underneath the cursor
    else
@@ -611,9 +570,12 @@ void GuiCanvas::rootMouseDown(const GuiEvent &event)
          GuiControl *ctrl = static_cast<GuiControl *>(*i);
          GuiControl *controlHit = ctrl->findHitControl(event.mousePoint);
 
-         if (controlHit->mProfile->mUseInput)
+         //see if the controlHit is a modeless dialog...
+         if ((! controlHit->mActive) && (! controlHit->mProfile->mModal))
+            continue;
+         else
          {
-            controlHit->onTouchDown(event);
+            controlHit->onMouseDown(event);
             break;
          }
       }
@@ -634,12 +596,12 @@ void GuiCanvas::findMouseControl(const GuiEvent &event)
    {
       if (bool(mMouseControl))
       {
-         mMouseControl->onTouchLeave(event);
+         mMouseControl->onMouseLeave(event);
          hoverControlStart = Platform::getRealMilliseconds();
          hoverPositionSet = false;
       }
       mMouseControl = controlHit;
-      mMouseControl->onTouchEnter(event);
+      mMouseControl->onMouseEnter(event);
    }
 }
 
@@ -666,16 +628,19 @@ void GuiCanvas::rootScreenTouchDown(const GuiEvent &event)
                 {  
                     if(mMouseCapturedControl != controlHit)  
                     {  
-                        mMouseCapturedControl->onTouchLeave(event);  
+                        mMouseCapturedControl->onMouseLeave(event);  
                     }  
                 }  
             }  
               
-			if (controlHit->mProfile->mUseInput)
-			{
-				controlHit->onTouchDown(event);
-				break;
-			}
+            //see if the controlHit is a modeless dialog...  
+            if ((! controlHit->mActive) && (! controlHit->mProfile->mModal))  
+                continue;  
+            else  
+            {  
+                controlHit->onMouseDown(event);  
+                break;  
+            }  
         }  
       
     if (bool(mMouseControl))  
@@ -695,11 +660,14 @@ void GuiCanvas::rootScreenTouchUp(const GuiEvent &event)
         GuiControl *ctrl = static_cast<GuiControl *>(*i);
         GuiControl *controlHit = ctrl->findHitControl(event.mousePoint);
         
-		if (controlHit->mActive && controlHit->mProfile->mUseInput)
-		{
-			controlHit->onTouchUp(event);
-			break;
-		}
+        //see if the controlHit is a modeless dialog...
+        if ((! controlHit->mActive) && (! controlHit->mProfile->mModal))
+            continue;
+        else
+        {
+            controlHit->onMouseUp(event);
+            break;
+        }
     }
 }
 
@@ -710,14 +678,14 @@ void GuiCanvas::rootScreenTouchMove(const GuiEvent &event)
    {
       checkLockMouseMove(event);
       if(!mMouseCapturedControl.isNull())
-            mMouseCapturedControl->onTouchDragged(event);
+            mMouseCapturedControl->onMouseDragged(event);
    }
    else
    {
       findMouseControl(event);
       if(bool(mMouseControl))
       {
-          mMouseControl->onTouchDragged(event);		  
+          mMouseControl->onMouseDragged(event);		  
       }
    }
 }
@@ -736,12 +704,12 @@ void GuiCanvas::rootMouseUp(const GuiEvent &event)
 
    //pass the event to the mouse locked control
    if (bool(mMouseCapturedControl))
-      mMouseCapturedControl->onTouchUp(event);
+      mMouseCapturedControl->onMouseUp(event);
    else
    {
       findMouseControl(event);
       if(bool(mMouseControl))
-         mMouseControl->onTouchUp(event);
+         mMouseControl->onMouseUp(event);
    }
 }
 
@@ -751,9 +719,9 @@ void GuiCanvas::checkLockMouseMove(const GuiEvent &event)
    if(controlHit != mMouseControl)
    {
       if(mMouseControl == mMouseCapturedControl)
-         mMouseCapturedControl->onTouchLeave(event);
+         mMouseCapturedControl->onMouseLeave(event);
       else if(controlHit == mMouseCapturedControl)
-         mMouseCapturedControl->onTouchEnter(event);
+         mMouseCapturedControl->onMouseEnter(event);
       mMouseControl = controlHit;
    }
 }
@@ -765,10 +733,10 @@ void GuiCanvas::rootMouseDragged(const GuiEvent &event)
    {
       checkLockMouseMove(event);
       if(!mMouseCapturedControl.isNull())
-            mMouseCapturedControl->onTouchDragged(event);
+            mMouseCapturedControl->onMouseDragged(event);
        //Luma: Mouse dragged calls mouse Moved on iPhone
 #if defined(TORQUE_OS_IOS) || defined(TORQUE_OS_ANDROID)
-       mMouseCapturedControl->onTouchMove(event);
+       mMouseCapturedControl->onMouseMove(event);
 #endif //TORQUE_OS_IOS
    }
    else
@@ -776,9 +744,9 @@ void GuiCanvas::rootMouseDragged(const GuiEvent &event)
       findMouseControl(event);
       if(bool(mMouseControl))
       {
-          mMouseControl->onTouchDragged(event);
+          mMouseControl->onMouseDragged(event);
 #if defined(TORQUE_OS_IOS) || defined(TORQUE_OS_ANDROID)
-          mMouseControl->onTouchMove(event);
+          mMouseControl->onMouseMove(event);
 #endif //TORQUE_OS_IOS
           
       }
@@ -791,13 +759,13 @@ void GuiCanvas::rootMouseMove(const GuiEvent &event)
    {
       checkLockMouseMove(event);
       if(mMouseCapturedControl != NULL)
-        mMouseCapturedControl->onTouchMove(event);
+        mMouseCapturedControl->onMouseMove(event);
    }
    else
    {
       findMouseControl(event);
       if(bool(mMouseControl))
-         mMouseControl->onTouchMove(event);
+         mMouseControl->onMouseMove(event);
    }
 }
 
@@ -977,10 +945,8 @@ void GuiCanvas::setContentControl(GuiControl *gui)
       GuiControl *ctrl = static_cast<GuiControl *>(*i);
       ctrl->buildAcceleratorMap();
 
-	  if (ctrl->mProfile->mUseInput)
-	  {
-		  break;
-	  }
+      if (ctrl->mProfile->mModal)
+         break;
    }
    refreshMouseControl();
 
@@ -1040,6 +1006,11 @@ void GuiCanvas::pushDialogControl(GuiControl *gui, S32 layer)
       ctrl->buildAcceleratorMap();
    }
    refreshMouseControl();
+   if(gui->mProfile && gui->mProfile->mModal)
+   {
+      Input::pushCursor(CursorManager::curArrow);
+
+   }
 }
 
 void GuiCanvas::popDialogControl(GuiControl *gui)
@@ -1051,6 +1022,13 @@ void GuiCanvas::popDialogControl(GuiControl *gui)
    GuiControl *ctrl = NULL;
    if (gui)
    {
+      //*** DAW: For modal dialogs, reset the mouse cursor and enable the appropriate platform menus
+      if(gui->mProfile && gui->mProfile->mModal)
+      {
+         Input::popCursor();
+
+      }
+
       //make sure the gui really exists on the stack
       iterator i;
       bool found = false;
@@ -1134,7 +1112,7 @@ void GuiCanvas::mouseLock(GuiControl *lockingControl)
       evt.mousePoint.x = S32(cursorPt.x);
       evt.mousePoint.y = S32(cursorPt.y);
 
-      mMouseControl->onTouchLeave(evt);
+      mMouseControl->onMouseLeave(evt);
    }
 }
 
@@ -1153,7 +1131,7 @@ void GuiCanvas::mouseUnlock(GuiControl *lockingControl)
       mMouseControl = controlHit;
       mMouseControlClicked = false;
       if(bool(mMouseControl))
-         mMouseControl->onTouchEnter(evt);
+         mMouseControl->onMouseEnter(evt);
    }
    mMouseCapturedControl = NULL;
 }
@@ -1358,7 +1336,7 @@ void GuiCanvas::renderFrame(bool preRenderOnly, bool bufferSwap /* = true */)
       //   helpCtrl->render(srf);
       //}
 
-      if (cursorON && mouseCursor && mShowCursor && !mHideCursorBecauseOfTouch)
+      if (cursorON && mouseCursor && mShowCursor)
       {
          Point2I pos((S32)cursorPt.x, (S32)cursorPt.y);
          Point2I spot = mouseCursor->getHotSpot();

@@ -26,10 +26,14 @@
 #include "gui/guiControl.h"
 #endif
 
-class GuiAutoScrollCtrl : public GuiControl
+#ifndef _GUITICKCTRL_H_
+#include "gui/guiTickCtrl.h"
+#endif
+
+class GuiAutoScrollCtrl : public GuiTickCtrl
 {
 private:
-   typedef GuiControl Parent;
+   typedef GuiTickCtrl Parent;
    bool mScrolling;
    F32 mCurrentTime;
    F32 mStartDelay;

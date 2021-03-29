@@ -52,7 +52,7 @@ void GuiDragAndDropControl::startDragging(Point2I offset)
    if (canvas->getMouseLockedControl())
    {
       GuiEvent event;
-      canvas->getMouseLockedControl()->onTouchLeave(event);
+      canvas->getMouseLockedControl()->onMouseLeave(event);
       canvas->mouseUnlock(canvas->getMouseLockedControl());
    }
    canvas->mouseLock(this);
@@ -61,12 +61,12 @@ void GuiDragAndDropControl::startDragging(Point2I offset)
    mLastTarget=NULL;
 }
 
-void GuiDragAndDropControl::onTouchDown(const GuiEvent& event)
+void GuiDragAndDropControl::onMouseDown(const GuiEvent& event)
 {
    startDragging(event.mousePoint - mBounds.point);
 }
 
-void GuiDragAndDropControl::onTouchDragged(const GuiEvent& event)
+void GuiDragAndDropControl::onMouseDragged(const GuiEvent& event)
 {
    mBounds.point = event.mousePoint - mOffset;
 
@@ -83,7 +83,7 @@ void GuiDragAndDropControl::onTouchDragged(const GuiEvent& event)
    sendDragEvent(dragTarget, "onControlDragged");
 }
 
-void GuiDragAndDropControl::onTouchUp(const GuiEvent& event)
+void GuiDragAndDropControl::onMouseUp(const GuiEvent& event)
 {
    mouseUnlock();
 

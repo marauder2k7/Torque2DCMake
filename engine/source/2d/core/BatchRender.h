@@ -44,7 +44,7 @@
 #endif
 
 #ifndef _COLOR_H_
-#include "graphics/gColor.h"
+#include "graphics/color.h"
 #endif
 
 //-----------------------------------------------------------------------------
@@ -115,8 +115,6 @@ private:
 public:
     BatchRender();
     virtual ~BatchRender();
-
-	static const U32 maxVertexCount = BATCHRENDER_BUFFERSIZE; 
 
     /// Set the strict order mode.
     inline void setStrictOrderMode( const bool strictOrder, const bool forceFlush = false )
@@ -227,12 +225,12 @@ public:
     ///   |\      |\
     ///   | \     | \
     ///  0| _\1  3| _\4
-	void SubmitTriangles(
-		const U32 vertexCount,
-		const Vector2* pVertexArray,
-		const Vector2* pTextureArray,
-		const ColorF*  pColorArray,
-		TextureHandle& texture);
+    void SubmitTriangles(
+            const U32 vertexCount,
+            const Vector2* pVertexArray,
+            const Vector2* pTextureArray,
+            TextureHandle& texture,
+            const ColorF& color = ColorF(-1.0f, -1.0f, -1.0f) );
 
     /// Submit a quad for batching.
     /// Vertex and textures are indexed as:

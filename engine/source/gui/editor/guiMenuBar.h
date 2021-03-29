@@ -26,6 +26,9 @@
 #ifndef _GUITEXTLISTCTRL_H_
 #include "gui/guiTextListCtrl.h"
 #endif
+#ifndef _GUITICKCTRL_H_
+#include "gui/guiTickCtrl.h"
+#endif
 
 class GuiMenuBar;
 class GuiMenuTextListCtrl;
@@ -39,9 +42,9 @@ protected:
    GuiMenuTextListCtrl *mTextList; 
 public:
    GuiMenuBackgroundCtrl(GuiMenuBar *ctrl, GuiMenuTextListCtrl* textList);
-   void onTouchDown(const GuiEvent &event);
-   void onTouchMove(const GuiEvent &event);
-   void onTouchDragged(const GuiEvent &event);
+   void onMouseDown(const GuiEvent &event);
+   void onMouseMove(const GuiEvent &event);
+   void onMouseDragged(const GuiEvent &event);
 };
 
 class GuiSubmenuBackgroundCtrl : public GuiMenuBackgroundCtrl
@@ -51,7 +54,7 @@ class GuiSubmenuBackgroundCtrl : public GuiMenuBackgroundCtrl
 public:
    GuiSubmenuBackgroundCtrl(GuiMenuBar *ctrl, GuiMenuTextListCtrl* textList);
    bool pointInControl(const Point2I & parentCoordPoint);
-   void onTouchDown(const GuiEvent &event);
+   void onMouseDown(const GuiEvent &event);
 };
 
 //------------------------------------------------------------------------------
@@ -72,8 +75,8 @@ class GuiMenuTextListCtrl : public GuiTextListCtrl
 
       // GuiControl overloads:
       bool onKeyDown(const GuiEvent &event);
-      void onTouchDown(const GuiEvent &event);
-      void onTouchUp(const GuiEvent &event);
+        void onMouseDown(const GuiEvent &event);
+      void onMouseUp(const GuiEvent &event);
       void onRenderCell(Point2I offset, Point2I cell, bool selected, bool mouseOver);
 
       virtual void onCellHighlighted(Point2I cell); // DAW: Added
@@ -81,9 +84,9 @@ class GuiMenuTextListCtrl : public GuiTextListCtrl
 
 //------------------------------------------------------------------------------
 
-class GuiMenuBar : public GuiControl
+class GuiMenuBar : public GuiTickCtrl // DAW: Was: GuiControl
 {
-   typedef GuiControl Parent;
+   typedef GuiTickCtrl Parent; // DAW: Was: GuiControl Parent;
 public:
 
     struct Menu;
@@ -191,11 +194,11 @@ public:
     void onRender(Point2I offset, const RectI &updateRect);
 
    void checkMenuMouseMove(const GuiEvent &event);
-   void onTouchMove(const GuiEvent &event);
-   void onTouchLeave(const GuiEvent &event);
-   void onTouchDown(const GuiEvent &event);
-   void onTouchDragged(const GuiEvent &event);
-   void onTouchUp(const GuiEvent &event);
+   void onMouseMove(const GuiEvent &event);
+   void onMouseLeave(const GuiEvent &event);
+   void onMouseDown(const GuiEvent &event);
+   void onMouseDragged(const GuiEvent &event);
+   void onMouseUp(const GuiEvent &event);
    
    void onAction();
    void closeMenu();

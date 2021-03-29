@@ -30,23 +30,20 @@
 #include "gui/guiTextCtrl.h"
 #endif
 
-class GuiTextEditCtrl : public GuiControl
+class GuiTextEditCtrl : public GuiTextCtrl
 {
 private:
-   typedef GuiControl Parent;
+   typedef GuiTextCtrl Parent;
 
    static U32 smNumAwake;
 
 protected:
 
-	S32 mMaxStrLen;   // max string len, must be less then or equal to 255
-	Resource<GFont> mFont;
-	bool     mTruncateWhenUnfocused;
    StringBuffer mTextBuffer;
 
    StringTableEntry mValidateCommand;
    StringTableEntry mEscapeCommand;
-   AssetPtr<AudioAsset>  mDeniedSound;
+   //AssetPtr<AudioAsset>  mDeniedSound;
 
    // for animating the cursor
    S32      mNumFramesElapsed;
@@ -89,8 +86,6 @@ protected:
    UTF16   **mHistoryBuf;
    void updateHistory(StringBuffer *txt, bool moveIndex);
 
-   S32 textBufferWidth(StringBuffer buffer);
-   StringBuffer truncate(StringBuffer buffer, StringBuffer terminationString, S32 width);
 
 public:
    GuiTextEditCtrl();
@@ -99,7 +94,6 @@ public:
    static void initPersistFields();
 
    bool onAdd();
-   void inspectPostApply();
    bool onWake();
    void onSleep();
 
@@ -108,22 +102,21 @@ public:
    /// dest should be of size GuiTextCtrl::MAX_STRING_LENGTH+1.
    void getText(char *dest);
 
+   void setText(S32 tag);
    virtual void setText(const UTF8* txt);
    virtual void setText(const UTF16* txt);
-   virtual void setTextID(S32 id);
-   virtual void setTextID(const char *id);
    S32   getCursorPos()   { return( mCursorPos ); }
    void  reallySetCursorPos( const S32 newPos );
    
-   void selectAllText();
-   void forceValidateText();
+   void selectAllText(); //*** DAW: Added
+   void forceValidateText(); //*** DAW: Added
    const char *getScriptValue();
    void setScriptValue(const char *value);
 
    bool onKeyDown(const GuiEvent &event);
-   void onTouchDown(const GuiEvent &event);
-   void onTouchDragged(const GuiEvent &event);
-   void onTouchUp(const GuiEvent &event);
+   void onMouseDown(const GuiEvent &event);
+   void onMouseDragged(const GuiEvent &event);
+   void onMouseUp(const GuiEvent &event);
    
    void onCopy(bool andCut);
    void onPaste();
@@ -139,12 +132,10 @@ public:
 
    void onPreRender();
    void onRender(Point2I offset, const RectI &updateRect);
-   virtual void drawText( const RectI &drawRect, GuiControlState currentState );
+   virtual void drawText( const RectI &drawRect, bool isFocused );
 	
 	void playDeniedSound();
-	void execConsoleCallback();
-
-	enum Constants { MAX_STRING_LENGTH = 1024 };
+	void execConsoleCallback();	
 };
 
 #endif //_GUI_TEXTEDIT_CTRL_H

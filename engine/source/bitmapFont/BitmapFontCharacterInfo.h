@@ -28,7 +28,7 @@
 #endif
 
 #ifndef _COLOR_H_
-#include "graphics/gColor.h"
+#include "graphics/color.h"
 #endif
 
 namespace font

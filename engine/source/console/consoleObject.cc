@@ -378,7 +378,7 @@ void ConsoleObject::addField(const char*  in_pFieldname,
       in_fieldType,
       in_fieldOffset,
       &defaultProtectedWriteFn,
-      in_elementCount,
+      1,
       in_table,
       in_pFieldDocs);
 }

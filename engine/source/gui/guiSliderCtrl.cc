@@ -166,12 +166,12 @@ void GuiSliderCtrl::onMouseEnter(const GuiEvent &event)
     }
     else
     {
-        if (mActive && mProfile->mSoundButtonOver)
-        {
+        //if (mActive && mProfile->mSoundButtonOver)
+        //{
             //F32 pan = (F32(event.mousePoint.x)/F32(Canvas->mBounds.extent.x)*2.0f-1.0f)*0.8f;
-            AUDIOHANDLE handle = alxCreateSource(mProfile->mSoundButtonOver);
-            alxPlay(handle);
-        }
+            //AUDIOHANDLE handle = alxCreateSource(mProfile->mSoundButtonOver);
+            //alxPlay(handle);
+        //}
         mMouseOver = true;
     }
 }
@@ -440,7 +440,7 @@ void GuiSliderCtrl::onRender(Point2I offset, const RectI &updateRect)
 
         // draw the thumb
         thumb.point += pos;
-		renderUniversalRect(thumb, mProfile, NormalState);
+        renderRaisedBox(thumb, mProfile);
     }
 
     if (mDisplayValue)
@@ -463,6 +463,6 @@ void GuiSliderCtrl::onRender(Point2I offset, const RectI &updateRect)
         dglSetBitmapModulation(mProfile->mFontColor);
         dglDrawText(mProfile->mFont, textStart, buf, mProfile->mFontColors);
     }
-    renderChildControls(offset, mBounds, updateRect);
+    renderChildControls(offset, updateRect);
 }
 

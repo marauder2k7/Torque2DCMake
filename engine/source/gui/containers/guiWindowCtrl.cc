@@ -37,14 +37,12 @@ GuiWindowCtrl::GuiWindowCtrl(void)
    mCanClose = true;
    mCanMinimize = true;
    mCanMaximize = true;
-
    mTitleHeight = 20;
    mResizeRightWidth = 10;
    mResizeBottomHeight = 10;
    mIsContainer = true;
-   mDepressed = false;
-   curHitRegion = None;
-   mActive = true;
+
+   mCloseCommand = StringTable->EmptyString;
 
    mMinimized = false;
    mMaximized = false;
@@ -52,8 +50,16 @@ GuiWindowCtrl::GuiWindowCtrl(void)
    mMouseResizeWidth = false;
    mMouseResizeHeight = false;
    mBounds.extent.set(100, 200);
+   mMinSize.set(50, 50);
    mMinimizeIndex = -1;
    mTabIndex = -1;
+
+   RectI closeRect(80, 2, 16, 16);
+   mCloseButton = closeRect;
+   closeRect.point.x -= 18;
+   mMaximizeButton = closeRect;
+   closeRect.point.x -= 18;
+   mMinimizeButton = closeRect;
 
    //other defaults
    mActive = true;
@@ -61,16 +67,6 @@ GuiWindowCtrl::GuiWindowCtrl(void)
    mPressMaximize = false;
    mPressMinimize = false;
 
-   mContentProfile = NULL;
-   mCloseButtonProfile = NULL;
-   mMinButtonProfile = NULL;
-   mMaxButtonProfile = NULL;
-
-   setField("contentProfile", "GuiWindowContentProfile");
-   setField("closeButtonProfile", "GuiWindowCloseButtonProfile");
-   setField("minButtonProfile", "GuiWindowMinButtonProfile");
-   setField("maxButtonProfile", "GuiWindowMaxButtonProfile");
-   setField("profile", "GuiWindowProfile");
 }
 
 void GuiWindowCtrl::initPersistFields()
@@ -83,11 +79,8 @@ void GuiWindowCtrl::initPersistFields()
    addField("canClose",          TypeBool,         Offset(mCanClose, GuiWindowCtrl));
    addField("canMinimize",       TypeBool,         Offset(mCanMinimize, GuiWindowCtrl));
    addField("canMaximize",       TypeBool,         Offset(mCanMaximize, GuiWindowCtrl));
-   addField("titleHeight",		TypeS32,           Offset(mTitleHeight, GuiWindowCtrl));
-   addField("contentProfile", TypeGuiProfile, Offset(mContentProfile, GuiWindowCtrl));
-   addField("closeButtonProfile", TypeGuiProfile, Offset(mCloseButtonProfile, GuiWindowCtrl));
-   addField("minButtonProfile", TypeGuiProfile, Offset(mMinButtonProfile, GuiWindowCtrl));
-   addField("maxButtonProfile", TypeGuiProfile, Offset(mMaxButtonProfile, GuiWindowCtrl));
+   addField("minSize",           TypePoint2I,      Offset(mMinSize, GuiWindowCtrl));
+   addField("closeCommand",      TypeString,       Offset(mCloseCommand, GuiWindowCtrl));
 }
 
 bool GuiWindowCtrl::isMinimized(S32 &index)
@@ -96,22 +89,54 @@ bool GuiWindowCtrl::isMinimized(S32 &index)
    return mMinimized && mVisible;
 }
 
+// helper fn so button positioning shares code...
+void GuiWindowCtrl::PositionButtons(void)
+{
+   if( !mBitmapBounds || !mAwake )
+      return;
+
+   S32 buttonWidth = mBitmapBounds[BmpStates * BmpClose].extent.x;
+   S32 buttonHeight = mBitmapBounds[BmpStates * BmpClose].extent.y;
+   Point2I mainOff = mProfile->mTextOffset;
+
+   int minLeft = mBounds.extent.x - buttonWidth * 3 - mainOff.x;
+   int minTop = mainOff.y;
+   int minOff = buttonWidth + 2;
+   
+   RectI minRect(minLeft, minTop, buttonHeight, buttonWidth);
+   mMinimizeButton = minRect;
+
+   mMaximizeButton = minRect;
+   minRect.point.x += minOff;
+   mMaximizeButton = minRect;
+
+   mCloseButton = minRect;
+   minRect.point.x += minOff;
+   mCloseButton = minRect;
+}
+
 bool GuiWindowCtrl::onWake()
 {
-	if (!Parent::onWake())
-		return false;
+   if (! Parent::onWake())
+      return false;
 
-	if (mContentProfile != NULL)
-		mContentProfile->incRefCount();
+   //get the texture for the close, minimize, and maximize buttons
+   
+   bool result = mProfile->constructBitmapArray() >= NumBitmaps;
+   mTextureHandle = mProfile->mTextureHandle;
+   AssertFatal(result, "Failed to create the bitmap array");
+   if(!result)
+      return false;
 
-	if (mCloseButtonProfile != NULL)
-		mCloseButtonProfile->incRefCount();
+   mBitmapBounds = mProfile->mBitmapArrayRects.address();
+   S32 buttonHeight = mBitmapBounds[BmpStates * BmpClose].extent.y;
 
-	if (mMinButtonProfile != NULL)
-		mMinButtonProfile->incRefCount();
+   mTitleHeight = buttonHeight + 4;
+   mResizeRightWidth = mTitleHeight / 2;
+   mResizeBottomHeight = mTitleHeight / 2;
 
-	if (mMaxButtonProfile != NULL)
-		mMaxButtonProfile->incRefCount();
+   //set the button coords
+   PositionButtons();
 
    //set the tab index
    mTabIndex = -1;
@@ -138,19 +163,8 @@ bool GuiWindowCtrl::onWake()
 
 void GuiWindowCtrl::onSleep()
 {
+   mTextureHandle = NULL;
    Parent::onSleep();
-
-   if (mContentProfile != NULL)
-	   mContentProfile->decRefCount();
-
-   if (mCloseButtonProfile != NULL)
-	   mCloseButtonProfile->decRefCount();
-
-   if (mMinButtonProfile != NULL)
-	   mMinButtonProfile->decRefCount();
-
-   if (mMaxButtonProfile != NULL)
-	   mMaxButtonProfile->decRefCount();
 }
 
 GuiControl* GuiWindowCtrl::findHitControl(const Point2I &pt, S32 initialLayer)
@@ -164,19 +178,12 @@ GuiControl* GuiWindowCtrl::findHitControl(const Point2I &pt, S32 initialLayer)
 void GuiWindowCtrl::resize(const Point2I &newPosition, const Point2I &newExtent)
 {
    Parent::resize(newPosition, newExtent);
+
+   //set the button coords
+   PositionButtons();
 }
 
-void GuiWindowCtrl::onTouchMove(const GuiEvent &event)
-{
-	curHitRegion = findHitRegion(globalToLocalCoord(event.mousePoint));
-}
-
-void GuiWindowCtrl::onTouchLeave(const GuiEvent &event)
-{
-	curHitRegion = None;
-}
-
-void GuiWindowCtrl::onTouchDown(const GuiEvent &event)
+void GuiWindowCtrl::onMouseDown(const GuiEvent &event)
 {
    setUpdate();
 
@@ -184,8 +191,6 @@ void GuiWindowCtrl::onTouchDown(const GuiEvent &event)
 
    mMouseDownPosition = event.mousePoint;
    Point2I localPoint = globalToLocalCoord(event.mousePoint);
-   curHitRegion = findHitRegion(localPoint);
-   mDepressed = true;
 
    //select this window - move it to the front, and set the first responder
    selectWindow();
@@ -194,19 +199,21 @@ void GuiWindowCtrl::onTouchDown(const GuiEvent &event)
    if (localPoint.y < mTitleHeight)
    {
       //if we clicked on the close button
-      if (curHitRegion == CloseButton)
+      if (mCanClose && mCloseButton.pointInRect(localPoint))
       {
-         mPressClose = true;
+         mPressClose = mCanClose;
       }
-      else if (curHitRegion == MaxButton)
+      else if (mCanMaximize && mMaximizeButton.pointInRect(localPoint))
       {
-         mPressMaximize = true;
+         mPressMaximize = mCanMaximize;
       }
-      else if (curHitRegion == MinButton)
+      else if (mCanMinimize && mMinimizeButton.pointInRect(localPoint))
       {
-         mPressMinimize = true;
+         mPressMinimize = mCanMinimize;
       }
-      else if (curHitRegion == TitleBar)
+
+      //else we clicked within the title
+      else
       {
          mMouseMovingWin = mCanMove;
          mMouseResizeWidth = false;
@@ -241,18 +248,16 @@ void GuiWindowCtrl::onTouchDown(const GuiEvent &event)
 
       GuiControl *ctrl = findHitControl(localPoint);
       if (ctrl && ctrl != this)
-         ctrl->onTouchDown(event);
+         ctrl->onMouseDown(event);
 
    }
 }
 
-void GuiWindowCtrl::onTouchDragged(const GuiEvent &event)
+void GuiWindowCtrl::onMouseDragged(const GuiEvent &event)
 {
    GuiControl *parent = getParent();
    GuiCanvas *root = getRoot();
    if (! root) return;
-
-   curHitRegion = findHitRegion(globalToLocalCoord(event.mousePoint));
 
    Point2I deltaMousePosition = event.mousePoint - mMouseDownPosition;
 
@@ -293,7 +298,7 @@ void GuiWindowCtrl::onTouchDragged(const GuiEvent &event)
    }
 }
 
-void GuiWindowCtrl::onTouchUp(const GuiEvent &event)
+void GuiWindowCtrl::onMouseUp(const GuiEvent &event)
 {
    bool closing = mPressClose;
    bool maximizing = mPressMaximize;
@@ -301,10 +306,8 @@ void GuiWindowCtrl::onTouchUp(const GuiEvent &event)
    mPressClose = false;
    mPressMaximize = false;
    mPressMinimize = false;
-   mDepressed = false;
 
    mouseUnlock();
-   setUpdate();
 
    mMouseMovingWin = false;
    mMouseResizeWidth = false;
@@ -318,7 +321,7 @@ void GuiWindowCtrl::onTouchUp(const GuiEvent &event)
    Point2I localPoint = globalToLocalCoord(event.mousePoint);
    if (closing && mCloseButton.pointInRect(localPoint))
    {
-      //Con::evaluate(mCloseCommand);
+      Con::evaluate(mCloseCommand);
    }
    else if (maximizing && mMaximizeButton.pointInRect(localPoint))
    {
@@ -400,8 +403,8 @@ void GuiWindowCtrl::onTouchUp(const GuiEvent &event)
          //if we have more than 32 minimized windows, use the first position
          count = getMax(0, count);
 
-         //this algorithm assumes all window have the same title height, and will minimize to 148 pix
-         Point2I newExtent(148, mTitleHeight);
+         //this algorithm assumes all window have the same title height, and will minimize to 98 pix
+         Point2I newExtent(98, mTitleHeight);
 
          //first, how many can fit across
          S32 numAcross = getMax(1, (parent->mBounds.extent.x / newExtent.x + 2));
@@ -493,27 +496,6 @@ GuiControl *GuiWindowCtrl::findPrevTabable(GuiControl *curResponder, bool firstC
    return tabCtrl;
 }
 
-GuiWindowCtrl::Region GuiWindowCtrl::findHitRegion(const Point2I& pt)
-{
-	if (mCanClose && mCloseButton.pointInRect(pt)) 
-	{
-		return CloseButton;
-	}
-	else if (mCanMaximize && mMaximizeButton.pointInRect(pt))
-	{
-		return MaxButton;
-	}
-	else if (mCanMinimize && mMinimizeButton.pointInRect(pt))
-	{
-		return MinButton;
-	}
-	else if (mTitleBar.pointInRect(pt))
-	{
-		return TitleBar;
-	}
-	return None;
-}
-
 bool GuiWindowCtrl::onKeyDown(const GuiEvent &event)
 {
    //if this control is a dead end, kill the event
@@ -565,206 +547,158 @@ void GuiWindowCtrl::selectWindow(void)
    setFirstResponder(mFirstResponder);
 }
 
+void GuiWindowCtrl::drawWinRect(const RectI &myRect)
+{
+   Point2I bl = myRect.point;
+   Point2I tr;
+   tr.x = myRect.point.x + myRect.extent.x - 1;
+   tr.y = myRect.point.y + myRect.extent.y - 1;
+   dglDrawRectFill(myRect, mProfile->mFillColor);
+   dglDrawLine(Point2I(bl.x + 1, tr.y), Point2I(bl.x + 1, bl.y), ColorI(255, 255, 255));
+   dglDrawLine(Point2I(bl.x, tr.y + 1), Point2I(tr.x, tr.y + 1), ColorI(255, 255, 255));
+   //dglDrawRect(myRect, ColorI(0, 0, 0)); // Taken out, this is controled via mProfile->mBorder
+}
+
 void GuiWindowCtrl::onRender(Point2I offset, const RectI &updateRect)
 {
-	//Does this window have focus (does it or a child receive key events)?
-	GuiCanvas *root = getRoot();
-	GuiControl *firstResponder = root ? root->getFirstResponder() : NULL;
-	bool hasFocus = (!firstResponder || ControlIsChild(firstResponder));
+   if( !mProfile || mProfile->mFont.isNull() || mProfile->mBitmapArrayRects.size() < NumBitmaps )
+      return Parent::onRender( offset, updateRect );
 
-	GuiControlState currentState = NormalState;
-	if (mMinimized)
-	{
-		currentState = DisabledState;
-	}
-	else if (hasFocus)
-	{
-		currentState = SelectedState;
+   //draw the outline
+   RectI winRect;
+   winRect.point = offset;
+   winRect.extent = mBounds.extent;
+   GuiCanvas *root = getRoot();
+   GuiControl *firstResponder = root ? root->getFirstResponder() : NULL;
 
-		GuiControl *parent = getParent();
-		if (parent)
-		{
-			parent->pushObjectToBack(this);
-		}
-	}
-	else if (curHitRegion == TitleBar)
-	{
-		currentState = HighlightState;
-	}
+   bool isKey = (!firstResponder || ControlIsChild(firstResponder));
 
-	//Render the title bar
-	RectI ctrlRectTitle = applyMargins(offset, Point2I(mBounds.extent.x, mTitleHeight), currentState, mProfile);
-	if (!ctrlRectTitle.isValidRect())
-	{
-		return;
-	}
-	mTitleBar.set(Point2I(ctrlRectTitle.point.x - offset.x, ctrlRectTitle.point.y - offset.y), ctrlRectTitle.extent);
-	renderUniversalRect(ctrlRectTitle, mProfile, currentState);
+   U32 topBase = isKey ? BorderTopLeftKey : BorderTopLeftNoKey;
+   winRect.point.x += mBitmapBounds[BorderLeft].extent.x;
+   winRect.point.y += mBitmapBounds[topBase + 2].extent.y;
 
-	//Render Text and buttons
-	dglSetBitmapModulation(mProfile->mFontColor);
-	RectI fillRectTitle = applyBorders(ctrlRectTitle.point, ctrlRectTitle.extent, currentState, mProfile);
-	RectI contentRectTitle = applyPadding(fillRectTitle.point, fillRectTitle.extent, currentState, mProfile);
+   winRect.extent.x -= mBitmapBounds[BorderLeft].extent.x + mBitmapBounds[BorderRight].extent.x;
+   winRect.extent.y -= mBitmapBounds[topBase + 2].extent.y + mBitmapBounds[BorderBottom].extent.y;
 
-	if (contentRectTitle.isValidRect())
-	{
-		RectI textRect = renderButtons(contentRectTitle);
-		renderText(textRect.point, textRect.extent, mText, mProfile);
-	}
+   dglDrawRectFill(winRect, mProfile->mFillColor);
 
-	//Render window contents
-	if (!mMinimized)
-	{
-		currentState = currentState != SelectedState ? NormalState : SelectedState;
-		RectI ctrlRectWindow = applyMargins(Point2I(offset.x, offset.y + mTitleHeight), Point2I(mBounds.extent.x, mBounds.extent.y - mTitleHeight), currentState, mContentProfile);
-		if (!ctrlRectWindow.isValidRect())
-		{
-			return;
-		}
-		renderUniversalRect(ctrlRectWindow, mContentProfile, currentState);
+   dglClearBitmapModulation();
+   dglDrawBitmapSR(mTextureHandle, offset, mBitmapBounds[topBase]);
+   dglDrawBitmapSR(mTextureHandle, Point2I(offset.x + mBounds.extent.x - mBitmapBounds[topBase+1].extent.x, offset.y),
+                   mBitmapBounds[topBase + 1]);
 
-		RectI fillRectWindow = applyBorders(ctrlRectWindow.point, ctrlRectWindow.extent, currentState, mContentProfile);
-		RectI contentRectWindow = applyPadding(fillRectWindow.point, fillRectWindow.extent, currentState, mContentProfile);
+   RectI destRect;
+   destRect.point.x = offset.x + mBitmapBounds[topBase].extent.x;
+   destRect.point.y = offset.y;
+   destRect.extent.x = mBounds.extent.x - mBitmapBounds[topBase].extent.x - mBitmapBounds[topBase + 1].extent.x;
+   destRect.extent.y = mBitmapBounds[topBase + 2].extent.y;
+   RectI stretchRect = mBitmapBounds[topBase + 2];
+   stretchRect.inset(1,0);
+   dglDrawBitmapStretchSR(mTextureHandle, destRect, stretchRect);
 
-		if (contentRectWindow.isValidRect())
-		{
-			//render the children
-			renderChildControls(offset, contentRectWindow, updateRect);
-		}
-	}
+   destRect.point.x = offset.x;
+   destRect.point.y = offset.y + mBitmapBounds[topBase].extent.y;
+   destRect.extent.x = mBitmapBounds[BorderLeft].extent.x;
+   destRect.extent.y = mBounds.extent.y - mBitmapBounds[topBase].extent.y - mBitmapBounds[BorderBottomLeft].extent.y;
+   stretchRect = mBitmapBounds[BorderLeft];
+   stretchRect.inset(0,1);
+   dglDrawBitmapStretchSR(mTextureHandle, destRect, stretchRect);
+
+   destRect.point.x = offset.x + mBounds.extent.x - mBitmapBounds[BorderRight].extent.x;
+   destRect.extent.x = mBitmapBounds[BorderRight].extent.x;
+   destRect.point.y = offset.y + mBitmapBounds[topBase + 1].extent.y;
+   destRect.extent.y = mBounds.extent.y - mBitmapBounds[topBase + 1].extent.y - mBitmapBounds[BorderBottomRight].extent.y;
+
+   stretchRect = mBitmapBounds[BorderRight];
+   stretchRect.inset(0,1);
+   dglDrawBitmapStretchSR(mTextureHandle, destRect, stretchRect);
+
+   dglDrawBitmapSR(mTextureHandle, offset + Point2I(0, mBounds.extent.y - mBitmapBounds[BorderBottomLeft].extent.y), mBitmapBounds[BorderBottomLeft]);
+   dglDrawBitmapSR(mTextureHandle, offset + mBounds.extent - mBitmapBounds[BorderBottomRight].extent, mBitmapBounds[BorderBottomRight]);
+
+   destRect.point.x = offset.x + mBitmapBounds[BorderBottomLeft].extent.x;
+   destRect.extent.x = mBounds.extent.x - mBitmapBounds[BorderBottomLeft].extent.x - mBitmapBounds[BorderBottomRight].extent.x;
+
+   destRect.point.y = offset.y + mBounds.extent.y - mBitmapBounds[BorderBottom].extent.y;
+   destRect.extent.y = mBitmapBounds[BorderBottom].extent.y;
+   stretchRect = mBitmapBounds[BorderBottom];
+   stretchRect.inset(1,0);
+
+   dglDrawBitmapStretchSR(mTextureHandle, destRect, stretchRect);
+
+   //draw the title
+   // dhc addition: copied/modded from renderJustifiedText, since we enforce a
+   // different color usage here. NOTE: it currently CAN overdraw the controls
+   // if mis-positioned or 'scrunched' in a small width.
+   dglSetBitmapModulation(mProfile->mFontColor);
+   S32 textWidth = mProfile->mFont->getStrWidth((const UTF8 *)mText);
+   Point2I start(0,0);
+   // align the horizontal
+   if ( mProfile->mAlignment == GuiControlProfile::RightJustify )
+      start.set( winRect.extent.x - textWidth, 0 );
+   else if ( mProfile->mAlignment == GuiControlProfile::CenterJustify )
+      start.set( ( winRect.extent.x - textWidth) / 2, 0 );
+   else // GuiControlProfile::LeftJustify or garbage... ;)
+      start.set( 0, 0 );
+   // If the text is longer then the box size, (it'll get clipped) so force Left Justify
+   if( textWidth > winRect.extent.x ) start.set( 0, 0 );
+   // center the vertical
+//   start.y = ( winRect.extent.y - ( font->getHeight() - 2 ) ) / 2;
+   dglDrawText(mFont, start + offset + mProfile->mTextOffset, mText);
+
+   // deal with rendering the titlebar controls
+   AssertFatal(root, "Unable to get the root Canvas.");
+   Point2I localPoint = globalToLocalCoord(root->getCursorPos());
+
+   //draw the close button
+   Point2I tempUL;
+   Point2I tempLR;
+   S32 bmp = BmpStates * BmpClose;
+
+   if( mCanClose ) {
+      if( mCloseButton.pointInRect( localPoint ) && mPressClose )
+         bmp += BmpHilite;
+
+      dglClearBitmapModulation();
+      dglDrawBitmapSR(mTextureHandle, offset + mCloseButton.point, mBitmapBounds[bmp]);
+   }
+
+   //draw the maximize button
+   if( mMaximized )
+      bmp = BmpStates * BmpNormal;
+   else
+      bmp = BmpStates * BmpMaximize;
+
+   if( mCanMaximize ) {
+      if( mMaximizeButton.pointInRect( localPoint ) && mPressMaximize )
+         bmp += BmpHilite;
+
+      dglClearBitmapModulation();
+      dglDrawBitmapSR( mTextureHandle, offset + mMaximizeButton.point, mBitmapBounds[bmp] );
+   }
+
+   //draw the minimize button
+   if( mMinimized )
+      bmp = BmpStates * BmpNormal;
+   else
+      bmp = BmpStates * BmpMinimize;
+
+   if( mCanMinimize ) {
+      if( mMinimizeButton.pointInRect( localPoint ) && mPressMinimize )
+         bmp += BmpHilite;
+
+      dglClearBitmapModulation();
+      dglDrawBitmapSR( mTextureHandle, offset + mMinimizeButton.point, mBitmapBounds[bmp] );
+   }
+
+   if( !mMinimized )
+   {
+      //render the children
+      renderChildControls( offset, updateRect );
+   }
 }
 
-RectI GuiWindowCtrl::renderButtons(const RectI &contentRect)
-{
-	S32 distanceFromEdge = 0;
 
-	if (mCanClose)
-	{
-		GuiControlState state = getRegionCurrentState(Region::CloseButton);
-		RectI content = renderButton(contentRect,  distanceFromEdge, state, mCloseButtonProfile, Icon::Close);
-		mCloseButton.set(Point2I(content.point.x - contentRect.point.x, content.point.y - contentRect.point.y), content.extent);
-		distanceFromEdge += content.extent.x;
-
-		GuiBorderProfile *leftProfile = mCloseButtonProfile->getLeftBorder();
-		S32 leftSize = (leftProfile) ? leftProfile->getMargin(state) : 0;
-		distanceFromEdge += leftSize;
-
-		GuiBorderProfile *rightProfile = mCloseButtonProfile->getRightBorder();
-		S32 rightSize = (rightProfile) ? rightProfile->getMargin(state) : 0;
-		distanceFromEdge += rightSize;
-	}
-	if (mCanMaximize)
-	{
-		GuiControlState state = getRegionCurrentState(Region::MaxButton);
-		RectI content = renderButton(contentRect, distanceFromEdge, state, mMaxButtonProfile, Icon::Max);
-		mMaximizeButton.set(Point2I(content.point.x - contentRect.point.x, content.point.y - contentRect.point.y), content.extent);
-		distanceFromEdge += content.extent.x;
-
-		GuiBorderProfile *leftProfile = mMaxButtonProfile->getLeftBorder();
-		S32 leftSize = (leftProfile) ? leftProfile->getMargin(state) : 0;
-		distanceFromEdge += leftSize;
-
-		GuiBorderProfile *rightProfile = mMaxButtonProfile->getRightBorder();
-		S32 rightSize = (rightProfile) ? rightProfile->getMargin(state) : 0;
-		distanceFromEdge += rightSize;
-	}
-	if (mCanMinimize)
-	{
-		GuiControlState state = getRegionCurrentState(Region::MinButton);
-		RectI content = renderButton(contentRect, distanceFromEdge, state, mMinButtonProfile, Icon::Min);
-		mMinimizeButton.set(Point2I(content.point.x - contentRect.point.x, content.point.y - contentRect.point.y), content.extent);
-		distanceFromEdge += content.extent.x;
-
-		GuiBorderProfile *leftProfile = mMinButtonProfile->getLeftBorder();
-		S32 leftSize = (leftProfile) ? leftProfile->getMargin(state) : 0;
-		distanceFromEdge += leftSize;
-
-		GuiBorderProfile *rightProfile = mMinButtonProfile->getRightBorder();
-		S32 rightSize = (rightProfile) ? rightProfile->getMargin(state) : 0;
-		distanceFromEdge += rightSize;
-	}
-
-	if (mProfile->mAlignment != GuiControlProfile::AlignmentType::RightAlign)
-	{
-		return RectI(contentRect.point.x, contentRect.point.y, contentRect.extent.x - distanceFromEdge, contentRect.extent.y);
-	}
-	else
-	{
-		return RectI(contentRect.point.x + distanceFromEdge, contentRect.point.y, contentRect.extent.x - distanceFromEdge, contentRect.extent.y);
-	}
-}
-
-RectI GuiWindowCtrl::renderButton(const RectI &contentRect, S32 distanceFromEdge, GuiControlState buttonState, GuiControlProfile *profile, Icon defaultIcon)
-{
-	RectI buttonContent = applyMargins(contentRect.point, contentRect.extent, buttonState, profile);
-	S32 horizMarginSize = contentRect.extent.x - buttonContent.extent.x;
-	RectI finalButtonRect = RectI(contentRect.point, Point2I(buttonContent.extent.y + horizMarginSize, contentRect.extent.y));
-	if (mProfile->mAlignment != GuiControlProfile::AlignmentType::RightAlign)
-	{
-		//get the right margin and add it to the distance from the edge
-		GuiBorderProfile *rightProfile = profile->getRightBorder();
-		S32 rightSize = (rightProfile) ? rightProfile->getMargin(buttonState) : 0;
-		distanceFromEdge += rightSize;
-		finalButtonRect.point.x = contentRect.point.x + (contentRect.extent.x - finalButtonRect.extent.x) - distanceFromEdge;
-	}
-	else
-	{
-		//get the left margin and add it to the disance from the edge
-		GuiBorderProfile *leftProfile = profile->getLeftBorder();
-		S32 leftSize = (leftProfile) ? leftProfile->getMargin(buttonState) : 0;
-		distanceFromEdge += leftSize;
-		finalButtonRect.point.x = distanceFromEdge;
-	}
-	RectI finalButtonContent = applyMargins(finalButtonRect.point, finalButtonRect.extent, buttonState, profile);
-	renderUniversalRect(finalButtonContent, profile, buttonState);
-
-	//now draw an icon if default rendering was used.
-	if ((profile->mImageAsset == NULL || !mCloseButtonProfile->mImageAsset->isAssetValid()) &&
-		profile->mBitmapName == NULL)
-	{
-		RectI fillRect = applyBorders(finalButtonContent.point, finalButtonContent.extent, buttonState, profile);
-		RectI contentRect = applyPadding(fillRect.point, fillRect.extent, buttonState, profile);
-
-		//draw the icon
-		if (defaultIcon == Icon::Close)
-		{
-
-		}
-		else if (defaultIcon == Icon::Min)
-		{
-			S32 h = (contentRect.len_y() / 2) - 1;
-			Point2I p1 = Point2I(contentRect.point.x, contentRect.point.y + h);
-			Point2I p2 = Point2I(contentRect.point.x, contentRect.point.y + h + 2);
-			Point2I p3 = Point2I(contentRect.point.x + contentRect.extent.x, contentRect.point.y + h + 2);
-			Point2I p4 = Point2I(contentRect.point.x + contentRect.extent.x, contentRect.point.y + h);
-			dglDrawQuadFill(p1, p2, p3, p4, profile->getFontColor(buttonState));
-		}
-		else if (defaultIcon == Icon::Max)
-		{
-
-		}
-	}
-
-	return finalButtonContent;
-}
-
-GuiControlState GuiWindowCtrl::getRegionCurrentState(GuiWindowCtrl::Region region)
-{
-	GuiControlState currentState = GuiControlState::NormalState;
-	if (!mActive)
-	{
-		currentState = GuiControlState::DisabledState;
-	}
-	else if (curHitRegion == region && mDepressed)
-	{
-		currentState = GuiControlState::SelectedState;
-	}
-	else if (curHitRegion == region)
-	{
-		currentState = GuiControlState::HighlightState;
-	}
-	return currentState;
-}
 
 void GuiWindowCtrl::getCursor(GuiCursor *&cursor, bool &showCursor, const GuiEvent &lastGuiEvent)
 {

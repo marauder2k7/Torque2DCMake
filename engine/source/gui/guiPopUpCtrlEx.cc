@@ -97,7 +97,7 @@ GuiPopUpBackgroundCtrlEx::GuiPopUpBackgroundCtrlEx(GuiPopUpMenuCtrlEx *ctrl, Gui
    mTextList = textList;
 }
 
-void GuiPopUpBackgroundCtrlEx::onTouchDown(const GuiEvent &event)
+void GuiPopUpBackgroundCtrlEx::onMouseDown(const GuiEvent &event)
 {
 //   mTextList->setSelectedCell(Point2I(-1,-1)); // DAW: Removed
    mPopUpCtrl->mBackgroundCancel = true; // DAW: Set that the user didn't click within the text list.  Replaces the line above.
@@ -181,12 +181,13 @@ bool GuiPopupTextListCtrlEx::onKeyDown(const GuiEvent &event)
    return Parent::onKeyDown(event);
 }
 
-void GuiPopupTextListCtrlEx::onTouchUp(const GuiEvent &event)
+void GuiPopupTextListCtrlEx::onMouseUp(const GuiEvent &event)
 {
     if(!mActive)
         return;
 
    Point2I pt = globalToLocalCoord(event.mousePoint);
+   pt.x -= mHeaderDim.x; pt.y -= mHeaderDim.y;
    Point2I cell(
       (pt.x < 0 ? -1 : pt.x / mCellSize.x), 
       (pt.y < 0 ? -1 : pt.y / mCellSize.y)
@@ -198,17 +199,18 @@ void GuiPopupTextListCtrlEx::onTouchUp(const GuiEvent &event)
          return;
    }
 
-   Parent::onTouchDown(event);
+   Parent::onMouseDown(event);
    mPopUpCtrl->closePopUp();
-   Parent::onTouchUp(event);
+   Parent::onMouseUp(event);
 }
 
-void GuiPopupTextListCtrlEx::onTouchMove( const GuiEvent &event )
+void GuiPopupTextListCtrlEx::onMouseMove( const GuiEvent &event )
 {
    if( !mPopUpCtrl || !mPopUpCtrl->isMethod("onHotTrackItem") )
-      return Parent::onTouchMove( event );
+      return Parent::onMouseMove( event );
 
    Point2I pt = globalToLocalCoord(event.mousePoint);
+   pt.x -= mHeaderDim.x; pt.y -= mHeaderDim.y;
    Point2I cell( (pt.x < 0 ? -1 : pt.x / mCellSize.x), (pt.y < 0 ? -1 : pt.y / mCellSize.y) );
 
    // Within Bounds?
@@ -220,7 +222,7 @@ void GuiPopupTextListCtrlEx::onTouchMove( const GuiEvent &event )
       Con::executef( mPopUpCtrl, 2, "onHotTrackItem", Con::getIntArg(-1) );
 
    // Call Parent
-   Parent::onTouchMove(event);
+   Parent::onMouseMove(event);
 }
 
 //------------------------------------------------------------------------------
@@ -890,8 +892,8 @@ void GuiPopUpMenuCtrlEx::onRender(Point2I offset, const RectI &updateRect)
 	  {
          dglDrawLine(l, t, l, b, colorWhite);
          dglDrawLine(l, t, r2, t, colorWhite);
-         //dglDrawLine(l + 1, b, r2, b, mProfile->mBorderColor);
-         //dglDrawLine(r2, t + 1, r2, b - 1, mProfile->mBorderColor);
+         dglDrawLine(l + 1, b, r2, b, mProfile->mBorderColor);
+         dglDrawLine(r2, t + 1, r2, b - 1, mProfile->mBorderColor);
 	  }
 
    }
@@ -926,8 +928,8 @@ void GuiPopUpMenuCtrlEx::onRender(Point2I offset, const RectI &updateRect)
 	  {
          dglDrawLine(l, t, l, b, colorWhite);
          dglDrawLine(l, t, r2, t, colorWhite);
-         //dglDrawLine(l + 1, b, r2, b, mProfile->mBorderColor);
-         //dglDrawLine(r2, t + 1, r2, b - 1, mProfile->mBorderColor);
+         dglDrawLine(l + 1, b, r2, b, mProfile->mBorderColor);
+         dglDrawLine(r2, t + 1, r2, b - 1, mProfile->mBorderColor);
 	  }
    }
    else
@@ -955,19 +957,19 @@ void GuiPopUpMenuCtrlEx::onRender(Point2I offset, const RectI &updateRect)
       // Do we render a bitmap border or lines?
       if(!(mProfile->mProfileForChildren && mProfile->mBitmapArrayRects.size()))
 	  {
-         //dglDrawRect(r, mProfile->mBorderColorNA);
+         dglDrawRect(r, mProfile->mBorderColorNA);
 	  }
    }
 //      renderSlightlyRaisedBox(r, mProfile); // DAW: Used to be the only 'else' condition to mInAction above.
 
-   S32 txt_w = mProfile->mFont->getStrWidth(mText);
+   S32 txt_w = mFont->getStrWidth(mText);
    localStart.x = 0;
-   localStart.y = (mBounds.extent.y - (mProfile->mFont->getHeight())) / 2;
+   localStart.y = (mBounds.extent.y - (mFont->getHeight())) / 2;
 
    // align the horizontal
    switch (mProfile->mAlignment)
    {
-      case GuiControlProfile::RightAlign:
+      case GuiControlProfile::RightJustify:
          if(mProfile->mProfileForChildren && mProfile->mBitmapArrayRects.size())
 		 {
             // We're making use of a bitmap border, so take into account the
@@ -980,7 +982,7 @@ void GuiPopUpMenuCtrlEx::onRender(Point2I offset, const RectI &updateRect)
             localStart.x = mBounds.extent.x - txt_w;  
          }
          break;
-      case GuiControlProfile::CenterAlign:
+      case GuiControlProfile::CenterJustify:
          if(mProfile->mProfileForChildren && mProfile->mBitmapArrayRects.size())
 		 {
             // We're making use of a bitmap border, so take into account the
@@ -994,7 +996,7 @@ void GuiPopUpMenuCtrlEx::onRender(Point2I offset, const RectI &updateRect)
          }
          break;
       default:
-         // GuiControlProfile::LeftAlign
+         // GuiControlProfile::LeftJustify
          if(txt_w > mBounds.extent.x)
 		 {
             // DAW: The width of the text is greater than the width of the control.
@@ -1046,28 +1048,28 @@ void GuiPopUpMenuCtrlEx::onRender(Point2I offset, const RectI &updateRect)
 
       // Draw the first column
       getColumn(mText, buff, 0, "\t");
-      dglDrawText(mProfile->mFont, globalStart, buff, mProfile->mFontColors);
+      dglDrawText(mFont, globalStart, buff, mProfile->mFontColors);
 
 	  // Draw the second column to the right
       getColumn(mText, buff, 1, "\t");
-      S32 txt_w = mProfile->mFont->getStrWidth(buff);
+      S32 txt_w = mFont->getStrWidth(buff);
       if(mProfile->mProfileForChildren && mProfile->mBitmapArrayRects.size())
       {
          // We're making use of a bitmap border, so take into account the
          // right cap of the border.
          RectI* mBitmapBounds = mProfile->mBitmapArrayRects.address();
          Point2I textpos = localToGlobalCoord(Point2I(mBounds.extent.x - txt_w - mBitmapBounds[2].extent.x,localStart.y));
-         dglDrawText(mProfile->mFont, textpos, buff, mProfile->mFontColors);
+         dglDrawText(mFont, textpos, buff, mProfile->mFontColors);
 
       } else
       {
          Point2I textpos = localToGlobalCoord(Point2I(mBounds.extent.x - txt_w - 12,localStart.y));
-         dglDrawText(mProfile->mFont, textpos, buff, mProfile->mFontColors);
+         dglDrawText(mFont, textpos, buff, mProfile->mFontColors);
 	  }
 
    } else
    {
-      dglDrawText(mProfile->mFont, globalStart, mText, mProfile->mFontColors);
+      dglDrawText(mFont, globalStart, mText, mProfile->mFontColors);
    }
 
    // If we're rendering a bitmap border, then it will take care of the arrow.
@@ -1207,25 +1209,25 @@ void GuiPopUpMenuCtrlEx::onAction()
    bool setScroll = false;
       
    for( U32 i = 0; i < (U32)mEntries.size(); ++i )
-      if(S32(mProfile->mFont->getStrWidth(mEntries[i].buf)) > textWidth)
-         textWidth = mProfile->mFont->getStrWidth(mEntries[i].buf);
+      if(S32(mFont->getStrWidth(mEntries[i].buf)) > textWidth)
+         textWidth = mFont->getStrWidth(mEntries[i].buf);
 
    //if(textWidth > mBounds.extent.x)
-   S32 sbWidth = 0;//TODO: mSc->mProfile->mBorderSize * 2 + mSc->scrollBarThickness(); // DAW: Calculate the scroll bar width
-   if(textWidth > (mBounds.extent.x - sbWidth-mProfile->mTextOffset.x)) // DAW: The text draw area to test against is the width of the drop-down minus the scroll bar width, the text margin and the scroll bar child margins.
+   S32 sbWidth = mSc->mProfile->mBorderThickness * 2 + mSc->scrollBarThickness(); // DAW: Calculate the scroll bar width
+   if(textWidth > (mBounds.extent.x - sbWidth-mProfile->mTextOffset.x - mSc->getChildMargin().x * 2)) // DAW: The text draw area to test against is the width of the drop-down minus the scroll bar width, the text margin and the scroll bar child margins.
    {
       //textWidth +=10;
-      textWidth +=sbWidth + mProfile->mTextOffset.x; // DAW: The new width is the width of the text plus the scroll bar width plus the text margin size plus the scroll bar child margins.
+      textWidth +=sbWidth + mProfile->mTextOffset.x + mSc->getChildMargin().x * 2; // DAW: The new width is the width of the text plus the scroll bar width plus the text margin size plus the scroll bar child margins.
       width = textWidth;
 	  
 	  // DAW: If a child margin is not defined for the scroll control, let's add
 	  //      some space between the text and scroll control for readability
-	  //if(mSc->getChildMargin().x == 0)
-		//  width += 2;
+	  if(mSc->getChildMargin().x == 0)
+		  width += 2;
    }
 
    //mTl->setCellSize(Point2I(width, mFont->getHeight()+3));
-   mTl->setCellSize(Point2I(width, mProfile->mFont->getHeight() + textSpace)); // DAW: Modified the above line to use textSpace rather than the '3' as this is what is used below.
+   mTl->setCellSize(Point2I(width, mFont->getHeight() + textSpace)); // DAW: Modified the above line to use textSpace rather than the '3' as this is what is used below.
 
    for( U32 j=0; j < (U32)mEntries.size(); ++j )
       mTl->addEntry(mEntries[j].id, mEntries[j].buf);
@@ -1235,7 +1237,7 @@ void GuiPopUpMenuCtrlEx::onAction()
 
    //Calc max Y distance, so Scroll Ctrl will fit on window 
    //S32 maxYdis = windowExt.y - pointInGC.y - mBounds.extent.y - menuSpace; 
-   S32 sbBorder = 0;//TODO: mSc->mProfile->mBorderSize * 2 + mSc->getChildMargin().y * 2; // DAW: Added to take into account the border thickness and the margin of the child controls of the scroll control when figuring out the size of the contained text list control
+   S32 sbBorder = mSc->mProfile->mBorderThickness * 2 + mSc->getChildMargin().y * 2; // DAW: Added to take into account the border thickness and the margin of the child controls of the scroll control when figuring out the size of the contained text list control
    S32 maxYdis = windowExt.y - pointInGC.y - mBounds.extent.y - sbBorder; // - menuSpace; // DAW: Need to remove the border thickness from the contained control maximum extent and got rid of the 'menuspace' variable
                      
    //If scroll bars need to be added
@@ -1408,7 +1410,7 @@ bool GuiPopUpMenuCtrlEx::getFontColor( ColorI &fontColor, S32 id, bool selected,
       fontColor = mProfile->mFontColorHL;
    else
    // Default color scheme...
-   fontColor = selected ? mProfile->mFontColorSL : mouseOver ? mProfile->mFontColorHL : mProfile->mFontColorNA; // DAW: Modified the final color choice from mProfile->mFontColor to mProfile->mFontColorNA
+   fontColor = selected ? mProfile->mFontColorSEL : mouseOver ? mProfile->mFontColorHL : mProfile->mFontColorNA; // DAW: Modified the final color choice from mProfile->mFontColor to mProfile->mFontColorNA
 
    return( true );
 }
@@ -1440,7 +1442,7 @@ bool GuiPopUpMenuCtrlEx::getColoredBox( ColorI &fontColor, S32 id )
 }
 
 //------------------------------------------------------------------------------
-void GuiPopUpMenuCtrlEx::onTouchDown(const GuiEvent &event)
+void GuiPopUpMenuCtrlEx::onMouseDown(const GuiEvent &event)
 {
    if(!mActive)
        return;
@@ -1449,20 +1451,20 @@ void GuiPopUpMenuCtrlEx::onTouchDown(const GuiEvent &event)
 }
 
 //------------------------------------------------------------------------------
-void GuiPopUpMenuCtrlEx::onTouchUp(const GuiEvent &event)
+void GuiPopUpMenuCtrlEx::onMouseUp(const GuiEvent &event)
 {
 }
 
 //------------------------------------------------------------------------------
 // DAW: Added
-void GuiPopUpMenuCtrlEx::onTouchEnter(const GuiEvent &event)
+void GuiPopUpMenuCtrlEx::onMouseEnter(const GuiEvent &event)
 {
    mMouseOver = true;
 }
 
 //------------------------------------------------------------------------------
 // DAW: Added
-void GuiPopUpMenuCtrlEx::onTouchLeave(const GuiEvent &)
+void GuiPopUpMenuCtrlEx::onMouseLeave(const GuiEvent &)
 {
    mMouseOver = false;
 }
@@ -1509,10 +1511,10 @@ void GuiPopUpMenuCtrlEx::autoScroll()
 
    while(mScrollCount > 1)
    {
-      mSc->scrollByRegion(mScrollDir);
+      mSc->autoScroll(mScrollDir);
       mScrollCount -= 1;
    }
-   mTl->onTouchMove(mEventSave);
+   mTl->onMouseMove(mEventSave);
 }
 
 //------------------------------------------------------------------------------

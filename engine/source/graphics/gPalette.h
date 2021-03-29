@@ -28,7 +28,7 @@
 #include "platform/platform.h"
 #endif
 #ifndef _COLOR_H_
-#include "graphics/gColor.h"
+#include "graphics/color.h"
 #endif
 
 //-------------------------------------- Forward decls.

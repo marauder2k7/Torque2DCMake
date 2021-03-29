@@ -84,7 +84,7 @@ void GuiTextEditSliderCtrl::setValue()
    Parent::setText(buf);
 }
 
-void GuiTextEditSliderCtrl::onTouchDown(const GuiEvent &event)
+void GuiTextEditSliderCtrl::onMouseDown(const GuiEvent &event)
 {
    char txt[20];
    Parent::getText(txt);
@@ -117,10 +117,10 @@ void GuiTextEditSliderCtrl::onTouchDown(const GuiEvent &event)
       mouseLock();
       return;
    }
-   Parent::onTouchDown(event);
+   Parent::onMouseDown(event);
 }
 
-void GuiTextEditSliderCtrl::onTouchDragged(const GuiEvent &event)
+void GuiTextEditSliderCtrl::onMouseDragged(const GuiEvent &event)
 {
    if(mTextAreaHit == None || mTextAreaHit == Slider)
    {
@@ -158,17 +158,17 @@ void GuiTextEditSliderCtrl::onTouchDragged(const GuiEvent &event)
          return;
       }
       mTextAreaHit = None;
-      Parent::onTouchDragged(event);
+      Parent::onMouseDragged(event);
    }
 }
 
-void GuiTextEditSliderCtrl::onTouchUp(const GuiEvent &event)
+void GuiTextEditSliderCtrl::onMouseUp(const GuiEvent &event)
 {
    mMulInc = 0.0f;
    mouseUnlock();
   //if we released the mouse within this control, then the parent will call
   //the mConsoleCommand other wise we have to call it.
-   Parent::onTouchUp(event);
+   Parent::onMouseUp(event);
   //if we didn't release the mouse within this control, then perform the action
    if (!cursorInControl())
       Con::evaluate(mConsoleCommand, false);

@@ -828,6 +828,7 @@ void mInstallLibrary_C()
    m_matF_normalize        = m_matF_normalize_C;
    m_matF_determinant      = m_matF_determinant_C;
    m_matF_x_matF           = default_matF_x_matF_C;
+   m_matF_x_matF_aligned = default_matF_x_matF_C;
 //    m_matF_x_point3F        = m_matF_x_point3F_C;
 //    m_matF_x_vectorF        = m_matF_x_vectorF_C;
    m_matF_x_point4F        = m_matF_x_point4F_C;

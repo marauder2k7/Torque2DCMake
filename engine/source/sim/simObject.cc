@@ -46,8 +46,6 @@ namespace Sim
 }
 
 //-----------------------------------------------------------------------------
-bool SimObject::disableNameChanging = false;
-//-----------------------------------------------------------------------------
 
 SimObject::SimObject()
 {
@@ -162,19 +160,25 @@ void SimObject::unregisterObject()
 
 void SimObject::deleteObject()
 {
-    // Sanity!
-    AssertISV( getScriptCallbackGuard() == 0, "SimObject::deleteObject: Object is being deleted whilst performing a script callback!" );
+   //This is a hack to deal with nullptr being sent to getScriptCallbackGuard()
+   if (this != nullptr)
+   {
+      // Sanity!
+      AssertISV(getScriptCallbackGuard() == 0, "SimObject::deleteObject: Object is being deleted whilst performing a script callback!");
 
-    AssertFatal(mFlags.test(Added),
-        "SimObject::deleteObject: Object not registered.");
-    AssertFatal(!isDeleted(),"SimManager::deleteObject: "
-        "Object has already been deleted");
-    AssertFatal(!isRemoved(),"SimManager::deleteObject: "
-        "Object in the process of being removed");
-    mFlags.set(Deleted);
+      AssertFatal(mFlags.test(Added),
+         "SimObject::deleteObject: Object not registered.");
+      AssertFatal(!isDeleted(), "SimManager::deleteObject: "
+         "Object has already been deleted");
+      AssertFatal(!isRemoved(), "SimManager::deleteObject: "
+         "Object in the process of being removed");
+      mFlags.set(Deleted);
 
-   unregisterObject();
-   delete this;
+      unregisterObject();
+      delete this;
+   }
+
+   return;
 }
 
 //---------------------------------------------------------------------------
@@ -543,6 +547,10 @@ void SimObject::setDataField(StringTableEntry slotName, const char *array, const
 
             if( (*fld->setDataFn)( this, bufferSecure ) )
                Con::setData(fld->type, (void *) (((const char *)this) + fld->offset), array1, 1, &value, fld->table);
+
+            onStaticModified( slotName, value );
+
+            return;
          }
 
          if(fld->validator)
@@ -848,21 +856,33 @@ SimObject::~SimObject()
 
 //---------------------------------------------------------------------------
 
+bool SimObject::isLocked()
+{
+   if(!mFieldDictionary)
+      return false;
+
+   const char * val = mFieldDictionary->getFieldValue( StringTable->insert( "locked", false ) );
+
+   return( val ? dAtob(val) : false );
+}
 
 void SimObject::setLocked( bool b = true )
 {
-   if (b)
-      mFlags.set(Locked);
-   else
-      mFlags.clear(Locked);
+   setDataField(StringTable->insert("locked", false), NULL, b ? "true" : "false" );
+}
+
+bool SimObject::isHidden()
+{
+   if(!mFieldDictionary)
+      return false;
+
+   const char * val = mFieldDictionary->getFieldValue( StringTable->insert( "hidden", false ) );
+   return( val ? dAtob(val) : false );
 }
 
 void SimObject::setHidden(bool b = true)
 {
-   if (b)
-      mFlags.set(Hidden);
-   else
-      mFlags.clear(Hidden);
+   setDataField(StringTable->insert("hidden", false), NULL, b ? "true" : "false" );
 }
 
 //---------------------------------------------------------------------------
@@ -1069,13 +1089,10 @@ void SimObject::clearAllNotifications()
 void SimObject::initPersistFields()
 {
    Parent::initPersistFields();
-
-   
    addGroup("SimBase");
-   addProtectedField("name", TypeName, Offset(objectName, SimObject), &setProtectedName, &defaultProtectedGetFn, "Name for the object.");
-   addField("canSaveDynamicFields",    TypeBool,         Offset(mCanSaveFieldDictionary, SimObject), &writeCanSaveDynamicFields, "");
+   addField("canSaveDynamicFields",   TypeBool,   Offset(mCanSaveFieldDictionary, SimObject), &writeCanSaveDynamicFields, "");
    addField("internalName",            TypeString,       Offset(mInternalName, SimObject), &writeInternalName, "");   
-   addProtectedField("parentGroup",    TypeSimObjectPtr, Offset(mGroup, SimObject), &setParentGroup, &defaultProtectedGetFn, &writeParentGroup, "Group hierarchy parent of the object." );
+   addProtectedField("parentGroup",        TypeSimObjectPtr, Offset(mGroup, SimObject), &setParentGroup, &defaultProtectedGetFn, &writeParentGroup, "Group hierarchy parent of the object." );
    endGroup("SimBase");
 
    // Namespace Linking.
@@ -1083,30 +1100,7 @@ void SimObject::initPersistFields()
    addProtectedField("superclass", TypeString, Offset(mSuperClassName, SimObject), &setSuperClass, &defaultProtectedGetFn, &writeSuperclass, "Script Class of object.");
    addProtectedField("class",      TypeString, Offset(mClassName,      SimObject), &setClass,      &defaultProtectedGetFn, &writeClass, "Script SuperClass of object.");
    endGroup("Namespace Linking");
-
-   addGroup("Editing");
-
-   addProtectedField("hidden", TypeBool, NULL, &_setHidden, &_getHidden, "Whether the object is visible.");
-   addProtectedField("locked", TypeBool, NULL, &_setLocked, &_getLocked, "Whether the object can be edited.");
-
-   endGroup("Editing");
 }
-
-//-----------------------------------------------------------------------------
-
-bool SimObject::setProtectedName(void *obj, const char *data)
-{
-   if (disableNameChanging)
-      return false;
-   SimObject *object = static_cast<SimObject*>(obj);
-
-   if (object->isProperlyAdded())
-      object->assignName(data);
-
-   // always return false because we assign the name here
-   return false;
-}
-
 
 //-----------------------------------------------------------------------------
 

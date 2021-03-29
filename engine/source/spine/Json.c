@@ -1,50 +1,32 @@
 /*
-Copyright (c) 2009, Dave Gamble
-Copyright (c) 2013, Esoteric Software
+ Copyright (c) 2009 Dave Gamble
 
-Permission is hereby granted, dispose of charge, to any person obtaining a copy
-of this software and associated documentation files (the "Software"), to deal
-in the Software without restriction, including without limitation the rights
-to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
-copies of the Software, and to permit persons to whom the Software is
-furnished to do so, subject to the following conditions:
+ Permission is hereby granted, dispose of charge, to any person obtaining a copy
+ of this software and associated documentation files (the "Software"), to deal
+ in the Software without restriction, including without limitation the rights
+ to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+ copies of the Software, and to permit persons to whom the Software is
+ furnished to do so, subject to the following conditions:
 
-The above copyright notice and this permission notice shall be included in
-all copies or substantial portions of the Software.
+ The above copyright notice and this permission notice shall be included in
+ all copies or substantial portions of the Software.
 
-THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
-IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
-FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
-AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
-LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
-OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
-THE SOFTWARE.
-*/
+ THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+ IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+ FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+ AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+ LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
+ THE SOFTWARE.
+ */
 
 /* Json */
 /* JSON parser in C. */
 
-#ifndef _DEFAULT_SOURCE
-/* Bring strings.h definitions into string.h, where appropriate */
-#define _DEFAULT_SOURCE
-#endif
-
-#ifndef _BSD_SOURCE
-/* Bring strings.h definitions into string.h, where appropriate */
-#define _BSD_SOURCE
-#endif
-
 #include "Json.h"
 #include <stdio.h>
 #include <ctype.h>
-#include <stdlib.h> /* strtod (C89), strtof (C99) */
-#include <string.h> /* strcasecmp (4.4BSD - compatibility), _stricmp (_WIN32) */
 #include <spine/extension.h>
-
-#ifndef SPINE_JSON_DEBUG
-/* Define this to do extra NULL and expected-character checking */
-#define SPINE_JSON_DEBUG 0
-#endif
 
 static const char* ep;
 
@@ -53,22 +35,11 @@ const char* Json_getError (void) {
 }
 
 static int Json_strcasecmp (const char* s1, const char* s2) {
-	/* TODO we may be able to elide these NULL checks if we can prove
-	the graph and input (only callsite is Json_getItem) should not have NULLs */
-	if (s1 && s2) {
-#if defined(_WIN32)
-		return _stricmp(s1, s2);
-#else
-		return strcasecmp( s1, s2 );
-#endif
-	} else {
-		if (s1 < s2)
-			return -1; /* s1 is null, s2 is not */
-		else if (s1 == s2)
-			return 0; /* both are null */
-		else
-			return 1; /* s2 is nul	s1 is not */
-	}
+	if (!s1) return (s1 == s2) ? 0 : 1;
+	if (!s2) return 1;
+	for (; tolower(*s1) == tolower(*s2); ++s1, ++s2)
+		if (*s1 == 0) return 0;
+	return tolower(*(const unsigned char*)s1) - tolower(*(const unsigned char*)s2);
 }
 
 /* Internal constructor. */
@@ -91,70 +62,37 @@ void Json_dispose (Json *c) {
 
 /* Parse the input text to generate a number, and populate the result into item. */
 static const char* parse_number (Json *item, const char* num) {
-	double result = 0.0;
-	int negative = 0;
-	char* ptr = (char*)num;
+	float n = 0, sign = 1, scale = 0;
+	int subscale = 0, signsubscale = 1;
 
-	if (*ptr == '-') {
-		negative = -1;
-		++ptr;
+	/* Could use sscanf for this? */
+	if (*num == '-') sign = -1, num++; /* Has sign? */
+	if (*num == '0') num++; /* is zero */
+	if (*num >= '1' && *num <= '9') do
+		n = (n * 10.0f) + (*num++ - '0');
+	while (*num >= '0' && *num <= '9'); /* Number? */
+	if (*num == '.' && num[1] >= '0' && num[1] <= '9') {
+		num++;
+		do
+			n = (n * 10.0f) + (*num++ - '0'), scale--;
+		while (*num >= '0' && *num <= '9');
+	} /* Fractional part? */
+	if (*num == 'e' || *num == 'E') /* Exponent? */
+	{
+		num++;
+		if (*num == '+')
+			num++;
+		else if (*num == '-') signsubscale = -1, num++; /* With sign? */
+		while (*num >= '0' && *num <= '9')
+			subscale = (subscale * 10) + (*num++ - '0'); /* Number? */
 	}
 
-	while (*ptr >= '0' && *ptr <= '9') {
-		result = result * 10.0 + (*ptr - '0');
-		++ptr;
-	}
+	n = sign * n * (float)pow(10.0f, (scale + subscale * signsubscale)); /* number = +/- number.fraction * 10^+/- exponent */
 
-	if (*ptr == '.') {
-		double fraction = 0.0;
-		int n = 0;
-		++ptr;
-
-		while (*ptr >= '0' && *ptr <= '9') {
-			fraction = (fraction * 10.0) + (*ptr - '0');
-			++ptr;
-			++n;
-		}
-		result += fraction / POW(10.0, n);
-	}
-	if (negative) result = -result;
-
-	if (*ptr == 'e' || *ptr == 'E') {
-		double exponent = 0;
-		int expNegative = 0;
-		int n = 0;
-		++ptr;
-
-		if (*ptr == '-') {
-			expNegative = -1;
-			++ptr;
-		} else if (*ptr == '+') {
-			++ptr;
-		}
-
-		while (*ptr >= '0' && *ptr <= '9') {
-			exponent = (exponent * 10.0) + (*ptr - '0');
-			++ptr;
-			++n;
-		}
-
-		if (expNegative)
-			result = result / POW(10, exponent);
-		else
-			result = result * POW(10, exponent);
-	}
-
-	if (ptr != num) {
-		/* Parse success, number found. */
-		item->valueFloat = (float)result;
-		item->valueInt = (int)result;
-		item->type = Json_Number;
-		return ptr;
-	} else {
-		/* Parse failure, ep is set. */
-		ep = num;
-		return 0;
-	}
+	item->valueFloat = n;
+	item->valueInt = (int)n;
+	item->type = Json_Number;
+	return num;
 }
 
 /* Parse the input text into an unescaped cstring, and populate item. */
@@ -165,7 +103,7 @@ static const char* parse_string (Json *item, const char* str) {
 	char* out;
 	int len = 0;
 	unsigned uc, uc2;
-	if (*str != '\"') { /* TODO: don't need this check when called from parse_value, but do need from parse_object */
+	if (*str != '\"') {
 		ep = str;
 		return 0;
 	} /* not a string! */
@@ -173,7 +111,7 @@ static const char* parse_string (Json *item, const char* str) {
 	while (*ptr != '\"' && *ptr && ++len)
 		if (*ptr++ == '\\') ptr++; /* Skip escaped quotes. */
 
-	out = MALLOC(char, len + 1); /* The length needed for the string, roughly. */
+	out = (char*)malloc(len + 1); /* This is how long we need for the string, roughly. */
 	if (!out) return 0;
 
 	ptr = str + 1;
@@ -205,7 +143,6 @@ static const char* parse_string (Json *item, const char* str) {
 
 				if ((uc >= 0xDC00 && uc <= 0xDFFF) || uc == 0) break; /* check for invalid.	*/
 
-				/* TODO provide an option to ignore surrogates, use unicode replacement character? */
 				if (uc >= 0xD800 && uc <= 0xDBFF) /* UTF16 surrogate pairs.	*/
 				{
 					if (ptr[1] != '\\' || ptr[2] != 'u') break; /* missing second-half of surrogate.	*/
@@ -227,15 +164,12 @@ static const char* parse_string (Json *item, const char* str) {
 				case 4:
 					*--ptr2 = ((uc | 0x80) & 0xBF);
 					uc >>= 6;
-					/* fallthrough */
 				case 3:
 					*--ptr2 = ((uc | 0x80) & 0xBF);
 					uc >>= 6;
-					/* fallthrough */
 				case 2:
 					*--ptr2 = ((uc | 0x80) & 0xBF);
 					uc >>= 6;
-					/* fallthrough */
 				case 1:
 					*--ptr2 = (uc | firstByteMark[len]);
 				}
@@ -249,7 +183,7 @@ static const char* parse_string (Json *item, const char* str) {
 		}
 	}
 	*ptr2 = 0;
-	if (*ptr == '\"') ptr++; /* TODO error handling if not \" or \0 ? */
+	if (*ptr == '\"') ptr++;
 	item->valueString = out;
 	item->type = Json_String;
 	return ptr;
@@ -262,22 +196,20 @@ static const char* parse_object (Json *item, const char* value);
 
 /* Utility to jump whitespace and cr/lf */
 static const char* skip (const char* in) {
-	if (!in) return 0; /* must propagate NULL since it's often called in skip(f(...)) form */
-	while (*in && (unsigned char)*in <= 32)
+	while (in && *in && (unsigned char)*in <= 32)
 		in++;
 	return in;
 }
 
 /* Parse an object - create a new root, and populate. */
 Json *Json_create (const char* value) {
-	Json *c;
+	const char* end = 0;
+	Json *c = Json_new();
 	ep = 0;
-	if (!value) return 0; /* only place we check for NULL other than skip() */
-	c = Json_new();
 	if (!c) return 0; /* memory fail */
 
-	value = parse_value(c, skip(value));
-	if (!value) {
+	end = parse_value(c, skip(value));
+	if (!end) {
 		Json_dispose(c);
 		return 0;
 	} /* parse failure. ep is set. */
@@ -287,56 +219,31 @@ Json *Json_create (const char* value) {
 
 /* Parser core - when encountering text, process appropriately. */
 static const char* parse_value (Json *item, const char* value) {
-	/* Referenced by Json_create(), parse_array(), and parse_object(). */
-	/* Always called with the result of skip(). */
-#if SPINE_JSON_DEBUG /* Checked at entry to graph, Json_create, and after every parse_ call. */
 	if (!value) return 0; /* Fail on null. */
-#endif
-
-	switch (*value) {
-	case 'n': {
-		if (!strncmp(value + 1, "ull", 3)) {
-			item->type = Json_NULL;
-			return value + 4;
-		}
-		break;
+	if (!strncmp(value, "null", 4)) {
+		item->type = Json_NULL;
+		return value + 4;
 	}
-	case 'f': {
-		if (!strncmp(value + 1, "alse", 4)) {
-			item->type = Json_False;
-			/* calloc prevents us needing item->type = Json_False or valueInt = 0 here */
-			return value + 5;
-		}
-		break;
+	if (!strncmp(value, "false", 5)) {
+		item->type = Json_False;
+		return value + 5;
 	}
-	case 't': {
-		if (!strncmp(value + 1, "rue", 3)) {
-			item->type = Json_True;
-			item->valueInt = 1;
-			return value + 4;
-		}
-		break;
+	if (!strncmp(value, "true", 4)) {
+		item->type = Json_True;
+		item->valueInt = 1;
+		return value + 4;
 	}
-	case '\"':
+	if (*value == '\"') {
 		return parse_string(item, value);
-	case '[':
-		return parse_array(item, value);
-	case '{':
-		return parse_object(item, value);
-	case '-': /* fallthrough */
-	case '0': /* fallthrough */
-	case '1': /* fallthrough */
-	case '2': /* fallthrough */
-	case '3': /* fallthrough */
-	case '4': /* fallthrough */
-	case '5': /* fallthrough */
-	case '6': /* fallthrough */
-	case '7': /* fallthrough */
-	case '8': /* fallthrough */
-	case '9':
+	}
+	if (*value == '-' || (*value >= '0' && *value <= '9')) {
 		return parse_number(item, value);
-	default:
-		break;
+	}
+	if (*value == '[') {
+		return parse_array(item, value);
+	}
+	if (*value == '{') {
+		return parse_object(item, value);
 	}
 
 	ep = value;
@@ -346,13 +253,10 @@ static const char* parse_value (Json *item, const char* value) {
 /* Build an array from input text. */
 static const char* parse_array (Json *item, const char* value) {
 	Json *child;
-
-#if SPINE_JSON_DEBUG /* unnecessary, only callsite (parse_value) verifies this */
 	if (*value != '[') {
 		ep = value;
 		return 0;
 	} /* not an array! */
-#endif
 
 	item->type = Json_Array;
 	value = skip(value + 1);
@@ -365,15 +269,13 @@ static const char* parse_array (Json *item, const char* value) {
 	item->size = 1;
 
 	while (*value == ',') {
-		Json *new_item = Json_new();
-		if (!new_item) return 0; /* memory fail */
+		Json *new_item;
+		if (!(new_item = Json_new())) return 0; /* memory fail */
 		child->next = new_item;
-#if SPINE_JSON_HAVE_PREV
 		new_item->prev = child;
-#endif
 		child = new_item;
 		value = skip(parse_value(child, skip(value + 1)));
-		if (!value) return 0; /* parse fail */
+		if (!value) return 0; /* memory fail */
 		item->size++;
 	}
 
@@ -385,13 +287,10 @@ static const char* parse_array (Json *item, const char* value) {
 /* Build an object from the text. */
 static const char* parse_object (Json *item, const char* value) {
 	Json *child;
-
-#if SPINE_JSON_DEBUG /* unnecessary, only callsite (parse_value) verifies this */
 	if (*value != '{') {
 		ep = value;
 		return 0;
 	} /* not an object! */
-#endif
 
 	item->type = Json_Object;
 	value = skip(value + 1);
@@ -412,12 +311,10 @@ static const char* parse_object (Json *item, const char* value) {
 	item->size = 1;
 
 	while (*value == ',') {
-		Json *new_item = Json_new();
-		if (!new_item) return 0; /* memory fail */
+		Json *new_item;
+		if (!(new_item = Json_new())) return 0; /* memory fail */
 		child->next = new_item;
-#if SPINE_JSON_HAVE_PREV
 		new_item->prev = child;
-#endif
 		child = new_item;
 		value = skip(parse_string(child, skip(value + 1)));
 		if (!value) return 0;

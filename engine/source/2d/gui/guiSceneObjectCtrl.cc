@@ -46,8 +46,8 @@ GuiSceneObjectCtrl::GuiSceneObjectCtrl(void)
 
    mCaption = StringTable->EmptyString;
 
-   //mStateOn = false;
-   //mButtonType = ButtonTypeRadio;
+   mStateOn = false;
+   mButtonType = ButtonTypeRadio;
 
    // Set-up private batcher.
    mBatchRenderer.setDebugStats( &mDebugStats );
@@ -190,28 +190,28 @@ void GuiSceneObjectCtrl::onMouseUp(const GuiEvent &event)
    if( mDepressed && ( event.mouseClickCount % 2 ) == 0 )
          Con::executef( this, 2, "onDoubleClick" );    
 
-   Parent::onTouchUp( event );
+   Parent::onMouseUp( event );
 }
 
 void GuiSceneObjectCtrl::onMouseLeave( const GuiEvent &event )
 {
    Con::executef( this, 2, "onMouseLeave" );
 
-   Parent::onTouchLeave( event );
+   Parent::onMouseLeave( event );
 }
 
 void GuiSceneObjectCtrl::onMouseEnter( const GuiEvent &event )
 {
    Con::executef( this, 2, "onMouseEnter" );
 
-   Parent::onTouchEnter( event );
+   Parent::onMouseEnter( event );
 }
 
 void GuiSceneObjectCtrl::onMouseDragged( const GuiEvent &event )
 {
    Con::executef( this, 2, "onMouseDragged" );
 
-   Parent::onTouchDragged( event );
+   Parent::onMouseDragged( event );
 }
 
 // -----------------------------------------------------------------------------
@@ -224,28 +224,30 @@ void GuiSceneObjectCtrl::onRender(Point2I offset, const RectI& updateRect)
    RectI ctrlRect( offset, mBounds.extent );
 
    // Draw Background
-      if( mDepressed )
+   if( mProfile->mOpaque )
+   {
+      if( mDepressed || mStateOn )
       {
          if( mHasTexture )
-			 renderUniversalRect( ctrlRect, mProfile, GuiControlState::SelectedState);
+            renderSizableBitmapBordersFilled( ctrlRect, 3, mProfile );
          else
             dglDrawRectFill( ctrlRect, mProfile->mFillColorHL );
       }
       else if ( mMouseOver )
       {
          if( mHasTexture )
-			 renderUniversalRect( ctrlRect, mProfile, GuiControlState::HighlightState);
+            renderSizableBitmapBordersFilled( ctrlRect, 2, mProfile );
          else
             dglDrawRectFill( ctrlRect, mProfile->mFillColorHL );
       }
       else
       {
          if( mHasTexture )
-			 renderUniversalRect( ctrlRect, mProfile, GuiControlState::NormalState);
+            renderSizableBitmapBordersFilled( ctrlRect, 1, mProfile );
          else
             dglDrawRectFill( ctrlRect, mProfile->mFillColor );
       }
-   
+   }
 
    //// Render Border.
    //if( mProfile->mBorder || mStateOn )    
@@ -261,10 +263,13 @@ void GuiSceneObjectCtrl::onRender(Point2I offset, const RectI& updateRect)
       ctrlRectInset.inset( mMargin, mMargin); 
 
       // Draw Canvas color for object
-	if( mHasTexture )
-		renderUniversalRect( objRect, mProfile, GuiControlState::DisabledState);
-	else
-		dglDrawRectFill( objRect, mProfile->mFillColorNA );
+      if ( mProfile->mOpaque )
+      {
+         if( mHasTexture )
+            renderSizableBitmapBordersFilled( objRect, 4, mProfile );
+         else
+            dglDrawRectFill( objRect, mProfile->mFillColorNA );
+      }
 
       // Yes, so fetch object clip boundary.
       const b2Vec2* pClipBoundary = mSelectedSceneObject->getRenderOOBB();
@@ -463,13 +468,13 @@ void GuiSceneObjectCtrl::onRender(Point2I offset, const RectI& updateRect)
 
    captionRect.inset(1, 1);
    dglSetBitmapModulation( ColorI(0,0,0,255) );
-   renderText(captionRect.point, captionRect.extent, mCaption, mProfile);
+   renderJustifiedText(captionRect.point, captionRect.extent, mCaption);
    captionRect.inset(1, 1);   
    dglSetBitmapModulation( mProfile->mFontColor );
-   renderText(captionRect.point, captionRect.extent, mCaption, mProfile);
+   renderJustifiedText(captionRect.point, captionRect.extent, mCaption);
 
    
 
    // Render Child Controls.
-   renderChildControls(offset, mBounds, updateRect);
+   renderChildControls(offset, updateRect);
 }

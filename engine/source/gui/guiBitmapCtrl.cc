@@ -225,13 +225,13 @@ void GuiBitmapCtrl::onRender(Point2I offset, const RectI &updateRect)
       }
    }
 
-   if (mProfile->mBorderDefault && *mProfile->mBorderDefault->mBorder > 0 && !mTextureHandle)
+   if (mProfile->mBorder || !mTextureHandle)
    {
       RectI rect(offset.x, offset.y, mBounds.extent.x, mBounds.extent.y);
-      dglDrawRect(rect, mProfile->mBorderDefault->mBorderColor[0]);
+      dglDrawRect(rect, mProfile->mBorderColor);
    }
 
-   renderChildControls(offset, mBounds, updateRect);
+   renderChildControls(offset, updateRect);
 }
 
 void GuiBitmapCtrl::setValue(S32 x, S32 y)

@@ -145,6 +145,8 @@ namespace Sim
    DeclareNamedSet(ActiveActionMapSet)
    DeclareNamedSet(GhostAlwaysSet)
    DeclareNamedSet(BehaviorSet)
+   DeclareNamedSet(SFXDescriptionSet)
+   DeclareNamedSet(SFXEnvironmentSet)
    DeclareNamedSet(AchievementSet)
    DeclareNamedGroup(ActionMapGroup)
    DeclareNamedGroup(ClientGroup)

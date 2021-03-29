@@ -103,8 +103,8 @@ void BatchRender::SubmitTriangles(
         const U32 vertexCount,
         const Vector2* pVertexArray,
         const Vector2* pTextureArray,
-		const ColorF*  pColorArray,
-		TextureHandle& texture)
+        TextureHandle& texture,
+        const ColorF& color )
 {
     // Debug Profiling.
     PROFILE_SCOPE(BatchRender_SubmitTriangles);
@@ -117,17 +117,28 @@ void BatchRender::SubmitTriangles(
     // Calculate triangle count.
     const U32 triangleCount = vertexCount / 3;
 
+    // Would we exceed the triangle buffer size?
     if ( (mTriangleCount + triangleCount) > BATCHRENDER_MAXTRIANGLES )
     {
-        // No room in the batch for the incoming request, so flush the current batch contents.
+        // Yes, so flush.
         flush( mpDebugStats->batchBufferFullFlush );
     }
-    else if ( mTriangleCount > 0 && mColorCount == 0 )
-	{
-		// We have a batch entry without explicit color definition.  This can happen via the other
-		// render methods which do not require color definition.  If so, we have to flush the batch to
-		// prepare for the current run.
-		flush( mpDebugStats->batchColorStateFlush );
+    // Do we have anything batched?
+    else if ( mTriangleCount > 0 )
+    {
+        // Yes, so do we have any existing colors?
+        if ( mColorCount == 0 )
+        {
+            // No, so flush if color is specified.
+            if ( color != NoColor  )
+                flush( mpDebugStats->batchColorStateFlush );
+        }
+        else
+        {
+            // Yes, so flush if color is not specified.
+            if ( color == NoColor  )
+                flush( mpDebugStats->batchColorStateFlush );
+        }
     }
 
     // Strict order mode?
@@ -160,19 +171,28 @@ void BatchRender::SubmitTriangles(
         findTextureBatch( texture )->push_back( TriangleRun( TriangleRun::TRIANGLE, triangleCount, mVertexCount ) );
     }
 
-    // Load vertex info into batch buffers
+    // Is a color specified?
+    if ( color != NoColor )
+    {
+        // Yes, so add colors.
+        for( U32 n = 0; n < triangleCount; ++n )
+        {
+            mColorBuffer[mColorCount++] = color;
+            mColorBuffer[mColorCount++] = color;
+            mColorBuffer[mColorCount++] = color;
+        }
+    }
+
+    // Add textured vertices.
     for( U32 n = 0; n < triangleCount; ++n )
     {
-		mColorBuffer[mColorCount++] = *(pColorArray++);
-		mColorBuffer[mColorCount++] = *(pColorArray++);
-		mColorBuffer[mColorCount++] = *(pColorArray++);
-		mVertexBuffer[mVertexCount++] = *(pVertexArray++);
-		mVertexBuffer[mVertexCount++] = *(pVertexArray++);
-		mVertexBuffer[mVertexCount++] = *(pVertexArray++);
-		mTextureBuffer[mTextureCoordCount++] = *(pTextureArray++);
+        mVertexBuffer[mVertexCount++]   = *(pVertexArray++);
+        mVertexBuffer[mVertexCount++]   = *(pVertexArray++);
+        mVertexBuffer[mVertexCount++]   = *(pVertexArray++);
         mTextureBuffer[mTextureCoordCount++] = *(pTextureArray++);
         mTextureBuffer[mTextureCoordCount++] = *(pTextureArray++);
-	}
+        mTextureBuffer[mTextureCoordCount++] = *(pTextureArray++);
+    }
 
     // Stats.
     mpDebugStats->batchTrianglesSubmitted += triangleCount;

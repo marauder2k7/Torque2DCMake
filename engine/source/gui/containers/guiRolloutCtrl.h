@@ -26,11 +26,19 @@
 #include "gui/guiControl.h"
 #endif
 
+#ifndef _GUISTACKCTRL_H_
+#include "gui/containers/guiStackCtrl.h"
+#endif
+
 #ifndef _H_GUIDEFAULTCONTROLRENDER_
 #include "gui/guiDefaultControlRender.h"
 #endif
 
-class GuiRolloutCtrl : public GuiControl
+#ifndef _GUITICKCTRL_H_
+#include "gui/guiTickCtrl.h"
+#endif
+
+class GuiRolloutCtrl : public GuiTickCtrl
 {
 private:
    typedef GuiControl Parent;
@@ -88,8 +96,8 @@ public:
    virtual void childResized(GuiControl *child);
 
    // Mouse Events
-   virtual void onTouchDown( const GuiEvent &event );
-   virtual void onTouchUp( const GuiEvent &event );
+   virtual void onMouseDown( const GuiEvent &event );
+   virtual void onMouseUp( const GuiEvent &event );
 
    // Sizing Helpers
    virtual void calculateHeights();

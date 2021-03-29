@@ -22,17 +22,17 @@
 
 typedef struct _ALGUID
 {
-    unsigned long  Data1;
-    unsigned short Data2;
-    unsigned short Data3;
-    unsigned char  Data4[8];
+   unsigned long  Data1;
+   unsigned short Data2;
+   unsigned short Data3;
+   unsigned char  Data4[8];
 }ALGUID;
 
 #ifndef INITGUID
-    #define DEFINE_ALGUID(name, l, w1, w2, b1, b2, b3, b4, b5, b6, b7, b8) \
+#define DEFINE_ALGUID(name, l, w1, w2, b1, b2, b3, b4, b5, b6, b7, b8) \
         extern const ALGUID name
 #else
-    #define DEFINE_ALGUID(name, l, w1, w2, b1, b2, b3, b4, b5, b6, b7, b8) \
+#define DEFINE_ALGUID(name, l, w1, w2, b1, b2, b3, b4, b5, b6, b7, b8) \
         extern const ALGUID name = { l, w1, w2, { b1, b2,  b3,  b4,  b5,  b6,  b7,  b8 } }
 #endif // INITGUID
 
@@ -41,43 +41,43 @@ typedef struct _ALGUID
 /*
  * EAX 3.0 listener property set {A8FA6880-B476-11d3-BDB9-00C0F02DDF87}
  */
-DEFINE_ALGUID(DSPROPSETID_EAX30_ListenerProperties, 
-    0xa8fa6882, 
-    0xb476, 
-    0x11d3, 
-    0xbd, 0xb9, 0x00, 0xc0, 0xf0, 0x2d, 0xdf, 0x87);
+DEFINE_ALGUID(DSPROPSETID_EAX30_ListenerProperties,
+   0xa8fa6882,
+   0xb476,
+   0x11d3,
+   0xbd, 0xb9, 0x00, 0xc0, 0xf0, 0x2d, 0xdf, 0x87);
 
 // For compatibility with future EAX versions:
 #define DSPROPSETID_EAX_ListenerProperties DSPROPSETID_EAX30_ListenerProperties
 
 typedef enum
 {
-    DSPROPERTY_EAXLISTENER_NONE,
-    DSPROPERTY_EAXLISTENER_ALLPARAMETERS,
-    DSPROPERTY_EAXLISTENER_ENVIRONMENT,
-    DSPROPERTY_EAXLISTENER_ENVIRONMENTSIZE,
-    DSPROPERTY_EAXLISTENER_ENVIRONMENTDIFFUSION,
-    DSPROPERTY_EAXLISTENER_ROOM,
-    DSPROPERTY_EAXLISTENER_ROOMHF,
-    DSPROPERTY_EAXLISTENER_ROOMLF,
-    DSPROPERTY_EAXLISTENER_DECAYTIME,
-    DSPROPERTY_EAXLISTENER_DECAYHFRATIO,
-    DSPROPERTY_EAXLISTENER_DECAYLFRATIO,
-    DSPROPERTY_EAXLISTENER_REFLECTIONS,
-    DSPROPERTY_EAXLISTENER_REFLECTIONSDELAY,
-    DSPROPERTY_EAXLISTENER_REFLECTIONSPAN,
-    DSPROPERTY_EAXLISTENER_REVERB,
-    DSPROPERTY_EAXLISTENER_REVERBDELAY,
-    DSPROPERTY_EAXLISTENER_REVERBPAN,
-    DSPROPERTY_EAXLISTENER_ECHOTIME,
-    DSPROPERTY_EAXLISTENER_ECHODEPTH,
-    DSPROPERTY_EAXLISTENER_MODULATIONTIME,
-    DSPROPERTY_EAXLISTENER_MODULATIONDEPTH,
-    DSPROPERTY_EAXLISTENER_AIRABSORPTIONHF,
-    DSPROPERTY_EAXLISTENER_HFREFERENCE,
-    DSPROPERTY_EAXLISTENER_LFREFERENCE,
-    DSPROPERTY_EAXLISTENER_ROOMROLLOFFFACTOR,
-    DSPROPERTY_EAXLISTENER_FLAGS
+   DSPROPERTY_EAXLISTENER_NONE,
+   DSPROPERTY_EAXLISTENER_ALLPARAMETERS,
+   DSPROPERTY_EAXLISTENER_ENVIRONMENT,
+   DSPROPERTY_EAXLISTENER_ENVIRONMENTSIZE,
+   DSPROPERTY_EAXLISTENER_ENVIRONMENTDIFFUSION,
+   DSPROPERTY_EAXLISTENER_ROOM,
+   DSPROPERTY_EAXLISTENER_ROOMHF,
+   DSPROPERTY_EAXLISTENER_ROOMLF,
+   DSPROPERTY_EAXLISTENER_DECAYTIME,
+   DSPROPERTY_EAXLISTENER_DECAYHFRATIO,
+   DSPROPERTY_EAXLISTENER_DECAYLFRATIO,
+   DSPROPERTY_EAXLISTENER_REFLECTIONS,
+   DSPROPERTY_EAXLISTENER_REFLECTIONSDELAY,
+   DSPROPERTY_EAXLISTENER_REFLECTIONSPAN,
+   DSPROPERTY_EAXLISTENER_REVERB,
+   DSPROPERTY_EAXLISTENER_REVERBDELAY,
+   DSPROPERTY_EAXLISTENER_REVERBPAN,
+   DSPROPERTY_EAXLISTENER_ECHOTIME,
+   DSPROPERTY_EAXLISTENER_ECHODEPTH,
+   DSPROPERTY_EAXLISTENER_MODULATIONTIME,
+   DSPROPERTY_EAXLISTENER_MODULATIONDEPTH,
+   DSPROPERTY_EAXLISTENER_AIRABSORPTIONHF,
+   DSPROPERTY_EAXLISTENER_HFREFERENCE,
+   DSPROPERTY_EAXLISTENER_LFREFERENCE,
+   DSPROPERTY_EAXLISTENER_ROOMROLLOFFFACTOR,
+   DSPROPERTY_EAXLISTENER_FLAGS
 } DSPROPERTY_EAX_LISTENERPROPERTY;
 
 // OR these flags with property id
@@ -87,9 +87,9 @@ typedef enum
                                                        DSPROPERTY_EAXLISTENER_IMMEDIATE)
 
 typedef struct _EAXVECTOR {
-	float x;
-	float y;
-	float z;
+   float x;
+   float y;
+   float z;
 } EAXVECTOR;
 
 // Use this structure for DSPROPERTY_EAXLISTENER_ALLPARAMETERS
@@ -109,65 +109,65 @@ typedef struct _EAXVECTOR {
 //
 typedef struct _EAXLISTENERPROPERTIES
 {
-    unsigned long ulEnvironment;   // sets all listener properties
-    float flEnvironmentSize;       // environment size in meters
-    float flEnvironmentDiffusion;  // environment diffusion
-    long  lRoom;                    // room effect level (at mid frequencies)
-    long  lRoomHF;                  // relative room effect level at high frequencies
-    long  lRoomLF;                  // relative room effect level at low frequencies  
-    float flDecayTime;             // reverberation decay time at mid frequencies
-    float flDecayHFRatio;          // high-frequency to mid-frequency decay time ratio
-    float flDecayLFRatio;          // low-frequency to mid-frequency decay time ratio   
-    long  lReflections;             // early reflections level relative to room effect
-    float flReflectionsDelay;      // initial reflection delay time
-    EAXVECTOR vReflectionsPan;     // early reflections panning vector
-    long  lReverb;                  // late reverberation level relative to room effect
-    float flReverbDelay;           // late reverberation delay time relative to initial reflection
-    EAXVECTOR vReverbPan;          // late reverberation panning vector
-    float flEchoTime;              // echo time
-    float flEchoDepth;             // echo depth
-    float flModulationTime;        // modulation time
-    float flModulationDepth;       // modulation depth
-    float flAirAbsorptionHF;       // change in level per meter at high frequencies
-    float flHFReference;           // reference high frequency
-    float flLFReference;           // reference low frequency 
-    float flRoomRolloffFactor;     // like DS3D flRolloffFactor but for room effect
-    unsigned long ulFlags;         // modifies the behavior of properties
+   unsigned long ulEnvironment;   // sets all listener properties
+   float flEnvironmentSize;       // environment size in meters
+   float flEnvironmentDiffusion;  // environment diffusion
+   long  lRoom;                    // room effect level (at mid frequencies)
+   long  lRoomHF;                  // relative room effect level at high frequencies
+   long  lRoomLF;                  // relative room effect level at low frequencies  
+   float flDecayTime;             // reverberation decay time at mid frequencies
+   float flDecayHFRatio;          // high-frequency to mid-frequency decay time ratio
+   float flDecayLFRatio;          // low-frequency to mid-frequency decay time ratio   
+   long  lReflections;             // early reflections level relative to room effect
+   float flReflectionsDelay;      // initial reflection delay time
+   EAXVECTOR vReflectionsPan;     // early reflections panning vector
+   long  lReverb;                  // late reverberation level relative to room effect
+   float flReverbDelay;           // late reverberation delay time relative to initial reflection
+   EAXVECTOR vReverbPan;          // late reverberation panning vector
+   float flEchoTime;              // echo time
+   float flEchoDepth;             // echo depth
+   float flModulationTime;        // modulation time
+   float flModulationDepth;       // modulation depth
+   float flAirAbsorptionHF;       // change in level per meter at high frequencies
+   float flHFReference;           // reference high frequency
+   float flLFReference;           // reference low frequency 
+   float flRoomRolloffFactor;     // like DS3D flRolloffFactor but for room effect
+   unsigned long ulFlags;         // modifies the behavior of properties
 } EAXLISTENERPROPERTIES, *LPEAXLISTENERPROPERTIES;
 
 // used by DSPROPERTY_EAXLISTENER_ENVIRONMENT
 enum
 {
-    EAX_ENVIRONMENT_GENERIC,
-    EAX_ENVIRONMENT_PADDEDCELL,
-    EAX_ENVIRONMENT_ROOM,
-    EAX_ENVIRONMENT_BATHROOM,
-    EAX_ENVIRONMENT_LIVINGROOM,
-    EAX_ENVIRONMENT_STONEROOM,
-    EAX_ENVIRONMENT_AUDITORIUM,
-    EAX_ENVIRONMENT_CONCERTHALL,
-    EAX_ENVIRONMENT_CAVE,
-    EAX_ENVIRONMENT_ARENA,
-    EAX_ENVIRONMENT_HANGAR,
-    EAX_ENVIRONMENT_CARPETEDHALLWAY,
-    EAX_ENVIRONMENT_HALLWAY,
-    EAX_ENVIRONMENT_STONECORRIDOR,
-    EAX_ENVIRONMENT_ALLEY,
-    EAX_ENVIRONMENT_FOREST,
-    EAX_ENVIRONMENT_CITY,
-    EAX_ENVIRONMENT_MOUNTAINS,
-    EAX_ENVIRONMENT_QUARRY,
-    EAX_ENVIRONMENT_PLAIN,
-    EAX_ENVIRONMENT_PARKINGLOT,
-    EAX_ENVIRONMENT_SEWERPIPE,
-    EAX_ENVIRONMENT_UNDERWATER,
-    EAX_ENVIRONMENT_DRUGGED,
-    EAX_ENVIRONMENT_DIZZY,
-    EAX_ENVIRONMENT_PSYCHOTIC,
+   EAX_ENVIRONMENT_GENERIC,
+   EAX_ENVIRONMENT_PADDEDCELL,
+   EAX_ENVIRONMENT_ROOM,
+   EAX_ENVIRONMENT_BATHROOM,
+   EAX_ENVIRONMENT_LIVINGROOM,
+   EAX_ENVIRONMENT_STONEROOM,
+   EAX_ENVIRONMENT_AUDITORIUM,
+   EAX_ENVIRONMENT_CONCERTHALL,
+   EAX_ENVIRONMENT_CAVE,
+   EAX_ENVIRONMENT_ARENA,
+   EAX_ENVIRONMENT_HANGAR,
+   EAX_ENVIRONMENT_CARPETEDHALLWAY,
+   EAX_ENVIRONMENT_HALLWAY,
+   EAX_ENVIRONMENT_STONECORRIDOR,
+   EAX_ENVIRONMENT_ALLEY,
+   EAX_ENVIRONMENT_FOREST,
+   EAX_ENVIRONMENT_CITY,
+   EAX_ENVIRONMENT_MOUNTAINS,
+   EAX_ENVIRONMENT_QUARRY,
+   EAX_ENVIRONMENT_PLAIN,
+   EAX_ENVIRONMENT_PARKINGLOT,
+   EAX_ENVIRONMENT_SEWERPIPE,
+   EAX_ENVIRONMENT_UNDERWATER,
+   EAX_ENVIRONMENT_DRUGGED,
+   EAX_ENVIRONMENT_DIZZY,
+   EAX_ENVIRONMENT_PSYCHOTIC,
 
-    EAX_ENVIRONMENT_UNDEFINED,
+   EAX_ENVIRONMENT_UNDEFINED,
 
-    EAX_ENVIRONMENT_COUNT
+   EAX_ENVIRONMENT_COUNT
 };
 
 // Used by DSPROPERTY_EAXLISTENER_FLAGS
@@ -189,7 +189,7 @@ enum
 
 // This flag limits high-frequency decay time according to air absorption.
 #define EAXLISTENERFLAGS_DECAYHFLIMIT          0x00000020
- 
+
 #define EAXLISTENERFLAGS_RESERVED              0xFFFFFF00 // reserved future use
 
 // Property ranges and defaults:
@@ -290,11 +290,11 @@ enum
 /*
 * EAX 3.0 buffer property set {A8FA6881-B476-11d3-BDB9-00C0F02DDF87}
 */
-DEFINE_ALGUID(DSPROPSETID_EAX30_BufferProperties, 
-	0xa8fa6881, 
-	0xb476, 
-	0x11d3, 
-	0xbd, 0xb9, 0x0, 0xc0, 0xf0, 0x2d, 0xdf, 0x87);
+DEFINE_ALGUID(DSPROPSETID_EAX30_BufferProperties,
+   0xa8fa6881,
+   0xb476,
+   0x11d3,
+   0xbd, 0xb9, 0x0, 0xc0, 0xf0, 0x2d, 0xdf, 0x87);
 
 // For compatibility with future EAX versions:
 #define DSPROPSETID_EAX_BufferProperties DSPROPSETID_EAX30_BufferProperties
@@ -302,30 +302,30 @@ DEFINE_ALGUID(DSPROPSETID_EAX30_BufferProperties,
 
 typedef enum
 {
-    DSPROPERTY_EAXBUFFER_NONE,
-    DSPROPERTY_EAXBUFFER_ALLPARAMETERS,
-    DSPROPERTY_EAXBUFFER_OBSTRUCTIONPARAMETERS,
-    DSPROPERTY_EAXBUFFER_OCCLUSIONPARAMETERS,
-    DSPROPERTY_EAXBUFFER_EXCLUSIONPARAMETERS,
-    DSPROPERTY_EAXBUFFER_DIRECT,
-    DSPROPERTY_EAXBUFFER_DIRECTHF,
-    DSPROPERTY_EAXBUFFER_ROOM,
-    DSPROPERTY_EAXBUFFER_ROOMHF,
-    DSPROPERTY_EAXBUFFER_OBSTRUCTION,
-    DSPROPERTY_EAXBUFFER_OBSTRUCTIONLFRATIO,
-    DSPROPERTY_EAXBUFFER_OCCLUSION, 
-    DSPROPERTY_EAXBUFFER_OCCLUSIONLFRATIO,
-    DSPROPERTY_EAXBUFFER_OCCLUSIONROOMRATIO,
-    DSPROPERTY_EAXBUFFER_OCCLUSIONDIRECTRATIO,
-    DSPROPERTY_EAXBUFFER_EXCLUSION, 
-    DSPROPERTY_EAXBUFFER_EXCLUSIONLFRATIO,
-    DSPROPERTY_EAXBUFFER_OUTSIDEVOLUMEHF, 
-    DSPROPERTY_EAXBUFFER_DOPPLERFACTOR, 
-    DSPROPERTY_EAXBUFFER_ROLLOFFFACTOR, 
-    DSPROPERTY_EAXBUFFER_ROOMROLLOFFFACTOR,
-    DSPROPERTY_EAXBUFFER_AIRABSORPTIONFACTOR,
-    DSPROPERTY_EAXBUFFER_FLAGS
-} DSPROPERTY_EAX_BUFFERPROPERTY;    
+   DSPROPERTY_EAXBUFFER_NONE,
+   DSPROPERTY_EAXBUFFER_ALLPARAMETERS,
+   DSPROPERTY_EAXBUFFER_OBSTRUCTIONPARAMETERS,
+   DSPROPERTY_EAXBUFFER_OCCLUSIONPARAMETERS,
+   DSPROPERTY_EAXBUFFER_EXCLUSIONPARAMETERS,
+   DSPROPERTY_EAXBUFFER_DIRECT,
+   DSPROPERTY_EAXBUFFER_DIRECTHF,
+   DSPROPERTY_EAXBUFFER_ROOM,
+   DSPROPERTY_EAXBUFFER_ROOMHF,
+   DSPROPERTY_EAXBUFFER_OBSTRUCTION,
+   DSPROPERTY_EAXBUFFER_OBSTRUCTIONLFRATIO,
+   DSPROPERTY_EAXBUFFER_OCCLUSION,
+   DSPROPERTY_EAXBUFFER_OCCLUSIONLFRATIO,
+   DSPROPERTY_EAXBUFFER_OCCLUSIONROOMRATIO,
+   DSPROPERTY_EAXBUFFER_OCCLUSIONDIRECTRATIO,
+   DSPROPERTY_EAXBUFFER_EXCLUSION,
+   DSPROPERTY_EAXBUFFER_EXCLUSIONLFRATIO,
+   DSPROPERTY_EAXBUFFER_OUTSIDEVOLUMEHF,
+   DSPROPERTY_EAXBUFFER_DOPPLERFACTOR,
+   DSPROPERTY_EAXBUFFER_ROLLOFFFACTOR,
+   DSPROPERTY_EAXBUFFER_ROOMROLLOFFFACTOR,
+   DSPROPERTY_EAXBUFFER_AIRABSORPTIONFACTOR,
+   DSPROPERTY_EAXBUFFER_FLAGS
+} DSPROPERTY_EAX_BUFFERPROPERTY;
 
 // OR these flags with property id
 #define DSPROPERTY_EAXBUFFER_IMMEDIATE 0x00000000 // changes take effect immediately
@@ -348,47 +348,47 @@ typedef enum
 //
 typedef struct _EAXBUFFERPROPERTIES
 {
-    long  lDirect;                 // direct path level (at low and mid frequencies)
-    long  lDirectHF;               // relative direct path level at high frequencies
-    long  lRoom;                   // room effect level (at low and mid frequencies)
-    long  lRoomHF;                 // relative room effect level at high frequencies
-    long  lObstruction;            // main obstruction control (attenuation at high frequencies) 
-    float flObstructionLFRatio;   // obstruction low-frequency level re. main control
-    long  lOcclusion;              // main occlusion control (attenuation at high frequencies)
-    float flOcclusionLFRatio;     // occlusion low-frequency level re. main control
-    float flOcclusionRoomRatio;   // relative occlusion control for room effect
-    float flOcclusionDirectRatio; // relative occlusion control for direct path
-    long  lExclusion;              // main exlusion control (attenuation at high frequencies)
-    float flExclusionLFRatio;     // exclusion low-frequency level re. main control
-    long  lOutsideVolumeHF;        // outside sound cone level at high frequencies
-    float flDopplerFactor;        // like DS3D flDopplerFactor but per source
-    float flRolloffFactor;        // like DS3D flRolloffFactor but per source
-    float flRoomRolloffFactor;    // like DS3D flRolloffFactor but for room effect
-    float flAirAbsorptionFactor;  // multiplies DSPROPERTY_EAXLISTENER_AIRABSORPTIONHF
-    unsigned long ulFlags;        // modifies the behavior of properties
+   long  lDirect;                 // direct path level (at low and mid frequencies)
+   long  lDirectHF;               // relative direct path level at high frequencies
+   long  lRoom;                   // room effect level (at low and mid frequencies)
+   long  lRoomHF;                 // relative room effect level at high frequencies
+   long  lObstruction;            // main obstruction control (attenuation at high frequencies) 
+   float flObstructionLFRatio;   // obstruction low-frequency level re. main control
+   long  lOcclusion;              // main occlusion control (attenuation at high frequencies)
+   float flOcclusionLFRatio;     // occlusion low-frequency level re. main control
+   float flOcclusionRoomRatio;   // relative occlusion control for room effect
+   float flOcclusionDirectRatio; // relative occlusion control for direct path
+   long  lExclusion;              // main exlusion control (attenuation at high frequencies)
+   float flExclusionLFRatio;     // exclusion low-frequency level re. main control
+   long  lOutsideVolumeHF;        // outside sound cone level at high frequencies
+   float flDopplerFactor;        // like DS3D flDopplerFactor but per source
+   float flRolloffFactor;        // like DS3D flRolloffFactor but per source
+   float flRoomRolloffFactor;    // like DS3D flRolloffFactor but for room effect
+   float flAirAbsorptionFactor;  // multiplies DSPROPERTY_EAXLISTENER_AIRABSORPTIONHF
+   unsigned long ulFlags;        // modifies the behavior of properties
 } EAXBUFFERPROPERTIES, *LPEAXBUFFERPROPERTIES;
 
 // Use this structure for DSPROPERTY_EAXBUFFER_OBSTRUCTION,
 typedef struct _EAXOBSTRUCTIONPROPERTIES
 {
-    long  lObstruction;
-    float flObstructionLFRatio;
+   long  lObstruction;
+   float flObstructionLFRatio;
 } EAXOBSTRUCTIONPROPERTIES, *LPEAXOBSTRUCTIONPROPERTIES;
 
 // Use this structure for DSPROPERTY_EAXBUFFER_OCCLUSION
 typedef struct _EAXOCCLUSIONPROPERTIES
 {
-    long  lOcclusion;
-    float flOcclusionLFRatio;
-    float flOcclusionRoomRatio;
-    float flOcclusionDirectRatio;
+   long  lOcclusion;
+   float flOcclusionLFRatio;
+   float flOcclusionRoomRatio;
+   float flOcclusionDirectRatio;
 } EAXOCCLUSIONPROPERTIES, *LPEAXOCCLUSIONPROPERTIES;
 
 // Use this structure for DSPROPERTY_EAXBUFFER_EXCLUSION
 typedef struct _EAXEXCLUSIONPROPERTIES
 {
-    long  lExclusion;
-    float flExclusionLFRatio;
+   long  lExclusion;
+   float flExclusionLFRatio;
 } EAXEXCLUSIONPROPERTIES, *LPEAXEXCLUSIONPROPERTIES;
 
 // Used by DSPROPERTY_EAXBUFFER_FLAGS
