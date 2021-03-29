@@ -32,6 +32,7 @@ function Sandbox::create( %this )
     exec( "./scripts/manipulation.cs" );
     exec( "./scripts/scene.cs" );
     exec( "./scripts/toys.cs" );
+	exec( "./scripts/menuBuilder.cs" );
 
     // Load GUI profiles.
     exec("./gui/guiProfiles.cs");

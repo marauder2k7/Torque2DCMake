@@ -72,24 +72,6 @@ function SetColorAlpha(%color, %newAlpha)
 
 //-----------------------------------------------------------------------------
 
-if(!isObject(GuiDefaultProfile)) new GuiControlProfile (GuiDefaultProfile)
-{
-    // fill color
-    fillColor = "0 0 0 0";
-
-    // font
-    fontType = $platformFontType;
-    fontSize = $platformFontSize;
-    fontColor = "255 255 255 255";
-	align = center;
-	vAlign = middle;
-
-	cursorColor = "0 0 0 255";
-
-	borderDefault = GuiDefaultBorderProfile;
-	category = "default";
-};
-
 new GuiCursor(DefaultCursor)
 {
     hotSpot = "3 3";
@@ -156,6 +138,33 @@ if (!isObject(GuiDefaultBorderProfile)) new GuiBorderProfile (GuiDefaultBorderPr
 	paddingNA = 0;
 	//Default underfill
 	underfill = true;
+};
+
+if(!isObject(GuiDefaultProfile)) new GuiControlProfile (GuiDefaultProfile)
+{
+    // fill color
+    fillColor = "0 0 0 0";
+
+    // font
+    fontType = $platformFontType;
+    fontSize = $platformFontSize;
+    fontColor = "255 255 255 255";
+    fontColorHL = "232 240 248 255";
+    fontColorSL= "255 255 255 255";
+    fontColorNA = "0 0 0 255";
+	align = center;
+	vAlign = middle;
+
+	cursorColor = "0 0 0 255";
+
+	borderDefault = GuiDefaultBorderProfile;
+	
+	category = "default";
+};
+
+if(!isObject(GuiEditorProfile)) new GuiControlProfile (GuiEditorProfile : GuiDefaultProfile)
+{
+	fillColor = "30 30 30 255";
 };
 
 if (!isObject(GuiBrightBorderProfile)) new GuiBorderProfile (GuiBrightBorderProfile : GuiDefaultBorderProfile)
