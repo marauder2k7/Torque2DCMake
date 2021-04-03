@@ -145,6 +145,7 @@ endif()
 # Always enabled paths first
 ###############################################################################
 addPath("${srcDir}/") # must come first :)
+addPath("${srcDir}/sfx")
 addPathRec("${srcDir}/algorithm")
 addPath("${srcDir}/assets")
 addPath("${srcDir}/bitmapFont")
@@ -206,7 +207,6 @@ addPath("${srcDir}/2d/experimental/composites")
 addPath("${srcDir}/2d/gui")
 addPath("${srcDir}/2d/scene")
 addPath("${srcDir}/2d/sceneobject")
-addPath("${srcDir}/sfx")
 
 if(TORQUE_SFX_OPENAL)
 	if(WIN32)
