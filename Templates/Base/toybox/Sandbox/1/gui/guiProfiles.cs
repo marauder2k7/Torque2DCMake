@@ -149,22 +149,13 @@ if(!isObject(GuiDefaultProfile)) new GuiControlProfile (GuiDefaultProfile)
     fontType = $platformFontType;
     fontSize = $platformFontSize;
     fontColor = "255 255 255 255";
-    fontColorHL = "232 240 248 255";
-    fontColorSL= "255 255 255 255";
-    fontColorNA = "0 0 0 255";
 	align = center;
 	vAlign = middle;
 
 	cursorColor = "0 0 0 255";
 
 	borderDefault = GuiDefaultBorderProfile;
-	
 	category = "default";
-};
-
-if(!isObject(GuiEditorProfile)) new GuiControlProfile (GuiEditorProfile : GuiDefaultProfile)
-{
-	fillColor = "30 30 30 255";
 };
 
 if (!isObject(GuiBrightBorderProfile)) new GuiBorderProfile (GuiBrightBorderProfile : GuiDefaultBorderProfile)

@@ -74,11 +74,11 @@ typedef unsigned long long  U64;
 #  define TORQUE_OS_STRING "Emscripten"
 #  define TORQUE_OS_EMSCRIPTEN
 #  include "platform/types.posix.h"
-#elif defined(linux)
+#elif defined(linux) || defined (LINUX)
 #  define TORQUE_OS_STRING "Linux"
 #  define TORQUE_OS_LINUX
-#  define TORQUE_SUPPORTS_NASM
-#  define TORQUE_SUPPORTS_GCC_INLINE_X86_ASM
+//#  define TORQUE_SUPPORTS_NASM
+//#  define TORQUE_SUPPORTS_GCC_INLINE_X86_ASM
 #  include "platform/types.posix.h"
 
 #elif defined(__OpenBSD__)
@@ -123,6 +123,11 @@ typedef unsigned long long  U64;
 #if defined(i386)
 #  define TORQUE_CPU_STRING "Intel x86"
 #  define TORQUE_CPU_X86
+#  define TORQUE_LITTLE_ENDIAN
+
+#elif defined(__x86_64__)
+#  define TORQUE_CPU_STRING "Intel x64"
+#  define TORQUE_CPU_X64
 #  define TORQUE_LITTLE_ENDIAN
 
 #elif defined(__amd64__)
