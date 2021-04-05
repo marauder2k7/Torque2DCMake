@@ -29,7 +29,7 @@
 #include "math/mPoint.h"
 
 #include <dlfcn.h>
-#include <SDL/SDL.h>
+#include <SDL2/SDL.h>
 
 // declare stub functions
 #define GL_FUNCTION(fn_return, fn_name, fn_args, fn_value) fn_return stub_##fn_name fn_args{ fn_value }
@@ -263,7 +263,7 @@ bool GL_EXT_Init( )
    } else {
       gGLState.suppARBMultitexture = false;
    }
-   
+
    // EXT_blend_color
    if(pExtString && dStrstr(pExtString, (const char*)"GL_EXT_blend_color") != NULL)
    {
@@ -417,7 +417,7 @@ GLint gluProject( GLdouble objx, GLdouble objy, GLdouble objz, const F64 *model,
    v.x *= invW;
    v.y *= invW;
    v.z *= invW;
-     
+
    *winx = (GLfloat)vp[0] + (GLfloat)vp[2] * (v.x + 1.0f) * 0.5f;
    *winy = (GLfloat)vp[1] + (GLfloat)vp[3] * (v.y + 1.0f) * 0.5f;
    *winz = (v.z + 1.0f) * 0.5f;

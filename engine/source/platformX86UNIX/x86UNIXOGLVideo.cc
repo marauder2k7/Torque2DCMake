@@ -31,10 +31,9 @@
 #include "platformX86UNIX/platformGL.h"
 #include "platformX86UNIX/x86UNIXOGLVideo.h"
 #include "platformX86UNIX/x86UNIXState.h"
-
-#include <SDL/SDL.h>
-#include <SDL/SDL_syswm.h>
-#include <SDL/SDL_version.h>
+#include <SDL2/SDL.h>
+#include <SDL2/SDL_syswm.h>
+#include <SDL2/SDL_version.h>
 
 //------------------------------------------------------------------------------
 bool InitOpenGL()
@@ -145,30 +144,19 @@ void OpenGLDevice::loadResolutions()
 
    // specifying full screen should give us the resolutions that the
    // X server allows
-   SDL_Rect** modes = SDL_ListModes(NULL, SDL_FULLSCREEN);
-   if (modes &&
-      (modes != (SDL_Rect **)-1))
+
+   int count = SDL_GetNumDisplayModes(0);
+   if(count < 0)
    {
-      for (int i = 0; modes[i] != NULL; ++i)
-      {
-         // do we already have this mode?
-         bool found = false;
-         for (Vector<Resolution>::iterator iter = mResolutionList.begin();
-              iter != mResolutionList.end();
-              ++iter)
-         {
-            if (iter->w == modes[i]->w && iter->h == modes[i]->h)
-            {
-               found = true;
-               break;
-            }
-         }
-         if (!found)
-            // don't check these resolutions because they should be OK
-            // (and checking might drop resolutions that are higher than the
-            // current desktop bpp)
-            addResolution(modes[i]->w, modes[i]->h, false);
-      }
+        AssertFatal(0,"You done messed up.")
+        return;
+   }
+
+   SDL_DisplayMode mode;
+   for(int i = 0; i < count; i++)
+   {
+        SDL_GetDisplayMode(0,i,&mode);
+        addResolution(mode.w,mode.h, false);
    }
 }
 
@@ -335,19 +323,32 @@ bool OpenGLDevice::setScreenMode( U32 width, U32 height, U32 bpp,
 //    SDL_GL_SetAttribute(SDL_GL_GREEN_SIZE, 6);
 //    SDL_GL_SetAttribute(SDL_GL_BLUE_SIZE, 5);
 
-   U32 flags = SDL_OPENGL;
+   U32 flags = SDL_WINDOW_OPENGL | SDL_WINDOW_RESIZABLE;
    if (fullScreen)
-      flags |= SDL_FULLSCREEN;
+      flags |= SDL_WINDOW_FULLSCREEN;
 
    Con::printf( "Setting screen mode to %dx%dx%d (%s)...", width, height,
       bpp, ( fullScreen ? "fs" : "w" ) );
 
+    SDL_Window *window = SDL_CreateWindow("",
+                                        SDL_WINDOWPOS_UNDEFINED,
+                                        SDL_WINDOWPOS_UNDEFINED,
+                                        width,
+                                        height,
+                                        flags);
+
    // set the new video mode
-   if (SDL_SetVideoMode(width, height, bpp, flags) == NULL)
+   if (window == NULL)
    {
       Con::printf("Unable to set SDL Video Mode: %s", SDL_GetError());
       return false;
    }
+
+   SDL_GLContext glContext = SDL_GL_CreateContext(window);
+
+   // we need to hold on to these for cleanup. But only if they are successful.
+   x86UNIXState->setSdlWindow(window);
+   x86UNIXState->setSdlGlContext(glContext);
 
    PrintGLAttributes();
 
@@ -370,7 +371,7 @@ bool OpenGLDevice::setScreenMode( U32 width, U32 height, U32 bpp,
    // reset the window in platform state
    SDL_SysWMinfo sysinfo;
    SDL_VERSION(&sysinfo.version);
-   if (SDL_GetWMInfo(&sysinfo) == 0)
+   if (SDL_GetWindowWMInfo(window,&sysinfo) == 0)
    {
       Con::printf("Unable to set SDL Video Mode: %s", SDL_GetError());
       return false;
@@ -397,7 +398,7 @@ bool OpenGLDevice::setScreenMode( U32 width, U32 height, U32 bpp,
    SDL_PushEvent(&event);
 
    // reset the caption
-   SDL_WM_SetCaption(x86UNIXState->getWindowName(), NULL);
+   SDL_SetWindowTitle(x86UNIXState->getSdlWindow() , x86UNIXState->getWindowName() );
 
    // repaint
    if ( repaint )
@@ -409,7 +410,8 @@ bool OpenGLDevice::setScreenMode( U32 width, U32 height, U32 bpp,
 //------------------------------------------------------------------------------
 void OpenGLDevice::swapBuffers()
 {
-   SDL_GL_SwapBuffers();
+   //SDL_GL_SwapBuffers();
+   SDL_GL_SwapWindow(x86UNIXState->getSdlWindow());
 }
 
 //------------------------------------------------------------------------------
@@ -443,7 +445,7 @@ bool OpenGLDevice::getGammaCorrection(F32 &g)
    U16 greentable[256];
    U16 bluetable[256];
 
-   if (SDL_GetGammaRamp(redtable, greentable, bluetable) == -1)
+   if (SDL_GetWindowGammaRamp(x86UNIXState->getSdlWindow(),redtable, greentable, bluetable) == -1)
    {
       Con::warnf("getGammaCorrection error: %s", SDL_GetError());
       return false;
@@ -481,7 +483,7 @@ bool OpenGLDevice::setGammaCorrection(F32 g)
    dMemcpy(greentable,redtable,256*sizeof(U16));
    dMemcpy(bluetable,redtable,256*sizeof(U16));
 
-   S32 ok = SDL_SetGammaRamp(redtable, greentable, bluetable);
+   S32 ok = SDL_GetWindowGammaRamp(x86UNIXState->getSdlWindow(),redtable, greentable, bluetable);
    if (ok == -1)
       Con::warnf("Error setting gamma correction: %s", SDL_GetError());
 

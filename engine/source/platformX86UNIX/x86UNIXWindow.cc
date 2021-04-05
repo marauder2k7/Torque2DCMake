@@ -50,9 +50,9 @@
 #include <time.h> // nanosleep
 
 #ifndef DEDICATED
-#include <SDL/SDL.h>
-#include <SDL/SDL_syswm.h>
-#include <SDL/SDL_version.h>
+#include <SDL2/SDL.h>
+#include <SDL2/SDL_syswm.h>
+#include <SDL2/SDL_version.h>
 #endif
 
 x86UNIXPlatformState *x86UNIXState;
@@ -157,40 +157,13 @@ static void InitWindow(const Point2I &initialSize, const char *name)
 //------------------------------------------------------------------------------
 static bool InitSDL()
 {
-   if (SDL_Init(SDL_INIT_VIDEO) != 0)
-      return false;
+
+    int res = SDL_Init(SDL_INIT_VIDEO | SDL_INIT_JOYSTICK | SDL_INIT_HAPTIC | SDL_INIT_GAMECONTROLLER | SDL_INIT_EVENTS | SDL_INIT_NOPARACHUTE);
 
    atexit(SDL_Quit);
 
    SDL_SysWMinfo sysinfo;
    SDL_VERSION(&sysinfo.version);
-   if (SDL_GetWMInfo(&sysinfo) == 0)
-      return false;
-
-   x86UNIXState->setDisplayPointer(sysinfo.info.x11.display);
-   DisplayPtrManager::setDisplayLockFunction(sysinfo.info.x11.lock_func);
-   DisplayPtrManager::setDisplayUnlockFunction(sysinfo.info.x11.unlock_func);
-
-   DisplayPtrManager xdisplay;
-   Display* display = xdisplay.getDisplayPointer();
-
-   x86UNIXState->setScreenNumber(
-      DefaultScreen( display ) );
-   x86UNIXState->setScreenPointer(
-      DefaultScreenOfDisplay( display ) );
-
-   x86UNIXState->setDesktopSize(
-      (S32) DisplayWidth(
-         display,
-         x86UNIXState->getScreenNumber()),
-      (S32) DisplayHeight(
-         display,
-         x86UNIXState->getScreenNumber())
-      );
-   x86UNIXState->setDesktopBpp(
-      (S32) DefaultDepth(
-         display,
-         x86UNIXState->getScreenNumber()));
 
    // indicate that we want sys WM messages
    SDL_EventState(SDL_SYSWMEVENT, SDL_ENABLE);
@@ -201,40 +174,34 @@ static bool InitSDL()
 //------------------------------------------------------------------------------
 static void ProcessSYSWMEvent(const SDL_Event& event)
 {
-   XEvent& xevent = event.syswm.msg->event.xevent;
+   //XEvent& xevent = event.syswm.msg->event.xevent;
    //Con::printf("xevent : %d", xevent.type);
-   switch (xevent.type)
-   {
-      case SelectionRequest:
+   //switch (xevent.type)
+   //{
+   //   case SelectionRequest:
          // somebody wants our clipboard
-         NotifySelectionEvent(xevent);
-         break;
-   }
+   //      NotifySelectionEvent(xevent);
+   //      break;
+   //}
 }
 
 //------------------------------------------------------------------------------
 static void SetAppState()
 {
-   U8 state = SDL_GetAppState();
-
-   // if we're not active but we have appactive and inputfocus, set window
-   // active and reactivate input
-   if ((!x86UNIXState->windowActive() || !Input::isActive()) &&
-      state & SDL_APPACTIVE &&
-      state & SDL_APPINPUTFOCUS)
+   U32 flags = SDL_GetWindowFlags( x86UNIXState->getSdlWindow() );
+   if( flags & SDL_WINDOW_INPUT_FOCUS || flags & SDL_WINDOW_INPUT_GRABBED || flags & SDL_WINDOW_MOUSE_FOCUS )
    {
       x86UNIXState->setWindowActive(true);
       Input::reactivate();
    }
-   // if we are active, but we don't have appactive or input focus,
-   // deactivate input (if window not locked) and clear windowActive
-   else if (x86UNIXState->windowActive() &&
-      !(state & SDL_APPACTIVE && state & SDL_APPINPUTFOCUS))
+   else
    {
       if (x86UNIXState->windowLocked())
          Input::deactivate();
+
       x86UNIXState->setWindowActive(false);
    }
+
 }
 
 //------------------------------------------------------------------------------
@@ -244,7 +211,7 @@ static S32 NumEventsPending()
    static SDL_Event events[MaxEvents];
 
    SDL_PumpEvents();
-   return SDL_PeepEvents(events, MaxEvents, SDL_PEEKEVENT, SDL_ALLEVENTS);
+   return SDL_PeepEvents(events, MaxEvents, SDL_PEEKEVENT, SDL_FIRSTEVENT,SDL_LASTEVENT);
 }
 
 //------------------------------------------------------------------------------
@@ -255,7 +222,7 @@ static void PrintSDLEventQueue()
 
    SDL_PumpEvents();
    S32 numEvents = SDL_PeepEvents(
-      events, MaxEvents, SDL_PEEKEVENT, SDL_ALLEVENTS);
+      events, MaxEvents, SDL_PEEKEVENT, SDL_FIRSTEVENT, SDL_LASTEVENT);
    if (numEvents <= 0)
    {
       dPrintf("SDL Event Queue is empty\n");
@@ -268,8 +235,6 @@ static void PrintSDLEventQueue()
       const char *eventType;
       switch (events[i].type)
       {
-         case SDL_NOEVENT: eventType = "SDL_NOEVENT"; break;
-         case SDL_ACTIVEEVENT: eventType = "SDL_ACTIVEEVENT"; break;
          case SDL_KEYDOWN: eventType = "SDL_KEYDOWN"; break;
          case SDL_KEYUP: eventType = "SDL_KEYUP"; break;
          case SDL_MOUSEMOTION: eventType = "SDL_MOUSEMOTION"; break;
@@ -282,8 +247,6 @@ static void PrintSDLEventQueue()
          case SDL_JOYBUTTONUP: eventType = "SDL_JOYBUTTONUP"; break;
          case SDL_QUIT: eventType = "SDL_QUIT"; break;
          case SDL_SYSWMEVENT: eventType = "SDL_SYSWMEVENT"; break;
-         case SDL_VIDEORESIZE: eventType = "SDL_VIDEORESIZE"; break;
-         case SDL_VIDEOEXPOSE: eventType = "SDL_VIDEOEXPOSE"; break;
        /* Events SDL_USEREVENT through SDL_MAXEVENTS-1 are for your use */
          case SDL_USEREVENT: eventType = "SDL_USEREVENT"; break;
          default: eventType = "UNKNOWN!"; break;
@@ -296,14 +259,11 @@ static void PrintSDLEventQueue()
 static bool ProcessMessages()
 {
    static const int MaxEvents = 255;
-   static const U32 Mask =
-      SDL_QUITMASK | SDL_VIDEORESIZEMASK | SDL_VIDEOEXPOSEMASK |
-      SDL_ACTIVEEVENTMASK | SDL_SYSWMEVENTMASK |
-      SDL_EVENTMASK(SDL_USEREVENT);
+   static const U32 Mask = SDL_USEREVENT;
    static SDL_Event events[MaxEvents];
 
    SDL_PumpEvents();
-   S32 numEvents = SDL_PeepEvents(events, MaxEvents, SDL_GETEVENT, Mask);
+   S32 numEvents = SDL_PeepEvents(events, MaxEvents, SDL_GETEVENT, Mask, Mask);
    if (numEvents == 0)
       return true;
    for (int i = 0; i < numEvents; ++i)
@@ -314,8 +274,8 @@ static bool ProcessMessages()
          case SDL_QUIT:
             return false;
             break;
-         case SDL_VIDEORESIZE:
-         case SDL_VIDEOEXPOSE:
+         case SDL_WINDOWEVENT_RESIZED:
+         case SDL_WINDOWEVENT_EXPOSED:
             Game->refreshWindow();
             break;
          case SDL_USEREVENT:
@@ -328,11 +288,11 @@ static bool ProcessMessages()
                {
                   SDL_Event tempEvent;
                   SDL_PeepEvents(&tempEvent, 1, SDL_GETEVENT,
-                     SDL_MOUSEMOTIONMASK);
+                     SDL_MOUSEMOTION, SDL_MOUSEMOTION);
                }
             }
             break;
-         case SDL_ACTIVEEVENT:
+         case SDL_WINDOWEVENT:
             SetAppState();
             break;
          case SDL_SYSWMEVENT:
@@ -379,7 +339,7 @@ void DisplayErrorAlert(const char* errMsg, bool showSDLError)
 
    if (showSDLError)
    {
-      char* sdlerror = SDL_GetError();
+      const char* sdlerror = SDL_GetError();
       if (sdlerror != NULL && dStrlen(sdlerror) > 0)
       {
          dStrcat(fullErrMsg, "  (Error: ");
@@ -398,25 +358,25 @@ static inline void AlertDisableVideo(AlertWinState& state)
 
    state.fullScreen = Video::isFullScreen();
    state.cursorHidden = (SDL_ShowCursor(SDL_QUERY) == SDL_DISABLE);
-   state.inputGrabbed = (SDL_WM_GrabInput(SDL_GRAB_QUERY) == SDL_GRAB_ON);
+   state.inputGrabbed = (SDL_GetWindowGrab(x86UNIXState->getSdlWindow()));
 
    if (state.fullScreen)
-      SDL_WM_ToggleFullScreen(SDL_GetVideoSurface());
+      SDL_SetWindowFullscreen(x86UNIXState->getSdlWindow(), SDL_WINDOW_FULLSCREEN);
    if (state.cursorHidden)
       SDL_ShowCursor(SDL_ENABLE);
    if (state.inputGrabbed)
-      SDL_WM_GrabInput(SDL_GRAB_OFF);
+      SDL_SetWindowGrab(x86UNIXState->getSdlWindow(),SDL_bool(SDL_FALSE));
 }
 
 //------------------------------------------------------------------------------
 static inline void AlertEnableVideo(AlertWinState& state)
 {
    if (state.fullScreen)
-      SDL_WM_ToggleFullScreen(SDL_GetVideoSurface());
+      SDL_SetWindowFullscreen(x86UNIXState->getSdlWindow(), SDL_WINDOW_FULLSCREEN);
    if (state.cursorHidden)
-      SDL_ShowCursor(SDL_DISABLE);
+      SDL_ShowCursor(SDL_ENABLE);
    if (state.inputGrabbed)
-      SDL_WM_GrabInput(SDL_GRAB_ON);
+      SDL_SetWindowGrab(x86UNIXState->getSdlWindow(),SDL_bool(SDL_TRUE));
 }
 #endif // DEDICATED
 
@@ -562,7 +522,7 @@ void Platform::minimizeWindow()
 {
 #ifndef DEDICATED
    if (x86UNIXState->windowCreated())
-      SDL_WM_IconifyWindow();
+      SDL_MinimizeWindow(x86UNIXState->getSdlWindow());
 #endif
 }
 
@@ -894,7 +854,7 @@ void Platform::setWindowTitle( const char* title )
 {
 #ifndef DEDICATED
    x86UNIXState->setWindowName(title);
-   SDL_WM_SetCaption(x86UNIXState->getWindowName(), NULL);
+   SDL_SetWindowTitle(x86UNIXState->getSdlWindow() , x86UNIXState->getWindowName() );
 #endif
 }
 

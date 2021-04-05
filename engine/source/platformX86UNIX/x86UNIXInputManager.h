@@ -27,7 +27,7 @@
 #include "platform/platformInput.h"
 #include "platformX86UNIX/platformX86UNIX.h"
 
-#include <SDL/SDL_events.h>
+#include <SDL2/SDL_events.h>
 
 #define NUM_KEYS ( KEY_OEM_102 + 1 )
 #define KEY_FIRST KEY_ESCAPE
@@ -54,15 +54,15 @@ struct JoystickAxisInfo
 
 //------------------------------------------------------------------------------
 class JoystickInputDevice : public InputDevice
-{   
+{
   public:
     JoystickInputDevice(U8 deviceID);
     ~JoystickInputDevice();
-    
+
     bool activate();
     bool deactivate();
     bool isActive() { return( mActive ); }
-    
+
     U8 getDeviceType() { return( JoystickDeviceType ); }
     U8 getDeviceID() { return( mDeviceID ); }
     const char* getName();
@@ -74,7 +74,7 @@ class JoystickInputDevice : public InputDevice
 
     bool process();
     void reset();
-    
+
   private:
     bool mActive;
     U8 mDeviceID;
@@ -83,7 +83,7 @@ class JoystickInputDevice : public InputDevice
     Vector<bool> mButtonState;
     Vector<U8> mHatState;
 
-    S32 mNumAxes; 
+    S32 mNumAxes;
     S32 mNumButtons;
     S32 mNumHats;
     S32 mNumBalls;
@@ -93,7 +93,7 @@ class JoystickInputDevice : public InputDevice
 class UInputManager : public InputManager
 {
    friend bool JoystickInputDevice::process(); // for joystick event funcs
-   friend void JoystickInputDevice::reset(); 
+   friend void JoystickInputDevice::reset();
 
    public:
       UInputManager();
@@ -124,14 +124,14 @@ class UInputManager : public InputManager
       bool isMouseEnabled()         { return( mMouseEnabled ); }
       bool activateMouse();
       void deactivateMouse();
-      bool isMouseActive()          { return( mMouseActive ); }          
+      bool isMouseActive()          { return( mMouseActive ); }
 
       bool enableJoystick();
       void disableJoystick();
       bool isJoystickEnabled()      { return( mJoystickEnabled ); }
       bool activateJoystick();
       void deactivateJoystick();
-      bool isJoystickActive()       { return( mJoystickActive ); }          
+      bool isJoystickActive()       { return( mJoystickActive ); }
 
       void setLocking(bool enabled);
       bool getLocking() { return mLocking; }
@@ -173,7 +173,7 @@ class UInputManager : public InputManager
       void unlockInput();
       bool mLocking;
 
-      void joyHatEvent(U8 deviceID, U8 hatNum, 
+      void joyHatEvent(U8 deviceID, U8 hatNum,
           U8 prevHatState, U8 currHatState);
       void joyButtonEvent(U8 deviceID, U8 buttonNum, bool pressed);
       void joyButtonEvent(const SDL_Event& event);
