@@ -95,6 +95,8 @@ void Cleanup(bool minimal)
    StdConsole::destroy();
 #ifndef DEDICATED
    GLLoader::OpenGLShutdown();
+   SDL_GL_DeleteContext(x86UNIXState->getSdlContext());
+   SDL_DestroyWindow(x86UNIXState->getSdlWindow());
    SDL_Quit();
 #endif
 //    Display* display = x86UNIXState->GetDisplayPointer();

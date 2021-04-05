@@ -434,7 +434,7 @@ void UInputManager::resetInputState()
    static SDL_Event events[MaxEvents];
    SDL_PumpEvents();
 
-   SDL_PeepEvents(events,MaxEvents,SDL_GETEVENT,AllInputEvents, AllInputEvents);
+   SDL_PeepEvents(events,MaxEvents,SDL_GETEVENT,SDL_FIRSTEVENT, SDL_LASTEVENT);
 
 }
 
@@ -1093,7 +1093,7 @@ void UInputManager::process()
    if (mask != 0)
    {
       SDL_PumpEvents();
-      S32 numEvents = SDL_PeepEvents(events, MaxEvents, SDL_GETEVENT, mask, AllInputEvents);
+      S32 numEvents = SDL_PeepEvents(events, MaxEvents, SDL_GETEVENT, SDL_FIRSTEVENT, SDL_LASTEVENT);
 
       for (int i = 0; i < numEvents; ++i)
       {

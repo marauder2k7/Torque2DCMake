@@ -86,6 +86,16 @@ class x86UNIXPlatformState
       SDL_Window * getSdlWindow() { return sdlWindow; }
 
       void setSdlGlContext(SDL_GLContext context){ sdlContext = context; }
+      SDL_GLContext getSdlContext() {return sdlContext;}
+
+      void setStateWindowSize(S32 horizontal, S32 vertical)
+      {
+
+        mWindowSize.set(horizontal,vertical);
+        SDL_SetWindowSize(sdlWindow, horizontal,vertical);
+
+      }
+      Point2I& getStateWindowSize() {return (mWindowSize);}
 
       // for compatibility, convert 24 bpp to 32
       void setDesktopBpp( S32 bpp )
@@ -103,11 +113,6 @@ class x86UNIXPlatformState
 
       void setWindow( Window newWindow ) { mCurrentWindow = newWindow; }
       Window getWindow() { return mCurrentWindow; }
-
-      void setWindowSize (S32 horizontal, S32 vertical )
-          { mWindowSize.set ( horizontal, vertical ); }
-      void setWindowSize( Point2I size ) { mWindowSize = size; }
-      Point2I& getWindowSize() { return ( mWindowSize ); }
 
       void setWindowName (const char * windowName)
       {

@@ -238,6 +238,7 @@ bool OpenGLDevice::setScreenMode( U32 width, U32 height, U32 bpp,
 {
    // load resolutions, this is done lazily so that we can check the setting
    // of smCanSwitchBitDepth, which may be overridden by console
+
    if (mResolutionList.size()==0)
       loadResolutions();
 
@@ -330,25 +331,31 @@ bool OpenGLDevice::setScreenMode( U32 width, U32 height, U32 bpp,
    Con::printf( "Setting screen mode to %dx%dx%d (%s)...", width, height,
       bpp, ( fullScreen ? "fs" : "w" ) );
 
-    SDL_Window *window = SDL_CreateWindow("",
-                                        SDL_WINDOWPOS_UNDEFINED,
-                                        SDL_WINDOWPOS_UNDEFINED,
-                                        width,
-                                        height,
-                                        flags);
+    if(!x86UNIXState->windowActive())
+    {
 
-   // set the new video mode
-   if (window == NULL)
-   {
-      Con::printf("Unable to set SDL Video Mode: %s", SDL_GetError());
-      return false;
+        SDL_Window *window = SDL_CreateWindow("",
+                                            SDL_WINDOWPOS_UNDEFINED,
+                                            SDL_WINDOWPOS_UNDEFINED,
+                                            width,
+                                            height,
+                                            flags);
+
+       if (window == NULL)
+       {
+          Con::printf("Unable to set SDL Video Mode: %s", SDL_GetError());
+          return false;
+       }
+
+       x86UNIXState->setWindowCreated(true);
+       x86UNIXState->setWindowActive(true);
+
+       SDL_GLContext glContext = SDL_GL_CreateContext(window);
+
+       // we need to hold on to these for cleanup. But only if they are successful.
+       x86UNIXState->setSdlWindow(window);
+       x86UNIXState->setSdlGlContext(glContext);
    }
-
-   SDL_GLContext glContext = SDL_GL_CreateContext(window);
-
-   // we need to hold on to these for cleanup. But only if they are successful.
-   x86UNIXState->setSdlWindow(window);
-   x86UNIXState->setSdlGlContext(glContext);
 
    PrintGLAttributes();
 
@@ -371,15 +378,13 @@ bool OpenGLDevice::setScreenMode( U32 width, U32 height, U32 bpp,
    // reset the window in platform state
    SDL_SysWMinfo sysinfo;
    SDL_VERSION(&sysinfo.version);
-   if (SDL_GetWindowWMInfo(window,&sysinfo) == 0)
+   if (SDL_GetWindowWMInfo(x86UNIXState->getSdlWindow(),&sysinfo) == 0)
    {
       Con::printf("Unable to set SDL Video Mode: %s", SDL_GetError());
       return false;
    }
-   x86UNIXState->setWindow(sysinfo.info.x11.window);
 
    // set various other parameters
-   x86UNIXState->setWindowCreated(true);
    smCurrentRes = NewResolution;
    Platform::setWindowSize ( width, height );
    smIsFullScreen = fullScreen;
@@ -388,6 +393,10 @@ bool OpenGLDevice::setScreenMode( U32 width, U32 height, U32 bpp,
    dSprintf( tempBuf, sizeof( tempBuf ), "%d %d %d",
       smCurrentRes.w, smCurrentRes.h, smCurrentRes.bpp );
    Con::setVariable( "$pref::Video::resolution", tempBuf );
+
+   SDL_SetWindowSize(x86UNIXState->getSdlWindow(),width,height);
+   if(fullScreen)
+      SDL_SetWindowFullscreen(x86UNIXState->getSdlWindow(),SDL_WINDOW_FULLSCREEN);
 
    // post a TORQUE_SETVIDEOMODE user event
    SDL_Event event;

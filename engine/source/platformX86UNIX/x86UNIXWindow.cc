@@ -149,7 +149,6 @@ static void DetectWindowingSystem()
 //------------------------------------------------------------------------------
 static void InitWindow(const Point2I &initialSize, const char *name)
 {
-   x86UNIXState->setWindowSize(initialSize);
    x86UNIXState->setWindowName(name);
 }
 
@@ -221,8 +220,7 @@ static void PrintSDLEventQueue()
    static SDL_Event events[MaxEvents];
 
    SDL_PumpEvents();
-   S32 numEvents = SDL_PeepEvents(
-      events, MaxEvents, SDL_PEEKEVENT, SDL_FIRSTEVENT, SDL_LASTEVENT);
+   S32 numEvents = SDL_PeepEvents(events, MaxEvents, SDL_GETEVENT, SDL_FIRSTEVENT, SDL_LASTEVENT);
    if (numEvents <= 0)
    {
       dPrintf("SDL Event Queue is empty\n");
@@ -259,11 +257,11 @@ static void PrintSDLEventQueue()
 static bool ProcessMessages()
 {
    static const int MaxEvents = 255;
-   static const U32 Mask = SDL_USEREVENT;
+   //static const U32 Mask = SDL_QUIT | SDL_APP_TERMINATING | SDL_USEREVENT | SDL_WINDOWEVENT;
    static SDL_Event events[MaxEvents];
 
    SDL_PumpEvents();
-   S32 numEvents = SDL_PeepEvents(events, MaxEvents, SDL_GETEVENT, Mask, Mask);
+   S32 numEvents = SDL_PeepEvents(events, MaxEvents, SDL_GETEVENT, SDL_QUIT, SDL_WINDOWEVENT);
    if (numEvents == 0)
       return true;
    for (int i = 0; i < numEvents; ++i)
@@ -274,10 +272,21 @@ static bool ProcessMessages()
          case SDL_QUIT:
             return false;
             break;
-         case SDL_WINDOWEVENT_RESIZED:
-         case SDL_WINDOWEVENT_EXPOSED:
-            Game->refreshWindow();
+         case SDL_APP_TERMINATING:
+            return false;
             break;
+         case SDL_WINDOWEVENT:
+            switch(event.window.event)
+            {
+                case SDL_WINDOWEVENT_CLOSE:
+                    return false;
+                    break;
+                case SDL_WINDOWEVENT_RESIZED:
+                    Platform::setWindowSize(event.window.data1,event.window.data2);
+                    break;
+                default:
+                    break;
+            }
          case SDL_USEREVENT:
             if (event.user.code == TORQUE_SETVIDEOMODE)
             {
@@ -288,12 +297,9 @@ static bool ProcessMessages()
                {
                   SDL_Event tempEvent;
                   SDL_PeepEvents(&tempEvent, 1, SDL_GETEVENT,
-                     SDL_MOUSEMOTION, SDL_MOUSEMOTION);
+                     SDL_FIRSTEVENT, SDL_LASTEVENT);
                }
             }
-            break;
-         case SDL_WINDOWEVENT:
-            SetAppState();
             break;
          case SDL_SYSWMEVENT:
             ProcessSYSWMEvent(event);
@@ -610,14 +616,14 @@ void Platform::process()
 //------------------------------------------------------------------------------
 const Point2I &Platform::getWindowSize()
 {
-   return x86UNIXState->getWindowSize();
+    return x86UNIXState->getStateWindowSize();
 }
 
 
 //------------------------------------------------------------------------------
 void Platform::setWindowSize( U32 newWidth, U32 newHeight )
 {
-   x86UNIXState->setWindowSize( (S32) newWidth, (S32) newHeight );
+   x86UNIXState->setStateWindowSize((S32)newWidth,(S32)newHeight);
 }
 
 //------------------------------------------------------------------------------
@@ -709,7 +715,7 @@ void Platform::initWindow(const Point2I &initialSize, const char *name)
 {
 #ifndef DEDICATED
    // initialize window
-   InitWindow(initialSize, name);
+   //InitWindow(initialSize, name);
    if (!InitOpenGL())
       ImmediateShutdown(1);
 #endif
