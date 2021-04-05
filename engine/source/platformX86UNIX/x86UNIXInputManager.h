@@ -52,6 +52,9 @@ struct JoystickAxisInfo
       S32 maxValue;
 };
 
+U32 getTorqueScanCodeFromSDL(U32 sdl);
+U32 getSDLScanCodeFromTorque(U32 torque);
+
 //------------------------------------------------------------------------------
 class JoystickInputDevice : public InputDevice
 {

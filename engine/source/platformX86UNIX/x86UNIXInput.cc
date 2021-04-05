@@ -81,8 +81,6 @@ bool           Input::smActive = false;
 // unix platform state
 extern x86UNIXPlatformState * x86UNIXState;
 
-extern AsciiData AsciiTable[NUM_KEYS];
-
 static XClipboard xclipboard;
 
 #ifdef LOG_INPUT
@@ -132,40 +130,14 @@ void Input::init()
 //------------------------------------------------------------------------------
 U16 Input::getKeyCode( U16 asciiCode )
 {
-   U16 keyCode = 0;
-   U16 i;
+   if(asciiCode > 255)
+        return 0;
 
-   // This is done three times so the lowerkey will always
-   // be found first. Some foreign keyboards have duplicate
-   // chars on some keys.
-   for ( i = KEY_FIRST; i < NUM_KEYS && !keyCode; i++ )
-   {
-      if ( AsciiTable[i].lower.ascii == asciiCode )
-      {
-         keyCode = i;
-         break;
-      };
-   }
+    char c[2];
+    c[0] = asciiCode;
+    c[1] = NULL;
 
-   for ( i = KEY_FIRST; i < NUM_KEYS && !keyCode; i++ )
-   {
-      if ( AsciiTable[i].upper.ascii == asciiCode )
-      {
-         keyCode = i;
-         break;
-      };
-   }
-
-   for ( i = KEY_FIRST; i < NUM_KEYS && !keyCode; i++ )
-   {
-      if ( AsciiTable[i].goofy.ascii == asciiCode )
-      {
-         keyCode = i;
-         break;
-      };
-   }
-
-   return( keyCode );
+   return getTorqueScanCodeFromSDL(SDL_GetScancodeFromKey(SDL_GetKeyFromName(c)));
 }
 
 //-----------------------------------------------------------------------------
@@ -179,14 +151,26 @@ U16 Input::getAscii( U16 keyCode, KEY_STATE keyState )
    if ( keyCode >= NUM_KEYS )
       return 0;
 
+   U32 SDLKey = getSDLScanCodeFromTorque(keyCode);
+   SDLKey = SDL_GetKeyFromScancode((SDL_Scancode)SDLKey);
+
+   const char *text = SDL_GetKeyName(SDLKey);
+   if(text[1] != 0)
+      return 0;
+
+   U8 ret = text[0];
+
+   if(!dIsalpha(ret))
+      return ret;
+
    switch ( keyState )
    {
       case STATE_LOWER:
-         return AsciiTable[keyCode].lower.ascii;
+         return dTolower(ret);
       case STATE_UPPER:
-         return AsciiTable[keyCode].upper.ascii;
+         return dToupper(ret);
       case STATE_GOOFY:
-         return AsciiTable[keyCode].goofy.ascii;
+         return 0;
       default:
          return(0);
 

@@ -30,18 +30,17 @@
 
 #include <SDL2/SDL.h>
 
-// ascii table
+// keymap table
+static const U32 SDLtoTKeyMapSize = NUM_KEYS;
+static U32 T2DtoSDLKey[SDLtoTKeyMapSize];
+static U32 SDLtoTKeyMap[SDLtoTKeyMapSize];
+static bool keyMapsInitialized = false;
+U32 getTorqueMod(U16 mod);
 AsciiData AsciiTable[NUM_KEYS];
 
-// keymap table
-static const U32 SDLtoTKeyMapSize = KEY_OEM_102 + 1;
-static U8 SDLtoTKeyMap[SDLtoTKeyMapSize];
-static bool keyMapsInitialized = false;
-
 // helper functions
-static void MapKey(Uint16 SDLkey, U8 tkey);
+static void MapKey(U32 SDLkey, U32 tkey);
 static void InitKeyMaps();
-static inline U8 TranslateSDLKeytoTKey(U32 keysym);
 
 // unix platform state
 extern x86UNIXPlatformState * x86UNIXState;
@@ -53,31 +52,81 @@ static const U32 KeyboardMask = SDL_KEYUP | SDL_KEYDOWN;
 static const U32 JoystickMask = SDL_JOYAXISMOTION;
 
 static const U32 AllInputEvents = MouseMask | KeyboardMask | JoystickMask;
-// defined in SDL
-extern "C" Uint16 X11_KeyToUnicode( U32 keysym, SDL_Keymod modifiers );
+
+extern "C" U16 X11_KeyToUnicode( U16 keysym, U16 modifiers );
 
 //==============================================================================
 // Static helper functions
 //==============================================================================
-static void MapKey(Uint16 SDLkey, U8 tkey)
+static void MapKey(U32 SDLkey, U32 tkey)
 {
    SDLtoTKeyMap[SDLkey] = tkey;
+   T2DtoSDLKey[tkey] = SDLkey;
 
-   Uint16 key = 0;
-   U32 skey = SDL_GetKeyFromScancode((SDL_Scancode)SDLkey);
-   // lower case
-   AsciiTable[tkey].lower.ascii = tkey;
-   // upper case
-   AsciiTable[tkey].upper.ascii = tkey;
-   // goofy (i18n) case
-   AsciiTable[tkey].goofy.ascii = tkey;
+}
+
+U32 getTorqueScanCodeFromSDL(U32 sdl)
+{
+    return SDLtoTKeyMap[sdl];
+}
+
+U32 getSDLScanCodeFromTorque(U32 torque)
+{
+    return T2DtoSDLKey[torque];
+}
+
+U32 getTorqueMod(U16 mod)
+{
+    U32 ret = 0;
+
+    if (mod & KMOD_LSHIFT)
+    {
+        ret |= SI_LSHIFT;
+        ret |= SI_SHIFT;
+    }
+
+    if (mod & KMOD_RSHIFT)
+    {
+        ret |= SI_RSHIFT;
+        ret |= SI_SHIFT;
+    }
+
+    if (mod & KMOD_LCTRL)
+    {
+        ret |= SI_LCTRL;
+        ret |= SI_CTRL;
+    }
+
+    if (mod & KMOD_RCTRL)
+    {
+        ret |= SI_RCTRL;
+        ret |= SI_CTRL;
+    }
+
+    if (mod & KMOD_LALT)
+    {
+        ret |= SI_LALT;
+        ret |= SI_ALT;
+    }
+
+    if (mod & KMOD_RALT)
+    {
+        ret |= SI_RALT;
+        ret |= SI_ALT;
+    }
+
+    return ret;
 }
 
 //------------------------------------------------------------------------------
 void InitKeyMaps()
 {
-   dMemset( &AsciiTable, 0, sizeof( AsciiTable ) );
-   dMemset(SDLtoTKeyMap, KEY_NULL, SDLtoTKeyMapSize);
+
+    for(int i = 0; i < SDLtoTKeyMapSize; ++i)
+    {
+        SDLtoTKeyMap[i] = 0;
+        T2DtoSDLKey[i] = 0;
+    }
 
    // SDL, Torque
    MapKey(SDL_SCANCODE_A, KEY_A);
@@ -121,12 +170,12 @@ void InitKeyMaps()
    MapKey(SDL_SCANCODE_BACKSPACE, KEY_BACKSPACE);
    MapKey(SDL_SCANCODE_TAB, KEY_TAB);
    MapKey(SDL_SCANCODE_RETURN, KEY_RETURN);
-   MapKey(SDL_SCANCODE_LCTRL, KEY_CONTROL);
-   MapKey(SDL_SCANCODE_RCTRL, KEY_CONTROL);
-   MapKey(SDL_SCANCODE_LALT, KEY_ALT);
-   MapKey(SDL_SCANCODE_RALT, KEY_ALT);
-   MapKey(SDL_SCANCODE_LSHIFT, KEY_SHIFT);
-   MapKey(SDL_SCANCODE_RSHIFT, KEY_SHIFT);
+   MapKey(SDL_SCANCODE_LCTRL, KEY_LCONTROL);
+   MapKey(SDL_SCANCODE_RCTRL, KEY_RCONTROL);
+   MapKey(SDL_SCANCODE_LALT, KEY_LALT);
+   MapKey(SDL_SCANCODE_RALT, KEY_RALT);
+   MapKey(SDL_SCANCODE_LSHIFT, KEY_LSHIFT);
+   MapKey(SDL_SCANCODE_RSHIFT, KEY_RSHIFT);
    MapKey(SDL_SCANCODE_PAUSE, KEY_PAUSE);
    MapKey(SDL_SCANCODE_CAPSLOCK, KEY_CAPSLOCK);
    MapKey(SDL_SCANCODE_ESCAPE, KEY_ESCAPE);
@@ -198,34 +247,13 @@ void InitKeyMaps()
    MapKey(SDL_SCANCODE_F23, KEY_F23);
    MapKey(SDL_SCANCODE_F24, KEY_F24);
 
-   MapKey(SDL_SCANCODE_LCTRL, KEY_LCONTROL);
-   MapKey(SDL_SCANCODE_RCTRL, KEY_RCONTROL);
-   MapKey(SDL_SCANCODE_LALT, KEY_LALT);
-   MapKey(SDL_SCANCODE_RALT, KEY_RALT);
-   MapKey(SDL_SCANCODE_LSHIFT, KEY_LSHIFT);
-   MapKey(SDL_SCANCODE_RSHIFT, KEY_RSHIFT);
+   MapKey(SDL_SCANCODE_LCTRL, KEY_CONTROL);
+   MapKey(SDL_SCANCODE_LALT, KEY_ALT);
+   MapKey(SDL_SCANCODE_LSHIFT, KEY_SHIFT);
 
 
    keyMapsInitialized = true;
 };
-
-//------------------------------------------------------------------------------
-U8 TranslateSDLKeytoTKey(U32 keysym)
-{
-   if (!keyMapsInitialized)
-   {
-      Con::printf("WARNING: SDLkeysymMap is not initialized");
-      return 0;
-   }
-   if (keysym < 0 ||
-       static_cast<U32>(keysym) >= SDLtoTKeyMapSize)
-   {
-      Con::printf("WARNING: invalid keysym: %d", keysym);
-      return 0;
-   }
-
-   return SDLtoTKeyMap[keysym];
-}
 
 //------------------------------------------------------------------------------
 // this shouldn't be used, use TranslateSDLKeytoTKey instead
@@ -806,145 +834,50 @@ void UInputManager::mouseButtonEvent(const SDL_Event& event)
 }
 
 //------------------------------------------------------------------------------
-const char* getKeyName( U16 key )
-{
-   switch ( key )
-   {
-      case KEY_BACKSPACE:     return "Backspace";
-      case KEY_TAB:           return "Tab";
-      case KEY_RETURN:        return "Return";
-      case KEY_PAUSE:         return "Pause";
-      case KEY_CAPSLOCK:      return "CapsLock";
-      case KEY_ESCAPE:        return "Esc";
-
-      case KEY_SPACE:         return "SpaceBar";
-      case KEY_PAGE_DOWN:     return "PageDown";
-      case KEY_PAGE_UP:       return "PageUp";
-      case KEY_END:           return "End";
-      case KEY_HOME:          return "Home";
-      case KEY_LEFT:          return "Left";
-      case KEY_UP:            return "Up";
-      case KEY_RIGHT:         return "Right";
-      case KEY_DOWN:          return "Down";
-      case KEY_PRINT:         return "PrintScreen";
-      case KEY_INSERT:        return "Insert";
-      case KEY_DELETE:        return "Delete";
-      case KEY_HELP:          return "Help";
-
-      case KEY_NUMPAD0:       return "Numpad 0";
-      case KEY_NUMPAD1:       return "Numpad 1";
-      case KEY_NUMPAD2:       return "Numpad 2";
-      case KEY_NUMPAD3:       return "Numpad 3";
-      case KEY_NUMPAD4:       return "Numpad 4";
-      case KEY_NUMPAD5:       return "Numpad 5";
-      case KEY_NUMPAD6:       return "Numpad 6";
-      case KEY_NUMPAD7:       return "Numpad 7";
-      case KEY_NUMPAD8:       return "Numpad 8";
-      case KEY_NUMPAD9:       return "Numpad 9";
-      case KEY_MULTIPLY:      return "Multiply";
-      case KEY_ADD:           return "Add";
-      case KEY_SEPARATOR:     return "Separator";
-      case KEY_SUBTRACT:      return "Subtract";
-      case KEY_DECIMAL:       return "Decimal";
-      case KEY_DIVIDE:        return "Divide";
-      case KEY_NUMPADENTER:   return "Numpad Enter";
-
-      case KEY_F1:            return "F1";
-      case KEY_F2:            return "F2";
-      case KEY_F3:            return "F3";
-      case KEY_F4:            return "F4";
-      case KEY_F5:            return "F5";
-      case KEY_F6:            return "F6";
-      case KEY_F7:            return "F7";
-      case KEY_F8:            return "F8";
-      case KEY_F9:            return "F9";
-      case KEY_F10:           return "F10";
-      case KEY_F11:           return "F11";
-      case KEY_F12:           return "F12";
-      case KEY_F13:           return "F13";
-      case KEY_F14:           return "F14";
-      case KEY_F15:           return "F15";
-      case KEY_F16:           return "F16";
-      case KEY_F17:           return "F17";
-      case KEY_F18:           return "F18";
-      case KEY_F19:           return "F19";
-      case KEY_F20:           return "F20";
-      case KEY_F21:           return "F21";
-      case KEY_F22:           return "F22";
-      case KEY_F23:           return "F23";
-      case KEY_F24:           return "F24";
-
-      case KEY_NUMLOCK:       return "NumLock";
-      case KEY_SCROLLLOCK:    return "ScrollLock";
-      case KEY_LCONTROL:      return "LCtrl";
-      case KEY_RCONTROL:      return "RCtrl";
-      case KEY_LALT:          return "LAlt";
-      case KEY_RALT:          return "RAlt";
-      case KEY_LSHIFT:        return "LShift";
-      case KEY_RSHIFT:        return "RShift";
-
-      case KEY_WIN_LWINDOW:   return "LWin";
-      case KEY_WIN_RWINDOW:   return "RWin";
-      case KEY_WIN_APPS:      return "Apps";
-   }
-
-   static char returnString[5];
-   dSprintf( returnString, sizeof( returnString ), "%c", Input::getAscii( key, STATE_UPPER ) );
-   return returnString;
-}
-
-
-//------------------------------------------------------------------------------
 void UInputManager::keyEvent(const SDL_Event& event)
 {
-   S32 action = (event.type == SDL_KEYDOWN) ? SI_MAKE : SI_BREAK;
    InputEvent ievent;
+
+   S32 iA = SI_MAKE;
+   SDL_Keysym tKey = event.key.keysym;
+
+   if(event.type == SDL_KEYUP)
+   {
+        iA = SI_BREAK;
+   }
+
+   if(event.key.repeat)
+   {
+        iA = SI_REPEAT;
+   }
+
+   U32 torqueMod = getTorqueMod(event.key.keysym.mod);
+   U32 torqueKey = getTorqueScanCodeFromSDL(tKey.scancode);
 
    ievent.deviceInst = 0;
    ievent.deviceType = KeyboardDeviceType;
    ievent.objType = SI_KEY;
-   ievent.objInst = TranslateSDLKeytoTKey(event.key.keysym.sym);
+   ievent.objInst = (InputObjectInstances)torqueKey;
+   ievent.modifier = torqueMod;
    // if the action is a make but this key is already pressed,
    // count it as a repeat
-   if (action == SI_MAKE && mKeyboardState[ievent.objInst])
-      action = SI_REPEAT;
-   ievent.action = action;
-   ievent.fValues[0] = (action == SI_MAKE || action == SI_REPEAT) ? 1.0 : 0.0;
+   if (iA == SI_MAKE && mKeyboardState[ievent.objInst])
+      iA = SI_REPEAT;
+
+   ievent.action = iA;
+   switch(iA)
+   {
+        case SI_MAKE:
+            ievent.fValues[0] = 1.0f;
+        case SI_REPEAT:
+            ievent.fValues[0] = 1.0f;
+        case SI_BREAK:
+            ievent.fValues[0] = 0.0f;
+   }
 
    processKeyEvent(ievent);
    Game->postEvent(ievent);
 
-#if 0
-   if (ievent.action == SI_MAKE)
-      dPrintf("key event: : %s key pressed. MODS:%c%c%c\n",
-         getKeyName(ievent.objInst),
-         ( mModifierKeys & SI_SHIFT ? 'S' : '.' ),
-         ( mModifierKeys & SI_CTRL ? 'C' : '.' ),
-         ( mModifierKeys & SI_ALT ? 'A' : '.' ));
-   else if (ievent.action == SI_REPEAT)
-      dPrintf("key event: : %s key repeated. MODS:%c%c%c\n",
-         getKeyName(ievent.objInst),
-         ( mModifierKeys & SI_SHIFT ? 'S' : '.' ),
-         ( mModifierKeys & SI_CTRL ? 'C' : '.' ),
-         ( mModifierKeys & SI_ALT ? 'A' : '.' ));
-   else if (ievent.action == SI_BREAK)
-      dPrintf("key event: : %s key released. MODS:%c%c%c\n",
-         getKeyName(ievent.objInst),
-         ( mModifierKeys & SI_SHIFT ? 'S' : '.' ),
-         ( mModifierKeys & SI_CTRL ? 'C' : '.' ),
-         ( mModifierKeys & SI_ALT ? 'A' : '.' ));
-   else
-      dPrintf("unknown key event!\n");
-#endif
-
-#ifdef LOG_INPUT
-   Input::log( "EVENT (Input): %s key %s. MODS:%c%c%c\n",
-      getKeyName(ievent.objInst),
-      action == SI_MAKE ? "pressed" : "released",
-      ( mModifierKeys & SI_SHIFT ? 'S' : '.' ),
-      ( mModifierKeys & SI_CTRL ? 'C' : '.' ),
-      ( mModifierKeys & SI_ALT ? 'A' : '.' ));
-#endif
 }
 
 //------------------------------------------------------------------------------
@@ -954,92 +887,6 @@ bool UInputManager::processKeyEvent( InputEvent &event )
    if ( event.deviceType != KeyboardDeviceType || event.objType != SI_KEY )
       return false;
 
-   bool modKey = false;
-   U8 keyCode = event.objInst;
-
-   if ( event.action == SI_MAKE || event.action == SI_REPEAT)
-   {
-      // Maintain the key structure:
-      mKeyboardState[keyCode] = true;
-
-      switch ( event.objInst )
-      {
-         case KEY_LSHIFT:
-            mModifierKeys |= SI_LSHIFT;
-            modKey = true;
-            break;
-
-         case KEY_RSHIFT:
-            mModifierKeys |= SI_RSHIFT;
-            modKey = true;
-            break;
-
-         case KEY_LCONTROL:
-            mModifierKeys |= SI_LCTRL;
-            modKey = true;
-            break;
-
-         case KEY_RCONTROL:
-            mModifierKeys |= SI_RCTRL;
-            modKey = true;
-            break;
-
-         case KEY_LALT:
-            mModifierKeys |= SI_LALT;
-            modKey = true;
-            break;
-
-         case KEY_RALT:
-            mModifierKeys |= SI_RALT;
-            modKey = true;
-            break;
-      }
-   }
-   else
-   {
-      // Maintain the keys structure:
-      mKeyboardState[keyCode] = false;
-
-      switch ( event.objInst )
-      {
-         case KEY_LSHIFT:
-            mModifierKeys &= ~SI_LSHIFT;
-            modKey = true;
-            break;
-
-         case KEY_RSHIFT:
-            mModifierKeys &= ~SI_RSHIFT;
-            modKey = true;
-            break;
-
-         case KEY_LCONTROL:
-            mModifierKeys &= ~SI_LCTRL;
-            modKey = true;
-            break;
-
-         case KEY_RCONTROL:
-            mModifierKeys &= ~SI_RCTRL;
-            modKey = true;
-            break;
-
-         case KEY_LALT:
-            mModifierKeys &= ~SI_LALT;
-            modKey = true;
-            break;
-
-         case KEY_RALT:
-            mModifierKeys &= ~SI_RALT;
-            modKey = true;
-            break;
-      }
-   }
-
-   if ( modKey )
-      event.modifier = 0;
-   else
-      event.modifier = mModifierKeys;
-
-   // TODO: alter this getAscii call
    KEY_STATE state = STATE_LOWER;
    if (event.modifier & (SI_CTRL|SI_ALT) )
    {
@@ -1052,7 +899,7 @@ bool UInputManager::processKeyEvent( InputEvent &event )
 
    event.ascii = Input::getAscii( event.objInst, state );
 
-   return modKey;
+   return true;
 }
 
 //------------------------------------------------------------------------------
