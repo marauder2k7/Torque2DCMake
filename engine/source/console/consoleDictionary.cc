@@ -161,7 +161,7 @@ void Dictionary::deleteVariables(const char *varString)
 
 U32 HashPointer(StringTableEntry ptr)
 {
-   return (U32)(((dsize_t)ptr) >> 2);
+    return (U32)((dsize_t)ptr >> 2);
 }
 
 Dictionary::Entry *Dictionary::lookup(StringTableEntry name)
@@ -272,7 +272,7 @@ void Dictionary::setState(ExprEvalState *state, Dictionary* ref)
       hashTable->count = 0;
       hashTable->size = ST_INIT_SIZE;
       hashTable->data = new Entry *[hashTable->size];
-   
+
       for(S32 i = 0; i < hashTable->size; i++)
          hashTable->data[i] = NULL;
    }
@@ -280,7 +280,7 @@ void Dictionary::setState(ExprEvalState *state, Dictionary* ref)
 
 Dictionary::~Dictionary()
 {
-   if ( hashTable->owner == this ) 
+   if ( hashTable->owner == this )
    {
       reset();
       delete [] hashTable->data;
@@ -405,7 +405,7 @@ void Dictionary::Entry::setStringValue(const char * value)
 
       // may as well pad to the next cache line
       U32 newLen = ((stringLen + 1) + 15) & ~15;
-      
+
       if(sval == typeValueEmpty)
          sval = (char *) dMalloc(newLen);
       else if(newLen > bufferLen)

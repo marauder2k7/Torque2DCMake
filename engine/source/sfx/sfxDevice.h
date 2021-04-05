@@ -10,7 +10,7 @@
 #endif
 
 #ifndef _OPENALFNTABLE
-#include "sfx/LoadOal.h"
+#include "sfx/LoadOAL.h"
 #endif
 
 class SFXProvider;

@@ -24,6 +24,7 @@
 
 #include "platformX86UNIX/platformX86UNIX.h"
 #include "platform/platform.h"
+#include "platform/platformString.h"
 #include <stdarg.h>
 #include <ctype.h>
 #include <stdlib.h>
@@ -71,8 +72,8 @@ char *stristr(char *szStringToBeSearched, const char *szSubstringToSearchFor)
    char *szCopy2 = NULL;
 
    // verify parameters
-   if ( szStringToBeSearched == NULL || 
-        szSubstringToSearchFor == NULL ) 
+   if ( szStringToBeSearched == NULL ||
+        szSubstringToSearchFor == NULL )
    {
       return szStringToBeSearched;
    }
@@ -105,7 +106,7 @@ char *stristr(char *szStringToBeSearched, const char *szSubstringToSearchFor)
    return pPos;
 } // stristr(...)
 
-char *dStrdup_r(const char *src, const char *fileName, U32 lineNumber)
+char *dStrdup_r(const char *src, const char *fileName, dsize_t lineNumber)
 {
    char *buffer = (char *) dMalloc_r(dStrlen(src) + 1, fileName, lineNumber);
    dStrcpy(buffer, src);
@@ -115,9 +116,9 @@ char *dStrdup_r(const char *src, const char *fileName, U32 lineNumber)
 char* dStrcat(char *dst, const char *src)
 {
    return strcat(dst,src);
-}   
+}
 
-char* dStrncat(char *dst, const char *src, U32 len)
+char* dStrncat(char *dst, const char *src, dsize_t len)
 {
    return strncat(dst,src,len);
 }
@@ -125,7 +126,7 @@ char* dStrncat(char *dst, const char *src, U32 len)
 // concatenates a list of src's onto the end of dst
 // the list of src's MUST be terminated by a NULL parameter
 // dStrcatl(dst, sizeof(dst), src1, src2, NULL);
-char* dStrcatl(char *dst, U32 dstSize, ...)
+char* dStrcatl(char *dst, dsize_t dstSize, ...)
 {
    const char* src;
    char *p = dst;
@@ -134,9 +135,9 @@ char* dStrcatl(char *dst, U32 dstSize, ...)
    dstSize--;  // leave room for string termination
 
    // find end of dst
-   while (dstSize && *p++)                    
-      dstSize--;   
-   
+   while (dstSize && *p++)
+      dstSize--;
+
    va_list args;
    va_start(args, dstSize);
 
@@ -145,22 +146,22 @@ char* dStrcatl(char *dst, U32 dstSize, ...)
       while( dstSize && *src )
       {
          *p++ = *src++;
-         dstSize--;   
+         dstSize--;
       }
 
    va_end(args);
 
-   // make sure the string is terminated 
+   // make sure the string is terminated
    *p = 0;
 
    return dst;
-}   
+}
 
 
 // copy a list of src's into dst
 // the list of src's MUST be terminated by a NULL parameter
 // dStrccpyl(dst, sizeof(dst), src1, src2, NULL);
-char* dStrcpyl(char *dst, U32 dstSize, ...)
+char* dStrcpyl(char *dst, dsize_t dstSize, ...)
 {
    const char* src;
    char *p = dst;
@@ -176,21 +177,21 @@ char* dStrcpyl(char *dst, U32 dstSize, ...)
       while( dstSize && *src )
       {
          *p++ = *src++;
-         dstSize--;   
+         dstSize--;
       }
 
    va_end(args);
 
-   // make sure the string is terminated 
+   // make sure the string is terminated
    *p = 0;
 
    return dst;
-}   
+}
 
 
 S32 dStrcmp(const char *str1, const char *str2)
 {
-   return strcmp(str1, str2);   
+   return strcmp(str1, str2);
 }
 
 S32 dStrcmp(const UTF16 *str1, const UTF16 *str2)
@@ -213,36 +214,36 @@ S32 dStrcmp(const UTF16 *str1, const UTF16 *str2)
 
    return ret;
 }
- 
+
 S32 dStricmp(const char *str1, const char *str2)
 {
-   return strcasecmp(str1, str2);   
-}  
+   return strcasecmp(str1, str2);
+}
 
-S32 dStrncmp(const char *str1, const char *str2, U32 len)
+S32 dStrncmp(const char *str1, const char *str2, dsize_t len)
 {
-   return strncmp(str1, str2, len);   
-}  
- 
-S32 dStrnicmp(const char *str1, const char *str2, U32 len)
+   return strncmp(str1, str2, len);
+}
+
+S32 dStrnicmp(const char *str1, const char *str2, dsize_t len)
 {
-   return strncasecmp(str1, str2, len);   
-}   
+   return strncasecmp(str1, str2, len);
+}
 
 char* dStrcpy(char *dst, const char *src)
 {
    return strcpy(dst,src);
-}   
+}
 
-char* dStrncpy(char *dst, const char *src, U32 len)
+char* dStrncpy(char *dst, const char *src, dsize_t len)
 {
    return strncpy(dst,src,len);
-}   
+}
 
 U32 dStrlen(const char *str)
 {
    return strlen(str);
-}   
+}
 
 
 char* dStrupr(char *str)
@@ -253,36 +254,36 @@ char* dStrupr(char *str)
 #else
    return __strtoup(str);
 #endif
-}   
+}
 
 
 char* dStrlwr(char *str)
 {
    return __strtolwr(str);
-}   
+}
 
 
 char* dStrchr(char *str, S32 c)
 {
    return strchr(str,c);
-}   
+}
 
 
 const char* dStrchr(const char *str, S32 c)
 {
    return strchr(str,c);
-}   
+}
 
 
 const char* dStrrchr(const char *str, S32 c)
 {
    return strrchr(str,c);
-}   
+}
 
 char* dStrrchr(char *str, S32 c)
 {
    return strrchr(str,c);
-}   
+}
 
 U32 dStrspn(const char *str, const char *set)
 {
@@ -292,7 +293,7 @@ U32 dStrspn(const char *str, const char *set)
 U32 dStrcspn(const char *str, const char *set)
 {
    return strcspn(str, set);
-}   
+}
 
 
 char* dStrstr(char *str1, const char *str2)
@@ -313,18 +314,18 @@ char* dStrtok(char *str, const char *sep)
 
 S32 dAtoi(const char *str)
 {
-   return atoi(str);   
-}  
+   return atoi(str);
+}
 
 F32 dAtof(const char *str)
 {
-   return atof(str);   
-}   
+   return atof(str);
+}
 
 bool dAtob(const char *str)
 {
    return !dStricmp(str, "true") || dAtof(str);
-}   
+}
 
 
 bool dIsalnum(const char c)
@@ -353,15 +354,15 @@ void dPrintf(const char *format, ...)
    va_start(args, format);
    vprintf(format, args);
    va_end(args);
-}   
+}
 
 S32 dVprintf(const char *format, va_list arglist)
 {
    S32 len = vprintf(format, arglist);
    return (len);
-}   
+}
 
-S32 dSprintf(char *buffer, U32 bufferSize, const char *format, ...)
+S32 dSprintf(char *buffer, dsize_t bufferSize, const char *format, ...)
 {
    va_list args;
    va_start(args, format);
@@ -371,10 +372,10 @@ S32 dSprintf(char *buffer, U32 bufferSize, const char *format, ...)
    va_end(args);
 
    return len;
-}   
+}
 
 
-S32 dVsprintf(char *buffer, U32 bufferSize, const char *format, va_list arglist)
+S32 dVsprintf(char *buffer, dsize_t bufferSize, const char *format, va_list arglist)
 {
    S32 len = vsnprintf(buffer, bufferSize, format, arglist);
 
@@ -385,7 +386,7 @@ S32 dStrrev(char *str)
 {
    // Get string length
    S32 l = dStrlen(str) - 1;
-   
+
    for (int x = 0; x < 1; x++,l--)
    {
       // triple XOR trick
@@ -416,14 +417,14 @@ S32 dItoa(S32 n, char s[])
    dStrrev(s);
 
    return dStrlen(s);
-} 
+}
 
 S32 dSscanf(const char *buffer, const char *format, ...)
 {
    va_list args;
 #if defined(HAS_VSSCANF)
    va_start(args, format);
-   return __vsscanf(buffer, format, args);   
+   return __vsscanf(buffer, format, args);
 #else
    va_start(args, format);
 
@@ -470,7 +471,7 @@ S32 dSscanf(const char *buffer, const char *format, ...)
    }
    return 0;
 #endif
-}   
+}
 
 S32 dFflushStdout()
 {

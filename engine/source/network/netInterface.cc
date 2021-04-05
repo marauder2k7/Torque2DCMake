@@ -31,7 +31,7 @@
 #include "netInterface_ScriptBinding.h"
 
 #ifdef GGC_PLUGIN
-#include "GGCNatTunnel.h" 
+#include "GGCNatTunnel.h"
 extern void HandleGGCPacket(NetAddress* addr, unsigned char* data, U32 dataSize);
 #endif
 
@@ -89,7 +89,7 @@ NetConnection *NetInterface::findPendingConnection(const NetAddress *address, U3
 void NetInterface::processPacketReceiveEvent(PacketReceiveEvent *prEvent)
 {
 
-   U32 dataSize = prEvent->size - PacketReceiveEventHeaderSize;
+   U32 dataSize = prEvent->size;
    BitStream pStream(prEvent->data, dataSize);
 
    // Determine what to do with this packet:

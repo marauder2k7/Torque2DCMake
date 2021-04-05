@@ -30,8 +30,13 @@
 
 //--------------------------------------
 // Types
+#if defined(TORQUE_X86)
 typedef signed long long    S64;
 typedef unsigned long long  U64;
+#else
+typedef signed long    S64;
+typedef unsigned long  U64;
+#endif
 
 
 //--------------------------------------
@@ -74,7 +79,7 @@ typedef unsigned long long  U64;
 #  define TORQUE_OS_STRING "Emscripten"
 #  define TORQUE_OS_EMSCRIPTEN
 #  include "platform/types.posix.h"
-#elif defined(linux) || defined (LINUX)
+#elif defined(__linux__) || defined (LINUX)
 #  define TORQUE_OS_STRING "Linux"
 #  define TORQUE_OS_LINUX
 //#  define TORQUE_SUPPORTS_NASM
@@ -113,14 +118,14 @@ typedef unsigned long long  U64;
 #endif
 #  include "platform/types.ppc.h"
 
-#else 
+#else
 #  error "GCC: Unsupported Operating System"
 #endif
 
 
 //--------------------------------------
 // Identify the CPU
-#if defined(i386)
+#if defined(i386) || defined(__i386) || defined(__i386__)
 #  define TORQUE_CPU_STRING "Intel x86"
 #  define TORQUE_CPU_X86
 #  define TORQUE_LITTLE_ENDIAN

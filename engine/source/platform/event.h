@@ -128,11 +128,11 @@ struct ConsoleEvent : public Event
 
 /// Header sizes for events defined later on.
 /// Byte offset to payload of a PacketReceiveEvent
-const U32 PacketReceiveEventHeaderSize = Offset(data,PacketReceiveEvent);
+//const U32 PacketReceiveEventHeaderSize = Offset(data,PacketReceiveEvent);
 /// Byte offset to payload of a ConnectedReceiveEvent
-const U32 ConnectedReceiveEventHeaderSize = Offset(data,ConnectedReceiveEvent);
+//const U32 ConnectedReceiveEventHeaderSize = Offset(data,ConnectedReceiveEvent);
 /// Byte offset to payload of a ConsoleEvent
-const U32 ConsoleEventHeaderSize = Offset(data,ConsoleEvent);
+//const U32 ConsoleEventHeaderSize = Offset(data,ConsoleEvent);
 
 
 /// Mouse input event.
@@ -143,14 +143,14 @@ struct MouseMoveEvent : public Event
 
    MouseMoveEvent() { type = MouseMoveEventType; size = sizeof(MouseMoveEvent); }
 };
-struct ScreenTouchEvent : public Event  
-{  
-    S32 xPos, yPos;  
+struct ScreenTouchEvent : public Event
+{
+    S32 xPos, yPos;
     S32 touchID;
     U8    action;
     U32 numTouches;
-    
-    ScreenTouchEvent() { type = ScreenTouchEventType; size = sizeof(ScreenTouchEvent); }  
+
+    ScreenTouchEvent() { type = ScreenTouchEventType; size = sizeof(ScreenTouchEvent); }
 };
 /// Generic input event.
 struct InputEvent : public Event
@@ -171,11 +171,11 @@ struct InputEvent : public Event
    char fingersZ[256];    ///< Collection of Z-coordinates for fingers
 
    char fingerIDs[256];    ///< Collection of touch IDs
-    
+
     InputEvent()
-    { 
-        type = InputEventType; 
-        size = sizeof(InputEvent); 
+    {
+        type = InputEventType;
+        size = sizeof(InputEvent);
         deviceInst = 0;
         iValue     = -1;
         objType    = 0;
@@ -401,7 +401,7 @@ enum JoystickCodes {
    XI_DPAD_DOWN      = 0x207,
    XI_DPAD_LEFT      = 0x208,
    XI_DPAD_RIGHT     = 0x209,
-   
+
    XI_START          = 0x311,
    XI_BACK           = 0x312,
    XI_LEFT_THUMB     = 0x313,
@@ -425,7 +425,7 @@ enum AccelerometerCodes
    SI_GRAVZ         = 0x305
 };
 
-enum GyroCodes 
+enum GyroCodes
 {
    SI_GYROX       = 0x306,
    SI_GYROY       = 0x307,

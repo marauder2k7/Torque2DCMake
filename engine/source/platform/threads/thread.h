@@ -44,7 +44,7 @@ class Thread
 protected:
    PlatformThreadData*  mData;
 
-   /// Used to signal threads need to stop. 
+   /// Used to signal threads need to stop.
    /// Threads set this flag to false in start()
    bool shouldStop;
 
@@ -57,12 +57,12 @@ public:
    /// @param arg Data to be passed to func, when the thread starts.
    /// @param start_thread Whether to start the Thread immediately.
    Thread(ThreadRunFunction func = 0, void *arg = 0, bool start_thread = true, bool autodelete = false);
-   
+
    /// Destroy a thread.
    /// The thread MUST be allowed to exit before it is destroyed.
    virtual ~Thread();
 
-   /// Start a thread. 
+   /// Start a thread.
    /// Sets shouldStop to false and calls run() in a new thread of execution.
    void start();
 
@@ -72,10 +72,12 @@ public:
    /// Block until the thread stops running.
    bool join();
 
-   /// Threads may call checkForStop() periodically to check if they've been 
+   /// Threads may call checkForStop() periodically to check if they've been
    /// asked to stop. As soon as checkForStop() returns true, the thread should
    /// clean up and return.
    bool checkForStop() {  return shouldStop; }
+
+   //U32 getId();
 
    /// Run the Thread's entry point function.
    /// Override this method in a subclass of Thread to create threaded code in
@@ -91,7 +93,7 @@ public:
    ThreadIdent getId();
 };
 
-class ThreadManager 
+class ThreadManager
 {
    static ThreadManager* singleton()
    {
@@ -103,7 +105,7 @@ class ThreadManager
 
    Vector<Thread*> threadPool;
    Mutex poolLock;
-   
+
 public:
 
    /// Returns true if threadId is the same as the calling thread's id.
@@ -114,14 +116,14 @@ public:
    /// reliably compare thread ids.
    // this comparator is needed by pthreads and ThreadManager.
    static bool compare(ThreadIdent threadId_1, ThreadIdent threadId_2);
-      
-   /// Returns the platform specific thread id of the calling thread. Some 
-   /// platforms do not guarantee that this ID stays the same over the life of 
+
+   /// Returns the platform specific thread id of the calling thread. Some
+   /// platforms do not guarantee that this ID stays the same over the life of
    /// the thread, so use ThreadManager::compare() to compare thread ids.
    static ThreadIdent getCurrentThreadId();
-   
+
    /// Each thread should add itself to the thread pool the first time it runs.
-   
+
    static void addThread(Thread* thread)
    {
       ThreadManager &manager = *singleton();
@@ -136,7 +138,7 @@ public:
    {
       ThreadManager &manager = *singleton();
       manager.poolLock.lock();
-      
+
       ThreadIdent threadID = thread->getId();
       for( U32 i = 0;i < (U32)manager.threadPool.size();++i)
       {
@@ -146,17 +148,17 @@ public:
             break;
          }
       }
-      
+
       manager.poolLock.unlock();
    }
-   
+
    /// Searches the pool of known threads for a thread whose id is equivalent to
    /// the given threadid. Compares thread ids with ThreadManager::compare().
    static Thread* getThreadById(ThreadIdent threadid)
    {
       AssertFatal(threadid != 0, "ThreadManager::getThreadById() Searching for a bad thread id.");
       Thread* ret = NULL;
-      
+
       singleton()->poolLock.lock();
       Vector<Thread*> &pool = singleton()->threadPool;
       for( S32 i = pool.size() - 1; i >= 0; i--)

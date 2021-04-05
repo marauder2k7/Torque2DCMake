@@ -4,7 +4,7 @@
 #include "platform/platform.h"
 
 #include "sfx/sfxDevice.h"
-#include "sfx/LoadOal.h"
+#include "sfx/LoadOAL.h"
 #include "console/console.h"
 
 class SFXProvider
@@ -19,7 +19,7 @@ public:
 protected:
    OPENALFNTABLE mOpenAL;
 
-   
+
 
 public:
    void init();

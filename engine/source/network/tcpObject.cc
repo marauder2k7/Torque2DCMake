@@ -351,7 +351,7 @@ void DefaultGame::processConnectedReceiveEvent(ConnectedReceiveEvent* event )
       Con::printf("Got bad connected receive event.");
       return;
    }
-   U32 size = U32(event->size - ConnectedReceiveEventHeaderSize);
+   U32 size = U32(event->size);
    U8 *buffer = event->data;
 
    while(size)

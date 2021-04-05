@@ -52,7 +52,7 @@
 // BRKSET file line clear passct expr - set a breakpoint on the file,line
 //        it must pass passct times for it to break and if clear is true, it
 //        clears when hit
-//    output: 
+//    output:
 //
 // BRKNEXT - stop execution at the next breakable line.
 //    output: none
@@ -87,7 +87,7 @@
 //
 // Other output:
 //
-// BREAK file1 line1 function1 file2 line2 function2 ... - Sent when the debugger hits a 
+// BREAK file1 line1 function1 file2 line2 function2 ... - Sent when the debugger hits a
 //          breakpoint.  It lists out one file/line/function triplet for each stack level.
 //          The first one is the top of the stack.
 //
@@ -214,11 +214,11 @@ void TelnetDebugger::setDebugParameters(S32 port, const char *password, bool wai
    dStrncpy(mDebuggerPassword, password, PasswordMaxLength);
 
    mWaitForClient = waitForClient;
-   if ( !mWaitForClient ) 
+   if ( !mWaitForClient )
       return;
 
    // Wait for the client to fully connect.
-   while ( mState != Connected  ) 
+   while ( mState != Connected  )
    {
       Platform::sleep(10);
       process();
@@ -272,7 +272,7 @@ void TelnetDebugger::process()
 
 void TelnetDebugger::checkDebugRecv()
 {
-   for (;;) 
+   for (;;)
    {
       // Process all the complete commands in the buffer.
       while ( mCurPos > 0 )
@@ -350,7 +350,7 @@ void TelnetDebugger::executionStopped(CodeBlock *code, U32 lineNumber)
    Breakpoint **bp = findBreakpoint(code->name, lineNumber);
    if(!bp)
       return;
-   
+
    Breakpoint *brk = *bp;
    mProgramPaused = true;
    Con::evaluatef("$Debug::result = %s;", brk->testExpression);
@@ -373,7 +373,7 @@ void TelnetDebugger::pushStackFrame()
    if(mState == NotConnected)
       return;
 
-   if(mBreakOnNextStatement && mStackPopBreakIndex > -1 && 
+   if(mBreakOnNextStatement && mStackPopBreakIndex > -1 &&
       gEvalState.stack.size() > mStackPopBreakIndex)
       setBreakOnNextStatement( false );
 }
@@ -426,7 +426,7 @@ void TelnetDebugger::sendBreak()
       Namespace *ns = gEvalState.stack[i]->scopeNamespace;
       scope[0] = 0;
       if ( ns ) {
-         
+
          if ( ns->mParent && ns->mParent->mPackage && ns->mParent->mPackage[0] ) {
             dStrcat( scope, ns->mParent->mPackage );
             dStrcat( scope, "::" );
@@ -483,7 +483,7 @@ void TelnetDebugger::processLineBuffer(S32 cmdLen)
       {
          ConsoleEvent postEvent;
          dStrcpy(postEvent.data, evalBuffer);
-         postEvent.size = ConsoleEventHeaderSize + dStrlen(evalBuffer) + 1;
+         postEvent.size = dStrlen(evalBuffer) + 1;
          Game->postEvent(postEvent);
       }
       else if(dSscanf(mLineBuffer, "BRKVARSET %s %d %[^\n]", varBuffer, &passCount, evalBuffer) == 3)
@@ -555,7 +555,7 @@ void TelnetDebugger::addAllBreakpoints(CodeBlock *code)
          // Find the fist breakline starting from and
          // including the requested breakline.
          S32 newLine = code->findFirstBreakLine(cur->lineNumber);
-         if (newLine <= 0) 
+         if (newLine <= 0)
          {
             walk = &cur->next;
 
@@ -587,7 +587,7 @@ void TelnetDebugger::addAllBreakpoints(CodeBlock *code)
                continue;
             }
 
-            // We're moving the breakpoint to new line... inform the 
+            // We're moving the breakpoint to new line... inform the
             // client so it can update it's view.
             dSprintf(buffer, MaxCommandSize, "BRKMOV %s %d %d\r\n", cur->fileName, cur->lineNumber, newLine);
             send(buffer);
@@ -622,7 +622,7 @@ void TelnetDebugger::addBreakpoint(const char *fileName, S32 line, bool clear, S
    }
    else
    {
-      // Note that if the code block is not already 
+      // Note that if the code block is not already
       // loaded it is handled by addAllBreakpoints.
       CodeBlock* code = CodeBlock::find(fileName);
       if (code)
@@ -630,7 +630,7 @@ void TelnetDebugger::addBreakpoint(const char *fileName, S32 line, bool clear, S
          // Find the fist breakline starting from and
          // including the requested breakline.
          S32 newLine = code->findFirstBreakLine(line);
-         if (newLine <= 0) 
+         if (newLine <= 0)
          {
             char buffer[MaxCommandSize];
             dSprintf(buffer, MaxCommandSize, "BRKCLR %s %d\r\n", fileName, line);
@@ -743,10 +743,10 @@ void TelnetDebugger::setBreakOnNextStatement( bool enabled )
       for(CodeBlock *walk = CodeBlock::getCodeBlockList(); walk; walk = walk->nextFile)
          walk->setAllBreaks();
       mBreakOnNextStatement = true;
-   } 
+   }
    else if ( !enabled )
    {
-      // Clear all the breaks on the codeblocks 
+      // Clear all the breaks on the codeblocks
       // then go reapply the breakpoints.
       for(CodeBlock *walk = CodeBlock::getCodeBlockList(); walk; walk = walk->nextFile)
          walk->clearAllBreaks();
@@ -764,7 +764,7 @@ void TelnetDebugger::debugBreakNext()
    if (mState != Connected)
       return;
 
-   if ( !mProgramPaused ) 
+   if ( !mProgramPaused )
       setBreakOnNextStatement( true );
 }
 
@@ -784,7 +784,7 @@ void TelnetDebugger::debugStepIn()
    // is in a running state when it connects.
    if (mState != Initialize)
       send("RUNNING\r\n");
-   else 
+   else
       mState = Connected;
 }
 
@@ -830,7 +830,7 @@ void TelnetDebugger::evaluateExpression(const char *tag, S32 frame, const char *
    CodeBlock *newCodeBlock = new CodeBlock();
    const char* result = newCodeBlock->compileExec( NULL, buffer, false, frame );
    delete [] buffer;
-   
+
    // Create a new buffer that fits the result.
    format = "EVALOUT %s %s\r\n";
    len = dStrlen( format ) + dStrlen( tag ) + dStrlen( result );

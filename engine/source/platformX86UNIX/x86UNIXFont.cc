@@ -34,7 +34,7 @@
 #include <X11/Xos.h>
 #include <X11/Xatom.h>
 #include <X11/Xft/Xft.h>
-#include <X11/extensions/Xrender.h>      // For XRenderColor
+//#include <X11/extensions/Xrender.h>      // For XRenderColor
 
 // Needed for getenv in createFont
 #include <stdlib.h>
@@ -83,7 +83,7 @@ XftFont *loadFont(const char *name, S32 size, Display *display)
 }
 
 // XA: New class for the unix unicode font
-PlatformFont *createPlatformFont(const char *name, U32 size, U32 charset /* = TGE_ANSI_CHARSET */)
+PlatformFont *createPlatformFont(const char *name, dsize_t size, U32 charset /* = TGE_ANSI_CHARSET */)
 {
   PlatformFont *retFont = new x86UNIXFont;
 
@@ -101,14 +101,14 @@ x86UNIXFont::~x86UNIXFont()
 {}
 
 
-bool x86UNIXFont::create(const char *name, U32 size, U32 charset)
+bool x86UNIXFont::create(const char *name, dsize_t size, U32 charset)
 {
   Display *display = XOpenDisplay(getenv("DISPLAY"));
   if (display == NULL)
     AssertFatal(false, "createFont: cannot connect to X server");
 
   XftFont *font = loadFont(name, size, display);
-  
+
   if (!font)
   {
     Con::errorf("Error: Could not load font -%s-", name);
@@ -197,11 +197,11 @@ PlatformFont::CharInfo &x86UNIXFont::getCharInfo(const UTF16 ch) const
                     DefaultColormap(display, screen),
                     "white",
                     &white);
-  
+
   XGlyphInfo charinfo;
   XftTextExtents16(display, fontInfo, &ch, 1, &charinfo);
   c.height     = fontInfo->height;
-  c.xOrigin    = 0; 
+  c.xOrigin    = 0;
   c.yOrigin    = fontInfo->ascent;
   c.xIncrement = charinfo.xOff;
   c.width      = charinfo.xOff;
@@ -218,8 +218,8 @@ PlatformFont::CharInfo &x86UNIXFont::getCharInfo(const UTF16 ch) const
   XftDrawString16 (draw, &white, fontInfo, 0, fontInfo->ascent, &ch, 1);
   // grab the pixmap image
 
-  XImage *ximage = XGetImage(display, pixmap, 0, 0, 
-			     charinfo.xOff, fontInfo->height, 
+  XImage *ximage = XGetImage(display, pixmap, 0, 0,
+			     charinfo.xOff, fontInfo->height,
 			     AllPlanes, XYPixmap);
   if (!ximage)
     AssertFatal(false, "cannot get x image");

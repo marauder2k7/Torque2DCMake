@@ -35,7 +35,7 @@ void renderBorderedRect(RectI &bounds, GuiControlProfile *profile, GuiControlSta
 void renderBorderedCircle(Point2I &center, S32 radius, GuiControlProfile *profile, GuiControlState state);
 void renderSizableBorderedImageAsset(RectI &bounds, U8 frame, ImageAsset *mImageAsset, S32 frameCount);
 void renderSizableBorderedBitmap(RectI &bounds, U8 frame, TextureHandle &texture, RectI *bitmapBounds, S32 frameCount);
-void renderSizableBorderedTexture(RectI &bounds, TextureHandle &texture, RectI &TopLeft, RectI &Top, RectI &TopRight, RectI &Left, RectI &Fill, RectI &Right, RectI &BottomLeft, RectI &Bottom, RectI &BottomRight);
+void renderSizableBorderedTexture(RectI &bounds, TextureHandle &texture, RectI TopLeft, RectI Top, RectI TopRight, RectI Left, RectI Fill, RectI Right, RectI BottomLeft, RectI Bottom, RectI BottomRight);
 void renderFixedBitmapBordersFilled(RectI &bounds, S32 baseMultiplier, GuiControlProfile *profile);
 void renderStretchedBitmap(RectI &bounds, U8 frame, GuiControlProfile *profile);
 void renderStretchedImageAsset(RectI &bounds, U8 frame, GuiControlProfile *profile);

@@ -47,7 +47,7 @@ bool Module::_constrainedToComeBefore(Module* module, Mode mode)
             // can be omitted from a link without requiring the module definitions
             // to be adapted.
 
-            Platform::outputDebugString("[EngineModuleManager] Module of depends on module '%s' which does not exist");
+            //Platform::outputDebugString("[EngineModuleManager] Module of depends on module '%s' which does not exist");
             continue;
          }
 
@@ -85,7 +85,7 @@ bool Module::_constrainedToComeAfter(Module* module, Mode mode)
             // can be omitted from a link without requiring the module definitions
             // to be adapted.
 
-            Platform::outputDebugString("[EngineModuleManager] Module of depends on module '%s' which does not exist");
+            //Platform::outputDebugString("[EngineModuleManager] Module of depends on module '%s' which does not exist");
             continue;
          }
 

@@ -62,7 +62,7 @@ protected:
     bool                                    mSelfTick;
 
     bool                                    mStaticProvider;
-    
+
     bool                                    mUsingNamedFrame;
 
     U32                                     mImageFrame;
@@ -125,7 +125,7 @@ public:
 		BatchRender* pBatchRenderer) const;
 
 	// Render the given list of vertex information directly.
-	void ImageFrameProviderCore::render(
+	void render(
 		const U32 vertexCount,
 		const Vector2 *vertexArray,
 		const Vector2 *textureArray,
@@ -143,7 +143,7 @@ public:
     inline U32 getImageFrame( void ) const { return mImageFrame; }
     virtual bool setNamedImageFrame( const char* frame );
     inline StringTableEntry getNamedImageFrame( void ) const { return mNamedImageFrame; }
-	
+
     /// Animated-Image Frame.
     virtual bool setAnimation( const char* pAnimationAssetId );
     inline StringTableEntry getAnimation( void ) const { return mpAnimationAsset->getAssetId(); }

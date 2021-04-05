@@ -93,6 +93,11 @@ class Point2I;
 #  define TORQUE_TMM_LOC
 #endif
 
+#if defined(TORQUE_OS_LINUX)
+class GOldFont;
+extern GOldFont *createFont(const char *name, dsize_t size, U32 charset = TGE_ANSI_CHARSET);
+const char *getCharSetName(const U32 charSet);
+#endif
 //------------------------------------------------------------------------------
 
 struct Platform
@@ -199,7 +204,7 @@ struct Platform
     static StringTableEntry getTemporaryDirectory();
     static StringTableEntry getTemporaryFileName();
     static StringTableEntry getExecutableName();
-    static StringTableEntry getExecutablePath(); 
+    static StringTableEntry getExecutablePath();
     static void setMainDotCsDir(const char *dir);
     static StringTableEntry getMainDotCsDir();
     static StringTableEntry getPrefsPath(const char *file = NULL);

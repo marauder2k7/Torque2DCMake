@@ -149,7 +149,7 @@ void TelnetConsole::process()
 
          const char *prompt = Con::getVariable("Con::Prompt");
          char connectMessage[1024];
-         dSprintf(connectMessage, sizeof(connectMessage), 
+         dSprintf(connectMessage, sizeof(connectMessage),
             "Torque Telnet Remote Console\r\n\r\n%s",
             cl->state == FullAccessConnected ? prompt : "Enter Password:");
 
@@ -197,7 +197,7 @@ void TelnetConsole::process()
                replyPos = 0;
 
                dStrcpy(mPostEvent.data, client->curLine);
-               mPostEvent.size = ConsoleEventHeaderSize + dStrlen(client->curLine) + 1;
+               mPostEvent.size = dStrlen(client->curLine) + 1;
                Game->postEvent(mPostEvent);
 
                // note - send prompt next

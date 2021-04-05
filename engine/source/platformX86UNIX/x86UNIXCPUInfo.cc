@@ -29,11 +29,11 @@
 #include <math.h>
 
 extern void PlatformBlitInit();
-extern void SetProcessorInfo(TorqueSystemInfo::Processor& pInfo, 
+extern void SetProcessorInfo(TorqueSystemInfo::Processor& pInfo,
    char* vendor, U32 processor, U32 properties); // platform/platformCPU.cc
 
 // asm cpu detection routine from platform code
-extern "C" 
+extern "C"
 {
 void detectX86CPUInfo(char *vendor, U32 *processor, U32 *properties);
 }
@@ -62,19 +62,19 @@ void Processor::init()
    clockticks = properties = processor = Ttime[0] = 0;
    dStrcpy(vendor, "");
 
-   detectX86CPUInfo(vendor, &processor, &properties);
-   SetProcessorInfo(PlatformSystemInfo.processor, 
+   //detectX86CPUInfo(vendor, &processor, &properties);
+   SetProcessorInfo(PlatformSystemInfo.processor,
       vendor, processor, properties);
 
    U32 mhz = 0;
 
    //--------------------------------------
    // if RDTSC support calculate the aproximate Mhz of the CPU
-   if (PlatformSystemInfo.processor.properties & CPU_PROP_RDTSC && 
+   if (PlatformSystemInfo.processor.properties & CPU_PROP_RDTSC &&
        PlatformSystemInfo.processor.properties & CPU_PROP_FPU)
    {
       const U32 MS_INTERVAL = 250; // Bigger = more accurate, but slower startup
-      
+
 #if defined(TORQUE_COMPILER_GCC) && ((__GNUC__ >= 3) && (__GNUC_MINOR__ >=4)) || ((__GNUC__ >= 4) && (__GNUC_MINOR__ >=0))
       asm("rdtsc" : "=a" (timeLo1), "=d" (timeHi1));
 #else
@@ -97,7 +97,7 @@ void Processor::init()
       asm("rdtsc" : "=a" (timeLo2), "=d" (timeHi2));
       // TODO: This will need to be fixed for x64 support to include bits from timeHi
       clockticks = timeLo2 - timeLo1;
-#else      
+#else
       asm(
          "pushl  %eax\n"
          "pushl  %edx\n"
@@ -112,7 +112,7 @@ void Processor::init()
       mhz = (U32)(F32(clockticks) / F32(ms) / 1000.0f);
       // catch-22 the timing method used above to calc Mhz is generally
       // wrong by a few percent so we want to round to the nearest clock
-      // multiple but we also want to be careful to not touch overclocked 
+      // multiple but we also want to be careful to not touch overclocked
       // results
 
       // measure how close the Raw Mhz number is to the center of each clock
@@ -120,18 +120,18 @@ void Processor::init()
       U32 bucket25 = mhz % 25;
       U32 bucket33 = mhz % 33;
       U32 bucket50 = mhz % 50;
-      
+
       if (bucket50 < 8 || bucket50 > 42)
-         PlatformSystemInfo.processor.mhz = 
-            U32((mhz+(50.0f/2.0f))/50.0f) * 50; 
+         PlatformSystemInfo.processor.mhz =
+            U32((mhz+(50.0f/2.0f))/50.0f) * 50;
       else if (bucket25 < 5 || bucket25 > 20)
-         PlatformSystemInfo.processor.mhz = 
-            U32((mhz+(25.0f/2.0f))/25.0f) * 25; 
+         PlatformSystemInfo.processor.mhz =
+            U32((mhz+(25.0f/2.0f))/25.0f) * 25;
       else if (bucket33 < 5 || bucket33 > 28)
-         PlatformSystemInfo.processor.mhz = 
-            U32((mhz+(33.0f/2.0f))/33.0f) * 33; 
-      else 
-         PlatformSystemInfo.processor.mhz = U32(mhz); 
+         PlatformSystemInfo.processor.mhz =
+            U32((mhz+(33.0f/2.0f))/33.0f) * 33;
+      else
+         PlatformSystemInfo.processor.mhz = U32(mhz);
    }
 
    Con::printf("Processor Init:");

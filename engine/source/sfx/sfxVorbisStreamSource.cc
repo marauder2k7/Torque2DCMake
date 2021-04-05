@@ -259,9 +259,6 @@ bool SFXVorbisStreamSource::updateBuffers()
    }
 #endif
 
-#ifdef TORQUE_OS_LINUX
-   checkPosition();
-#endif
 
    // Get status
    mOpenAL.alGetSourcei(mSource, AL_BUFFERS_PROCESSED, &processed);
@@ -461,36 +458,6 @@ long SFXVorbisStreamSource::oggRead(char *buffer, int length,
    }
    return offset;
 }
-
-#ifdef TORQUE_OS_LINUX
-
-// JMQ: OpenAL sometimes replaces the stream source's position with its own
-// nifty value, causing the music to pan around the listener.  how nice.
-// this function checks to see if the current source position in openal
-// is near the initial position, and slams it to the correct value if it
-// is wrong.
-
-// This is a bad place to put this, but I don't feel like adding a new
-// .cc file.  And since this is an incredibly lame hack to
-// workaround a stupid OpenAL bug, I see no point in overengineering it.
-
-void AudioStreamSource::checkPosition()
-{
-   ALfloat pos[3];
-   mOpenAL.alGetSourcefv(mSource, AL_POSITION, pos);
-
-   // just compute the difference between the openal pos and the
-   // correct pos.  it better be pretty friggin small.
-   Point3F openalPos(pos[0], pos[1], pos[2]);
-   F32 slopDist = 0.0001f;
-
-   F32 dist = mFabs((openalPos - mPosition).len());
-   if (dist > slopDist)
-      // slam!
-      mOpenAL.alSource3f(mSource, AL_POSITION, mPosition.x, mPosition.y, mPosition.z);
-}
-
-#endif
 
 F32 SFXVorbisStreamSource::getElapsedTime()
 {

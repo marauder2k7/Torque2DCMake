@@ -28,11 +28,11 @@
 #endif
 
 #ifndef Offset
-#if defined(TORQUE_COMPILER_GCC) && (__GNUC__ > 3) || ((__GNUC__ == 3) && (__GNUC_MINOR__ >= 1))
-#define Offset(m,T) ((int)(&((T *)1)->m) - 1)
-#else
+//#if defined(TORQUE_COMPILER_GCC) && (__GNUC__ > 3) || ((__GNUC__ == 3) && (__GNUC_MINOR__ >= 1))
+//#define Offset(m,T) ((int)(&((T *)1)->m) - 1)
+//#else
 #define Offset(x, cls) ((dsize_t)((const char *)&(((cls *)0)->x)-(const char *)0))
-#endif
+//#endif
 #endif
 
 // Define Core Console Types

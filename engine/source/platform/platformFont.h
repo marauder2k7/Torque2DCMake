@@ -77,7 +77,7 @@ public:
         S32  xIncrement;
         U8  *bitmapData;     // temp storage for bitmap data
     };
-    
+
     PlatformFont() {}
     virtual ~PlatformFont() {}
     virtual bool isValidChar(const UTF16 ch) const = 0;
@@ -89,12 +89,12 @@ public:
     virtual PlatformFont::CharInfo &getCharInfo(const UTF16 ch) const = 0;
     virtual PlatformFont::CharInfo &getCharInfo(const UTF8 *str) const = 0;
 
-    virtual bool create(const char *name, U32 size, U32 charset = TGE_ANSI_CHARSET) = 0;
+    virtual bool create(const char *name, dsize_t size, U32 charset = TGE_ANSI_CHARSET) = 0;
     static void enumeratePlatformFonts( Vector<StringTableEntry>& fonts );
 };
 
 //-------------------------------------------------------------------------
 
-extern PlatformFont *createPlatformFont(const char *name, U32 size, U32 charset = TGE_ANSI_CHARSET);
+extern PlatformFont *createPlatformFont(const char *name, dsize_t size, U32 charset = TGE_ANSI_CHARSET);
 
 #endif // _PLATFORMFONT_H_

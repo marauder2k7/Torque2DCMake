@@ -39,13 +39,13 @@ extern UTF8* dStrcat(UTF8 *dst, const UTF8 *src);
 extern char* dStrncat(char* dst, const char* src, dsize_t len);
 extern char* dStrcatl(char *dst, dsize_t dstSize, ...);
 
-extern int dStrcmp(const char *str1, const char *str2);
-extern int dStrcmp(const UTF16 *str1, const UTF16 *str2);
-extern int dStrcmp(const UTF8 *str1, const UTF8 *str2);
+extern S32 dStrcmp(const char *str1, const char *str2);
+extern S32 dStrcmp(const UTF16 *str1, const UTF16 *str2);
+extern S32 dStrcmp(const UTF8 *str1, const UTF8 *str2);
 
-extern int dStricmp(const char *str1, const char *str2);
-extern int dStrncmp(const char *str1, const char *str2, dsize_t len);
-extern int dStrnicmp(const char *str1, const char *str2, dsize_t len);
+extern S32 dStricmp(const char *str1, const char *str2);
+extern S32 dStrncmp(const char *str1, const char *str2, dsize_t len);
+extern S32 dStrnicmp(const char *str1, const char *str2, dsize_t len);
 
 extern char* dStrcpy(char *dst, const char *src);
 extern char* dStrcpyl(char *dst, dsize_t dstSize, ...);
@@ -68,26 +68,26 @@ extern const char* dStrstr(const char *str1, const char *str2);
 
 extern char* dStrtok(char *str, const char *sep);
 
-extern int dStrrev(char* str);
+extern S32 dStrrev(char* str);
 
-extern int dAtoi(const char *str);
+extern S32 dAtoi(const char *str);
 extern float dAtof(const char *str);
 extern bool dAtob(const char *str);
-extern int dItoa(int n, char s[]);
+extern S32 dItoa(int n, char s[]);
 
 extern bool dIsalnum(const char c);
 extern bool dIsalpha(const char c);
 extern bool dIsdigit(const char c);
 extern bool dIsspace(const char c);
 
-extern int dSscanf(const char *buffer, const char *format, ...);
-extern int dFflushStdout();
-extern int dFflushStderr();
+extern S32 dSscanf(const char *buffer, const char *format, ...);
+extern S32 dFflushStdout();
+extern S32 dFflushStderr();
 
 extern void dPrintf(const char *format, ...);
-extern int dVprintf(const char *format, va_list arglist);
-extern int dSprintf(char *buffer, dsize_t bufferSize, const char *format, ...);
-extern int dVsprintf(char *buffer, dsize_t bufferSize, const char *format, va_list arglist);
+extern S32 dVprintf(const char *format, va_list arglist);
+extern S32 dSprintf(char *buffer, dsize_t bufferSize, const char *format, ...);
+extern S32 dVsprintf(char *buffer, dsize_t bufferSize, const char *format, va_list arglist);
 
 #define QSORT_CALLBACK FN_CDECL
 extern void dQsort(void *base, U32 nelem, U32 width, int (QSORT_CALLBACK *fcmp)(const void *, const void *));

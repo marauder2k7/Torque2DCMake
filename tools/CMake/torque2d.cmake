@@ -14,9 +14,13 @@ if(UNIX)
 	set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} ${CXX_FLAG32} -Wundef -msse -pipe -Wfatal-errors -no-pie ${TORQUE_ADDITIONAL_LINKER_FLAGS} -Wl,-rpath,'$$ORIGIN'")
 	set(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} ${CXX_FLAG32} -Wundef -msse -pipe -Wfatal-errors ${TORQUE_ADDITIONAL_LINKER_FLAGS} -Wl,-rpath,'$$ORIGIN'")
 
-   endif()    
+   endif()
 
-    set (CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -std=c++11")
+    set (CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -std=c++11 ")
+endif()
+
+if(UNIX AND NOT APPLE)
+    set(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} -DLINUX")
 endif()
 
 # TODO: fmod support
@@ -44,11 +48,11 @@ if(WIN32)
     set(ALSOFT_HRTF_DEFS OFF CACHE BOOL "Install HRTF definition files" FORCE)
     set(ALSOFT_AMBDEC_PRESETS OFF CACHE BOOL "Install AmbDec presets" FORCE)
     set(ALSOFT_EMBED_HRTF_DATA OFF CACHE BOOL "Embed the HRTF data (increases library footprint)" FORCE)
-    
+
     add_subdirectory( ${libDir}/openal-soft ${CMAKE_CURRENT_BINARY_DIR}/openal-soft)
-	
-	add_subdirectory( ${libDir}/Box2D ${CMAKE_CURRENT_BINARY_DIR}/Box2D)
 endif()
+
+add_subdirectory( ${libDir}/Box2D ${CMAKE_CURRENT_BINARY_DIR}/Box2D)
 
 if(TORQUE_SFX_OPENAL)
     #Hide some unnecessary fields as advanced
@@ -124,7 +128,7 @@ if(WIN32)
     set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -wd4018")
     # warning C4244: 'initializing' : conversion from 'XXX' to 'XXX', possible loss of data
     set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -wd4244")
-	
+
 endif()
 
 # build types
@@ -157,9 +161,7 @@ addPath("${srcDir}/debug/remote")
 addPath("${srcDir}/delegates")
 addPath("${srcDir}/game")
 addPath("${srcDir}/sfx")
-if(WIN32)
 set(BLACKLIST "bitmapPvr.cc" )
-endif()
 addPath("${srcDir}/graphics")
 if(WIN32)
 set(BLACKLIST "")
@@ -227,6 +229,16 @@ endif()
 mark_as_advanced(AL_ALEXT_PROTOTYPES)
 if(AL_ALEXT_PROTOTYPES)
 	addDef( "AL_ALEXT_PROTOTYPES" )
+endif()
+
+if(UNIX AND NOT APPLE)
+       #set(CMAKE_SIZEOF_VOID_P 4) #force 32 bit
+       set(ENV{CFLAGS} "${CXX_FLAG32} -g -O3")
+       if("${TORQUE_ADDITIONAL_LINKER_FLAGS}" STREQUAL "")
+         set(ENV{LDFLAGS} "${CXX_FLAG32}")
+       else()
+         set(ENV{LDFLAGS} "${CXX_FLAG32} ${TORQUE_ADDITIONAL_LINKER_FLAGS}")
+       endif()
 endif()
 
 # Vorbis
@@ -315,7 +327,7 @@ endif()
 
 if(UNIX AND NOT APPLE)
     # copy pasted from T3D build system, some might not be needed
-	set(TORQUE_EXTERNAL_LIBS "stdc++ m dl pthread rt X11 Xft SDL " CACHE STRING "external libs to link against")
+	set(TORQUE_EXTERNAL_LIBS "stdc++ m dl pthread rt X11 Xft SDL openal" CACHE STRING "external libs to link against")
 	mark_as_advanced(TORQUE_EXTERNAL_LIBS)
 
     string(REPLACE " " ";" TORQUE_EXTERNAL_LIBS_LIST ${TORQUE_EXTERNAL_LIBS})
@@ -328,6 +340,7 @@ endif()
 ###############################################################################
 addDef(TORQUE_DEBUG Debug)
 addDef(TORQUE_DEBUG_GUARD)
+addDef(TORQUE_NET_STATS)
 addDef(_CRT_SECURE_NO_WARNINGS)
 addDef(_CRT_SECURE_NO_DEPRECATE)
 addDef(UNICODE)
@@ -350,13 +363,14 @@ addInclude("${libDir}/lpng")
 addInclude("${libDir}/ljpeg")
 addInclude("${libDir}/zlib")
 addInclude("${libDir}/libogg/include")
+addInclude("${libDir}/Box2D")
 addInclude("${srcDir}/persistence/rapidjson")
 addInclude("${srcDir}/persistence/rapidjson/include")
 addInclude("${srcDir}/persistence/libjson")
 addInclude("${srcDir}/testing/googleTest")
 addInclude("${srcDir}/testing/googleTest/include")
 addInclude("${srcDir}/spine")
-addInclude("${libDir}/Box2D")
+
 
 if(UNIX AND NOT APPLE)
 	addInclude("/usr/include/freetype2/freetype")

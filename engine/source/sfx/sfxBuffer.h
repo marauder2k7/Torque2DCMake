@@ -24,7 +24,7 @@
 #define _SFXBUFFER_H_
 
 #ifndef _LOADOAL_H_
-#include "sfx/loadOal.h"
+#include "sfx/LoadOAL.h"
 #endif // !_LOADOAL_H_
 
 #ifndef _RESMANAGER_H_

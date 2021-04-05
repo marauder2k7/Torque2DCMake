@@ -86,7 +86,7 @@ void GuiCursor::render(const Point2I &pos)
    Point2I renderPos = pos;
    renderPos.x -= (S32)( texWidth  * mRenderOffset.x );
    renderPos.y -= (S32)( texHeight * mRenderOffset.y );
-   
+
    dglClearBitmapModulation();
    dglDrawBitmap(mTextureHandle, renderPos);
 }
@@ -274,7 +274,7 @@ GuiControlProfile::GuiControlProfile(void) :
 	mRefCount = 0;
 	mBitmapArrayRects.clear();
 	mMouseOverSelected = false;
-	
+
 	mTabable       = false;
 	mCanKeyFocus   = false;
 	mUseInput      = true;
@@ -289,20 +289,20 @@ GuiControlProfile::GuiControlProfile(void) :
 	mBorderTop = NULL;
    mBottomProfileName = NULL;
 	mBorderBottom = NULL;
-	
+
 	// default font
 	mFontType      = StringTable->EmptyString;
 	mFontSize      = 12;
 	mFontCharset   = TGE_ANSI_CHARSET;
 	mFontColors[BaseColor].set(255,255,255,255);
-	
+
 	// default bitmap
 	mBitmapName    = NULL;
 	mTextOffset.set(0,0);
 
 	// default image asset
 	mImageAsset = NULL;
-	
+
 	mAlignment     = LeftAlign;
 	mVAlignment    = MiddleVAlign;
 	mReturnTab     = false;
@@ -632,7 +632,7 @@ S32 GuiControlProfile::constructBitmapArray()
    // Make sure the texture exists.
    if( !bmp )
 	  return 0;
-  
+
    //get the separator color
    ColorI sepColor;
    if ( !bmp || !bmp->getColor( 0, 0, sepColor ) )
@@ -736,7 +736,7 @@ void GuiControlProfile::decRefCount()
    // following the way this works, it seems that a profile
    // is being removed before it is added =/
 
-   AssertFatal(mRefCount, "GuiControlProfile::%s::decRefCount: zero ref count", this->getName());
+   AssertFatal(mRefCount, "GuiControlProfile::decRefCount: zero ref count");
    if(!mRefCount)
 	  return;
    --mRefCount;

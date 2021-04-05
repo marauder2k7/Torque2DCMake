@@ -110,7 +110,7 @@ void renderBorderedRect(RectI &bounds, GuiControlProfile *profile, GuiControlSta
 	S32 rightSize = (rightProfile) ? rightProfile->getBorder(state) : 0;
 	S32 topSize = (topProfile) ? topProfile->getBorder(state) : 0;
 	S32 bottomSize = (bottomProfile) ? bottomProfile->getBorder(state) : 0;
-	
+
 	//Get the inner rect
 	RectI innerRect = RectI(bounds.point.x + leftSize, bounds.point.y + topSize, (bounds.extent.x - leftSize) - rightSize, (bounds.extent.y - topSize) - bottomSize);
 
@@ -123,7 +123,7 @@ void renderBorderedRect(RectI &bounds, GuiControlProfile *profile, GuiControlSta
 			(topProfile && topProfile->mUnderfill) ? bounds.point.y : innerRect.point.y, fillWidth, fillHeight);
 		dglDrawRectFill(fillRect, fillColor);
 	}
-	
+
 	//Draw the borders
 	//Points for outer bounds starting top left and traveling counter-clockwise
 	Point2I p1 = Point2I(bounds.point);
@@ -196,25 +196,25 @@ void renderSizableBorderedImageAsset(RectI &bounds, U8 frame, ImageAsset *imageA
 
 	if (frameCount >= (NumFrames + i))
 	{
-		const ImageAsset::FrameArea::PixelArea& pixelArea1 = imageAsset->getImageFrameArea((U32)i).mPixelArea;
-		const ImageAsset::FrameArea::PixelArea& pixelArea2 = imageAsset->getImageFrameArea((U32)i+1).mPixelArea;
-		const ImageAsset::FrameArea::PixelArea& pixelArea3 = imageAsset->getImageFrameArea((U32)i+2).mPixelArea;
-		const ImageAsset::FrameArea::PixelArea& pixelArea4 = imageAsset->getImageFrameArea((U32)i+3).mPixelArea;
-		const ImageAsset::FrameArea::PixelArea& pixelArea5 = imageAsset->getImageFrameArea((U32)i+4).mPixelArea;
-		const ImageAsset::FrameArea::PixelArea& pixelArea6 = imageAsset->getImageFrameArea((U32)i+5).mPixelArea;
-		const ImageAsset::FrameArea::PixelArea& pixelArea7 = imageAsset->getImageFrameArea((U32)i+6).mPixelArea;
-		const ImageAsset::FrameArea::PixelArea& pixelArea8 = imageAsset->getImageFrameArea((U32)i+7).mPixelArea;
-		const ImageAsset::FrameArea::PixelArea& pixelArea9 = imageAsset->getImageFrameArea((U32)i+8).mPixelArea;
+		ImageAsset::FrameArea::PixelArea pixelArea1 = imageAsset->getImageFrameArea((U32)i).mPixelArea;
+		ImageAsset::FrameArea::PixelArea pixelArea2 = imageAsset->getImageFrameArea((U32)i+1).mPixelArea;
+		ImageAsset::FrameArea::PixelArea pixelArea3 = imageAsset->getImageFrameArea((U32)i+2).mPixelArea;
+		ImageAsset::FrameArea::PixelArea pixelArea4 = imageAsset->getImageFrameArea((U32)i+3).mPixelArea;
+		ImageAsset::FrameArea::PixelArea pixelArea5 = imageAsset->getImageFrameArea((U32)i+4).mPixelArea;
+		ImageAsset::FrameArea::PixelArea pixelArea6 = imageAsset->getImageFrameArea((U32)i+5).mPixelArea;
+		ImageAsset::FrameArea::PixelArea pixelArea7 = imageAsset->getImageFrameArea((U32)i+6).mPixelArea;
+		ImageAsset::FrameArea::PixelArea pixelArea8 = imageAsset->getImageFrameArea((U32)i+7).mPixelArea;
+		ImageAsset::FrameArea::PixelArea pixelArea9 = imageAsset->getImageFrameArea((U32)i+8).mPixelArea;
 
-		renderSizableBorderedTexture(bounds, imageAsset->getImageTexture(), 
+		renderSizableBorderedTexture(bounds, imageAsset->getImageTexture(),
 			RectI(pixelArea1.mPixelOffset, Point2I(pixelArea1.mPixelWidth, pixelArea1.mPixelHeight)),
 			RectI(pixelArea2.mPixelOffset, Point2I(pixelArea2.mPixelWidth, pixelArea2.mPixelHeight)),
-			RectI(pixelArea3.mPixelOffset, Point2I(pixelArea3.mPixelWidth, pixelArea3.mPixelHeight)), 
-			RectI(pixelArea4.mPixelOffset, Point2I(pixelArea4.mPixelWidth, pixelArea4.mPixelHeight)), 
-			RectI(pixelArea5.mPixelOffset, Point2I(pixelArea5.mPixelWidth, pixelArea5.mPixelHeight)), 
-			RectI(pixelArea6.mPixelOffset, Point2I(pixelArea6.mPixelWidth, pixelArea6.mPixelHeight)), 
-			RectI(pixelArea7.mPixelOffset, Point2I(pixelArea7.mPixelWidth, pixelArea7.mPixelHeight)), 
-			RectI(pixelArea8.mPixelOffset, Point2I(pixelArea8.mPixelWidth, pixelArea8.mPixelHeight)), 
+			RectI(pixelArea3.mPixelOffset, Point2I(pixelArea3.mPixelWidth, pixelArea3.mPixelHeight)),
+			RectI(pixelArea4.mPixelOffset, Point2I(pixelArea4.mPixelWidth, pixelArea4.mPixelHeight)),
+			RectI(pixelArea5.mPixelOffset, Point2I(pixelArea5.mPixelWidth, pixelArea5.mPixelHeight)),
+			RectI(pixelArea6.mPixelOffset, Point2I(pixelArea6.mPixelWidth, pixelArea6.mPixelHeight)),
+			RectI(pixelArea7.mPixelOffset, Point2I(pixelArea7.mPixelWidth, pixelArea7.mPixelHeight)),
+			RectI(pixelArea8.mPixelOffset, Point2I(pixelArea8.mPixelWidth, pixelArea8.mPixelHeight)),
 			RectI(pixelArea9.mPixelOffset, Point2I(pixelArea9.mPixelWidth, pixelArea9.mPixelHeight)));
 	}
 }
@@ -230,7 +230,7 @@ void renderSizableBorderedBitmap(RectI &bounds, U8 frame, TextureHandle &texture
    }
 }
 
-void renderSizableBorderedTexture(RectI &bounds, TextureHandle &texture, RectI &TopLeft, RectI &Top, RectI &TopRight, RectI &Left, RectI &Fill, RectI &Right, RectI &BottomLeft, RectI &Bottom, RectI &BottomRight)
+void renderSizableBorderedTexture(RectI &bounds, TextureHandle &texture, RectI TopLeft, RectI Top, RectI TopRight, RectI Left, RectI Fill, RectI Right, RectI BottomLeft, RectI Bottom, RectI BottomRight)
 {
 	dglClearBitmapModulation();
 	RectI destRect;

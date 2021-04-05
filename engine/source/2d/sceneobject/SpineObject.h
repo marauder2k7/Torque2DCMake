@@ -120,11 +120,11 @@ public:
 
 	// Use CopyTo() if need to replicate.
 	SpineObject(const SpineObject&) = delete;
-	SpineObject& SpineObject::operator=(const SpineObject&) = delete;
+	SpineObject& operator=(const SpineObject&) = delete;
 
 	// Add 'move' support if/when needed.
 	SpineObject(SpineObject&& other) = delete;
-	SpineObject& SpineObject::operator=(SpineObject&&) = delete;
+	SpineObject& operator=(SpineObject&&) = delete;
 
 	virtual void copyTo(SimObject* object);
 
@@ -186,8 +186,8 @@ public:
 	bool setMix(const char* pFromName, const char* pToName, const F32 mixDuration);
 
 	// Events
-	void SpineObject::enableEventCallbacks(void);
-	void SpineObject::disableEventCallbacks(void);
+	void enableEventCallbacks(void);
+	void disableEventCallbacks(void);
 
 	// Collision Support
 	const SpineCollisionProxy* getCollisionProxy(
@@ -228,13 +228,13 @@ protected:
 	static const char* getVertexEffectTypeDescription(const VertexEffect vertexEffectType);
 
 	// Internal management
-	void SpineObject::resetState();
+	void resetState();
 
 	virtual void OnRegisterScene(Scene *scene);
 	virtual void OnUnregisterScene(Scene *scene);
 
 private:
-	// Utility 
+	// Utility
 
 	// Cope with spine reflecting about an axis to accomplish a flip, while the SceneObject doesn't support such flipping.
 	inline F32 setPerFlipState(const F32 value) { return mFlipY ? (mFlipX ? value : -value) : (mFlipX ? -value : value); }
@@ -249,7 +249,7 @@ private:
 	// in a string for writing to the TAML file.
 	const char *getAnimationData(void) const;
 
-	// This encodes and returns the information required to recreate the Spine object's collision boxes.  
+	// This encodes and returns the information required to recreate the Spine object's collision boxes.
 	const char *getCollisionData(void) const;
 
 	// This attempts to start the animation(s) defined in the animation data string passed in.

@@ -73,7 +73,7 @@ static PlatformFont* createSafePlatformFont(const char *name, U32 size, U32 char
 
       platFont = createSafePlatformFont(fallback, size, charset);
    }
-   
+
    return platFont;
 }
 
@@ -90,7 +90,7 @@ ResourceInstance* constructNewFont(Stream& stream)
    {
       ret->mPlatformFont = createSafePlatformFont(ret->mFaceName, ret->mSize, ret->mCharSet);
    }
-   
+
    return ret;
 }
 
@@ -103,9 +103,9 @@ Resource<GFont> GFont::create(const char *faceName, U32 size, const char *cacheD
 {
    char buf[256];
    Resource<GFont> ret;
-    
+
     dSprintf(buf, sizeof(buf), "%s/%s %d (%s).fnt", cacheDirectory, faceName, size, getFontCharSetName(charset));
-    
+
     ret = ResourceManager->load(buf);
     if(bool(ret))
     {
@@ -123,9 +123,9 @@ Resource<GFont> GFont::create(const char *faceName, U32 size, const char *cacheD
    }
 
    PlatformFont *platFont = createSafePlatformFont(faceName, size, charset);
-   
+
    AssertFatal(platFont, "platFont is null");
-    
+
    GFont *resFont = new GFont;
    resFont->mPlatformFont = platFont;
    resFont->addSheet();
@@ -161,25 +161,25 @@ GFont::GFont()
    mSize = 0;
    mCharSet = 0;
    mNeedSave = false;
-   
+
    mMutex = Mutex::createMutex();
 }
 
 GFont::~GFont()
 {
-   
+
    // Need to stop this for now!
-   mNeedSave = false; 
+   mNeedSave = false;
    if(mNeedSave)
    {
       FileStream stream;
-      if(ResourceManager->openFileForWrite(stream, mGFTFile)) 
+      if(ResourceManager->openFileForWrite(stream, mGFTFile))
       {
          write(stream);
          stream.close();
       }
    }
-   
+
    S32 i;
 
    for(i = 0;i < mCharInfoList.size();i++)
@@ -192,9 +192,9 @@ GFont::~GFont()
    {
        mTextureSheets[i] = 0;
    }
-   
+
    SAFE_DELETE(mPlatformFont);
-   
+
    Mutex::destroyMutex(mMutex);
 }
 
@@ -306,10 +306,10 @@ void GFont::addBitmap(PlatformFont::CharInfo &charInfo)
 
    AssertFatal(bmp, "GFont::addBitmap - null texture sheet bitmap!");
    AssertFatal(bmp->getFormat() == GBitmap::Alpha, "GFont::addBitmap - cannot added characters to non-greyscale textures!");
-   
+
    // [neo, 5/7/2007 - #3050]
    // If we get large font sizes charInfo.height/width will be larger than TextureSheetSize
-   // and as GBitmap::getAddress() does no range checking the following will overrun memory! 
+   // and as GBitmap::getAddress() does no range checking the following will overrun memory!
    // Added checks against TextureSheetSize
    for( U32 y = 0; y < charInfo.height; y++ )
    {
@@ -321,14 +321,14 @@ void GFont::addBitmap(PlatformFont::CharInfo &charInfo)
       for( U32 x = 0; x < charInfo.width; x++ )
       {
          S32 dx = x + charInfo.xOffset;
-         
+
          if( dx >= TextureSheetSize )
             break;
 
          *bmp->getAddress( dx, dy ) = charInfo.bitmapData[ y * charInfo.width + x ];
       }
    }
-   
+
    mTextureSheets[mCurSheet].refresh();
 }
 
@@ -421,13 +421,13 @@ U32 GFont::getStrNWidth(const UTF16 *str, U32 n)
 {
    AssertFatal(str != NULL, "GFont::getStrNWidth: String is NULL");
 
-   if (str == NULL || str[0] == '\0' || n == 0)   
+   if (str == NULL || str[0] == '\0' || n == 0)
       return 0;
-      
+
    U32 totWidth = 0;
    UTF16 curChar;
    U32 charCount;
-   
+
    for(charCount = 0; charCount < n; charCount++)
    {
       curChar = str[charCount];
@@ -460,19 +460,19 @@ U32 GFont::getStrNWidthPrecise(const UTF16 *str, U32 n)
 {
    AssertFatal(str != NULL, "GFont::getStrNWidth: String is NULL");
 
-   if (str == NULL || str[0] == '\0' || n == 0)   
+   if (str == NULL || str[0] == '\0' || n == 0)
       return(0);
-      
+
    U32 totWidth = 0;
    UTF16 curChar;
    U32 charCount = 0;
-   
+
    for(charCount = 0; charCount < n; charCount++)
    {
       curChar = str[charCount];
       if(curChar == '\0')
          break;
-         
+
       if(isValidChar(curChar))
       {
          const PlatformFont::CharInfo& rChar = getCharInfo(curChar);
@@ -513,7 +513,7 @@ U32 GFont::getBreakPos(const UTF16 *str16, U32 slen, U32 width, bool breakOnWhit
       c = str16[charCount];
       if(c == '\0')
          break;
-         
+
       if(c == dT('\t'))
          c = dT(' ');
       if(!isValidChar(c))
@@ -531,7 +531,7 @@ U32 GFont::getBreakPos(const UTF16 *str16, U32 slen, U32 width, bool breakOnWhit
          return ret;
       }
       width -= rChar.xIncrement;
-      
+
       ret++;
    }
    return ret;
@@ -549,7 +549,7 @@ void GFont::wrapString(const UTF8 *txt, U32 lineWidth, Vector<U32> &startLineOff
 
    U32 len = dStrlen(txt);
 
-   U32 startLine; 
+   U32 startLine;
 
    for (U32 i = 0; i < len;)
    {
@@ -567,7 +567,7 @@ void GFont::wrapString(const UTF8 *txt, U32 lineWidth, Vector<U32> &startLineOff
             if ( txt[i] == '\n' || lineStrWidth > lineWidth )
             {
                needsNewLine = true;
-               break;      
+               break;
             }
          }
       }
@@ -580,8 +580,8 @@ void GFont::wrapString(const UTF8 *txt, U32 lineWidth, Vector<U32> &startLineOff
       }
 
       // now determine where to put the newline
-      // else we need to backtrack until we find a either space character 
-      // or \\ character to break up the line. 
+      // else we need to backtrack until we find a either space character
+      // or \\ character to break up the line.
       S32 j;
       for (j = i - 1; j >= (S32)startLine; j--)
       {
@@ -591,7 +591,7 @@ void GFont::wrapString(const UTF8 *txt, U32 lineWidth, Vector<U32> &startLineOff
 
       if (j < (S32)startLine)
       {
-         // the line consists of a single word!              
+         // the line consists of a single word!
          // So, just break up the word
          j = i - 1;
       }
@@ -650,7 +650,7 @@ bool GFont::read(Stream& io_rStream)
 
    U32 numSheets = 0;
    io_rStream.read(&numSheets);
-   
+
    for(i = 0; i < numSheets; i++)
    {
        GBitmap *bmp = new GBitmap;
@@ -668,7 +668,7 @@ bool GFont::read(Stream& io_rStream)
        mTextureSheets.last() = TextureHandle(buf, bmp, TextureHandle::BitmapKeepTexture);
        mTextureSheets.last().setFilter(GL_NEAREST);
    }
-   
+
    // Read last position info
    io_rStream.read(&mCurX);
    io_rStream.read(&mCurY);
@@ -703,7 +703,7 @@ bool GFont::read(Stream& io_rStream)
          }
       }
    }
-   
+
    return (io_rStream.getStatus() == Stream::Ok);
 }
 
@@ -716,7 +716,7 @@ bool GFont::write(Stream& stream)
     stream.writeString(mFaceName);
     stream.write(mSize);
     stream.write(mCharSet);
-   
+
     stream.write(mHeight);
     stream.write(mBaseline);
     stream.write(mAscent);
@@ -803,7 +803,7 @@ bool GFont::write(Stream& stream)
          }
       }
    }
-   
+
    return (stream.getStatus() == Stream::Ok);
 }
 
@@ -843,7 +843,7 @@ void GFont::exportStrip(const char *fileName, U32 padding, U32 kerning)
 
       RectI ri(mCharInfoList[i].xOffset, mCharInfoList[i].yOffset, mCharInfoList[i].width, mCharInfoList[i].height );
       Point2I outRi(curWidth, padding + getBaseline() - mCharInfoList[i].yOrigin);
-      gb.copyRect(mTextureSheets[bitmap].getBitmap(), ri, outRi); 
+      gb.copyRect(mTextureSheets[bitmap].getBitmap(), ri, outRi);
 
       // Advance.
       curWidth +=  mCharInfoList[i].width + kerning + 2*padding;
@@ -851,13 +851,13 @@ void GFont::exportStrip(const char *fileName, U32 padding, U32 kerning)
 
    // Write the image!
    FileStream fs;
-   
+
    if(!ResourceManager->openFileForWrite(fs, fileName))
    {
       Con::errorf("GFont::exportStrip - failed to open '%s' for writing.", fileName);
       return;
    }
- 
+
    // Done!
    gb.writePNG(fs, false);
 }
@@ -920,7 +920,7 @@ void GFont::importStrip(const char *fileName, U32 padding, U32 kerning)
       // Copy the rect.
       RectI ri(curWidth, getBaseline() - mCharInfoList[i].yOrigin, glyphList.last().bitmap->width, glyphList.last().bitmap->height);
       Point2I outRi(0,0);
-      glyphList.last().bitmap->copyRect(strip, ri, outRi); 
+      glyphList.last().bitmap->copyRect(strip, ri, outRi);
 
       // Update glyph attributes.
       mCharInfoList[i].width = glyphList.last().bitmap->width;
@@ -947,7 +947,7 @@ void GFont::importStrip(const char *fileName, U32 padding, U32 kerning)
    for(U32 i = 0; i < (U32)glyphList.size(); i++)
    {
       PlatformFont::CharInfo *ci = &mCharInfoList[glyphList[i].charId];
-      
+
       if(ci->height > (U32)maxHeight)
          maxHeight = ci->height;
 
@@ -968,7 +968,7 @@ void GFont::importStrip(const char *fileName, U32 padding, U32 kerning)
 
       if(ci->height > (U32)curLnHeight)
          curLnHeight = ci->height;
-      
+
       ci->bitmapIndex = sheetSizes.size();
       ci->xOffset = curX;
       ci->yOffset = curY;
@@ -1043,13 +1043,13 @@ bool GFont::readBMFont(Stream& io_rStream)
 {
     for (U32 i = 0; i < (sizeof(mRemapTable) / sizeof(S32)); i++)
         mRemapTable[i] = -1;
-    
+
     U32 bmWidth = 0;
     U32 bmHeight = 0;
     U32 numSheets = 0;
     U32 currentPage = 0;
     StringTableEntry fileName = StringTable->insert("");
-    
+
     U32 numBytes = io_rStream.getStreamSize() - io_rStream.getPosition();
     while((io_rStream.getStatus() != Stream::EOS) && numBytes > 0)
     {
@@ -1057,19 +1057,19 @@ bool GFont::readBMFont(Stream& io_rStream)
         char Token[256];
         char *buffer = Con::getReturnBuffer(256);
         io_rStream.readLine((U8 *)buffer, 256);
-        
+
         char temp[256];
         U32 tokenCount = StringUnit::getUnitCount(buffer, "\"");
-        
+
         if (tokenCount > 1)
         {
             dSprintf(Token, 256, "%s", StringUnit::getUnit(buffer, 1, "\""));
             dSprintf(temp, 256, "tok1");
             dSprintf(buffer, 256, "%s", (char*)StringUnit::setUnit(buffer, 1, temp, "\""));
         }
-        
+
         U32 wordCount = StringUnit::getUnitCount(buffer, " \t\n");
-        
+
         dSprintf(Read, 256, "%s", StringUnit::getUnit(buffer, 0, " \t\n"));
         if( dStrcmp( Read, "info") == 0 )
         {
@@ -1080,15 +1080,15 @@ bool GFont::readBMFont(Stream& io_rStream)
                 char temp[256];
                 char Key[256];
                 char Value[256];
-                
+
                 dSprintf(temp, 256, "%s", Read);
                 dSprintf(Key, 256, "%s", StringUnit::getUnit(temp, 0, "="));
                 dSprintf(Value, 256, "%s", StringUnit::getUnit(temp, 1, "="));
-                
+
                 if (dStrcmp( Value, "\"tok1\"") == 0) {
                     dSprintf(Value, 256, "%s", Token);
                 }
-                
+
                 if( dStrcmp( Key, "size" ) == 0 )
                     mSize = U16(dAtoi(Value));
                 currentWordCount++;
@@ -1104,15 +1104,15 @@ bool GFont::readBMFont(Stream& io_rStream)
                 char temp[256];
                 char Key[256];
                 char Value[256];
-                
+
                 dSprintf(temp, 256, "%s", Read);
                 dSprintf(Key, 256, "%s", StringUnit::getUnit(temp, 0, "="));
                 dSprintf(Value, 256, "%s", StringUnit::getUnit(temp, 1, "="));
-                
+
                 if (dStrcmp( Value, "\"tok1\"") == 0) {
                     dSprintf(Value, 256, "%s", Token);
                 }
-                
+
                 if( dStrcmp( Key, "lineHeight" ) == 0 )
                      mHeight = U16(dAtoi(Value));
                 else if( dStrcmp( Key, "base" ) == 0 )
@@ -1135,22 +1135,22 @@ bool GFont::readBMFont(Stream& io_rStream)
             //this holds common data
             char lineLeft[256];
             dSprintf ( lineLeft, 256, "%s", StringUnit::getUnit(buffer, 1, " \t\n"));
-            
+
             while( currentWordCount < wordCount )
             {
                 dSprintf(Read, 256, "%s", StringUnit::getUnit(buffer, currentWordCount, " \t\n"));
                 char temp[256];
                 char Key[256];
                 char Value[256];
-                
+
                 dSprintf(temp, 256, "%s", Read);
                 dSprintf(Key, 256, "%s", StringUnit::getUnit(temp, 0, "="));
                 dSprintf(Value, 256, "%s", StringUnit::getUnit(temp, 1, "="));
-                
+
                 if (dStrcmp( Value, "\"tok1\"") == 0) {
                     dSprintf(Value, 256, "%s", Token);
                 }
-                
+
                 //assign the correct value
                 if( dStrcmp( Key, "id" ) == 0 )
                     currentPage = U32(dAtoi(Value));
@@ -1160,7 +1160,7 @@ bool GFont::readBMFont(Stream& io_rStream)
                 currentWordCount++;
             }
         }
-        
+
         else if( dStrcmp( Read, "char" ) == 0 )
         {
             PlatformFont::CharInfo ci; //  = &mCharInfoList[charIndex];
@@ -1176,16 +1176,16 @@ bool GFont::readBMFont(Stream& io_rStream)
                 char temp[256];
                 char Key[256];
                 char Value[256];
-                
-                
+
+
                 dSprintf(temp, 256, "%s", Read);
                 dSprintf(Key, 256, "%s", StringUnit::getUnit(temp, 0, "="));
                 dSprintf(Value, 256, "%s", StringUnit::getUnit(temp, 1, "="));
-                
+
                 if (dStrcmp( Value, "\"tok1\"") == 0) {
                     dSprintf(Value, 256, "%s", Token);
                 }
-                
+
                 //assign the correct value
                 if( dStrcmp( Key, "id" ) == 0 )
                     CharID = U32(dAtoi(Value));
@@ -1209,23 +1209,23 @@ bool GFont::readBMFont(Stream& io_rStream)
             mRemapTable[ CharID ] = mCharInfoList.size()-1;
         }
     }
-    
+
     for(U32 i = 0; i < numSheets; i++)
     {
         char buf[1024];
         dSprintf(buf, sizeof(buf), "%s/%s", Con::getVariable("$GUI::fontCacheDirectory"), fileName);
         Con::printf("Platform::makeFullPathName %s", buf);
-        
+
         GBitmap *bmp = dynamic_cast<GBitmap*>(ResourceManager->loadInstance(buf));
-        
+
         if(bmp == NULL)
         {
             return false;
         }
-        
+
         char buff[30];
         dSprintf(buff, sizeof(buff), "font_%d", smSheetIdCount++);
-        
+
         mTextureSheets.increment();
         constructInPlace(&mTextureSheets.last());
         mTextureSheets.last() = TextureHandle(buf, bmp, TextureHandle::BitmapKeepTexture);

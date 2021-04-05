@@ -76,20 +76,20 @@ static void *ThreadRunHandler(void * arg)
    // can execute before pthread_create() returns and sets mThreadID.
    // The value from pthread_create() and pthread_self() are guaranteed to be equivalent (but not identical)
    mData->mThreadID = pthread_self();
-   
+
    ThreadManager::addThread(thread);
    thread->run(mData->mRunArg);
    ThreadManager::removeThread(thread);
 
    bool autoDelete = thread->autoDelete;
-   
+
    mData->mThreadID = 0;
    mData->mDead = true;
    mData->mGateway.release();
-   
+
    if( autoDelete )
       delete thread;
-      
+
    // return value for pthread lib's benefit
    return NULL;
    // the end of this function is where the created pthread will die.
@@ -107,14 +107,14 @@ void Thread::start()
 }
 
 bool Thread::join()
-{ 
+{
    // not using pthread_join here because pthread_join cannot deal
    // with multiple simultaneous calls.
-   
+
    mData->mGateway.acquire();
    AssertFatal( !isAlive(), "Thread::join() - thread not dead after join()" );
    mData->mGateway.release();
-   
+
    return true;
 }
 
@@ -129,7 +129,7 @@ bool Thread::isAlive()
   return ( !mData->mDead );
 }
 
-U32 Thread::getId()
+ThreadIdent Thread::getId()
 {
    return (U32)mData->mThreadID;
 }
@@ -139,7 +139,7 @@ ThreadIdent ThreadManager::getCurrentThreadId()
    return pthread_self();
 }
 
-bool ThreadManager::compare(U32 threadId_1, U32 threadId_2)
+bool ThreadManager::compare(ThreadIdent threadId_1, ThreadIdent threadId_2)
 {
    return pthread_equal((pthread_t)threadId_1, (pthread_t)threadId_2);
 }

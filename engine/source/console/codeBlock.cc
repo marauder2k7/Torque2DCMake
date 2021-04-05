@@ -82,7 +82,7 @@ StringTableEntry CodeBlock::getCurrentCodeBlockName()
       return CodeBlock::getCurrentBlock()->name;
    else
       return NULL;
-}   
+}
 
 StringTableEntry CodeBlock::getCurrentCodeBlockFullPath()
 {
@@ -375,7 +375,7 @@ bool CodeBlock::read(StringTableEntry fileName, Stream &st)
 
       modPath = Con::getModNameFromPath(fileName);
    }
-   
+
    //
    if (name)
    {
@@ -453,17 +453,17 @@ bool CodeBlock::read(StringTableEntry fileName, Stream &st)
          ste = StringTable->insert(globalStrings + offset);
       else
          ste = StringTable->EmptyString;
-      
+
       U32 count;
       st.read(&count);
       while(count--)
       {
          U32 ip;
          st.read(&ip);
-#ifdef TORQUE_64
+#ifdef TORQUE_CPU_X64
          *(U64*)(code+ip) = (U64)ste;
 #else
-         code[ip] = (U32)ste;
+         code[ip] = *((U32)&ste);
 #endif
       }
    }
@@ -498,10 +498,10 @@ bool CodeBlock::compile(const char *codeFileName, StringTableEntry fileName, con
    {
       consoleAllocReset();
       return false;
-   }   
+   }
 
    FileStream st;
-   if(!ResourceManager->openFileForWrite(st, codeFileName)) 
+   if(!ResourceManager->openFileForWrite(st, codeFileName))
       return false;
    st.write(DSO_VERSION);
 
@@ -545,7 +545,7 @@ bool CodeBlock::compile(const char *codeFileName, StringTableEntry fileName, con
    st.write(lineBreakPairCount);
 
    // Write out our bytecode, doing a bit of compression for low numbers.
-   U32 i;   
+   U32 i;
    for(i = 0; i < codeSize; i++)
    {
       if(code[i] < 0xFF)
@@ -582,7 +582,7 @@ const char *CodeBlock::compileExec(StringTableEntry fileName, const char *string
       const StringTableEntry cwd = Platform::getCurrentDirectory();
 
       fullPath = NULL;
-      
+
       if(Platform::isFullPath(fileName))
          fullPath = fileName;
 
@@ -602,7 +602,7 @@ const char *CodeBlock::compileExec(StringTableEntry fileName, const char *string
 
    if(name)
       addToCodeList();
-   
+
    statementList = NULL;
 
    // Set up the parser.
@@ -641,7 +641,7 @@ const char *CodeBlock::compileExec(StringTableEntry fileName, const char *string
    smBreakLineCount = 0;
    U32 lastIp = compileBlock(statementList, code, 0, 0, 0);
    code[lastIp++] = OP_RETURN;
-   
+
    consoleAllocReset();
 
    if(lineBreakPairCount && fileName)

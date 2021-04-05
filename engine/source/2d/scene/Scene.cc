@@ -166,7 +166,7 @@ Scene::Scene() :
 
     /// Window rendering.
     mpCurrentRenderWindow(NULL),
-    
+
     /// Miscellaneous.
     mIsEditorScene(0),
     mUpdateCallback(false),
@@ -179,7 +179,7 @@ Scene::Scene() :
     VECTOR_SET_ASSOCIATION( mDeleteRequestsTemp );
     VECTOR_SET_ASSOCIATION( mEndContacts );
     VECTOR_SET_ASSOCIATION( mAssetPreloads );
-     
+
     // Initialize layer sort mode.
     for ( U32 n = 0; n < MAX_LAYERS_SUPPORTED; ++n )
        mLayerSortModes[n] = SceneRenderQueue::RENDER_SORT_NEWEST;
@@ -191,7 +191,7 @@ Scene::Scene() :
     mControllers = new SimSet();
     mControllers->registerObject();
 
-    // Assign scene index.    
+    // Assign scene index.
     mSceneIndex = ++sSceneMasterIndex;
     sSceneCount++;
 }
@@ -311,15 +311,15 @@ void Scene::initPersistFields()
     addField("PositionIterations", TypeS32, Offset(mPositionIterations, Scene), &writePositionIterations, "" );
 
     // Layer sort modes.
-    char buffer[64];
+    /*char buffer[64];
     for ( U32 n = 0; n < MAX_LAYERS_SUPPORTED; n++ )
     {
        dSprintf( buffer, 64, "layerSortMode%d", n );
        addField( buffer, TypeEnum, OffsetNonConst(mLayerSortModes[n], Scene), &writeLayerSortMode, 1, &SceneRenderQueue::renderSortTable, "");
-    }
+    }*/
 
     addProtectedField("Controllers", TypeSimObjectPtr, Offset(mControllers, Scene), &defaultProtectedNotSetFn, &defaultProtectedGetFn, &defaultProtectedNotWriteFn, "The scene controllers to use.");
-    
+
     // Callbacks.
     addField("UpdateCallback", TypeBool, Offset(mUpdateCallback, Scene), &writeUpdateCallback, "");
     addField("RenderCallback", TypeBool, Offset(mRenderCallback, Scene), &writeRenderCallback, "");
@@ -584,7 +584,7 @@ void Scene::dispatchBeginContactCallbacks( void )
                 (pSceneObjectA->mCollisionLayerMask & pSceneObjectB->mSceneLayerMask) != 0 )
         {
             // Yes, so does it handle the collision callback?
-            if ( pSceneObjectA->isMethod("onCollision") )            
+            if ( pSceneObjectA->isMethod("onCollision") )
             {
                 // Yes, so perform the script callback on it.
                 Con::executef( pSceneObjectA, 3, "onCollision",
@@ -604,7 +604,7 @@ void Scene::dispatchBeginContactCallbacks( void )
                 (pSceneObjectB->mCollisionLayerMask & pSceneObjectA->mSceneLayerMask) != 0 )
         {
             // Yes, so does it handle the collision callback?
-            if ( pSceneObjectB->isMethod("onCollision") )            
+            if ( pSceneObjectB->isMethod("onCollision") )
             {
                 // Yes, so perform the script callback on it.
                 Con::executef( pSceneObjectB, 3, "onCollision",
@@ -696,7 +696,7 @@ void Scene::dispatchEndContactCallbacks( void )
                 (pSceneObjectA->mCollisionLayerMask & pSceneObjectB->mSceneLayerMask) != 0 )
         {
             // Yes, so does it handle the collision callback?
-            if ( pSceneObjectA->isMethod("onEndCollision") )            
+            if ( pSceneObjectA->isMethod("onEndCollision") )
             {
                 // Yes, so perform the script callback on it.
                 Con::executef( pSceneObjectA, 3, "onEndCollision",
@@ -716,7 +716,7 @@ void Scene::dispatchEndContactCallbacks( void )
                 (pSceneObjectB->mCollisionLayerMask & pSceneObjectA->mSceneLayerMask) != 0 )
         {
             // Yes, so does it handle the collision callback?
-            if ( pSceneObjectB->isMethod("onEndCollision") )            
+            if ( pSceneObjectB->isMethod("onEndCollision") )
             {
                 // Yes, so perform the script callback on it.
                 Con::executef( pSceneObjectB, 3, "onEndCollision",
@@ -1030,7 +1030,7 @@ void Scene::sceneRender( const SceneRenderState* pSceneRenderState )
         PROFILE_SCOPE(Scene_RenderSceneCompileRenderRequests);
 
         // Fetch the primary scene render queue.
-        SceneRenderQueue* pSceneRenderQueue = SceneRenderQueueFactory.createObject();      
+        SceneRenderQueue* pSceneRenderQueue = SceneRenderQueueFactory.createObject();
 
         // Yes so step through layers.
         for ( S32 layer = MAX_LAYERS_SUPPORTED-1; layer >= 0 ; layer-- )
@@ -1131,7 +1131,7 @@ void Scene::sceneRender( const SceneRenderState* pSceneRenderState )
 
                     // Fetch scene render object.
                     SceneRenderObject* pSceneRenderObject = pSceneRenderRequest->mpSceneRenderObject;
-             
+
                     // Flush if the object is not render batched and we're in strict order mode.
                     if ( !pSceneRenderObject->isBatchRendered() && mBatchRenderer.getStrictOrderMode() )
                     {
@@ -1725,7 +1725,7 @@ S32 Scene::createDistanceJoint(
     // Fetch bodies.
     b2Body* pBodyA = pSceneObjectA != NULL ? pSceneObjectA->getBody() : getGroundBody();
     b2Body* pBodyB = pSceneObjectB != NULL ? pSceneObjectB->getBody() : getGroundBody();
-    
+
     // Populate definition.
     b2DistanceJointDef jointDef;
     jointDef.userData         = static_cast<PhysicsProxy*>(this);
@@ -1737,7 +1737,7 @@ S32 Scene::createDistanceJoint(
     jointDef.length           = length < 0.0f ? (pBodyB->GetWorldPoint( localAnchorB ) - pBodyA->GetWorldPoint( localAnchorA )).Length() : length;
     jointDef.frequencyHz      = frequency;
     jointDef.dampingRatio     = dampingRatio;
-    
+
     // Create joint.
     return createJoint( &jointDef );
 }
@@ -1937,7 +1937,7 @@ S32 Scene::createRopeJoint(
     // Fetch bodies.
     b2Body* pBodyA = pSceneObjectA != NULL ? pSceneObjectA->getBody() : getGroundBody();
     b2Body* pBodyB = pSceneObjectB != NULL ? pSceneObjectB->getBody() : getGroundBody();
-    
+
     // Populate definition.
     b2RopeJointDef jointDef;
     jointDef.userData         = static_cast<PhysicsProxy*>(this);
@@ -1947,7 +1947,7 @@ S32 Scene::createRopeJoint(
     jointDef.localAnchorA     = localAnchorA;
     jointDef.localAnchorB     = localAnchorB;
     jointDef.maxLength        = maxLength < 0.0f ? (pBodyB->GetWorldPoint( localAnchorB ) - pBodyA->GetWorldPoint( localAnchorA )).Length() : maxLength;
-    
+
     // Create joint.
     return createJoint( &jointDef );
 }
@@ -2034,7 +2034,7 @@ S32 Scene::createRevoluteJoint(
     // Fetch bodies.
     b2Body* pBodyA = pSceneObjectA != NULL ? pSceneObjectA->getBody() : getGroundBody();
     b2Body* pBodyB = pSceneObjectB != NULL ? pSceneObjectB->getBody() : getGroundBody();
-    
+
     // Populate definition.
     b2RevoluteJointDef jointDef;
     jointDef.userData         = static_cast<PhysicsProxy*>(this);
@@ -2044,7 +2044,7 @@ S32 Scene::createRevoluteJoint(
     jointDef.referenceAngle   = pBodyB->GetAngle() - pBodyA->GetAngle();
     jointDef.localAnchorA     = localAnchorA;
     jointDef.localAnchorB     = localAnchorB;
-    
+
     // Create joint.
     return createJoint( &jointDef );
 }
@@ -2144,7 +2144,7 @@ void Scene::setRevoluteJointMotor(
     // Access joint.
     pRealJoint->SetMotorSpeed( motorSpeed );
     pRealJoint->SetMaxMotorTorque( maxMotorTorque );
-    pRealJoint->EnableMotor( enableMotor );    
+    pRealJoint->EnableMotor( enableMotor );
 }
 
 //-----------------------------------------------------------------------------
@@ -2264,7 +2264,7 @@ S32 Scene::createWeldJoint(
     // Fetch bodies.
     b2Body* pBodyA = pSceneObjectA != NULL ? pSceneObjectA->getBody() : getGroundBody();
     b2Body* pBodyB = pSceneObjectB != NULL ? pSceneObjectB->getBody() : getGroundBody();
-    
+
     // Populate definition.
     b2WeldJointDef jointDef;
     jointDef.userData         = static_cast<PhysicsProxy*>(this);
@@ -2276,7 +2276,7 @@ S32 Scene::createWeldJoint(
     jointDef.localAnchorB     = localAnchorB;
     jointDef.frequencyHz      = frequency;
     jointDef.dampingRatio     = dampingRatio;
-    
+
     // Create joint.
     return createJoint( &jointDef );
 }
@@ -2421,7 +2421,7 @@ S32 Scene::createWheelJoint(
     // Fetch bodies.
     b2Body* pBodyA = pSceneObjectA != NULL ? pSceneObjectA->getBody() : getGroundBody();
     b2Body* pBodyB = pSceneObjectB != NULL ? pSceneObjectB->getBody() : getGroundBody();
-    
+
     // Populate definition.
     b2WheelJointDef jointDef;
     jointDef.userData         = static_cast<PhysicsProxy*>(this);
@@ -2431,7 +2431,7 @@ S32 Scene::createWheelJoint(
     jointDef.localAnchorA     = localAnchorA;
     jointDef.localAnchorB     = localAnchorB;
     jointDef.localAxisA       = pBodyA->GetLocalVector( worldAxis );
-    
+
     // Create joint.
     return createJoint( &jointDef );
 }
@@ -2466,7 +2466,7 @@ void Scene::setWheelJointMotor(
     // Access joint.
     pRealJoint->SetMotorSpeed( motorSpeed );
     pRealJoint->SetMaxMotorTorque( maxMotorTorque );
-    pRealJoint->EnableMotor( enableMotor ); 
+    pRealJoint->EnableMotor( enableMotor );
 }
 
 //-----------------------------------------------------------------------------
@@ -2644,7 +2644,7 @@ S32 Scene::createFrictionJoint(
     // Fetch bodies.
     b2Body* pBodyA = pSceneObjectA != NULL ? pSceneObjectA->getBody() : getGroundBody();
     b2Body* pBodyB = pSceneObjectB != NULL ? pSceneObjectB->getBody() : getGroundBody();
-    
+
     // Populate definition.
     b2FrictionJointDef jointDef;
     jointDef.userData         = static_cast<PhysicsProxy*>(this);
@@ -2655,7 +2655,7 @@ S32 Scene::createFrictionJoint(
     jointDef.localAnchorB     = localAnchorB;
     jointDef.maxForce         = maxForce;
     jointDef.maxTorque        = maxTorque;
-    
+
     // Create joint.
     return createJoint( &jointDef );
 }
@@ -2800,7 +2800,7 @@ S32 Scene::createPrismaticJoint(
     // Fetch bodies.
     b2Body* pBodyA = pSceneObjectA != NULL ? pSceneObjectA->getBody() : getGroundBody();
     b2Body* pBodyB = pSceneObjectB != NULL ? pSceneObjectB->getBody() : getGroundBody();
-    
+
     // Populate definition.
     b2PrismaticJointDef jointDef;
     jointDef.userData         = static_cast<PhysicsProxy*>(this);
@@ -2811,7 +2811,7 @@ S32 Scene::createPrismaticJoint(
     jointDef.localAnchorA     = localAnchorA;
     jointDef.localAnchorB     = localAnchorB;
     jointDef.localAxisA       = pBodyA->GetLocalVector( worldAxis );
-    
+
     // Create joint.
     return createJoint( &jointDef );
 }
@@ -2911,7 +2911,7 @@ void Scene::setPrismaticJointMotor(
     // Access joint.
     pRealJoint->SetMotorSpeed( motorSpeed );
     pRealJoint->SetMaxMotorForce( maxMotorForce );
-    pRealJoint->EnableMotor( enableMotor ); 
+    pRealJoint->EnableMotor( enableMotor );
 }
 
 //-----------------------------------------------------------------------------
@@ -2978,7 +2978,7 @@ S32 Scene::createPulleyJoint(
     // Fetch bodies.
     b2Body* pBodyA = pSceneObjectA != NULL ? pSceneObjectA->getBody() : getGroundBody();
     b2Body* pBodyB = pSceneObjectB != NULL ? pSceneObjectB->getBody() : getGroundBody();
-    
+
     // Populate definition.
     b2PulleyJointDef jointDef;
     jointDef.userData         = static_cast<PhysicsProxy*>(this);
@@ -2992,7 +2992,7 @@ S32 Scene::createPulleyJoint(
     jointDef.lengthA          = lengthA < 0.0f ? (pBodyA->GetWorldPoint( localAnchorA ) - worldGroundAnchorA).Length() : lengthA;
     jointDef.lengthB          = lengthB < 0.0f ? (pBodyA->GetWorldPoint( localAnchorB ) - worldGroundAnchorB).Length() : lengthB;
     jointDef.ratio            = ratio > b2_epsilon ? ratio : b2_epsilon + b2_epsilon;
-    
+
     // Create joint.
     return createJoint( &jointDef );
 }
@@ -3025,7 +3025,7 @@ S32 Scene::createTargetJoint(
 
     // Fetch bodies.
     b2Body* pBody = pSceneObject->getBody();
-    
+
     // Populate definition.
     b2MouseJointDef jointDef;
     jointDef.userData         = static_cast<PhysicsProxy*>(this);
@@ -3047,7 +3047,7 @@ S32 Scene::createTargetJoint(
     if ( !useCenterOfMass )
     {
         // No, so set the target as the world target.
-        // NOTE:-   This is done because initially the target (mouse) joint assumes the target 
+        // NOTE:-   This is done because initially the target (mouse) joint assumes the target
         //          coincides with the body anchor.
         pRealJoint->SetTarget( worldTarget );
     }
@@ -3308,7 +3308,7 @@ S32 Scene::createMotorJoint(
     // Fetch bodies.
     b2Body* pBodyA = pSceneObjectA != NULL ? pSceneObjectA->getBody() : getGroundBody();
     b2Body* pBodyB = pSceneObjectB != NULL ? pSceneObjectB->getBody() : getGroundBody();
-    
+
     // Populate definition.
     b2MotorJointDef jointDef;
     jointDef.userData           = static_cast<PhysicsProxy*>(this);
@@ -3320,7 +3320,7 @@ S32 Scene::createMotorJoint(
     jointDef.correctionFactor   = correctionFactor;
     jointDef.maxForce           = maxForce;
     jointDef.maxTorque          = maxTorque;
-    
+
     // Create joint.
     return createJoint( &jointDef );
 }
@@ -3712,14 +3712,14 @@ void Scene::processDeleteRequests( const bool forceImmediate )
             {
                 // Yes, so increase safe-ready count.
                 ++safeDeleteReadyCount;
-            }         
+            }
         }
         else
         {
             // No, so it looks like the object got deleted prematurely; let's just remove
             // the request instead.
             mDeleteRequests.erase_fast( requestIndex );
-            
+
             // Repeat this item.
             continue;
         }
@@ -3814,7 +3814,7 @@ SceneObject* Scene::create( const char* pType )
     AssertFatal( pType != NULL, "Scene::create() - Cannot create a NULL type." );
 
     // Find the class rep.
-    AbstractClassRep* pClassRep = AbstractClassRep::findClassRep( pType ); 
+    AbstractClassRep* pClassRep = AbstractClassRep::findClassRep( pType );
 
     // Did we find the type?
     if ( pClassRep == NULL )
@@ -3825,7 +3825,7 @@ SceneObject* Scene::create( const char* pType )
     }
 
     // Find the scene object rep.
-    AbstractClassRep* pSceneObjectRep = AbstractClassRep::findClassRep( "SceneObject" ); 
+    AbstractClassRep* pSceneObjectRep = AbstractClassRep::findClassRep( "SceneObject" );
 
     // Sanity!
     AssertFatal( pSceneObjectRep != NULL,  "Scene::create() - Could not find SceneObject class rep." );
@@ -3837,7 +3837,7 @@ SceneObject* Scene::create( const char* pType )
         Con::warnf( "Scene::create() - Type '%s' is not derived from SceneObject.", pType );
         return NULL;
     }
-    
+
     // Create the type.
     SceneObject* pSceneObject = dynamic_cast<SceneObject*>( pClassRep->create() );
 
@@ -4103,7 +4103,7 @@ void Scene::onTamlPostRead( const TamlCustomNodes& customNodes )
 
                 // Create joint.
                 const U32 jointId = createRevoluteJoint( pSceneObjectA, pSceneObjectB, localAnchorA, localAnchorB, collideConnected );
-            
+
                 if ( enableLimit )
                     setRevoluteJointLimit( jointId, true, lowerAngle, upperAngle );
 
@@ -4249,7 +4249,7 @@ void Scene::onTamlPostRead( const TamlCustomNodes& customNodes )
                     }
                     else if ( fieldName == jointWheelWorldAxisName )
                     {
-                        pField->getFieldValue( worldAxis );                    
+                        pField->getFieldValue( worldAxis );
                     }
                 }
 
@@ -4659,7 +4659,7 @@ void Scene::onTamlPostRead( const TamlCustomNodes& customNodes )
         {
             // Fetch controller node.
             TamlCustomNode* pControllerNode = *controllerNodeItr;
-            
+
             // Is the node a proxy object?
             if ( !pControllerNode->isProxyObject() )
             {
@@ -4737,7 +4737,7 @@ void Scene::onTamlPostRead( const TamlCustomNodes& customNodes )
             // Add asset preload.
             addAssetPreload( pFieldValue + prefixOffset );
         }
-    }   
+    }
 }
 
 //-----------------------------------------------------------------------------
@@ -5164,7 +5164,7 @@ void Scene::onTamlCustomWrite( TamlCustomNodes& customNodes )
 
     // Fetch controller count.
     const S32 sceneControllerCount = getControllers() ? getControllers()->size() : 0;
-    
+
     // Do we have any scene controllers?
     if ( sceneControllerCount > 0 )
     {
@@ -5212,7 +5212,7 @@ void Scene::onTamlCustomWrite( TamlCustomNodes& customNodes )
 
             // Add asset Id.
             pAssetNode->addField( "Id", valueBuffer );
-        }        
+        }
     }
 }
 
@@ -5452,11 +5452,11 @@ static void WriteJointsCustomTamlScehema( const AbstractClassRep* pClassRep, TiX
     pJointsNodeElement->SetAttribute( "minOccurs", 0 );
     pJointsNodeElement->SetAttribute( "maxOccurs", 1 );
     pParentElement->LinkEndChild( pJointsNodeElement );
-    
+
     // Create complex type.
     TiXmlElement* pJointsNodeComplexTypeElement = new TiXmlElement( "xs:complexType" );
     pJointsNodeElement->LinkEndChild( pJointsNodeComplexTypeElement );
-    
+
     // Create choice element.
     TiXmlElement* pJointsNodeChoiceElement = new TiXmlElement( "xs:choice" );
     pJointsNodeChoiceElement->SetAttribute( "minOccurs", 0 );
@@ -5533,11 +5533,11 @@ static void WriteControllersCustomTamlScehema( const AbstractClassRep* pClassRep
     pControllersNodeElement->SetAttribute( "minOccurs", 0 );
     pControllersNodeElement->SetAttribute( "maxOccurs", 1 );
     pParentElement->LinkEndChild( pControllersNodeElement );
-    
+
     // Create complex type.
     TiXmlElement* pControllersNodeComplexTypeElement = new TiXmlElement( "xs:complexType" );
     pControllersNodeElement->LinkEndChild( pControllersNodeComplexTypeElement );
-    
+
     // Create choice element.
     TiXmlElement* pControllersNodeChoiceElement = new TiXmlElement( "xs:choice" );
     pControllersNodeChoiceElement->SetAttribute( "minOccurs", 0 );
@@ -5585,11 +5585,11 @@ static void WritePreloadsCustomTamlScehema( const AbstractClassRep* pClassRep, T
     pPreloadsNodeElement->SetAttribute( "minOccurs", 0 );
     pPreloadsNodeElement->SetAttribute( "maxOccurs", 1 );
     pParentElement->LinkEndChild( pPreloadsNodeElement );
-    
+
     // Create complex type.
     TiXmlElement* pPreloadsNodeComplexTypeElement = new TiXmlElement( "xs:complexType" );
     pPreloadsNodeElement->LinkEndChild( pPreloadsNodeComplexTypeElement );
-    
+
     // Create choice element.
     TiXmlElement* pPreloadsNodeChoiceElement = new TiXmlElement( "xs:choice" );
     pPreloadsNodeChoiceElement->SetAttribute( "minOccurs", 0 );

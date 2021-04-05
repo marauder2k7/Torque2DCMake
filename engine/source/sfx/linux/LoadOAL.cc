@@ -29,6 +29,7 @@
 #include <dlfcn.h>
 #include <err.h>
 #include <string.h>
+#include "console/console.h"
 #include "sfx/LoadOAL.h"
 
 void* openal_library = NULL;
