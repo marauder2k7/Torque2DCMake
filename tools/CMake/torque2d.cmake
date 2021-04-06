@@ -113,7 +113,7 @@ mark_as_advanced(TORQUE_SFX_OPENAL)
 ###############################################################################
 # options
 ###############################################################################
-if(NOT MSVC AND NOT APPLE) # handle single-configuration generator
+if(UNIX AND NOT APPLE) # handle single-configuration generator
     set(TORQUE_BUILD_TYPE "Debug" CACHE STRING "Select one of Debug, Release and RelWithDebInfo")
     set_property(CACHE TORQUE_BUILD_TYPE PROPERTY STRINGS "Debug" "Release" "RelWithDebInfo")
 
@@ -132,7 +132,7 @@ if(WIN32)
 endif()
 
 # build types
-if(NOT MSVC AND NOT APPLE) # handle single-configuration generator
+if(UNIX AND NOT APPLE) # handle single-configuration generator
 	set(CMAKE_BUILD_TYPE ${TORQUE_BUILD_TYPE})
 	if(CMAKE_BUILD_TYPE STREQUAL "Debug")
         set(TORQUE_DEBUG TRUE)
