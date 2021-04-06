@@ -162,6 +162,8 @@ class UInputManager : public InputManager
       bool mKeyboardState[256];
       bool mMouseButtonState[3];
 
+      bool mTextInput;
+
       // last mousex and y are maintained when window is unlocked
       S32 mLastMouseX;
       S32 mLastMouseY;
@@ -177,13 +179,16 @@ class UInputManager : public InputManager
       bool mLocking;
 
       void joyHatEvent(U8 deviceID, U8 hatNum,
-          U8 prevHatState, U8 currHatState);
+      U8 prevHatState, U8 currHatState);
       void joyButtonEvent(U8 deviceID, U8 buttonNum, bool pressed);
       void joyButtonEvent(const SDL_Event& event);
       void joyAxisEvent(const SDL_Event& event);
       void joyAxisEvent(U8 deviceID, U8 axisNum, S16 axisValue);
+      void mouseWheelEvent(const SDL_Event& event);
       void mouseButtonEvent(const SDL_Event& event);
       void mouseMotionEvent(const SDL_Event& event);
+      void textEvent(const SDL_Event& event);
+      void processTextEvent(U32 mod, U16 key);
       void keyEvent(const SDL_Event& event);
       bool processKeyEvent(InputEvent &event);
 };

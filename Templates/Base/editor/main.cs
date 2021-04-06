@@ -23,7 +23,7 @@
 new ModuleManager(EditorManager);
 
 // Scans for the modules that make up the editors.
-EditorManager.scanModules( "." );
+EditorManager.scanModules( "editor" );
 
 // Load the central module
 EditorManager.LoadGroup( "EditorGroup" );

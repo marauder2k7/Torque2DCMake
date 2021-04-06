@@ -447,7 +447,6 @@ void UInputManager::resetInputState()
 {
    resetKeyboardState();
    resetMouseState();
-
    // reset joysticks
    for (Vector<JoystickInputDevice*>::iterator iter = mJoystickList.begin();
         iter != mJoystickList.end();
@@ -481,14 +480,20 @@ void UInputManager::lockInput()
 {
    if (x86UNIXState->windowActive() && x86UNIXState->windowLocked() &&
       mLocking && !SDL_GetWindowGrab(x86UNIXState->getSdlWindow()))
-      SDL_SetWindowGrab(x86UNIXState->getSdlWindow(),SDL_bool(SDL_TRUE));
+      {
+        SDL_SetWindowGrab(x86UNIXState->getSdlWindow(),SDL_bool(SDL_TRUE));
+        SDL_SetRelativeMouseMode(SDL_TRUE);
+      }
 }
 
 //------------------------------------------------------------------------------
 void UInputManager::unlockInput()
 {
-   if (SDL_GetWindowGrab(x86UNIXState->getSdlWindow()))
-      SDL_SetWindowGrab(x86UNIXState->getSdlWindow(),SDL_bool(SDL_FALSE));
+    if (SDL_GetWindowGrab(x86UNIXState->getSdlWindow()))
+    {
+        SDL_SetWindowGrab(x86UNIXState->getSdlWindow(),SDL_bool(SDL_FALSE));
+        SDL_SetRelativeMouseMode(SDL_FALSE);
+    }
 }
 
 
@@ -512,60 +517,6 @@ void UInputManager::onRemove()
 {
    deactivate();
    Parent::onRemove();
-}
-
-//------------------------------------------------------------------------------
-void UInputManager::mouseMotionEvent(const SDL_Event& event)
-{
-//    Con::printf("motion event: %d %d %d %d",
-//       event.motion.xrel, event.motion.yrel,
-//       event.motion.x, event.motion.y);
-   if (x86UNIXState->windowLocked())
-   {
-      InputEvent ievent;
-      ievent.deviceInst = 0;
-      ievent.deviceType = MouseDeviceType;
-      ievent.objInst = 0;
-      ievent.modifier = mModifierKeys;
-      ievent.ascii = 0;
-      ievent.action = SI_MOVE;
-
-      // post events if things have changed
-      if (event.motion.xrel != 0)
-      {
-         ievent.objType = SI_XAXIS;
-         ievent.fValues[0] = event.motion.xrel;
-         Game->postEvent(ievent);
-      }
-      if (event.motion.yrel != 0)
-      {
-         ievent.objType = SI_YAXIS;
-         ievent.fValues[0] = event.motion.yrel;
-         Game->postEvent(ievent);
-      }
-#ifdef LOG_INPUT
-#ifdef LOG_MOUSEMOVE
-         Input::log( "EVENT (Input): Mouse relative move (%.1f, %.1f).\n",
-            event.motion.xrel != 0 ? F32(event.motion.xrel) : 0.0,
-            event.motion.yrel != 0 ? F32(event.motion.yrel) : 0.0);
-#endif
-#endif
-   }
-   else
-   {
-      MouseMoveEvent mmevent;
-      mmevent.xPos = mLastMouseX = event.motion.x;
-      mmevent.yPos = mLastMouseY = event.motion.y;
-      mmevent.modifier = mModifierKeys;
-      Game->postEvent(mmevent);
-#ifdef LOG_INPUT
-#ifdef LOG_MOUSEMOVE
-         Input::log( "EVENT (Input): Mouse absolute move (%.1f, %.1f).\n",
-            F32(event.motion.x),
-            F32(event.motion.y));
-#endif
-#endif
-   }
 }
 
 //------------------------------------------------------------------------------
@@ -750,15 +701,98 @@ void UInputManager::joyAxisEvent(U8 deviceID, U8 axisNum, S16 axisValue)
 
 }
 
+
+//------------------------------------------------------------------------------
+// MOUSE EVENTS
+//------------------------------------------------------------------------------
+
+void UInputManager::mouseMotionEvent(const SDL_Event& event)
+{
+//    Con::printf("motion event: %d %d %d %d",
+//       event.motion.xrel, event.motion.yrel,
+//       event.motion.x, event.motion.y);
+   if (x86UNIXState->windowLocked())
+   {
+      InputEvent ievent;
+      ievent.deviceInst = 0;
+      ievent.deviceType = MouseDeviceType;
+      ievent.objInst = 0;
+      ievent.modifier = mModifierKeys;
+      ievent.ascii = 0;
+      ievent.action = SI_MOVE;
+
+      // post events if things have changed
+      if (event.motion.xrel != 0)
+      {
+         ievent.objType = SI_XAXIS;
+         ievent.fValues[0] = event.motion.xrel;
+         Game->postEvent(ievent);
+      }
+      if (event.motion.yrel != 0)
+      {
+         ievent.objType = SI_YAXIS;
+         ievent.fValues[0] = event.motion.yrel;
+         Game->postEvent(ievent);
+      }
+#ifdef LOG_INPUT
+#ifdef LOG_MOUSEMOVE
+         Input::log( "EVENT (Input): Mouse relative move (%.1f, %.1f).\n",
+            event.motion.xrel != 0 ? F32(event.motion.xrel) : 0.0,
+            event.motion.yrel != 0 ? F32(event.motion.yrel) : 0.0);
+#endif
+#endif
+   }
+   else
+   {
+      MouseMoveEvent mmevent;
+      mmevent.xPos = mLastMouseX = event.motion.x;
+      mmevent.yPos = mLastMouseY = event.motion.y;
+      mmevent.modifier = mModifierKeys;
+      Game->postEvent(mmevent);
+#ifdef LOG_INPUT
+#ifdef LOG_MOUSEMOVE
+         Input::log( "EVENT (Input): Mouse absolute move (%.1f, %.1f).\n",
+            F32(event.motion.x),
+            F32(event.motion.y));
+#endif
+#endif
+   }
+}
+
+//------------------------------------------------------------------------------
+
+void UInputManager::mouseWheelEvent(const SDL_Event& event)
+{
+
+    U32 mods = getTorqueMod(SDL_GetModState());
+    S32 wheel = Con::getIntVariable("$pref::Input::MouseWheelSpeed",120);
+    S32 wheelXDelta = event.wheel.x * wheel;
+    S32 wheelYDelta = event.wheel.y * wheel;
+
+    InputEvent ievent;
+    ievent.deviceType = MouseDeviceType;
+    ievent.objInst = 0;
+
+    if(wheelYDelta)
+    {
+        ievent.objType = SI_ZAXIS;
+        ievent.fValues[0] = (F32)wheelYDelta;
+        Game->postEvent(ievent);
+    }
+
+    if(wheelXDelta)
+    {
+        ievent.objType = SI_RZAXIS;
+        ievent.fValues[0] = (F32)wheelXDelta;
+        Game->postEvent(ievent);
+    }
+
+}
 //------------------------------------------------------------------------------
 void UInputManager::mouseButtonEvent(const SDL_Event& event)
 {
    S32 action = (event.type == SDL_MOUSEBUTTONDOWN) ? SI_MAKE : SI_BREAK;
    S32 objInst = -1;
-   // JMQTODO: support wheel delta like windows version?
-   // JMQTODO: make this value configurable?
-   S32 wheelDelta = 10;
-   bool wheel = false;
 
    switch (event.button.button)
    {
@@ -771,16 +805,9 @@ void UInputManager::mouseButtonEvent(const SDL_Event& event)
       case SDL_BUTTON_MIDDLE:
          objInst = KEY_BUTTON2;
          break;
-      case Button4:
-         wheel = true;
-         break;
-      case Button5:
-         wheel = true;
-         wheelDelta = -wheelDelta;
-         break;
    }
 
-   if (objInst == -1 && !wheel)
+   if (objInst == -1)
       // unsupported button
       return;
 
@@ -791,27 +818,6 @@ void UInputManager::mouseButtonEvent(const SDL_Event& event)
    ievent.modifier = mModifierKeys;
    ievent.ascii = 0;
 
-   if (wheel)
-   {
-      // SDL generates a button press/release for each wheel move,
-      // so ignore breaks to translate those into a single event
-      if (action == SI_BREAK)
-         return;
-      ievent.objType = SI_ZAXIS;
-      ievent.objInst = 0;
-      ievent.action = SI_MOVE;
-      ievent.fValues[0] = wheelDelta;
-#ifdef LOG_INPUT
-      Input::log( "EVENT (Input): mouse wheel moved %s: %.1f. MODS:%c%c%c\n",
-         wheelDelta > 0 ? "up" : "down",
-         ievent.fValues[0],
-         ( mModifierKeys & SI_SHIFT ? 'S' : '.' ),
-         ( mModifierKeys & SI_CTRL ? 'C' : '.' ),
-         ( mModifierKeys & SI_ALT ? 'A' : '.' ));
-#endif
-   }
-   else // regular button
-   {
       S32 buttonID = (objInst - KEY_BUTTON0);
       if (buttonID < 3)
          mMouseButtonState[buttonID] = ( action == SI_MAKE ) ? true : false;
@@ -828,12 +834,64 @@ void UInputManager::mouseButtonEvent(const SDL_Event& event)
          ( mModifierKeys & SI_CTRL ? 'C' : '.' ),
          ( mModifierKeys & SI_ALT ? 'A' : '.' ));
 #endif
-   }
-
    Game->postEvent(ievent);
 }
 
 //------------------------------------------------------------------------------
+// KEYBOARD EVENTS
+//------------------------------------------------------------------------------
+
+void UInputManager::textEvent(const SDL_Event& event)
+{
+
+    U32 mod = getTorqueMod(SDL_GetModState());
+    if(event.text.text[1])
+    {
+        U16 wchar = event.text.text[0];
+        processTextEvent(mod,wchar);
+        return;
+    }
+    else
+    {
+        const U32 len = strlen(event.text.text);
+        U16 wchar[16] = {};
+        dMemcpy(wchar, event.text.text, sizeof(char)*len);
+
+        for(int i = 0; i < 16; ++i)
+        {
+            if(!wchar[i])
+                return;
+
+            processTextEvent(mod,wchar[i]);
+
+        }
+    }
+}
+
+//------------------------------------------------------------------------------
+
+void UInputManager::processTextEvent(U32 mod, U16 key)
+{
+
+    InputEvent ievent;
+    ievent.deviceInst = 0;
+    ievent.deviceType = KeyboardDeviceType;
+    ievent.objType = SI_KEY;
+    ievent.objInst = KEY_NULL;
+    ievent.modifier = mod;
+    ievent.ascii = key;
+    ievent.action = SI_MAKE;
+    ievent.fValues[0] = 1.0f;
+    Game->postEvent(ievent);
+
+    ievent.action = SI_BREAK;
+    ievent.fValues[0] = 0.0f;
+    Game->postEvent(ievent);
+
+}
+
+//------------------------------------------------------------------------------
+
 void UInputManager::keyEvent(const SDL_Event& event)
 {
    InputEvent ievent;
@@ -875,8 +933,21 @@ void UInputManager::keyEvent(const SDL_Event& event)
             ievent.fValues[0] = 0.0f;
    }
 
-   processKeyEvent(ievent);
+   KEY_STATE state = STATE_LOWER;
+   if (ievent.modifier & (SI_CTRL|SI_ALT) )
+   {
+      state = STATE_GOOFY;
+   }
+   if ( ievent.modifier & SI_SHIFT )
+   {
+      state = STATE_UPPER;
+   }
+
+   ievent.ascii = Input::getAscii( ievent.objInst, state );
+
+   //processKeyEvent(ievent);
    Game->postEvent(ievent);
+
 
 }
 
@@ -902,6 +973,8 @@ bool UInputManager::processKeyEvent( InputEvent &event )
    return true;
 }
 
+//------------------------------------------------------------------------------
+// WINDOW STATE
 //------------------------------------------------------------------------------
 void UInputManager::setWindowLocked(bool locked)
 {
@@ -949,6 +1022,9 @@ void UInputManager::process()
             case SDL_MOUSEMOTION:
                mouseMotionEvent(events[i]);
                break;
+            case SDL_MOUSEWHEEL:
+                mouseWheelEvent(events[i]);
+                break;
             case SDL_MOUSEBUTTONUP:
             case SDL_MOUSEBUTTONDOWN:
                mouseButtonEvent(events[i]);
@@ -957,6 +1033,9 @@ void UInputManager::process()
             case SDL_KEYUP:
                keyEvent(events[i]);
                break;
+            //case SDL_TEXTINPUT:
+            //   textEvent(events[i]);
+            //   break;
          }
       }
    }

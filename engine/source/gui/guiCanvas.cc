@@ -52,7 +52,7 @@ GuiCanvas::GuiCanvas()
 #else
    mBounds.set(0, 0, MIN_RESOLUTION_X, MIN_RESOLUTION_Y);
 #endif
-    
+
    mAwake = true;
    mPixelsPerMickey = 1.0f;
 
@@ -151,10 +151,10 @@ void GuiCanvas::useNativeCursor(bool useNative)
    mUseNativeCursor = useNative;
 }
 
-void GuiCanvas::setCursorPos(const Point2I &pt)   
-{ 
-   cursorPt.x = F32(pt.x); 
-   cursorPt.y = F32(pt.y); 
+void GuiCanvas::setCursorPos(const Point2I &pt)
+{
+   cursorPt.x = F32(pt.x);
+   cursorPt.y = F32(pt.y);
 
    Input::setCursorPos( pt.x, pt.y );
 }
@@ -210,7 +210,7 @@ bool GuiCanvas::tabPrev(void)
         if ( newResponder && newResponder != oldResponder )
         {
             newResponder->setFirstResponder();
-    
+
           if ( oldResponder )
              oldResponder->onLoseFirstResponder();
 
@@ -227,16 +227,16 @@ void GuiCanvas::processScreenTouchEvent(const ScreenTouchEvent *event)
     mLastEvent.mousePoint.y = S32(event->yPos);
     mLastEvent.eventID = event->touchID;
     mLastEvent.mouseClickCount = event->numTouches;
-    
+
     //see if button was pressed
     if (event->action == SI_MAKE)
     {
         U32 curTime = Platform::getVirtualMilliseconds();
         mNextMouseTime = curTime + mInitialMouseDelay;
-        
+
         mLastMouseDownTime = curTime;
 //		mLastEvent.mouseClickCount = mLastMouseClickCount;
-        
+
         rootScreenTouchDown(mLastEvent);
     }
     else if(event->action == SI_MOVE)
@@ -267,7 +267,7 @@ void GuiCanvas::processMouseMoveEvent(const MouseMoveEvent *event)
          cursorPt.x =(F32) getMax(0, getMin((S32)cursorPt.x, mBounds.extent.x - 1));
          cursorPt.y = (F32)getMax(0, getMin((S32)cursorPt.y, mBounds.extent.y - 1));
       }
-      
+
         mLastEvent.mousePoint.x = S32(cursorPt.x);
         mLastEvent.mousePoint.y = S32(cursorPt.y);
         mLastEvent.eventID = 0;
@@ -292,13 +292,13 @@ void GuiCanvas::processMouseMoveEvent(const MouseMoveEvent *event)
 			}
 			else if(mHideCursorBecauseOfTouch && !mMouseButtonDown)
 			{
-				if(mPotentialMouseEventCount > 20) 
+				if(mPotentialMouseEventCount > 20)
 				{
 					//This is our 20th small movement with no click or drag so it must be a mouse!
 					mHideCursorBecauseOfTouch = false;
 					mPotentialMouseEventCount = 0;
 				}
-				else 
+				else
 				{
 					mPotentialMouseEventCount++;
 				}
@@ -647,39 +647,39 @@ void GuiCanvas::findMouseControl(const GuiEvent &event)
 //http://www.garagegames.com/community/forums/viewthread/93467/1#comment-669559
 void GuiCanvas::rootScreenTouchDown(const GuiEvent &event)
 {
-    mPrevMouseTime = Platform::getVirtualMilliseconds();  
-    mMouseButtonDown = true;  
-  
-        iterator i;  
-        i = end();  
-        while (i != begin())  
-        {  
-            i--;  
-            GuiControl *ctrl = static_cast<GuiControl *>(*i);  
-            GuiControl *controlHit = ctrl->findHitControl(event.mousePoint);  
-              
-            //If the control we hit is not the same one that is locked,  
-            // then unlock the existing control.  
-            if (bool(mMouseCapturedControl))  
-            {  
-                if(mMouseCapturedControl->isMouseLocked())  
-                {  
-                    if(mMouseCapturedControl != controlHit)  
-                    {  
-                        mMouseCapturedControl->onTouchLeave(event);  
-                    }  
-                }  
-            }  
-              
+    mPrevMouseTime = Platform::getVirtualMilliseconds();
+    mMouseButtonDown = true;
+
+        iterator i;
+        i = end();
+        while (i != begin())
+        {
+            i--;
+            GuiControl *ctrl = static_cast<GuiControl *>(*i);
+            GuiControl *controlHit = ctrl->findHitControl(event.mousePoint);
+
+            //If the control we hit is not the same one that is locked,
+            // then unlock the existing control.
+            if (bool(mMouseCapturedControl))
+            {
+                if(mMouseCapturedControl->isMouseLocked())
+                {
+                    if(mMouseCapturedControl != controlHit)
+                    {
+                        mMouseCapturedControl->onTouchLeave(event);
+                    }
+                }
+            }
+
 			if (controlHit->mProfile->mUseInput)
 			{
 				controlHit->onTouchDown(event);
 				break;
 			}
-        }  
-      
-    if (bool(mMouseControl))  
-        mMouseControlClicked = true;  
+        }
+
+    if (bool(mMouseControl))
+        mMouseControlClicked = true;
 }
 
 void GuiCanvas::rootScreenTouchUp(const GuiEvent &event)
@@ -691,10 +691,10 @@ void GuiCanvas::rootScreenTouchUp(const GuiEvent &event)
     i = end();
     while (i != begin())
     {
-        i--;    
+        i--;
         GuiControl *ctrl = static_cast<GuiControl *>(*i);
         GuiControl *controlHit = ctrl->findHitControl(event.mousePoint);
-        
+
 		if (controlHit->mActive && controlHit->mProfile->mUseInput)
 		{
 			controlHit->onTouchUp(event);
@@ -717,7 +717,7 @@ void GuiCanvas::rootScreenTouchMove(const GuiEvent &event)
       findMouseControl(event);
       if(bool(mMouseControl))
       {
-          mMouseControl->onTouchDragged(event);		  
+          mMouseControl->onTouchDragged(event);
       }
    }
 }
@@ -780,7 +780,7 @@ void GuiCanvas::rootMouseDragged(const GuiEvent &event)
 #if defined(TORQUE_OS_IOS) || defined(TORQUE_OS_ANDROID)
           mMouseControl->onTouchMove(event);
 #endif //TORQUE_OS_IOS
-          
+
       }
    }
 }
@@ -1201,7 +1201,7 @@ void GuiCanvas::renderFrame(bool preRenderOnly, bool bufferSwap /* = true */)
    PROFILE_START(CanvasPreRender);
 
 #if !defined TORQUE_OS_IOS && !defined TORQUE_OS_ANDROID && !defined TORQUE_OS_EMSCRIPTEN
-    
+
    if(mRenderFront)
       glDrawBuffer(GL_FRONT);
    else
@@ -1283,7 +1283,7 @@ void GuiCanvas::renderFrame(bool preRenderOnly, bool bufferSwap /* = true */)
     if ( mUseBackgroundColor )
     {
         glClearColor( mBackgroundColor.red, mBackgroundColor.green, mBackgroundColor.blue, mBackgroundColor.alpha );
-        glClear(GL_COLOR_BUFFER_BIT);	
+        glClear(GL_COLOR_BUFFER_BIT);
     }
 
       //render the dialogs
@@ -1350,7 +1350,7 @@ void GuiCanvas::renderFrame(bool preRenderOnly, bool bufferSwap /* = true */)
          glRecti((S32)cursorPt.x, (S32)cursorPt.y, (S32)(cursorPt.x + 2), (S32)(cursorPt.y + 2));
 #endif
       }
-       
+
       //DEBUG
       //draw the help ctrl
       //if (helpCtrl)
@@ -1373,7 +1373,7 @@ void GuiCanvas::renderFrame(bool preRenderOnly, bool bufferSwap /* = true */)
 
    if( bufferSwap )
       swapBuffers();
-    
+
 //#if defined(TORQUE_OS_WIN32)
 //   PROFILE_START(glFinish);
 //   glFinish(); // This was changed to work with the D3D layer -pw
@@ -1448,6 +1448,7 @@ void GuiCanvas::resetUpdateRegions()
    mOldUpdateRects[0].set(mBounds.point, mBounds.extent);
    mOldUpdateRects[1] = mOldUpdateRects[0];
    mCurUpdateRect = mOldUpdateRects[0];
+
 }
 
 void GuiCanvas::setFirstResponder( GuiControl* newResponder )

@@ -327,7 +327,7 @@ endif()
 
 if(UNIX AND NOT APPLE)
     # copy pasted from T3D build system, some might not be needed
-	set(TORQUE_EXTERNAL_LIBS "stdc++ m dl pthread rt X11 Xft SDL openal" CACHE STRING "external libs to link against")
+	set(TORQUE_EXTERNAL_LIBS "stdc++ m dl pthread rt X11 Xft SDL2main SDL2 openal" CACHE STRING "external libs to link against")
 	mark_as_advanced(TORQUE_EXTERNAL_LIBS)
 
     string(REPLACE " " ";" TORQUE_EXTERNAL_LIBS_LIST ${TORQUE_EXTERNAL_LIBS})

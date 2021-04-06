@@ -45,8 +45,8 @@ const U32 GFont::csm_fileVersion = 3;
 
 static PlatformFont* createSafePlatformFont(const char *name, U32 size, U32 charset = TGE_ANSI_CHARSET)
 {
-   PlatformFont *platFont = createPlatformFont(name, size, charset);
-   
+   PlatformFont *platFont = createPlatformFont(name, (dsize_t)size, charset);
+
    if (platFont == NULL)
    {
       Con::errorf("Loading platform font failed, trying font fallbacks...");
