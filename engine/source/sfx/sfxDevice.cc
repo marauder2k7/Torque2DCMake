@@ -59,8 +59,8 @@ SFXDevice::SFXDevice(SFXProvider* provider, const OPENALFNTABLE & openal)
    mOpenAL.alcMakeContextCurrent(mContext);
    ///---Get device info and capabilities
    mDeviceName = mOpenAL.alcGetString(mDevice, ALC_DEVICE_SPECIFIER);
-   mOpenAL.alcGetIntegerv(mDevice, ALC_MAJOR_VERSION, sizeof(int), &mMajorVersion);
-   mOpenAL.alcGetIntegerv(mDevice, ALC_MINOR_VERSION, sizeof(int), &mMinorVersion);
+   mOpenAL.alcGetIntegerv(mDevice, ALC_MAJOR_VERSION, sizeof(U32), &mMajorVersion);
+   mOpenAL.alcGetIntegerv(mDevice, ALC_MINOR_VERSION, sizeof(U32), &mMinorVersion);
 
    Con::printf("SFXDevice: %s v%i.%i", mDeviceName, mMajorVersion, mMinorVersion);
 
@@ -124,7 +124,7 @@ SFXDevice::~SFXDevice()
    delete mProvider;
 }
 
-unsigned int SFXDevice::GetMaxNumSources()
+U32 SFXDevice::GetMaxNumSources()
 {
    ALuint uiSources[256];
    U32 iSourceCount = 0;

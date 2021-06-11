@@ -39,7 +39,7 @@
 
 class SFXBuffer : public ResourceInstance
 {
-   friend class AudioThread;
+
 protected:
    StringTableEntry  mFilename;
    bool              mLoading;

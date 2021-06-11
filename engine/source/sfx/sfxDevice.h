@@ -15,6 +15,8 @@
 
 class SFXProvider;
 
+#define SFX SFXDevice->get();
+
 enum SFXCaps
 {
    SFXCapture = 0,
@@ -33,6 +35,9 @@ class SFXDevice
 {
 
 public:
+
+   static SFXDevice *get() { return smDevice; }
+
    SFXDevice(SFXProvider* provider,const OPENALFNTABLE &openal);
    ~SFXDevice();
 
@@ -61,7 +66,7 @@ public:
    static void init();
    static void shutdown();
 
-   unsigned int GetMaxNumSources();
+   U32 GetMaxNumSources();
 
    // sound property description
    struct DefDescription
